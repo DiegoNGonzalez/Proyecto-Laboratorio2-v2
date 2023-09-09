@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Administrador.cpp" />
-    <ClCompile Include="Cine.cpp" />
+    <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
     <ClCompile Include="Funcion.cpp" />
@@ -152,7 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrador.h" />
-    <ClInclude Include="Cine.h" />
+    <ClInclude Include="Sistema.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
     <ClInclude Include="Funcion.h" />

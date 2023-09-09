@@ -3,6 +3,7 @@
 #include "Pelicula.h"
 #include "Sala.h"
 #include "Funcion.h"
+#include "Administrador.h"
 
 class Sistema
 {
@@ -26,22 +27,18 @@ class Sistema
 		metodo para obtener ganancias por funcion
 		*/
 	private:
-		std::vector<Pelicula> _peliculas;
-		std::vector<Sala> _salas;
-		std::vector<Funcion> _funciones;
+		std::vector<Pelicula> vecPeliculas;
+		std::vector<Sala> vecSalas;
+		std::vector<Funcion> vecFunciones;
+		Administrador _admin1;
+
+		
 		public:
-			void agregarPelicula(Pelicula pelicula);
-			void agregarSala(Sala sala);
-			void programarFuncion(Funcion funcion);
-			void mostrarFunciones();
-			void venderEntradas(int idFuncion, int cantidadEntradas);
-			void mostrarEstadisticasOcupacionSalas();
-			int buscarFuncion(int idFuncion);
-			int obtenerCantidadEntradasVendidas(int idFuncion);
-			float obtenerGananciasPorFuncion(int idFuncion);
+			void mostrarMenuIniciarPrograma();
+
 
 			Sistema();
-			Sistema(std::vector<Pelicula> peliculas, std::vector<Sala> salas, std::vector<Funcion> funciones);
+			
 
 };
 
