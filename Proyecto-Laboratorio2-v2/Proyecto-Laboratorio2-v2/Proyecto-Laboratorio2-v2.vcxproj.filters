@@ -39,6 +39,12 @@
     <ClCompile Include="Sala.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Persona.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Administrador.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cine.h">
@@ -60,6 +66,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Sala.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+     <ClInclude Include="Persona.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Administrador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rlutil.h">

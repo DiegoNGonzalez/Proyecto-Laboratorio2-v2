@@ -6,6 +6,9 @@
 #include "Sala.h"
 #include "Funcion.h"
 #include "Cine.h"
+#include "Persona.h"
+#include "Administrador.h"
+#include <vector>
 
 
 using namespace std;
@@ -29,8 +32,8 @@ void showItem(const char* text, int posx, int posy, bool selected) {
 */
 
 int main() {
-    
-    Pelicula pelicula1("El señor de los anillos", "Peter Jackson", "Mayores de 13 a�os", "Fantasia", Horario(00, 30, 03));
+
+   /* Pelicula pelicula1("El señor de los anillos", "Peter Jackson", "Mayores de 13 a�os", "Fantasia", Horario(00, 30, 03));
     Pelicula pelicula2("Bomba vs tomy", "Agustin damonte", "menores de 12", "Porno gay", Horario(10, 30, 01));
     Sala sala1(1, 100, 5.5, pelicula1);
     Sala sala2(2, 200, 100.5, pelicula2);
@@ -75,6 +78,8 @@ int main() {
                 
         int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
+   
+
         switch (key) // evalua el codigo de tecla
         {
         case 14: // flecha ARRIBA
@@ -105,5 +110,15 @@ int main() {
         }
     } while (op != 0);
     */
+  
+    Persona p1;
+    p1 = Persona();
+    cout << p1.mostrarDatos() << endl;
+    p1 = Persona(12,"Administrador", "Diego", "Gomez", "Admin", "1234asd");
+    cout << p1.mostrarDatos() << endl;
+    std::vector <Pelicula> vecPeliculas;
+    Administrador admin1;
+    admin1.cargarPeliculas( vecPeliculas);
+    admin1.verPeliculasCargadas( vecPeliculas);
     return 0;
 }
