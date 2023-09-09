@@ -145,6 +145,7 @@
     <ClCompile Include="Funcion.cpp" />
     <ClCompile Include="Horario.cpp" />
     <ClCompile Include="Pelicula.cpp" />
+    <ClCompile Include="Persona.cpp" />
     <ClCompile Include="Sala.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="Funcion.h" />
     <ClInclude Include="Horario.h" />
     <ClInclude Include="Pelicula.h" />
+    <ClInclude Include="Persona.h" />
     <ClInclude Include="Sala.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

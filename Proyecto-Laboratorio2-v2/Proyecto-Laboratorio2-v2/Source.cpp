@@ -4,12 +4,13 @@
 #include "Sala.h"
 #include "Funcion.h"
 #include "Cine.h"
+#include "Persona.h"
 
 
 using namespace std;
 
 int main() {
-    Pelicula pelicula1("El señor de los anillos", "Peter Jackson", "Mayores de 13 a�os", "Fantasia", Horario(00, 30, 03));
+   /* Pelicula pelicula1("El señor de los anillos", "Peter Jackson", "Mayores de 13 a�os", "Fantasia", Horario(00, 30, 03));
     Pelicula pelicula2("Bomba vs tomy", "Agustin damonte", "menores de 12", "Porno gay", Horario(10, 30, 01));
     Sala sala1(1, 100, 5.5, pelicula1);
     Sala sala2(2, 200, 100.5, pelicula2);
@@ -30,8 +31,13 @@ int main() {
     cout << "Cantidad de entradas vendidas por la funcion 1: " << cine1.obtenerCantidadEntradasVendidas(1) << endl;
     cout << "Cantidad de entradas vendidas por la funcion 2: " << cine1.obtenerCantidadEntradasVendidas(2) << endl;
     cout << "Dinero recaudado funcion 1: " << cine1.obtenerGananciasPorFuncion(1) << endl;
-    cout << "Dinero recaudado funcion 2: " << cine1.obtenerGananciasPorFuncion(2) << endl;
+    cout << "Dinero recaudado funcion 2: " << cine1.obtenerGananciasPorFuncion(2) << endl;*/
 
+    Persona p1;
+    p1 = Persona();
+    cout << p1.mostrarDatos() << endl;
+    p1 = Persona(12, "Diego", "Gomez", "Admin", "1234asd");
+    cout << p1.mostrarDatos() << endl;
 
 
     return 0;
