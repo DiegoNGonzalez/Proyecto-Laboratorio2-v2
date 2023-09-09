@@ -20,5 +20,7 @@ public:
 	void verFuncionesCargadas();
 	void verVentas();
 	void generarReporte();
+	Administrador();
+	Administrador(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
 };
 

@@ -1,10 +1,9 @@
 #pragma once
 #include <vector>
-#include "Pelicula.h"
-#include "Sala.h"
 #include "Funcion.h"
+#include "Administrador.h"
 
-class Cine
+class Sistema
 {
 	/*Clase Cine
 		Esta clase representa el cine en sí y administra todas las funciones y salas.
@@ -26,22 +25,18 @@ class Cine
 		metodo para obtener ganancias por funcion
 		*/
 	private:
-		std::vector<Pelicula> _peliculas;
-		std::vector<Sala> _salas;
-		std::vector<Funcion> _funciones;
-		public:
-			void agregarPelicula(Pelicula pelicula);
-			void agregarSala(Sala sala);
-			void programarFuncion(Funcion funcion);
-			void mostrarFunciones();
-			void venderEntradas(int idFuncion, int cantidadEntradas);
-			void mostrarEstadisticasOcupacionSalas();
-			int buscarFuncion(int idFuncion);
-			int obtenerCantidadEntradasVendidas(int idFuncion);
-			float obtenerGananciasPorFuncion(int idFuncion);
+		std::vector<Pelicula> vecPeliculas;
+		std::vector<Sala> vecSalas;
+		std::vector<Funcion> vecFunciones;
+		Administrador _admin1;
 
-			Cine();
-			Cine(std::vector<Pelicula> peliculas, std::vector<Sala> salas, std::vector<Funcion> funciones);
+		
+		public:
+			void mostrarMenuIniciarPrograma();
+
+
+			Sistema();
+			
 
 };
 
