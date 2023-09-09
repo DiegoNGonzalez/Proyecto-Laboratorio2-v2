@@ -18,7 +18,7 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Cine.cpp">
+    <ClCompile Include="Sistema.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Fecha.cpp">
@@ -47,7 +47,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Cine.h">
+    <ClInclude Include="Sistema.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Fecha.h">
@@ -68,7 +68,7 @@
     <ClInclude Include="Sala.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-     <ClInclude Include="Persona.h">
+    <ClInclude Include="Persona.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Administrador.h">
