@@ -30,7 +30,7 @@ int main() {
     cout << "Cantidad de entradas vendidas por la funcion 1: " << cine1.obtenerCantidadEntradasVendidas(1) << endl;
     cout << "Cantidad de entradas vendidas por la funcion 2: " << cine1.obtenerCantidadEntradasVendidas(2) << endl;
     cout << "Dinero recaudado funcion 1: " << cine1.obtenerGananciasPorFuncion(1) << endl;
-    cout << "Dinero recaudado funcion 2: " << cine1.obtenerGananciasPorFuncion(2);
+    cout << "Dinero recaudado funcion 2: " << cine1.obtenerGananciasPorFuncion(2) << endl;
 
 
 
