@@ -9,10 +9,10 @@ public:
     void setFecha(Fecha fecha);
     void setHorario(Horario horario);
     void setFecha(int dia, int mes, int anio);
-    void setHorario(int segundo, int minuto, int hora);
+    void setHorario( int minuto, int hora);
     FechaHorario();
     FechaHorario(Fecha fecha, Horario horario);
-    FechaHorario(int dia, int mes, int anio, int segundo, int minuto, int hora);
+    FechaHorario(int dia, int mes, int anio, int minuto, int hora);
     std::string toString();
 private:
     Fecha _fecha;

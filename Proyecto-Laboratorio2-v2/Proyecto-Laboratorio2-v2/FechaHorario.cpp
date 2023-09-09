@@ -19,8 +19,8 @@ void FechaHorario::setFecha(int dia, int mes, int anio) {
     _fecha.setMes(mes);
     _fecha.setAnio(anio);
 }
-void FechaHorario::setHorario(int segundo, int minuto, int hora) {
-    _horario = Horario(segundo, minuto, hora);
+void FechaHorario::setHorario( int minuto, int hora) {
+    _horario = Horario( minuto, hora);
 }
 
 FechaHorario::FechaHorario(Fecha fecha, Horario horario) {
@@ -32,11 +32,10 @@ FechaHorario::FechaHorario() {
 
 }
 
-FechaHorario::FechaHorario(int dia, int mes, int anio, int segundo, int minuto, int hora) {
+FechaHorario::FechaHorario(int dia, int mes, int anio,  int minuto, int hora) {
     _fecha.setDia(dia);
     _fecha.setMes(mes);
     _fecha.setAnio(anio);
-    _horario.setSegundo(segundo);
     _horario.setMinuto(minuto);
     _horario.setHora(hora);
 
