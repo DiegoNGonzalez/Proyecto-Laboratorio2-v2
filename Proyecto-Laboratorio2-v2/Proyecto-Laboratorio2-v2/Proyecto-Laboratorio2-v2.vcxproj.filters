@@ -68,11 +68,17 @@
     <ClInclude Include="Sala.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Persona.h">
+     <ClInclude Include="Persona.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Administrador.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="rlutil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
