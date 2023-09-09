@@ -2,12 +2,13 @@
 #include <string>
 class Persona
 {
-private:
+protected:
 	int _legajo;
 	std::string _nombre;
 	std::string _apellido;
 	std::string _usuario;
 	std::string _contrasenia;
+	std::string _cargo;
 public:
 	void setLegajo(int legajo);
 	int getLegajo() const;
@@ -19,8 +20,10 @@ public:
 	std::string getUsuario() const;
 	void setContrasenia(std::string contrasenia);
 	std::string getContrasenia() const;
+	void setCargo(std::string cargo);
+	std::string getCargo() const;
 	std::string mostrarDatos();
 	Persona();
-	Persona(int legajo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
+	Persona(int legajo,std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
 };
 

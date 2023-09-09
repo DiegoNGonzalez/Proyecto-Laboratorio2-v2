@@ -5,6 +5,8 @@
 #include "Funcion.h"
 #include "Cine.h"
 #include "Persona.h"
+#include "Administrador.h"
+#include <vector>
 
 
 using namespace std;
@@ -36,9 +38,12 @@ int main() {
     Persona p1;
     p1 = Persona();
     cout << p1.mostrarDatos() << endl;
-    p1 = Persona(12, "Diego", "Gomez", "Admin", "1234asd");
+    p1 = Persona(12,"Administrador", "Diego", "Gomez", "Admin", "1234asd");
     cout << p1.mostrarDatos() << endl;
-
+    std::vector <Pelicula> vecPeliculas;
+    Administrador admin1;
+    admin1.cargarPeliculas( vecPeliculas);
+    admin1.verPeliculasCargadas( vecPeliculas);
 
     return 0;
 }

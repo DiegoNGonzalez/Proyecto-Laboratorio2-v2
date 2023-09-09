@@ -30,21 +30,31 @@ void Persona::setContrasenia(std::string contrasenia){
 std::string Persona::getContrasenia() const{
 	return _contrasenia;
 }
+void Persona::setCargo(std::string cargo) {
+	_cargo = cargo;
+}
+std::string Persona::getCargo() const
+{
+	return _cargo;
+}
+
 
 std::string Persona::mostrarDatos() {
 	std::string valorADevolver;
-	valorADevolver = "Legajo: " + std::to_string(_legajo) + " Nombre: " + _nombre + ", Apellido: " + _apellido + ", Usuario:" + _usuario;
+	valorADevolver = "Legajo: " + std::to_string(_legajo) + ", Cargo:"+_cargo+", Nombre: " + _nombre + ", Apellido: " + _apellido + ", Usuario:" + _usuario;
 	return valorADevolver;
 }
 Persona::Persona() {
 	_legajo = 0;
+	_cargo = "";
 	_nombre = "";
 	_apellido = "";
 	_usuario = "";
 	_contrasenia = "";
 }
-Persona::Persona(int legajo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia) {
+Persona::Persona(int legajo,std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia) {
 	_legajo = legajo;
+	_cargo = cargo;
 	_nombre = nombre;
 	_apellido = apellido;
 	_usuario = usuario;

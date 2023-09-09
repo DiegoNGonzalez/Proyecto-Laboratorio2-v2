@@ -80,7 +80,7 @@ Pelicula::Pelicula()
 	_director = "";
 	_clasificacionEdad = "";
 	_genero = "";
-	_duracion = Horario(00,00,00);
+	_duracion = Horario(00,00);
 }
 
 Pelicula::Pelicula(std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, Horario duracion)

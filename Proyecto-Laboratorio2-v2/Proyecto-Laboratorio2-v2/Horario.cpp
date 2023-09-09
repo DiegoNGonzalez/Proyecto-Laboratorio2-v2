@@ -26,13 +26,13 @@ Horario::Horario() {
     _minuto = f->tm_min; // Indirecciona f y accede a tm_mon
     _hora = f->tm_hour;
 }
-Horario::Horario(int Segundo, int minuto, int hora) {
-    setSegundo(Segundo);
+Horario::Horario( int minuto, int hora) {
+    
     setMinuto(minuto);
     setHora(hora);
 }
 std::string Horario::toString() {
     std::string valorADevolver;
-    valorADevolver = std::to_string(_hora) + ":" + std::to_string(_minuto) + ":" + std::to_string(_segundo);
+    valorADevolver = std::to_string(_hora) + ":" + std::to_string(_minuto) ;
     return valorADevolver;
 }

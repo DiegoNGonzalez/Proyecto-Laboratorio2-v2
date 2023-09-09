@@ -10,7 +10,7 @@ public:
     void setMinuto(int minuto);
     void setHora(int hora);
     Horario();
-    Horario(int segundo, int minuto, int hora);
+    Horario( int minuto, int hora);
     std::string toString();
 
 private:
