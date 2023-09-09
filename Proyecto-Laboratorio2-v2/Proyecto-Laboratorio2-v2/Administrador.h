@@ -14,8 +14,8 @@ private:
 public:
 	void cargarPeliculas(std::vector <Pelicula> &vecPeliculas);
 	void verPeliculasCargadas(std::vector <Pelicula>& vecPeliculas);
-	void cargarSalas();
-	void verSalasCargadas();
+	void cargarSalas(std::vector <Sala> &vecSalas);
+	void verSalasCargadas(std::vector <Sala>& vecSalas);
 	void cargarFunciones();
 	void verFuncionesCargadas();
 	void verVentas();
