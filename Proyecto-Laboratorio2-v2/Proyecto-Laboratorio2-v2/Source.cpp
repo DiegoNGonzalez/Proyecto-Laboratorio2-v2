@@ -32,7 +32,7 @@ int main() {
     cout << "Dinero recaudado funcion 1: " << cine1.obtenerGananciasPorFuncion(1) << endl;
     cout << "Dinero recaudado funcion 2: " << cine1.obtenerGananciasPorFuncion(2);
 
-
+    cout << "Soy Bomba" << endl;
 
     return 0;
 }
