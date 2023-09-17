@@ -31,7 +31,7 @@ Horario::Horario( int minuto, int hora) {
     setMinuto(minuto);
     setHora(hora);
 }
-std::string Horario::toString() {
+std::string Horario::toString() const {
     std::string valorADevolver;
     valorADevolver = std::to_string(_hora) + ":" + std::to_string(_minuto) ;
     return valorADevolver;

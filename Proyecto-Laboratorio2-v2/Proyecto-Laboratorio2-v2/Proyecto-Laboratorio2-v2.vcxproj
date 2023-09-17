@@ -149,6 +149,7 @@
     <ClCompile Include="Persona.cpp" />
     <ClCompile Include="Sala.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Vendedor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrador.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Pelicula.h" />
     <ClInclude Include="Persona.h" />
     <ClInclude Include="Sala.h" />
+    <ClInclude Include="Vendedor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
