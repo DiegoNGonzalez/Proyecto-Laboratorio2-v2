@@ -48,6 +48,47 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 			login = true;
 			system("pause");
 			system("cls");
+			mostrarMenuVendedor();
+		}
+        else {
+			cout << "Usuario o contrasenia incorrectos" << endl;
+			intentos++;
+			system("pause");
+			system("cls");
+		}
+	} while (intentos < 3 && login == false);
+}
+
+Vendedor Sistema::getVendedor() const {
+	return _vendedor1;
+}
+//funcion login
+
+void Sistema::login(Administrador admin1, Vendedor vendedor1) {
+
+    string usuario;
+    string contrasenia;
+    int intentos = 0;
+    bool login = false;
+    
+    do {
+		system("cls");
+		cout << "Ingrese su usuario: ";
+		cin >> usuario;
+		cout << "Ingrese su contrasenia: ";
+		cin >> contrasenia;
+        if (usuario == admin1.getUsuario() && contrasenia == admin1.getContrasenia()) {
+			cout << "Bienvenido " << admin1.getNombre() << " " << admin1.getApellido() << endl;
+			login = true;
+			system("pause");
+			system("cls");
+			mostrarMenuAdmin();
+		}
+        else if (usuario == vendedor1.getUsuario() && contrasenia == vendedor1.getContrasenia()) {
+			cout << "Bienvenido " << vendedor1.getNombre() << " " << vendedor1.getApellido() << endl;
+			login = true;
+			system("pause");
+			system("cls");
 			mostrarMenuAdmin();
 		}
         else {
@@ -83,7 +124,7 @@ void Sistema::mostrarMenuAdmin() {
     Funcion f1;
 
     do {
-        rlutil::setConsoleTitle("ADMIN CINE"); // establece el titulo de la consola
+        rlutil::setConsoleTitle("MENU ADMIN CINE"); // establece el titulo de la consola
         rlutil::hidecursor(); // oculta el cursor
         //rlutil::cls(); // limpia la pantalla
 
@@ -175,4 +216,66 @@ void Sistema::mostrarMenuAdmin() {
 
 
 
+}
+
+void Sistema::mostrarMenuVendedor() {
+
+    int op = 1, y = 0;
+    Funcion f1;
+
+    do {
+        rlutil::setConsoleTitle("MENU VENDEDOR CINE"); // establece el titulo de la consola
+        rlutil::hidecursor(); // oculta el cursor
+        //rlutil::cls(); // limpia la pantalla
+
+        showItem(" OPCION 1 ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+        showItem(" OPCION 2 ", 50, 11, y == 1);
+        showItem(" OPCION 3 ", 50, 12, y == 2);
+        showItem(" OPCION 4 ", 50, 13, y == 3);
+        showItem(" OPCION 5 ", 50, 14, y == 4);
+        showItem("  SALIR   ", 50, 15, y == 5);
+
+        int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+
+
+
+        switch (key) // evalua el codigo de tecla
+        {
+        case 14: // flecha ARRIBA
+            rlutil::locate(28, 10 + y);
+            std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+            y--;
+            if (y < 0) y = 0; // validacion para que no se salga de las opciones
+            break;
+        case 15: // flecha ABAJO
+            rlutil::locate(28, 10 + y);
+            std::cout << " " << std::endl;
+            y++;
+            if (y > 5) y = 5;
+            break;
+        case 1: // ENTER
+            switch (y)
+            {
+            case 0: {
+                
+                break;
+            }
+            case 1:
+              
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+              
+                break;
+            case 5: // Si el cursor esta en la opcion SALIR
+                op = 0; // sale del programa
+                break;
+            }
+        }
+    } while (op != 0);
 }

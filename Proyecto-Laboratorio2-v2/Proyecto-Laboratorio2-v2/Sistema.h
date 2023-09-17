@@ -39,6 +39,7 @@ class Sistema
 			Vendedor getVendedor() const;
 			void login(Administrador admin1, Vendedor vendedor1);
 			void mostrarMenuAdmin();
+			void mostrarMenuVendedor();
 
 
 			Sistema();
