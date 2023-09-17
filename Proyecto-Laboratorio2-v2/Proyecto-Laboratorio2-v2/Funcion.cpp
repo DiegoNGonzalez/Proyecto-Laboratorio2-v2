@@ -28,7 +28,7 @@ using namespace std;
 //		bool hayAsientosDisponibles();
 
 
- void Funcion::setPelicula(const Pelicula& pelicula )
+ void Funcion::setPelicula(const Pelicula pelicula )
 {
 	 	_pelicula = pelicula;
 }

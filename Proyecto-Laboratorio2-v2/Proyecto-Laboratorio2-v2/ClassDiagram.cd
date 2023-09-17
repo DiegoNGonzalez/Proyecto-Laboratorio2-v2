@@ -1,2 +1,74 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Administrador">
+    <Position X="2.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAEAAAABAAAAIAAAAQAAAAACAAAAAAIQQAAgBAAA=</HashCode>
+      <FileName>Administrador.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sistema">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAgAAAAAIAoAAAAAAAABAAAAAAAAAAAAgAIAAAAAEAA=</HashCode>
+      <FileName>Sistema.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fecha">
+    <Position X="4.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAABAEAAEEABAdAAAAAAAAAAIAAAAAAUAA=</HashCode>
+      <FileName>Fecha.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FechaHorario">
+    <Position X="6" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgRAAEAAAAAAAAAAAAAhAAAAAAAAAEAAAEAAAAAAAA=</HashCode>
+      <FileName>FechaHorario.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Funcion">
+    <Position X="13.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>EAAIAAAAAAAACAEEAAiABCAABAAAAQRQAAIAAMIACJA=</HashCode>
+      <FileName>Funcion.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Horario">
+    <Position X="4.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAwgQAIAAAAAEAAAAAAABAAEAAAgAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Horario.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Pelicula">
+    <Position X="9" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AgIAIAAAAQCAEABAADBpABAAAAAQAAQGACAAAAEAAAA=</HashCode>
+      <FileName>Pelicula.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Persona">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAABBSAERQBCAAAwAAIAAAAAABAAAAEAAIECAQ=</HashCode>
+      <FileName>Persona.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Sala">
+    <Position X="11.25" Y="0.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAAIAAgIAAAAAAAAAAAAAAAAAYAQAQQAAQCAAAAAAAA=</HashCode>
+      <FileName>Sala.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Vendedor">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAACAA=</HashCode>
+      <FileName>Vendedor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

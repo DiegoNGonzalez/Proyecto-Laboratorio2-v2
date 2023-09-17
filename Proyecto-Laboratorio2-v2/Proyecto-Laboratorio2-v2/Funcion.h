@@ -31,7 +31,7 @@ class Funcion
 	int _asientosReservados;
 	int _idFuncion;
 	public:
-		void setPelicula( const Pelicula& pelicula);
+		void setPelicula( Pelicula pelicula);
 		Pelicula getPelicula();
 		void setSala(Sala sala);
 		Sala getSala();
