@@ -7,17 +7,17 @@
 class Administrador : public Persona
 {
 private:
-	std::vector <Pelicula> _vecPeliculas;
-	std::vector <Sala> _vecSalas;
-	std::vector <Funcion> _vecFunciones;
+	/*Pelicula _vecPeliculas[5];
+	Sala _vecSalas[5];
+	Funcion _vecFunciones[25];*/
 
 public:
-	void cargarPeliculas(std::vector <Pelicula> &vecPeliculas);
-	void verPeliculasCargadas(std::vector <Pelicula>& vecPeliculas);
-	void cargarSalas();
-	void verSalasCargadas();
-	void cargarFunciones();
-	void verFuncionesCargadas();
+	void cargarPeliculas(Pelicula* vecPeliculas);
+	void verPeliculasCargadas(const Pelicula* vecPeliculas);
+	void cargarSalas(Sala* vecSalas);
+	void verSalasCargadas(const Sala* vecSalas);
+	void cargarFunciones(Funcion* vecFunciones);
+	void verFuncionesCargadas(const Funcion* vecFunciones);
 	void verVentas();
 	void generarReporte();
 	Administrador();

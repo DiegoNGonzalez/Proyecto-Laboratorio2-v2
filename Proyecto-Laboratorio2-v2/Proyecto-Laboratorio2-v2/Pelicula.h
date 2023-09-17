@@ -19,12 +19,15 @@ class Pelicula
 		Métodos para obtener y establecer los atributos.
 		Método para mostrar los detalles de la película.*/
 	private:
+		int _id;
 		std::string _titulo;
 		std::string _director;
 		std::string _clasificacionEdad;
 		std::string _genero;
 		Horario _duracion;
 	public:
+		void setId(int id);
+		int getId() const;
 		void setTitulo(std::string titulo);
 		std::string getTitulo();
 		void setDirector(std::string director);
@@ -36,7 +39,7 @@ class Pelicula
 		void setDuracion(Horario duracion);
 		Horario getDuracion();
 		Pelicula();
-		Pelicula(std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, Horario duracion);
-		void mostrarDetalles();
+		Pelicula(int id, std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, Horario duracion);
+		void mostrarDetalles() const;
 };
 

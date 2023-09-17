@@ -27,9 +27,10 @@ using namespace std;
 //		void reservarAsiento();
 //		bool hayAsientosDisponibles();
 
-void Funcion::setPelicula(Pelicula pelicula)
+
+ void Funcion::setPelicula(const Pelicula& pelicula )
 {
-	_pelicula = pelicula;
+	 	_pelicula = pelicula;
 }
 
 Pelicula Funcion::getPelicula()

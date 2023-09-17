@@ -24,6 +24,15 @@ using namespace std;
 //		Pelicula(std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, Horario duracion);
 //		void mostrarDetalles();
 
+void Pelicula::setId(int id)
+{
+	_id = id;
+}
+
+int Pelicula::getId() const
+{
+	return _id;
+}
 void Pelicula::setTitulo(std::string titulo)
 {
 	_titulo = titulo;
@@ -83,7 +92,7 @@ Pelicula::Pelicula()
 	_duracion = Horario(00,00);
 }
 
-Pelicula::Pelicula(std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, Horario duracion)
+Pelicula::Pelicula(int id,std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, Horario duracion)
 {
 	_titulo = titulo;
 	_director = director;
@@ -92,7 +101,7 @@ Pelicula::Pelicula(std::string titulo, std::string director, std::string clasifi
 	_duracion = duracion;
 }
 
-void Pelicula::mostrarDetalles()
+void Pelicula::mostrarDetalles() const
 {
 	cout << "Titulo: " << _titulo << endl;
 	cout << "Director: " << _director << endl;
