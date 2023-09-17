@@ -45,48 +45,24 @@ int Sala::getCapacidadMaximaAsientos()
 	return _capacidadMaximaAsientos;
 }
 
-void Sala::setPrecioEntrada(float precioEntrada)
-{
-	_precioEntrada = precioEntrada;
-}
-
-float Sala::getPrecioEntrada()
-{
-	return _precioEntrada;
-}
-
-void Sala::setPelicula(Pelicula pelicula)
-{
-	_pelicula = pelicula;
-}
-
-Pelicula Sala::getPelicula()
-{
-	return _pelicula;
-}
 
 Sala::Sala()
 {
 	_numeroSala = 0;
 	_capacidadMaximaAsientos = 0;
-	_precioEntrada = 0;
 }
 
-Sala::Sala(int numeroSala, int capacidadMaximaAsientos, float precioEntrada, Pelicula pelicula)
+Sala::Sala(int numeroSala, int capacidadMaximaAsientos)
 {
 	_numeroSala = numeroSala;
 	_capacidadMaximaAsientos = capacidadMaximaAsientos;
-	_precioEntrada = precioEntrada;
-	_pelicula = pelicula;
 }
 
 
-void Sala::mostrarDetalles()
+void Sala::mostrarDetalles() const
 {
 	cout << "Numero de sala: " << _numeroSala << endl;
 	cout << "Capacidad maxima de asientos: " << _capacidadMaximaAsientos << endl;
-	cout << "Precio de la entrada: " << _precioEntrada << endl;
-	cout << "Pelicula: " << _pelicula.getTitulo() << endl;
 }
 
 void Sala::descontarAsientos()

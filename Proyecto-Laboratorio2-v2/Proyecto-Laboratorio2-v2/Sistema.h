@@ -4,6 +4,7 @@
 #include "Sala.h"
 #include "Funcion.h"
 #include "Administrador.h"
+#include "Vendedor.h"
 
 class Sistema
 {
@@ -27,14 +28,17 @@ class Sistema
 		metodo para obtener ganancias por funcion
 		*/
 	private:
-		std::vector<Pelicula> vecPeliculas;
-		std::vector<Sala> vecSalas;
-		std::vector<Funcion> vecFunciones;
+		Pelicula vecPeliculas[5];
+		Sala vecSalas[5];
+		Funcion vecFunciones[25];
 		Administrador _admin1;
-
+		Vendedor _vendedor1;
 		
 		public:
-			void mostrarMenuIniciarPrograma();
+			Administrador getAdmin() const ;
+			Vendedor getVendedor() const;
+			void login(Administrador admin1, Vendedor vendedor1);
+			void mostrarMenuAdmin();
 
 
 			Sistema();

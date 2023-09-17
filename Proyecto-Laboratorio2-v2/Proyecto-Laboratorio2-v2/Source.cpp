@@ -57,8 +57,8 @@ int main() {
 
     Sistema sistema;
     sistema = Sistema();
-    
-    sistema.mostrarMenuIniciarPrograma();
+    sistema.login(sistema.getAdmin(), sistema.getVendedor());
+    //sistema.mostrarMenuIniciarPrograma();
 
     return 0;
 }
