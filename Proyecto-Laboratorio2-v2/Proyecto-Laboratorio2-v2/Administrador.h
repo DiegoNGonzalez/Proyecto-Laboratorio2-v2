@@ -13,9 +13,9 @@ private:
 
 public:
 	void cargarPeliculas(Pelicula* vecPeliculas);
-	void verPeliculasCargadas(const Pelicula* vecPeliculas);
+	void verPeliculasCargadas(Pelicula* vecPeliculas);
 	void cargarSalas(Sala* vecSalas);
-	void verSalasCargadas(const Sala* vecSalas);
+	void verSalasCargadas(Sala* vecSalas);
 	Pelicula seleccionarPelicula(Pelicula* vecPeliculas);
 	Sala seleccionarSala(Sala* vecSalas);
 	void cargarFunciones(Funcion* vecFunciones, Pelicula* vecPeliculas, Sala* vecSalas);
