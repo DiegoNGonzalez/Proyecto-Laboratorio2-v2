@@ -14,9 +14,9 @@ void Vendedor::mostrarCapacidadSala(int matrizSalasxFuncion[25][10][10], int idF
 
 	std::cout << "Estado actual de la sala de cine:\n";
 	for (int i = idFuncion; i <= idFuncion; i++) {
-	for (int j = 0; j < 10; ++j) {
-		for (int k = 0; k < 10; ++k) {
-			if (matrizSalasxFuncion[idFuncion][j][k] == 0) {
+	for (int j = 0; j < 10; j++) {
+		for (int k = 0; k < 10; k++) {
+			if (matrizSalasxFuncion[idFuncion-1][j][k] == 0) {
 				std::cout << "\033[47m "; // Fondo blanco
 			}
 			else {

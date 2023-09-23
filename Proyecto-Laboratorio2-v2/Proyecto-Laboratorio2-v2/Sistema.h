@@ -33,7 +33,7 @@ class Sistema
 		Funcion vecFunciones[25];
 		Administrador _admin1;
 		Vendedor _vendedor1;
-		int matrizSalasxFuncion[25][10][10];
+		int matrizSalasxFuncion[25][10][10] = {0};
 		
 		public:
 			Administrador getAdmin() const ;
