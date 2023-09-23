@@ -24,20 +24,24 @@ class Sala
 	private:
 		int _numeroSala;
 		int _capacidadMaximaAsientos;
+		int _filas;
+		int _columnas;
 		
 	public:
 
 		void setNumeroSala(int numeroSala);
 		int getNumeroSala();
-		void setCapacidadMaximaAsientos(int capacidadMaximaAsientos);
-		int getCapacidadMaximaAsientos();
+		
 		Sala();
-		Sala(int numeroSala, int capacidadMaximaAsientos);
+		Sala(int numeroSala, int filas, int columnas);
 		void mostrarDetalles() const;
 		void descontarAsientos();
 		void descontarAsientos(int cantidad);
 		bool hayAsientosDisponibles();
 		float porcentajeOcupacion();
+		int getFilas() const;
+		int getColumnas() const;
+		int getCapacidadMaximaAsientos();
 
 };
 

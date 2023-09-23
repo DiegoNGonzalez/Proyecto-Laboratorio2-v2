@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Administrador">
-    <Position X="2.25" Y="2.25" Width="1.5" />
+    <Position X="2.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AgAAAEAAAABAAAAIAAAAQAAAAACAAAAAAIQQAAgBAAA=</HashCode>
       <FileName>Administrador.h</FileName>
@@ -31,7 +31,7 @@
   <Class Name="Funcion">
     <Position X="13.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>EAAIAAAAAAAACAEEAAiABCAABAAAAQRQAAIAAMIACJA=</HashCode>
+      <HashCode>EAAIAAAAAAAACAEEAAiABCAABAAAAQRQAAIAAMAACJA=</HashCode>
       <FileName>Funcion.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,14 +59,14 @@
   <Class Name="Sala">
     <Position X="11.25" Y="0.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>gAAIAAgIAAAAAAAAAAAAAAAAAYAQAQQAAQCAAAAAAAA=</HashCode>
+      <HashCode>gABIAAgIAAAAAAAAAAAAAAAAAYABAQQAAUCAAAAAAAA=</HashCode>
       <FileName>Sala.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Vendedor">
     <Position X="2.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAACAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAgACIACAA=</HashCode>
       <FileName>Vendedor.h</FileName>
     </TypeIdentifier>
   </Class>

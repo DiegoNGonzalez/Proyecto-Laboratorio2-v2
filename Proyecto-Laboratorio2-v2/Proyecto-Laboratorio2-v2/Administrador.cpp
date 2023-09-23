@@ -40,15 +40,15 @@ void Administrador::verPeliculasCargadas(const Pelicula* vecPelicula) {
 	}
 }
 void Administrador::cargarSalas(Sala* vecSalas) {
+	std::cout << "Cargando salas..." << std::endl;
 	for (int i = 0;i < 5;i++) {
 		int numeroSala=i+1;
-		int capacidadMaximaAsientos;
-		std::cout<< "Numero de sala: "<< numeroSala << std::endl;
-		std::cout << "Ingrese la capacidad maxima de asientos: " << std::endl;
-		std::cin >> capacidadMaximaAsientos;
-		Sala sala = Sala(numeroSala, capacidadMaximaAsientos);
+		int filas=10,columnas=10;
+		Sala sala = Sala(numeroSala, filas, columnas);
 		vecSalas[i] = sala;
 	}
+	std::cout << "Salas cargadas con exito" << std::endl;
+	system("pause");
 }
 void Administrador::verSalasCargadas(const Sala* vecSalas) {
 	for (int i = 0; i < 5; i++) {
@@ -109,6 +109,8 @@ Sala Administrador::seleccionarSala(Sala* vecSalas) {
 void Administrador::cargarFunciones(Funcion* vecFunciones,Pelicula* vecPeliculas, Sala* vecSalas) {
 	for (int i = 0; i < 2; i++) {
 		int idFuncion = i + 1;
+		const int filas = 10;
+		const int columnas = 10;
 		Pelicula pelicula;
 		Sala sala;
 		FechaHorario fechaHoraFuncion;

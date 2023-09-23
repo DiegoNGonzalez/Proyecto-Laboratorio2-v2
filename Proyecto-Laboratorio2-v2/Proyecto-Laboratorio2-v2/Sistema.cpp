@@ -10,6 +10,7 @@ Sistema::Sistema()
 	Pelicula vecPeliculas[5];
 	Sala vecSalas[5];
 	Funcion vecFunciones[25];
+	int matrizSalasxFuncion[25][10][10]{0 };
 	_admin1 = Administrador(01, "DT", "Carlos", "Tevez", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
 }
@@ -49,7 +50,7 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 			login = true;
 			system("pause");
 			system("cls");
-			mostrarMenuAdmin();
+			mostrarMenuVendedor();
 		}
 		else {
 			cout << "Usuario o contrasenia incorrectos" << endl;
@@ -168,7 +169,7 @@ void Sistema::mostrarMenuVendedor() {
 
 	int op = 1, y = 0;
 	Funcion f1;
-
+	int aux, fila,columna;
 	do {
 		rlutil::setConsoleTitle("MENU VENDEDOR CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
@@ -207,13 +208,21 @@ void Sistema::mostrarMenuVendedor() {
 				break;
 			}
 			case 1:
-
+				std::cout << "Ingrese el id de la funcion a mostrar sala:";
+				std::cin >> aux;
+				_vendedor1.mostrarCapacidadSala(matrizSalasxFuncion, aux);
 				break;
 			case 2:
-
+				std::cout << "Ingrese el id de la funcion para la cual quiere reservar asiento:";
+				std::cin >> aux;
+			std::cout << "Ingrese fila: ";
+			std::cin >> fila;
+			std::cout << "Ingrese columna: ";
+			std::cin >> columna;
+			_vendedor1.reservarAsiento(fila, columna,matrizSalasxFuncion,aux);
 				break;
 			case 3:
-
+				_vendedor1.cancelarReserva(fila, columna, matrizSalasxFuncion, aux);
 				break;
 			case 4:
 

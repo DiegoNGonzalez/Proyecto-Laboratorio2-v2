@@ -35,10 +35,6 @@ int Sala::getNumeroSala()
 	return _numeroSala;
 }
 
-void Sala::setCapacidadMaximaAsientos(int capacidadMaximaAsientos)
-{
-	_capacidadMaximaAsientos = capacidadMaximaAsientos;
-}
 
 int Sala::getCapacidadMaximaAsientos()
 {
@@ -52,10 +48,12 @@ Sala::Sala()
 	_capacidadMaximaAsientos = 0;
 }
 
-Sala::Sala(int numeroSala, int capacidadMaximaAsientos)
+Sala::Sala(int numeroSala, int filas = 10, int columnas = 10)
 {
 	_numeroSala = numeroSala;
-	_capacidadMaximaAsientos = capacidadMaximaAsientos;
+	_filas= filas;
+	_columnas = columnas;
+	_capacidadMaximaAsientos = _filas*_columnas;
 }
 
 
@@ -89,4 +87,16 @@ bool Sala::hayAsientosDisponibles()
 float Sala:: porcentajeOcupacion() {
 	return _capacidadMaximaAsientos / 100.f;
 
+}
+
+
+int Sala::getFilas() const
+{
+	return _filas;
+}
+
+
+int Sala::getColumnas() const
+{
+	return _columnas;
 }

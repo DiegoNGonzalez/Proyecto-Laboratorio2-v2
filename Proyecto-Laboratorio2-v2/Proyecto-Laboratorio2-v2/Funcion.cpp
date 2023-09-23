@@ -83,7 +83,7 @@ void Funcion::setIdFuncion(int idFuncion)
 	_idFuncion = idFuncion;
 }
 
-int Funcion::getIdFuncion()
+int Funcion::getIdFuncion() const
 {
 	return _idFuncion;
 }
@@ -114,31 +114,7 @@ void Funcion::mostrarDetalles()
 	cout << "Asientos reservados: " << _asientosReservados << endl;
 }
 
-void Funcion::reservarAsiento()
-{
-	if (hayAsientosDisponibles())
-	{
-		_asientosDisponibles--;
-		_asientosReservados++;
-	}
-	else
-	{
-		cout << "No hay asientos disponibles" << endl;
-	}
-}
 
-void Funcion::reservarAsiento(int cantidad)
-{
-	if (hayAsientosDisponibles())
-	{
-		_asientosDisponibles -= cantidad;
-		_asientosReservados += cantidad;
-	}
-	else
-	{
-		cout << "No hay asientos disponibles" << endl;
-	}
-}
 
 bool Funcion::hayAsientosDisponibles()
 {
