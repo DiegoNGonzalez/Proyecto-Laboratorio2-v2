@@ -16,7 +16,7 @@ void Vendedor::mostrarCapacidadSala(int matrizSalasxFuncion[25][10][10], int idF
 	for (int i = idFuncion; i <= idFuncion; i++) {
 	for (int j = 0; j < 10; ++j) {
 		for (int k = 0; k < 10; ++k) {
-			if (matrizSalasxFuncion[i][j][k] == 0) {
+			if (matrizSalasxFuncion[idFuncion][j][k] == 0) {
 				std::cout << "\033[47m "; // Fondo blanco
 			}
 			else {
@@ -27,6 +27,7 @@ void Vendedor::mostrarCapacidadSala(int matrizSalasxFuncion[25][10][10], int idF
 		std::cout << "\n";
 	}
 	}
+	system("pause");
 }
 bool Vendedor::reservarAsiento(int fila, int columna, int matrizSalasxFuncion[25][10][10], int idFuncion) {
 	if (fila < 1 || fila > 10 || columna < 1 || columna > 10) {

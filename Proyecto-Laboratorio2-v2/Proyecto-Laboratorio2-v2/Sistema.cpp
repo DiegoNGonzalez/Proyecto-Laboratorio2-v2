@@ -95,7 +95,8 @@ void Sistema::mostrarMenuAdmin() {
 		showItem(" Ver salas cargadas ", 50, 13, y == 3);
 		showItem(" Cargar Funciones ", 50, 14, y == 4);
 		showItem(" Ver salas cargadas ", 50, 15, y == 5);
-		showItem("  SALIR   ", 50, 16, y == 6);
+		showItem(" Cerrar sesion ", 50, 16, y == 6);
+		showItem("  SALIR   ", 50, 17, y == 7);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -154,7 +155,10 @@ void Sistema::mostrarMenuAdmin() {
 				system("pause");
 				system("cls");
 				break;
-			case 6: // Si el cursor esta en la opcion SALIR
+			case 6:
+				login(_admin1, _vendedor1);
+				break;
+			case 7: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}
@@ -208,11 +212,15 @@ void Sistema::mostrarMenuVendedor() {
 				break;
 			}
 			case 1:
+				system("cls");
 				std::cout << "Ingrese el id de la funcion a mostrar sala:";
 				std::cin >> aux;
 				_vendedor1.mostrarCapacidadSala(matrizSalasxFuncion, aux);
+				system("pause");
+				system("cls");
 				break;
 			case 2:
+				system("cls");	
 				std::cout << "Ingrese el id de la funcion para la cual quiere reservar asiento:";
 				std::cin >> aux;
 			std::cout << "Ingrese fila: ";
@@ -220,12 +228,24 @@ void Sistema::mostrarMenuVendedor() {
 			std::cout << "Ingrese columna: ";
 			std::cin >> columna;
 			_vendedor1.reservarAsiento(fila, columna,matrizSalasxFuncion,aux);
+			system("pause");
+			system("cls");
+
 				break;
 			case 3:
+				system("cls");
+				std::cout << "Ingrese el id de la funcion para la cual quiere reservar asiento:";
+				std::cin >> aux;
+				std::cout << "Ingrese fila: ";
+				std::cin >> fila;
+				std::cout << "Ingrese columna: ";
+				std::cin >> columna;
 				_vendedor1.cancelarReserva(fila, columna, matrizSalasxFuncion, aux);
+				system("pause");
+				system("cls");
 				break;
 			case 4:
-
+				login(_admin1, _vendedor1);
 				break;
 			case 5: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
