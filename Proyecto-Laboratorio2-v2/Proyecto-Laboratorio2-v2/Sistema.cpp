@@ -3,6 +3,7 @@
 #include <string>
 #include "Windows.h"
 #include "rlutil.h"
+#include <conio.h>
 using namespace std;
 
 Sistema::Sistema()
@@ -37,8 +38,27 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		cout << "Ingrese su usuario: ";
 		cin >> usuario;
 		cout << "Ingrese su contrasenia: ";
-		cin >> contrasenia;
+		//cin >> contrasenia;
+		contrasenia = "";
+		char caracter;
+		while (true) {
+			caracter = _getch(); // Capturamos un carácter sin mostrarlo en pantalla
+
+			if (caracter == 13) // 13 es el código ASCII de la tecla Enter, terminamos cuando se presiona Enter
+				break;
+			else if (caracter == 8) { // 8 es el código ASCII de la tecla Retroceso, para borrar un carácter
+				if (contrasenia.length() > 0) {
+					cout << "\b \b"; // Borramos el carácter en pantalla y retrocedemos el cursor
+					contrasenia.pop_back(); // Eliminamos el último carácter de la contraseña
+				}
+			}
+			else {
+				contrasenia += caracter; // Agregamos el carácter a la contraseña
+				cout << "*"; // Mostramos un asterisco en lugar del carácter
+			}
+		}
 		if (usuario == admin1.getUsuario() && contrasenia == admin1.getContrasenia()) {
+			cout << endl;
 			cout << "Bienvenido " << admin1.getNombre() << " " << admin1.getApellido() << endl;
 			login = true;
 			system("pause");
@@ -46,6 +66,7 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 			mostrarMenuAdmin();
 		}
 		else if (usuario == vendedor1.getUsuario() && contrasenia == vendedor1.getContrasenia()) {
+			cout << endl;
 			cout << "Bienvenido " << vendedor1.getNombre() << " " << vendedor1.getApellido() << endl;
 			login = true;
 			system("pause");
