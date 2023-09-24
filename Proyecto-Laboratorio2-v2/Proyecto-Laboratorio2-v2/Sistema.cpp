@@ -10,6 +10,7 @@ Sistema::Sistema()
 	Pelicula vecPeliculas[5];
 	Sala vecSalas[5];
 	Funcion vecFunciones[25];
+	int matrizSalasxFuncion[25][10][10]={0};
 	_admin1 = Administrador(01, "DT", "Carlos", "Tevez", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
 }
@@ -49,7 +50,7 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 			login = true;
 			system("pause");
 			system("cls");
-			mostrarMenuAdmin();
+			mostrarMenuVendedor();
 		}
 		else {
 			cout << "Usuario o contrasenia incorrectos" << endl;
@@ -93,8 +94,9 @@ void Sistema::mostrarMenuAdmin() {
 		showItem(" Cargar salas ", 50, 12, y == 2);
 		showItem(" Ver salas cargadas ", 50, 13, y == 3);
 		showItem(" Cargar Funciones ", 50, 14, y == 4);
-		showItem(" Ver salas cargadas ", 50, 15, y == 5);
-		showItem("  SALIR   ", 50, 16, y == 6);
+		showItem(" Ver Funciones cargadas ", 50, 15, y == 5);
+		showItem(" Cerrar sesion ", 50, 16, y == 6);
+		showItem("  SALIR   ", 50, 17, y == 7);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -112,7 +114,7 @@ void Sistema::mostrarMenuAdmin() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 6) y = 6;
+			if (y > 7) y = 7;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -153,7 +155,10 @@ void Sistema::mostrarMenuAdmin() {
 				system("pause");
 				system("cls");
 				break;
-			case 6: // Si el cursor esta en la opcion SALIR
+			case 6:
+				login(_admin1, _vendedor1);
+				break;
+			case 7: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}
@@ -168,17 +173,17 @@ void Sistema::mostrarMenuVendedor() {
 
 	int op = 1, y = 0;
 	Funcion f1;
-
+	int aux, fila, columna, contadorEntradas=0, contadorGeneralEntradas=0;
 	do {
 		rlutil::setConsoleTitle("MENU VENDEDOR CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem(" OPCION 1 ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem(" OPCION 2 ", 50, 11, y == 1);
-		showItem(" OPCION 3 ", 50, 12, y == 2);
-		showItem(" OPCION 4 ", 50, 13, y == 3);
-		showItem(" OPCION 5 ", 50, 14, y == 4);
+		showItem(" MOSTRAR SALA, SE NECESITA ID DE FUNCION. ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem(" RESERVAR ASIENTOS ", 50, 11, y == 1);
+		showItem(" CANCELAR ASIENTOS ", 50, 12, y == 2);
+		showItem(" VENTA DE ASIENTOS ", 50, 13, y == 3);
+		showItem(" CERRAR SESION ", 50, 14, y == 4);
 		showItem("  SALIR   ", 50, 15, y == 5);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
@@ -203,20 +208,50 @@ void Sistema::mostrarMenuVendedor() {
 			switch (y)
 			{
 			case 0: {
+				system("cls");
+				std::cout << "Ingrese el id de la funcion a mostrar sala:";
+				std::cin >> aux;
+				_vendedor1.mostrarCapacidadSala(matrizSalasxFuncion, aux);
+				system("cls");
 
 				break;
 			}
 			case 1:
-
+				system("cls");	
+				std::cout << "Ingrese el id de la funcion para la cual quiere reservar un asiento: ";
+				std::cin >> aux;
+				std::cout << "Ingrese fila: ";
+				std::cin >> fila;
+				std::cout << "Ingrese el nro de asiento: ";
+				std::cin >> columna;
+				_vendedor1.reservarAsiento(fila, columna,matrizSalasxFuncion,aux);
+				contadorEntradas++;
+				system("pause");
+				system("cls");
 				break;
 			case 2:
+				system("cls");
+				std::cout << "Ingrese el id de la funcion para la cual quiere cancelar un asiento: ";
+				std::cin >> aux;
+				std::cout << "Ingrese fila: ";
+				std::cin >> fila;
+				std::cout << "Ingrese el nro de asiento: ";
+				std::cin >> columna;
+				_vendedor1.cancelarReserva(fila, columna, matrizSalasxFuncion, aux);
+				contadorEntradas--;
+				system("pause");
+				system("cls");
 
 				break;
 			case 3:
-
+				system("cls");
+				_vendedor1.venderEntradas(contadorEntradas, vecFunciones, aux, contadorGeneralEntradas);
+				contadorEntradas = 0;
+				system("pause");
+				system("cls");
 				break;
 			case 4:
-
+				login(_admin1, _vendedor1);
 				break;
 			case 5: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
