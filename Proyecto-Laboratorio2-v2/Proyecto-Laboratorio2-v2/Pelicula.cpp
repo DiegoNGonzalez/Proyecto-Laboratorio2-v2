@@ -73,14 +73,24 @@ std::string Pelicula::getGenero()
 	return _genero;
 }
 
-void Pelicula::setDuracion(Horario duracion)
+void Pelicula::setHora(int hora)
 {
-	_duracion = duracion;
+	_hora=hora;
 }
 
-Horario Pelicula::getDuracion()
+int Pelicula::getHora() const
 {
-	return _duracion;
+	return _hora;
+}
+
+void Pelicula::setMinuto(int minuto)
+{
+	_minuto = minuto;
+}
+
+int Pelicula::getMinuto() const
+{
+	return _minuto;
 }
 
 Pelicula::Pelicula()
@@ -89,16 +99,18 @@ Pelicula::Pelicula()
 	_director = "";
 	_clasificacionEdad = "";
 	_genero = "";
-	_duracion = Horario(00,00);
+	_hora = 0;
+	_minuto = 0;
 }
 
-Pelicula::Pelicula(int id,std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, Horario duracion)
+Pelicula::Pelicula(int id,std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, int hora, int minuto)
 {
 	_titulo = titulo;
 	_director = director;
 	_clasificacionEdad = clasificacionEdad;
 	_genero = genero;
-	_duracion = duracion;
+	_hora=hora;
+	_minuto=minuto;
 }
 
 void Pelicula::mostrarDetalles() const
@@ -107,7 +119,7 @@ void Pelicula::mostrarDetalles() const
 	cout << "Director: " << _director << endl;
 	cout << "Clasificacion de edad: " << _clasificacionEdad << endl;
 	cout << "Genero: " << _genero << endl;
-	cout << "Duracion: " << _duracion.toString() << endl;
+	cout << "Duracion: " << _hora <<":"<<_minuto << endl;
 }
 
 

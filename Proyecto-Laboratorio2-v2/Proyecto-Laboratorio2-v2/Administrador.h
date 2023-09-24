@@ -13,11 +13,13 @@ private:
 
 public:
 	void cargarPeliculas(Pelicula* vecPeliculas);
-	void verPeliculasCargadas(const Pelicula* vecPeliculas);
+	void verPeliculasCargadas(Pelicula* vecPeliculas);
 	void cargarSalas(Sala* vecSalas);
-	void verSalasCargadas(const Sala* vecSalas);
-	void cargarFunciones(Funcion* vecFunciones);
-	void verFuncionesCargadas(const Funcion* vecFunciones);
+	void verSalasCargadas(Sala* vecSalas);
+	Pelicula seleccionarPelicula(Pelicula* vecPeliculas);
+	Sala seleccionarSala(Sala* vecSalas);
+	void cargarFunciones(Funcion* vecFunciones, Pelicula* vecPeliculas, Sala* vecSalas);
+	void verFuncionesCargadas( Funcion* vecFunciones);
 	void verVentas();
 	void generarReporte();
 	Administrador();
