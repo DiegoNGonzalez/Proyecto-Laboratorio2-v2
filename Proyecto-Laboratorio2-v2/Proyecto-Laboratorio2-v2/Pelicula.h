@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include "Horario.h"
+#include <cstring>
 class Pelicula
 {
 	/*Clase Película
@@ -20,22 +21,22 @@ class Pelicula
 		Método para mostrar los detalles de la película.*/
 	private:
 		int _id;
-		std::string _titulo;
-		std::string _director;
-		std::string _clasificacionEdad;
-		std::string _genero;
+		char _titulo[30];
+		char _director[30];
+		char _clasificacionEdad[30];
+		char _genero[30];
 		int _hora, _minuto;
 	public:
 		void setId(int id);
 		int getId() const;
 		void setTitulo(std::string titulo);
-		std::string getTitulo();
+		char* getTitulo();
 		void setDirector(std::string director);
-		std::string getDirector();
+		char* getDirector();
 		void setClasificacionEdad(std::string clasificacionEdad);
-		std::string getClasificacionEdad();
+		char* getClasificacionEdad();
 		void setGenero(std::string genero);
-		std::string getGenero();
+		char* getGenero();
 		void setHora(int hora);
 		int getHora() const;
 		void setMinuto(int minuto);

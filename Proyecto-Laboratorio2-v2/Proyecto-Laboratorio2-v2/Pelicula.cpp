@@ -35,40 +35,40 @@ int Pelicula::getId() const
 }
 void Pelicula::setTitulo(std::string titulo)
 {
-	_titulo = titulo;
+	strcpy(_titulo, titulo.c_str());
 }
 
-std::string Pelicula::getTitulo()
+char* Pelicula::getTitulo()
 {
 	return _titulo;
 }
 
 void Pelicula::setDirector(std::string director)
 {
-	_director = director;
+	strcpy(_director, director.c_str());
 }
 
-std::string Pelicula::getDirector()
+char* Pelicula::getDirector()
 {
 	return _director;
 }
 
 void Pelicula::setClasificacionEdad(std::string clasificacionEdad)
 {
-	_clasificacionEdad = clasificacionEdad;
+	strcpy(_clasificacionEdad, clasificacionEdad.c_str());
 }
 
-std::string Pelicula::getClasificacionEdad()
+char* Pelicula::getClasificacionEdad()
 {
 	return _clasificacionEdad;
 }
 
 void Pelicula::setGenero(std::string genero)
 {
-	_genero = genero;
+	strcpy(_genero, genero.c_str());
 }
 
-std::string Pelicula::getGenero()
+char* Pelicula::getGenero()
 {
 	return _genero;
 }
@@ -95,20 +95,20 @@ int Pelicula::getMinuto() const
 
 Pelicula::Pelicula()
 {
-	_titulo = "";
-	_director = "";
-	_clasificacionEdad = "";
-	_genero = "";
+	 strcpy(_titulo, "Transformers");
+	 strcpy(_director, "Julian Alvarez");
+	 strcpy(_clasificacionEdad, "+18");
+	 strcpy(_genero,"Accion");
 	_hora = 0;
 	_minuto = 0;
 }
 
-Pelicula::Pelicula(int id,std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, int hora, int minuto)
+Pelicula::Pelicula(int id, std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, int hora, int minuto)
 {
-	_titulo = titulo;
-	_director = director;
-	_clasificacionEdad = clasificacionEdad;
-	_genero = genero;
+	strcpy(_titulo, titulo.c_str());
+	strcpy(_director, director.c_str());
+	strcpy(_clasificacionEdad, clasificacionEdad.c_str());
+	strcpy(_genero, genero.c_str());
 	_hora=hora;
 	_minuto=minuto;
 }

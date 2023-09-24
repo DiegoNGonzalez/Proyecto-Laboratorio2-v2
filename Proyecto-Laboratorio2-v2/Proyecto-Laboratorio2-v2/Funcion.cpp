@@ -69,7 +69,6 @@ Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, fl
 
 void Funcion::mostrarDetalles()
 {
-	cout << "Funcion: " << endl;
 	cout << "Pelicula: " << endl;
 	_pelicula.mostrarDetalles();
 	cout << "Sala: " << endl;
