@@ -23,32 +23,29 @@ class Funcion
 		Método para verificar la disponibilidad de asientos.
 		metodo para vender entradas para una funcion especifica
 ;*/
-	private:
+private:
 	Pelicula _pelicula;
 	Sala _sala;
 	FechaHorario _fechaHoraFuncion;
-	int _asientosDisponibles;
-	int _asientosReservados;
 	int _idFuncion;
-	public:
+	float _precioEntrada;
+public:
+		int matrizSala[1][10][10] = {0};
 		void setPelicula( Pelicula pelicula);
 		Pelicula getPelicula();
 		void setSala(Sala sala);
 		Sala getSala();
 		void setFechaHoraFuncion(FechaHorario fechaHoraFuncion);
 		FechaHorario getFechaHoraFuncion();
-		void setAsientosDisponibles(int asientosDisponibles);
-		int getAsientosDisponibles();
-		void setAsientosReservados(int asientosReservados);
-		int getAsientosReservados();
 		void setIdFuncion(int idFuncion);
-		int getIdFuncion();
+		int getIdFuncion() const;
 		Funcion();
-		Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, int asientosDisponibles, int asientosReservados);
+		Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada);
 		void mostrarDetalles();
-		void reservarAsiento();
-		void reservarAsiento(int cantidad);
 		bool hayAsientosDisponibles();
+		void setPrecioEntrada(float precioEntrada);
+		float getPrecioEntrada() const;
+		
 		
 
 };
