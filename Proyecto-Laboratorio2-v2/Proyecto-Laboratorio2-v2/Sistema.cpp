@@ -94,6 +94,8 @@ void Sistema::mostrarMenuAdmin() {
 		showItem(" Cargar salas ", 50, 12, y == 2);
 		showItem(" Ver salas cargadas ", 50, 13, y == 3);
 		showItem(" Cargar Funciones ", 50, 14, y == 4);
+		showItem(" Ver Funciones cargadas ", 50, 15, y == 5);
+		showItem("  SALIR   ", 50, 16, y == 6);
 		showItem(" Ver salas cargadas ", 50, 15, y == 5);
 		showItem(" Cerrar sesion ", 50, 16, y == 6);
 		showItem("  SALIR   ", 50, 17, y == 7);
