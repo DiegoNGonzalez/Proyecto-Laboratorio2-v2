@@ -13,7 +13,6 @@ cargarPeliculas(Pelicula* vecPelicula) {
 		std::string clasificacionEdad;
 		std::string genero;
 		int hora, minuto, id;
-		Horario duracion;
 		Pelicula pelicula;
 		id = i + 1;
 		std::cin.ignore();
@@ -30,8 +29,7 @@ cargarPeliculas(Pelicula* vecPelicula) {
 		std::cout << "Ingrese los minutos de duracion: ";
 		std::cin >> minuto;
 		std::cout << std::endl;
-		duracion = Horario(minuto, hora);
-		pelicula = Pelicula(id, titulo, director, clasificacionEdad, genero, duracion);
+		pelicula = Pelicula(id, titulo, director, clasificacionEdad, genero, hora, minuto);
 		vecPelicula[i] =  pelicula;
 		fwrite(&vecPelicula[i], sizeof(Pelicula), 1, p);
 	}
@@ -188,8 +186,8 @@ void Administrador::cargarFunciones(Funcion* vecFunciones,Pelicula* vecPeliculas
 		Pelicula pelicula;
 		Sala sala;
 		FechaHorario fechaHoraFuncion;
-		int asientosDisponibles, dia , mes, anio, hora, minuto;
-		int asientosReservados;
+		int  dia , mes, anio, hora, minuto;
+		float valorEntrada;
 		Funcion funcion;
 		pelicula = seleccionarPelicula(vecPeliculas);
 		sala = seleccionarSala(vecSalas);
@@ -203,12 +201,10 @@ void Administrador::cargarFunciones(Funcion* vecFunciones,Pelicula* vecPeliculas
 		std::cin >> hora;
 		std::cout << "Ingrese los minutos de la funcion: ";
 		std::cin >> minuto;
+		std::cout << "Ingrese el valor de la entrada: ";
+		std::cin >> valorEntrada;
 		fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
-		std::cout << "Ingrese la cantidad de asientos disponibles: ";
-		std::cin >> asientosDisponibles;
-		std::cout << "Ingrese la cantidad de asientos reservados: ";
-		std::cin >> asientosReservados;
-		funcion = Funcion(pelicula, sala, fechaHoraFuncion, asientosDisponibles, asientosReservados);
+		funcion = Funcion(pelicula, sala, fechaHoraFuncion, valorEntrada);
 		vecFunciones[i] = funcion;
 		fwrite(&vecFunciones[i], sizeof(Funcion), 1, f);
 	}

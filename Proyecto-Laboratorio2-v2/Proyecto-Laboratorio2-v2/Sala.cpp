@@ -48,12 +48,12 @@ Sala::Sala()
 	_capacidadMaximaAsientos = 0;
 }
 
-Sala::Sala(int numeroSala, int filas = 10, int columnas = 10)
+Sala::Sala(int numeroSala, int capacidadMaxima)
 {
 	_numeroSala = numeroSala;
-	_filas= filas;
-	_columnas = columnas;
-	_capacidadMaximaAsientos = _filas*_columnas;
+	/*_filas= filas;
+	_columnas = columnas;*/
+	_capacidadMaximaAsientos = capacidadMaxima;
 }
 
 

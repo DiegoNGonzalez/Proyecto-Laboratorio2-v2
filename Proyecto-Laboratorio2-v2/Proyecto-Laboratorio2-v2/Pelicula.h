@@ -24,7 +24,7 @@ class Pelicula
 		std::string _director;
 		std::string _clasificacionEdad;
 		std::string _genero;
-		Horario _duracion;
+		int _hora, _minuto;
 	public:
 		void setId(int id);
 		int getId() const;
@@ -36,10 +36,12 @@ class Pelicula
 		std::string getClasificacionEdad();
 		void setGenero(std::string genero);
 		std::string getGenero();
-		void setDuracion(Horario duracion);
-		Horario getDuracion();
+		void setHora(int hora);
+		int getHora() const;
+		void setMinuto(int minuto);
+		int getMinuto() const;
 		Pelicula();
-		Pelicula(int id, std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, Horario duracion);
+		Pelicula(int id, std::string titulo, std::string director, std::string clasificacionEdad, std::string genero,int hora, int minuto);
 		void mostrarDetalles() const;
 };
 

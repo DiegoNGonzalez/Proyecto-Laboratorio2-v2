@@ -3,30 +3,6 @@
 #include <string>
 using namespace std;
 
-//private:
-//	Pelicula _pelicula;
-//	Sala _sala;
-//	FechaHorario _fechaHoraFuncion;
-//	int _asientosDisponibles;
-//	int _asientosReservados;
-//	public:
-//
-//		void setPelicula(Pelicula pelicula);
-//		Pelicula getPelicula();
-//		void setSala(Sala sala);
-//		Sala getSala();
-//		void setFechaHoraFuncion(FechaHorario fechaHoraFuncion);
-//		FechaHorario getFechaHoraFuncion();
-//		void setAsientosDisponibles(int asientosDisponibles);
-//		int getAsientosDisponibles();
-//		void setAsientosReservados(int asientosReservados);
-//		int getAsientosReservados();
-//		Funcion();
-//		Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, int asientosDisponibles, int asientosReservados);
-//		void mostrarDetalles();
-//		void reservarAsiento();
-//		bool hayAsientosDisponibles();
-
 
  void Funcion::setPelicula(const Pelicula pelicula )
 {
@@ -58,26 +34,6 @@ FechaHorario Funcion::getFechaHoraFuncion()
 	return _fechaHoraFuncion;
 }
 
-void Funcion::setAsientosDisponibles(int asientosDisponibles)
-{
-	_asientosDisponibles = asientosDisponibles;
-}
-
-int Funcion::getAsientosDisponibles()
-{
-	return _asientosDisponibles;
-}
-
-void Funcion::setAsientosReservados(int asientosReservados)
-{
-	_asientosReservados = asientosReservados;
-}
-
-int Funcion::getAsientosReservados()
-{
-	return _asientosReservados;
-}
-
 void Funcion::setIdFuncion(int idFuncion)
 {
 	_idFuncion = idFuncion;
@@ -88,17 +44,27 @@ int Funcion::getIdFuncion() const
 	return _idFuncion;
 }
 
+void Funcion::setPrecioEntrada(float precioEntrada)
+{
+	_precioEntrada = precioEntrada;
+}
+
+float Funcion::getPrecioEntrada() const
+{
+	return _precioEntrada;
+}
+
 Funcion::Funcion()
 {
 }
 
-Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, int asientosDisponibles, int asientosReservados)
+Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada)
 {
 	_pelicula = pelicula;
 	_sala = sala;
 	_fechaHoraFuncion = fechaHoraFuncion;
-	_asientosDisponibles = asientosDisponibles;
-	_asientosReservados = asientosReservados;
+	_precioEntrada = precioEntrada;
+
 }
 
 void Funcion::mostrarDetalles()
@@ -110,15 +76,12 @@ void Funcion::mostrarDetalles()
 	_sala.mostrarDetalles();
 	cout << "Fecha y hora de la funcion: " << endl;
 	cout << _fechaHoraFuncion.toString() << endl;
-	cout << "Asientos disponibles: " << _asientosDisponibles << endl;
-	cout << "Asientos reservados: " << _asientosReservados << endl;
+	cout << "Precio de la entrada: $" << _precioEntrada << endl;
+
 }
 
 
 
-bool Funcion::hayAsientosDisponibles()
-{
-	return _asientosDisponibles > 0;
-}
+
 
 

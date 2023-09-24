@@ -60,3 +60,12 @@ bool Vendedor::cancelarReserva(int fila, int columna, int matrizSalasxFuncion[25
 	std::cout << "¡Reserva cancelada con éxito!\n";
 	return true;
 }
+
+void Vendedor::venderEntradas(int contadorEntradas, Funcion* vecFunciones , int idFuncion, int contadorGeneralEntradas) {
+	std::cout <<"Cantidad de entradas vendidas: "<< contadorEntradas << std::endl;
+	std::cout <<"El total a abonar es: $"<< vecFunciones[idFuncion].getPrecioEntrada() * contadorEntradas<< std::endl;
+	std::cout << "¡Entrada vendida con éxito!\n";
+	
+	std::cout << "Cantidad de entradas vendidas en total: " << contadorGeneralEntradas << std::endl;
+	
+}

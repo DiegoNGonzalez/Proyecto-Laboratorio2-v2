@@ -2,25 +2,6 @@
 #include "Pelicula.h"
 class Sala
 {
-	/*Clase Sala
-		Esta clase representa una sala de cine y sus detalles.
-
-		Propiedades:
-
-	Número de sala
-		Capacidad máxima de asientos
-		Precio de la entrada
-		pelicula a emitir
-		Funciones :
-
-	Constructor para inicializar los atributos.
-		Métodos para obtener y establecer los atributos.
-		Método para mostrar los detalles de la sala.
-		metodo para descontar asientos de la sala  de a uno o con cantidad pasada por valores.
-		metodo para comprobar si hay asientos disponibles en la sala.
-		metodo para obtener porcentaje de ocupacion de la sala.
-
-		*/
 	private:
 		int _numeroSala;
 		int _capacidadMaximaAsientos;
@@ -33,7 +14,7 @@ class Sala
 		int getNumeroSala();
 		
 		Sala();
-		Sala(int numeroSala, int filas, int columnas);
+		Sala(int numeroSala, int capacidadMaxima);
 		void mostrarDetalles() const;
 		void descontarAsientos();
 		void descontarAsientos(int cantidad);

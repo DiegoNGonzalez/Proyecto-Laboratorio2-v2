@@ -95,8 +95,6 @@ void Sistema::mostrarMenuAdmin() {
 		showItem(" Ver salas cargadas ", 50, 13, y == 3);
 		showItem(" Cargar Funciones ", 50, 14, y == 4);
 		showItem(" Ver Funciones cargadas ", 50, 15, y == 5);
-		showItem("  SALIR   ", 50, 16, y == 6);
-		showItem(" Ver salas cargadas ", 50, 15, y == 5);
 		showItem(" Cerrar sesion ", 50, 16, y == 6);
 		showItem("  SALIR   ", 50, 17, y == 7);
 
@@ -175,7 +173,7 @@ void Sistema::mostrarMenuVendedor() {
 
 	int op = 1, y = 0;
 	Funcion f1;
-	int aux, fila,columna;
+	int aux, fila, columna, contadorEntradas=0, contadorGeneralEntradas=0;
 	do {
 		rlutil::setConsoleTitle("MENU VENDEDOR CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
@@ -222,13 +220,14 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");	
 				std::cout << "Ingrese el id de la funcion para la cual quiere reservar un asiento: ";
 				std::cin >> aux;
-			std::cout << "Ingrese fila: ";
-			std::cin >> fila;
-			std::cout << "Ingrese el nro de asiento: ";
-			std::cin >> columna;
-			_vendedor1.reservarAsiento(fila, columna,matrizSalasxFuncion,aux);
-			system("pause");
-			system("cls");
+				std::cout << "Ingrese fila: ";
+				std::cin >> fila;
+				std::cout << "Ingrese el nro de asiento: ";
+				std::cin >> columna;
+				_vendedor1.reservarAsiento(fila, columna,matrizSalasxFuncion,aux);
+				contadorEntradas++;
+				system("pause");
+				system("cls");
 				break;
 			case 2:
 				system("cls");
@@ -239,14 +238,20 @@ void Sistema::mostrarMenuVendedor() {
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
 				_vendedor1.cancelarReserva(fila, columna, matrizSalasxFuncion, aux);
+				contadorEntradas--;
 				system("pause");
 				system("cls");
 
 				break;
 			case 3:
-				login(_admin1, _vendedor1);
+				system("cls");
+				_vendedor1.venderEntradas(contadorEntradas, vecFunciones, aux, contadorGeneralEntradas);
+				contadorEntradas = 0;
+				system("pause");
+				system("cls");
 				break;
 			case 4:
+				login(_admin1, _vendedor1);
 				break;
 			case 5: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
