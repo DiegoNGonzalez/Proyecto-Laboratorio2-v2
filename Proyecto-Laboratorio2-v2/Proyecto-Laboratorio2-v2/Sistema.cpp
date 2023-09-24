@@ -74,6 +74,7 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 			mostrarMenuVendedor();
 		}
 		else {
+			cout << endl;
 			cout << "Usuario o contrasenia incorrectos" << endl;
 			intentos++;
 			system("pause");
