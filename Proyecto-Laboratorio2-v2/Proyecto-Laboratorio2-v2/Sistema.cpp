@@ -179,11 +179,11 @@ void Sistema::mostrarMenuVendedor() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem(" OPCION 1 ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem(" OPCION 2 ", 50, 11, y == 1);
-		showItem(" OPCION 3 ", 50, 12, y == 2);
-		showItem(" OPCION 4 ", 50, 13, y == 3);
-		showItem(" OPCION 5 ", 50, 14, y == 4);
+		showItem(" MOSTRAR SALA, SE NECESITA ID DE FUNCION. ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem(" RESERVAR ASIENTOS ", 50, 11, y == 1);
+		showItem(" CANCELAR ASIENTOS ", 50, 12, y == 2);
+		showItem(" VENTA DE ASIENTOS ", 50, 13, y == 3);
+		showItem(" CERRAR SESION ", 50, 14, y == 4);
 		showItem("  SALIR   ", 50, 15, y == 5);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
