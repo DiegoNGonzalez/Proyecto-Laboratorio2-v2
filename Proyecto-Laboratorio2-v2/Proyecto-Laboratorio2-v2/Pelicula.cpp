@@ -29,7 +29,7 @@ void Pelicula::setId(int id)
 	_id = id;
 }
 
-int Pelicula::getId() const
+int Pelicula::getId() 
 {
 	return _id;
 }
@@ -111,6 +111,7 @@ Pelicula::Pelicula(int id, std::string titulo, std::string director, std::string
 	strcpy(_genero, genero.c_str());
 	_hora=hora;
 	_minuto=minuto;
+	_id = id;
 }
 
 void Pelicula::mostrarDetalles() const
@@ -120,6 +121,7 @@ void Pelicula::mostrarDetalles() const
 	cout << "Clasificacion de edad: " << _clasificacionEdad << endl;
 	cout << "Genero: " << _genero << endl;
 	cout << "Duracion: " << _hora <<":"<<_minuto << endl;
+	cout << "Id: " << _id << endl;
 }
 
 

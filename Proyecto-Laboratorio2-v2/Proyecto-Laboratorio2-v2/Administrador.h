@@ -4,6 +4,9 @@
 #include "Pelicula.h"
 #include "Sala.h"
 #include <vector>
+#include "ArchivoFunciones.h"
+#include "ArchivoPeliculas.h"
+#include "ArchivoSalas.h"
 class Administrador : public Persona
 {
 private:
@@ -12,14 +15,14 @@ private:
 	Funcion _vecFunciones[25];*/
 
 public:
-	void cargarPeliculas(Pelicula* vecPeliculas);
-	void verPeliculasCargadas(Pelicula* vecPeliculas);
-	void cargarSalas(Sala* vecSalas);
-	void verSalasCargadas(Sala* vecSalas);
-	Pelicula seleccionarPelicula(Pelicula* vecPeliculas);
-	Sala seleccionarSala(Sala* vecSalas);
-	void cargarFunciones(Funcion* vecFunciones, Pelicula* vecPeliculas, Sala* vecSalas);
-	void verFuncionesCargadas( Funcion* vecFunciones);
+	void cargarPeliculas();
+	void verPeliculasCargadas();
+	void cargarSalas();
+	void verSalasCargadas();
+	Pelicula seleccionarPelicula();
+	Sala seleccionarSala();
+	void cargarFunciones();
+	void verFuncionesCargadas();
 	void verVentas();
 	void generarReporte();
 	Administrador();

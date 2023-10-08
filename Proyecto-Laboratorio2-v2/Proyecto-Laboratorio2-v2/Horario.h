@@ -11,7 +11,7 @@ public:
     void setHora(int hora);
     Horario();
     Horario( int minuto, int hora);
-    std::string toString() const;
+    void mostrarHorario();
 
 private:
     int _hora, _minuto, _segundo;

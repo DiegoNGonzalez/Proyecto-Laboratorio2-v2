@@ -1,6 +1,8 @@
 #include "fechahorario.h"
 #include "fecha.h"
 #include "horario.h"
+#include <iostream>
+
 
 Fecha FechaHorario::getFecha() {
     return _fecha;
@@ -40,8 +42,10 @@ FechaHorario::FechaHorario(int dia, int mes, int anio,  int minuto, int hora) {
     _horario.setHora(hora);
 
 }
-std::string FechaHorario::toString() {
-    std::string valorADevolver;
-    valorADevolver = _fecha.toString() + " " + _horario.toString();
-    return valorADevolver;
+void FechaHorario::mostrarFechaHora(){
+    _fecha.mostrarFecha();
+    std::cout << " ";
+    _horario.mostrarHorario();
+     std::cout << std::endl;
+
 }

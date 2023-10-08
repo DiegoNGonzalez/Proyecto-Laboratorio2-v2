@@ -13,7 +13,7 @@ public:
     FechaHorario();
     FechaHorario(Fecha fecha, Horario horario);
     FechaHorario(int dia, int mes, int anio, int minuto, int hora);
-    std::string toString();
+    void mostrarFechaHora();
 private:
     Fecha _fecha;
     Horario _horario;

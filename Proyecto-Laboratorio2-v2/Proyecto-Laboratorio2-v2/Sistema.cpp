@@ -143,37 +143,37 @@ void Sistema::mostrarMenuAdmin() {
 			{
 			case 0: {
 				system("cls");
-				_admin1.cargarPeliculas(vecPeliculas);
+				_admin1.cargarPeliculas();
 				system("cls");
 				break;
 			}
 			case 1:
 				system("cls");
-				_admin1.verPeliculasCargadas(vecPeliculas);
+				_admin1.verPeliculasCargadas();
 				system("pause");
 				system("cls");
 				break;
 			case 2:
 				system("cls");
-				_admin1.cargarSalas(vecSalas);
+				_admin1.cargarSalas();
 				system("cls");
 				break;
 			case 3:
 				system("cls");
-				_admin1.verSalasCargadas(vecSalas);
+				_admin1.verSalasCargadas();
 				system("pause");
 				system("cls");
 				break;
 			case 4:
 				system("cls");
-				_admin1.cargarFunciones(vecFunciones, vecPeliculas, vecSalas);
+				_admin1.cargarFunciones();
 				system("pause");
 				system("cls");
 				break;
 
 			case 5:
 				system("cls");
-				_admin1.verFuncionesCargadas(vecFunciones);
+				_admin1.verFuncionesCargadas();
 				system("pause");
 				system("cls");
 				break;
@@ -233,7 +233,7 @@ void Sistema::mostrarMenuVendedor() {
 			{
 			case 0: {
 				system("cls");
-				_admin1.verFuncionesCargadas(vecFunciones);
+				_admin1.verFuncionesCargadas();
 				system("pause");
 				system("cls");
 				break;

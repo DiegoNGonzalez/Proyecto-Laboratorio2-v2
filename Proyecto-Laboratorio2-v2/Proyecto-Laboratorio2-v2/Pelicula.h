@@ -28,7 +28,7 @@ class Pelicula
 		int _hora, _minuto;
 	public:
 		void setId(int id);
-		int getId() const;
+		int getId();
 		void setTitulo(std::string titulo);
 		char* getTitulo();
 		void setDirector(std::string director);

@@ -1,6 +1,6 @@
 #include "horario.h"
 #include <ctime>
-
+#include <iostream>
 int Horario::getSegundo() {
     return _segundo;
 }
@@ -31,8 +31,7 @@ Horario::Horario( int minuto, int hora) {
     setMinuto(minuto);
     setHora(hora);
 }
-std::string Horario::toString() const {
-    std::string valorADevolver;
-    valorADevolver = std::to_string(_hora) + ":" + std::to_string(_minuto) ;
-    return valorADevolver;
+
+void Horario::mostrarHorario() {
+	std::cout << _hora << ":" << _minuto;
 }

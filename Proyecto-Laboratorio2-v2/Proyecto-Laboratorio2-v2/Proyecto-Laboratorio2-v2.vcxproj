@@ -140,6 +140,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Administrador.cpp" />
+    <ClCompile Include="ArchivoFunciones.cpp" />
+    <ClCompile Include="ArchivoPeliculas.cpp" />
+    <ClCompile Include="ArchivoSalas.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
@@ -153,6 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrador.h" />
+    <ClInclude Include="ArchivoFunciones.h" />
+    <ClInclude Include="ArchivoPeliculas.h" />
+    <ClInclude Include="ArchivoSalas.h" />
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />

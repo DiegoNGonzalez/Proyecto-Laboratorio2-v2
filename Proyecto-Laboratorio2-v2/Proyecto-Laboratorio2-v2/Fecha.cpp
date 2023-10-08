@@ -2,6 +2,7 @@
 #include <iostream>
 #include "fecha.h"
 
+
 int Fecha::getDia() {
     return _dia;
 }
@@ -34,15 +35,7 @@ Fecha::Fecha(int dia, int mes, int anio) {
     setAnio(anio);
     _diaSemana = -1;
 }
-std::string Fecha::toString() {
-    std::string valorADevolver;
-    valorADevolver = std::to_string(_dia) + "/" + std::to_string(_mes) + "/" + std::to_string(_anio);
-    return valorADevolver;
-}
-std::string Fecha::getNombreDia() {
-    std::string nombres[7] = { "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" };
-    if (_diaSemana >= 0 && _diaSemana <= 6) {
-        return nombres[_diaSemana];
-    }
-    return "";
+
+void Fecha::mostrarFecha() {
+    std::cout << _dia << "/" << _mes << "/" << _anio;
 }

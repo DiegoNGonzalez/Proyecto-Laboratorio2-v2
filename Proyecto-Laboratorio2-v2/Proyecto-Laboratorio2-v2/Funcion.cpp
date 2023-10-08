@@ -74,7 +74,7 @@ void Funcion::mostrarDetalles()
 	cout << "Sala: " << endl;
 	_sala.mostrarDetalles();
 	cout << "Fecha y hora de la funcion: " << endl;
-	cout << _fechaHoraFuncion.toString() << endl;
+	_fechaHoraFuncion.mostrarFechaHora();
 	cout << "Precio de la entrada: $" << _precioEntrada << endl;
 
 }
