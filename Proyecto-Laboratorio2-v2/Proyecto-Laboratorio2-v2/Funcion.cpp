@@ -54,16 +54,27 @@ float Funcion::getPrecioEntrada() const
 	return _precioEntrada;
 }
 
+void Funcion::setEstado(bool estado)
+{
+	_estado = estado;
+}
+
+bool Funcion::getEstado() const
+{
+	return _estado;
+}
 Funcion::Funcion()
 {
 }
 
-Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada)
+Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada, DiagramaSala diagramaSala)
 {
 	_pelicula = pelicula;
 	_sala = sala;
 	_fechaHoraFuncion = fechaHoraFuncion;
 	_precioEntrada = precioEntrada;
+	_estado = true;
+	_diagramaSalas = diagramaSala;
 
 }
 
@@ -80,6 +91,15 @@ void Funcion::mostrarDetalles()
 }
 
 
+void Funcion::setDiagramaSala(DiagramaSala diagramaSala)
+{
+	_diagramaSalas = diagramaSala;
+}
+
+DiagramaSala Funcion::getDiagramaSala() const
+{
+	return _diagramaSalas;
+}
 
 
 

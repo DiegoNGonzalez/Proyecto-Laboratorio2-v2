@@ -93,6 +93,15 @@ int Pelicula::getMinuto() const
 	return _minuto;
 }
 
+void Pelicula::setEstado(bool estado)
+{
+	_estado = estado;
+}
+
+bool Pelicula::getEstado() const
+{
+	return _estado;
+}
 Pelicula::Pelicula()
 {
 	 strcpy(_titulo, "Transformers");
@@ -101,6 +110,7 @@ Pelicula::Pelicula()
 	 strcpy(_genero,"Accion");
 	_hora = 0;
 	_minuto = 0;
+	_estado = true;
 }
 
 Pelicula::Pelicula(int id, std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, int hora, int minuto)
@@ -112,6 +122,7 @@ Pelicula::Pelicula(int id, std::string titulo, std::string director, std::string
 	_hora=hora;
 	_minuto=minuto;
 	_id = id;
+	_estado = true;
 }
 
 void Pelicula::mostrarDetalles() const

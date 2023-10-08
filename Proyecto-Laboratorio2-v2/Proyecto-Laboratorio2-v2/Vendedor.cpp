@@ -8,7 +8,7 @@ Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::strin
 
 }
 
-void Vendedor::mostrarCapacidadSala(int matrizSalasxFuncion[25][10][10], int idFuncion) {
+void Vendedor::mostrarCapacidadSala(int matrizSalasxFuncion[10][10], int idFuncion) {
 	
 	system("cls");
 
@@ -16,7 +16,7 @@ void Vendedor::mostrarCapacidadSala(int matrizSalasxFuncion[25][10][10], int idF
 	for (int i = idFuncion; i <= idFuncion; i++) {
 	for (int j = 0; j < 10; j++) {
 		for (int k = 0; k < 10; k++) {
-			if (matrizSalasxFuncion[idFuncion-1][j][k] == 0) {
+			if (matrizSalasxFuncion[j][k] == 0) {
 				std::cout << "\033[47m "; // Fondo blanco
 			}
 			else {
@@ -29,60 +29,61 @@ void Vendedor::mostrarCapacidadSala(int matrizSalasxFuncion[25][10][10], int idF
 	}
 	system("pause");
 }
-bool Vendedor::reservarAsiento(int fila, int columna, int matrizSalasxFuncion[25][10][10], int idFuncion) {
+bool Vendedor::reservarAsiento(int fila, int columna, int matrizSalasxFuncion[10][10], int idFuncion) {
 	if (fila < 1 || fila > 10 || columna < 1 || columna > 10) {
 		std::cout << "El asiento especificado no existe.\n";
 		return false;
 	}
 
-	if (matrizSalasxFuncion[idFuncion - 1][fila - 1][columna - 1] == 1) {
+	if (matrizSalasxFuncion[fila - 1][columna - 1] == 1) {
 		std::cout << "El asiento ya está reservado.\n";
 		return false;
 	}
 
-	matrizSalasxFuncion[idFuncion - 1][fila - 1][columna - 1] = 1;
+	matrizSalasxFuncion[fila - 1][columna - 1] = 1;
 	std::cout << "¡Asiento reservado con éxito!\n";
 	return true;
 }
 
-bool Vendedor::cancelarReserva(int fila, int columna, int matrizSalasxFuncion[25][10][10], int idFuncion) {
+bool Vendedor::cancelarReserva(int fila, int columna, int matrizSalasxFuncion[10][10], int idFuncion) {
 	if (fila < 1 || fila > 10 || columna < 1 || columna > 10) {
 		std::cout << "El asiento especificado no existe.\n";
 		return false;
 	}
 
-	if (matrizSalasxFuncion[idFuncion-1][fila - 1][columna - 1] == 0) {
+	if (matrizSalasxFuncion[fila - 1][columna - 1] == 0) {
 		std::cout << "El asiento no está reservado.\n";
 		return false;
 	}
 
-	matrizSalasxFuncion[idFuncion - 1][fila - 1][columna - 1] = 0;
+	matrizSalasxFuncion[fila - 1][columna - 1] = 0;
 	std::cout << "¡Reserva cancelada con éxito!\n";
 	return true;
 }
 
-void Vendedor::venderEntradas(int contadorEntradas, Funcion* vecFunciones, int idFuncion, int contadorGeneralEntradas) {
-	FILE* f;
-	f = fopen("funcion.dat", "rb");
-	if (f == NULL) {
-		std::cout << "ERROR AL QUERER ABRIR EL ARCHIVO DE LAS FUNCIONES" << std::endl;
-	}
-	else {
-		// Mueve la posición del puntero en el archivo al registro correcto
-		fseek(f, (idFuncion - 1) * sizeof(Funcion), SEEK_SET);
+void Vendedor::venderEntradas(int contadorEntradas,  int idFuncion, int contadorGeneralEntradas) {
+	//FILE* f;
+	//f = fopen("funcion.dat", "rb");
+	//if (f == NULL) {
+	//	std::cout << "ERROR AL QUERER ABRIR EL ARCHIVO DE LAS FUNCIONES" << std::endl;
+	//}
+	//else {
+	//	// Mueve la posición del puntero en el archivo al registro correcto
+	//	fseek(f, (idFuncion - 1) * sizeof(Funcion), SEEK_SET);
 
-		// Lee la información de la función desde el archivo
-		if (fread(&vecFunciones[idFuncion - 1], sizeof(Funcion), 1, f) == 1) {
-			std::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
-			std::cout << "El total a abonar es: $" << vecFunciones[idFuncion - 1].getPrecioEntrada() * contadorEntradas << std::endl;
-			std::cout << "¡Entrada vendida con éxito!\n";
-		}
-		else {
-			std::cout << "No se pudo leer la información de la función desde el archivo." << std::endl;
-		}
+	//	// Lee la información de la función desde el archivo
+	//	if (fread(&vecFunciones[idFuncion - 1], sizeof(Funcion), 1, f) == 1) {
+	//		std::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
+	//		std::cout << "El total a abonar es: $" << vecFunciones[idFuncion - 1].getPrecioEntrada() * contadorEntradas << std::endl;
+	//		std::cout << "¡Entrada vendida con éxito!\n";
+	//	}
+	//	else {
+	//		std::cout << "No se pudo leer la información de la función desde el archivo." << std::endl;
+	//	}
 
-		contadorGeneralEntradas += contadorEntradas;
-		std::cout << "Cantidad de entradas vendidas en total: " << contadorGeneralEntradas << std::endl;
-		fclose(f);
-	}
+	//	contadorGeneralEntradas += contadorEntradas;
+	//	std::cout << "Cantidad de entradas vendidas en total: " << contadorGeneralEntradas << std::endl;
+	//	fclose(f);
+	//}
+	std ::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
 }

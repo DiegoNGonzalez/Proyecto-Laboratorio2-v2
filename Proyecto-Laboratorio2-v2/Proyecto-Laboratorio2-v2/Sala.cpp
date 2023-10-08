@@ -36,67 +36,35 @@ int Sala::getNumeroSala()
 }
 
 
-int Sala::getCapacidadMaximaAsientos()
+
+
+void Sala::setEstado(bool estado)
 {
-	return _capacidadMaximaAsientos;
+	_estado = estado;
 }
 
+bool Sala::getEstado() const
+{
+	return _estado;
+}
 
 Sala::Sala()
 {
 	_numeroSala = 0;
-	_capacidadMaximaAsientos = 0;
+	_estado = true;
 }
 
-Sala::Sala(int numeroSala, int capacidadMaxima)
+Sala::Sala(int numeroSala)
 {
 	_numeroSala = numeroSala;
-	/*_filas= filas;
-	_columnas = columnas;*/
-	_capacidadMaximaAsientos = capacidadMaxima;
+	_estado = true;
 }
 
 
 void Sala::mostrarDetalles() const
 {
 	cout << "Numero de sala: " << _numeroSala << endl;
-	cout << "Capacidad maxima de asientos: " << _capacidadMaximaAsientos << endl;
-}
-
-void Sala::descontarAsientos()
-{
-	_capacidadMaximaAsientos--;
-}
-
-void Sala::descontarAsientos(int cantidad)
-{
-	_capacidadMaximaAsientos -= cantidad;
-}
-bool Sala::hayAsientosDisponibles()
-{
-	if (_capacidadMaximaAsientos > 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-float Sala:: porcentajeOcupacion() {
-	return _capacidadMaximaAsientos / 100.f;
-
+	cout << "Capacidad maxima de asientos: " << 100 << endl;
 }
 
 
-int Sala::getFilas() const
-{
-	return _filas;
-}
-
-
-int Sala::getColumnas() const
-{
-	return _columnas;
-}

@@ -11,7 +11,7 @@ Sistema::Sistema()
 	Pelicula vecPeliculas[5];
 	Sala vecSalas[5];
 	Funcion vecFunciones[25];
-	int matrizSalasxFuncion[25][10][10]={0};
+	//int matrizSalasxFuncion[10][10]={0};
 	_admin1 = Administrador(01, "DT", "Carlos", "Tevez", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
 }
@@ -193,7 +193,7 @@ void Sistema::mostrarMenuAdmin() {
 }
 
 void Sistema::mostrarMenuVendedor() {
-
+	DiagramaSala diagramaSala;
 	int op = 1, y = 0;
 	Funcion f1;
 	int aux, fila, columna, contadorEntradas=0, contadorGeneralEntradas=0;
@@ -242,7 +242,7 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion a mostrar sala:";
 				std::cin >> aux;
-				_vendedor1.mostrarCapacidadSala(matrizSalasxFuncion, aux);
+				_vendedor1._diagramaSala.mostrarSalaDeCine(aux);
 				system("cls");
 
 				break;
@@ -255,7 +255,7 @@ void Sistema::mostrarMenuVendedor() {
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				_vendedor1.reservarAsiento(fila, columna,matrizSalasxFuncion,aux);
+				_vendedor1._diagramaSala.reservarAsiento(aux, fila, columna);
 				contadorEntradas++;
 				system("pause");
 				system("cls");
@@ -268,7 +268,7 @@ void Sistema::mostrarMenuVendedor() {
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				_vendedor1.cancelarReserva(fila, columna, matrizSalasxFuncion, aux);
+				_vendedor1._diagramaSala.cancelarReserva(aux, fila, columna);
 				contadorEntradas--;
 				system("pause");
 				system("cls");
@@ -276,7 +276,7 @@ void Sistema::mostrarMenuVendedor() {
 				break;
 			case 4:
 				system("cls");
-				_vendedor1.venderEntradas(contadorEntradas, vecFunciones, aux, contadorGeneralEntradas);
+				_vendedor1.venderEntradas(contadorEntradas, aux, contadorGeneralEntradas);
 				contadorEntradas = 0;
 				system("pause");
 				system("cls");

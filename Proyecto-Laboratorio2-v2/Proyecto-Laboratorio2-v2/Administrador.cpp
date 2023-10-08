@@ -45,13 +45,11 @@ void Administrador::verPeliculasCargadas() {
 }
 void Administrador::cargarSalas() {
 	ArchivoSalas archiSalas("sala.dat");
-	int numeroSala, capacidadMaximaAsientos;
+	int numeroSala;
 	Sala sala;
 	std::cout << "Ingrese el numero de sala: ";
 	std::cin >> numeroSala;
-	std::cout << "Ingrese la capacidad maxima de asientos: ";
-	std::cin >> capacidadMaximaAsientos;
-	sala = Sala(numeroSala, capacidadMaximaAsientos);
+	sala = Sala(numeroSala);
 	archiSalas.grabarRegistro(sala);
 
 
@@ -146,6 +144,7 @@ void Administrador::cargarFunciones() {
 	Pelicula pelicula;
 	Sala sala;
 	FechaHorario fechaHoraFuncion;
+	DiagramaSala diagramaSala;
 	int  dia, mes, anio, hora, minuto;
 	float valorEntrada;
 	pelicula = seleccionarPelicula();
@@ -164,8 +163,9 @@ void Administrador::cargarFunciones() {
 	std::cin >> minuto;
 	std::cout << "Ingrese el valor de la entrada: ";
 	std::cin >> valorEntrada;
+	diagramaSala = DiagramaSala(idFuncion);
 	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
-	funcion = Funcion(pelicula, sala, fechaHoraFuncion, valorEntrada);
+	funcion = Funcion(pelicula, sala, fechaHoraFuncion, valorEntrada, diagramaSala);
 	archiFunciones.grabarRegistro(funcion);
 }
 

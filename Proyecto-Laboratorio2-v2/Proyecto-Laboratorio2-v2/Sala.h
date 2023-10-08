@@ -4,9 +4,10 @@ class Sala
 {
 	private:
 		int _numeroSala;
-		int _capacidadMaximaAsientos;
-		int _filas;
-		int _columnas;
+		//int _capacidadMaximaAsientos;
+		//int _filas;
+		//int _columnas;
+		bool _estado;
 		
 	public:
 
@@ -14,15 +15,10 @@ class Sala
 		int getNumeroSala();
 		
 		Sala();
-		Sala(int numeroSala, int capacidadMaxima);
+		Sala(int numeroSala);
 		void mostrarDetalles() const;
-		void descontarAsientos();
-		void descontarAsientos(int cantidad);
-		bool hayAsientosDisponibles();
-		float porcentajeOcupacion();
-		int getFilas() const;
-		int getColumnas() const;
-		int getCapacidadMaximaAsientos();
+		void setEstado(bool estado);
+		bool getEstado() const;
 
 };
 

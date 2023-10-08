@@ -26,6 +26,7 @@ class Pelicula
 		char _clasificacionEdad[30];
 		char _genero[30];
 		int _hora, _minuto;
+		bool _estado;
 	public:
 		void setId(int id);
 		int getId();
@@ -41,6 +42,8 @@ class Pelicula
 		int getHora() const;
 		void setMinuto(int minuto);
 		int getMinuto() const;
+		void setEstado(bool estado);
+		bool getEstado() const;
 		Pelicula();
 		Pelicula(int id, std::string titulo, std::string director, std::string clasificacionEdad, std::string genero,int hora, int minuto);
 		void mostrarDetalles() const;
