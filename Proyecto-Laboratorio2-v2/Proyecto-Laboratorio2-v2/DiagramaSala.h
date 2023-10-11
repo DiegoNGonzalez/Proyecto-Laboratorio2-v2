@@ -14,7 +14,7 @@ public:
     bool cancelarReserva(int idFuncion,int fila, int columna);
     void setidFuncion(int idFuncion);
     int getidFuncion();
-    int getSalaDeCine() const ;
+    int** getSalaDeCine()  ;
     
 
 

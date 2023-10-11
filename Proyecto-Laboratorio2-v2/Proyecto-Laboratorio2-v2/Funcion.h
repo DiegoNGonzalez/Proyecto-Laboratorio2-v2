@@ -2,7 +2,6 @@
 #include "Pelicula.h"
 #include "Sala.h"
 #include "FechaHorario.h"
-#include "DiagramaSala.h"
 class Funcion
 {
 	/*Clase Función
@@ -27,7 +26,6 @@ private:
 	Pelicula _pelicula;
 	Sala _sala;
 	FechaHorario _fechaHoraFuncion;
-	DiagramaSala _diagramaSalas;
 	int _idFuncion;
 	float _precioEntrada;
 	bool _estado;
@@ -43,13 +41,12 @@ public:
 		void setEstado(bool estado);
 		bool getEstado() const;
 		Funcion();
-		Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada, DiagramaSala diagramaSala);
+		Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada, int idFuncion);
 		void mostrarDetalles();
 		bool hayAsientosDisponibles();
 		void setPrecioEntrada(float precioEntrada);
 		float getPrecioEntrada() const;
-		DiagramaSala getDiagramaSala() const;
-		void setDiagramaSala(DiagramaSala diagramaSala);
+
 		
 		
 

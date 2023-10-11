@@ -67,15 +67,14 @@ Funcion::Funcion()
 {
 }
 
-Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada, DiagramaSala diagramaSala)
+Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada, int idFuncion)
 {
 	_pelicula = pelicula;
 	_sala = sala;
 	_fechaHoraFuncion = fechaHoraFuncion;
 	_precioEntrada = precioEntrada;
 	_estado = true;
-	_diagramaSalas = diagramaSala;
-
+	_idFuncion = idFuncion;
 }
 
 void Funcion::mostrarDetalles()
@@ -87,19 +86,11 @@ void Funcion::mostrarDetalles()
 	cout << "Fecha y hora de la funcion: " << endl;
 	_fechaHoraFuncion.mostrarFechaHora();
 	cout << "Precio de la entrada: $" << _precioEntrada << endl;
+	
+	cout << "id funcion " << _idFuncion << endl;	
 
 }
 
-
-void Funcion::setDiagramaSala(DiagramaSala diagramaSala)
-{
-	_diagramaSalas = diagramaSala;
-}
-
-DiagramaSala Funcion::getDiagramaSala() const
-{
-	return _diagramaSalas;
-}
 
 
 

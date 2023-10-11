@@ -242,7 +242,7 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion a mostrar sala:";
 				std::cin >> aux;
-				_vendedor1._diagramaSala.mostrarSalaDeCine(aux);
+				diagramaSala.mostrarSalaDeCine(aux);
 				system("cls");
 
 				break;
@@ -255,7 +255,7 @@ void Sistema::mostrarMenuVendedor() {
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				_vendedor1._diagramaSala.reservarAsiento(aux, fila, columna);
+				diagramaSala.reservarAsiento(aux, fila, columna);
 				contadorEntradas++;
 				system("pause");
 				system("cls");
@@ -268,7 +268,7 @@ void Sistema::mostrarMenuVendedor() {
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				_vendedor1._diagramaSala.cancelarReserva(aux, fila, columna);
+				diagramaSala.cancelarReserva(aux, fila, columna);
 				contadorEntradas--;
 				system("pause");
 				system("cls");

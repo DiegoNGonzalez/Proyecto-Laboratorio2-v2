@@ -7,6 +7,8 @@
 #include "ArchivoFunciones.h"
 #include "ArchivoPeliculas.h"
 #include "ArchivoSalas.h"
+#include "ArchivoDiagrama.h"
+#include "DiagramaSala.h"
 class Administrador : public Persona
 {
 private:

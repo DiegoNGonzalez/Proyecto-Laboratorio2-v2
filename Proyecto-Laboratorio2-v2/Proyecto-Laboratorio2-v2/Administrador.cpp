@@ -137,6 +137,7 @@ Sala Administrador::seleccionarSala() {
 
 void Administrador::cargarFunciones() {
 	ArchivoFunciones archiFunciones("funcion.dat");
+	ArchivoDiagrama archiDiagrama("diagrama.dat");
 	Funcion funcion;
 	int idFuncion;
 	const int filas = 10;
@@ -164,8 +165,9 @@ void Administrador::cargarFunciones() {
 	std::cout << "Ingrese el valor de la entrada: ";
 	std::cin >> valorEntrada;
 	diagramaSala = DiagramaSala(idFuncion);
+	archiDiagrama.grabarRegistro(diagramaSala);
 	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
-	funcion = Funcion(pelicula, sala, fechaHoraFuncion, valorEntrada, diagramaSala);
+	funcion = Funcion(pelicula, sala, fechaHoraFuncion, valorEntrada,idFuncion );
 	archiFunciones.grabarRegistro(funcion);
 }
 
