@@ -164,7 +164,7 @@ void Administrador::cargarFunciones() {
 	std::cin >> minuto;
 	std::cout << "Ingrese el valor de la entrada: ";
 	std::cin >> valorEntrada;
-	diagramaSala = DiagramaSala(idFuncion);
+	diagramaSala = DiagramaSala(idFuncion-1);
 	archiDiagrama.grabarRegistro(diagramaSala);
 	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
 	funcion = Funcion(pelicula, sala, fechaHoraFuncion, valorEntrada,idFuncion );

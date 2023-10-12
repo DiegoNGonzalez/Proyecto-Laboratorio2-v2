@@ -9,12 +9,12 @@ private:
 public:
     DiagramaSala();
     DiagramaSala(int idFuncion);
-    void mostrarSalaDeCine(int idFuncion);
-    bool reservarAsiento(int idFuncion,int fila, int columna);
-    bool cancelarReserva(int idFuncion,int fila, int columna);
+    bool reservarAsiento(int fila, int columna);
+    bool cancelarReserva( int fila, int columna);
     void setidFuncion(int idFuncion);
     int getidFuncion();
-    int** getSalaDeCine()  ;
+    void mostrarSala();
+    void setSalaDeCine(int fila, int columna, int estado);
     
 
 

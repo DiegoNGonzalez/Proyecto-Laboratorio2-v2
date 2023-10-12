@@ -194,6 +194,7 @@ void Sistema::mostrarMenuAdmin() {
 
 void Sistema::mostrarMenuVendedor() {
 	DiagramaSala diagramaSala;
+	ArchivoDiagrama archiDiagrama("diagrama.dat");
 	int op = 1, y = 0;
 	Funcion f1;
 	int aux, fila, columna, contadorEntradas=0, contadorGeneralEntradas=0;
@@ -242,7 +243,7 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion a mostrar sala:";
 				std::cin >> aux;
-				diagramaSala.mostrarSalaDeCine(aux);
+				archiDiagrama.mostrarRegistro(aux);
 				system("cls");
 
 				break;
@@ -255,7 +256,7 @@ void Sistema::mostrarMenuVendedor() {
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				diagramaSala.reservarAsiento(aux, fila, columna);
+				archiDiagrama.reservarAsientoEnRegistro(aux, fila, columna);
 				contadorEntradas++;
 				system("pause");
 				system("cls");
@@ -268,7 +269,7 @@ void Sistema::mostrarMenuVendedor() {
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				diagramaSala.cancelarReserva(aux, fila, columna);
+				archiDiagrama.cancelarReservaEnRegistro(aux, fila, columna);
 				contadorEntradas--;
 				system("pause");
 				system("cls");
