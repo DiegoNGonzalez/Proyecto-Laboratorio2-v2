@@ -16,5 +16,6 @@ private:
 		void mostrarRegistro(int idFuncion);
 		bool reservarAsientoEnRegistro(int idFuncion, int fila, int columna);
 		bool cancelarReservaEnRegistro(int idFuncion, int fila, int columna);
+		int buscarDiagrama(int valorBuscado);
 };
 

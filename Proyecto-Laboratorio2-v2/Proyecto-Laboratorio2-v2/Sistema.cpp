@@ -243,38 +243,58 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion a mostrar sala:";
 				std::cin >> aux;
-				archiDiagrama.mostrarRegistro(aux);
+				int pos = archiDiagrama.buscarDiagrama(aux);
+				if (pos != -1) {
+					archiDiagrama.mostrarRegistro(pos);
+				}
+				else {
+					system("pause");
+				}
 				system("cls");
 
 				break;
 			}
-			case 2:
-				system("cls");	
+			case 2: {
+				system("cls");
 				std::cout << "Ingrese el id de la funcion para la cual quiere reservar un asiento: ";
 				std::cin >> aux;
+				int pos = archiDiagrama.buscarDiagrama(aux);
 				std::cout << "Ingrese fila: ";
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				archiDiagrama.reservarAsientoEnRegistro(aux, fila, columna);
+				if (pos != -1) {
+					archiDiagrama.reservarAsientoEnRegistro(pos, fila, columna);
+				}
+				else {
+					system("pause");
+				}
 				contadorEntradas++;
 				system("pause");
 				system("cls");
 				break;
-			case 3:
+			}
+			case 3: {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion para la cual quiere cancelar un asiento: ";
 				std::cin >> aux;
+				int pos = archiDiagrama.buscarDiagrama(aux);
 				std::cout << "Ingrese fila: ";
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				archiDiagrama.cancelarReservaEnRegistro(aux, fila, columna);
+				if (pos != -1) {
+					archiDiagrama.cancelarReservaEnRegistro(pos, fila, columna);
+				}
+				else {
+					system("pause");
+				}
 				contadorEntradas--;
 				system("pause");
 				system("cls");
 
 				break;
+			}
 			case 4:
 				system("cls");
 				_vendedor1.venderEntradas(contadorEntradas, aux, contadorGeneralEntradas);
