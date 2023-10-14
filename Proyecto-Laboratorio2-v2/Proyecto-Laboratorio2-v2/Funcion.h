@@ -23,11 +23,10 @@ class Funcion
 		metodo para vender entradas para una funcion especifica
 ;*/
 private:
+	int _idFuncion;
 	Pelicula _pelicula;
 	Sala _sala;
 	FechaHorario _fechaHoraFuncion;
-	int _idFuncion;
-	float _precioEntrada;
 	bool _estado;
 public:
 		void setPelicula( Pelicula pelicula);
@@ -41,11 +40,10 @@ public:
 		void setEstado(bool estado);
 		bool getEstado() const;
 		Funcion();
-		Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada, int idFuncion);
+		Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, int idFuncion);
 		void mostrarDetalles();
 		bool hayAsientosDisponibles();
-		void setPrecioEntrada(float precioEntrada);
-		float getPrecioEntrada() const;
+		
 
 		
 		

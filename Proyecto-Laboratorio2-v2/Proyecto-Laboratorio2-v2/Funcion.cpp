@@ -44,15 +44,6 @@ int Funcion::getIdFuncion() const
 	return _idFuncion;
 }
 
-void Funcion::setPrecioEntrada(float precioEntrada)
-{
-	_precioEntrada = precioEntrada;
-}
-
-float Funcion::getPrecioEntrada() const
-{
-	return _precioEntrada;
-}
 
 void Funcion::setEstado(bool estado)
 {
@@ -67,27 +58,25 @@ Funcion::Funcion()
 {
 }
 
-Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, float precioEntrada, int idFuncion)
+Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, int idFuncion)
 {
 	_pelicula = pelicula;
 	_sala = sala;
 	_fechaHoraFuncion = fechaHoraFuncion;
-	_precioEntrada = precioEntrada;
 	_estado = true;
 	_idFuncion = idFuncion;
 }
 
 void Funcion::mostrarDetalles()
 {
+	cout << "id funcion " << _idFuncion << endl;
 	cout << "Pelicula: " << endl;
 	_pelicula.mostrarDetalles();
 	cout << "Sala: " << endl;
 	_sala.mostrarDetalles();
 	cout << "Fecha y hora de la funcion: " << endl;
 	_fechaHoraFuncion.mostrarFechaHora();
-	cout << "Precio de la entrada: $" << _precioEntrada << endl;
 	
-	cout << "id funcion " << _idFuncion << endl;	
 
 }
 

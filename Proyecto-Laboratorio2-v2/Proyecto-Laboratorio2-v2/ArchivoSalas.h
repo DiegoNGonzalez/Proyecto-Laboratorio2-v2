@@ -12,5 +12,8 @@ class ArchivoSalas
 		Sala leerRegistro(int posicion);
 		int contarRegistros();
 		bool grabarRegistro(Sala sala);
+		void generarBackUp();
+		void restaurarBackUp();
+
 };
 

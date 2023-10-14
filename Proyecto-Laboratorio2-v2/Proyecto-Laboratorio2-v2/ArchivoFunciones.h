@@ -12,5 +12,7 @@ public:
 	Funcion leerRegistro(int posicion);
 	int contarRegistros();
 	bool grabarRegistro(Funcion funcion);
+	void generarBackUp();
+	void restaurarBackUp();
 };
 

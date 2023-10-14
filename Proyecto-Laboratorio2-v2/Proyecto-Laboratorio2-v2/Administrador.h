@@ -1,4 +1,5 @@
 #pragma once
+#include "rlutil.h"
 #include "Persona.h"
 #include "Funcion.h"
 #include "Pelicula.h"
@@ -9,6 +10,8 @@
 #include "ArchivoSalas.h"
 #include "ArchivoDiagrama.h"
 #include "DiagramaSala.h"
+#include "funcionesGlobales.h"
+
 class Administrador : public Persona
 {
 private:
@@ -29,5 +32,9 @@ public:
 	void generarReporte();
 	Administrador();
 	Administrador(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
-};
+	void menuPeliculas();
+	void menuSalas();
+	void menuFunciones();
+	void menuBackUp();
 
+};

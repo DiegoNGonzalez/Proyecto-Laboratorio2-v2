@@ -34,3 +34,37 @@ bool ArchivoSalas::grabarRegistro(Sala sala) {
 	fclose(p);
 	return escribio;
 };
+
+void ArchivoSalas::generarBackUp() {
+	FILE* p;
+	FILE* pBackUp;
+	Sala sala;
+	p = fopen(_nombre, "rb");
+	pBackUp = fopen("backUp/salaBKP.dat", "wb");
+	if (p == NULL || pBackUp == NULL) {
+		std::cout << "Error al generar back up" << std::endl;
+		return;
+	}
+	while (fread(&sala, sizeof sala, 1, p) == 1) {
+		fwrite(&sala, sizeof sala, 1, pBackUp);
+	}
+	fclose(p);
+	fclose(pBackUp);
+}
+
+void ArchivoSalas::restaurarBackUp() {
+	FILE* p;
+	FILE* pBackUp;
+	Sala sala;
+	p = fopen(_nombre, "wb");
+	pBackUp = fopen("backUp/salaBKP.dat", "rb");
+	if (p == NULL || pBackUp == NULL) {
+		std::cout << "Error al restaurar back up" << std::endl;
+		return;
+	}
+	while (fread(&sala, sizeof sala, 1, pBackUp) == 1) {
+		fwrite(&sala, sizeof sala, 1, p);
+	}
+	fclose(p);
+	fclose(pBackUp);
+}

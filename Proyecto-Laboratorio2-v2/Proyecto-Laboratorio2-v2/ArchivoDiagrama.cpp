@@ -150,3 +150,40 @@ int ArchivoDiagrama::buscarDiagrama(int valorBuscado) {
 			return -1;
 }
 
+void ArchivoDiagrama::generarBackUp() {
+		FILE* archivo = fopen(_nombre, "rb");
+	FILE* archivoBackUp = fopen("backUp/diagramaBKP.dat", "wb");
+	if (archivo == NULL)
+	{
+		std::cout << "Error al abrir el archivo" << std::endl;
+	}
+	else
+	{
+		DiagramaSala diagrama;
+		while (fread(&diagrama, sizeof(DiagramaSala), 1, archivo))
+		{
+			fwrite(&diagrama, sizeof(DiagramaSala), 1, archivoBackUp);
+		}
+		fclose(archivo);
+		fclose(archivoBackUp);
+	}
+}
+
+void ArchivoDiagrama::restaurarBackUp() {
+		FILE* archivoBackUp = fopen("backUp/diagramaBKP.dat", "rb");
+	FILE* archivo = fopen(_nombre, "wb");
+	if (archivoBackUp == NULL)
+	{
+		std::cout << "Error al abrir el archivo" << std::endl;
+	}
+	else
+	{
+		DiagramaSala diagrama;
+		while (fread(&diagrama, sizeof(DiagramaSala), 1, archivoBackUp))
+		{
+			fwrite(&diagrama, sizeof(DiagramaSala), 1, archivo);
+		}
+		fclose(archivoBackUp);
+		fclose(archivo);
+	}
+}

@@ -3,19 +3,19 @@
 class Sala
 {
 	private:
-		int _numeroSala;
-		//int _capacidadMaximaAsientos;
-		//int _filas;
-		//int _columnas;
+		int _idSala;
+		float _precioAsiento;
 		bool _estado;
 		
 	public:
 
-		void setNumeroSala(int numeroSala);
-		int getNumeroSala();
+		void setIdSala(int numeroSala);
+		int getIdSala();
+		void setPrecioAsiento(float precioAsiento);
+		float getPrecioAsiento();
 		
 		Sala();
-		Sala(int numeroSala);
+		Sala(int idSala, float precioAsiento);
 		void mostrarDetalles() const;
 		void setEstado(bool estado);
 		bool getEstado() const;

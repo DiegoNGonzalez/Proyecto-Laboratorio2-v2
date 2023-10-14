@@ -4,38 +4,26 @@
 
 using namespace std;
 
-//private:
-//	int _numeroSala;
-//	int _capacidadMaximaAsientos;
-//	float _precioEntrada;
-//	Pelicula _pelicula;
-//	public:
-//
-//		void setNumeroSala(int numeroSala);
-//		int getNumeroSala();
-//		void setCapacidadMaximaAsientos(int capacidadMaximaAsientos);
-//		int getCapacidadMaximaAsientos();
-//		void setPrecioEntrada(float precioEntrada);
-//		float getPrecioEntrada();
-//		void setPelicula(Pelicula pelicula);
-//		Pelicula getPelicula();
-//		Sala();
-//		Sala(int numeroSala, int capacidadMaximaAsientos, float precioEntrada);
-//		void asignarPelicula(Pelicula pelicula);
-//		void mostrarDetalles();
-//};
 
-void Sala::setNumeroSala(int numeroSala)
+void Sala::setIdSala(int idSala)
 {
-	_numeroSala = numeroSala;
+	_idSala = idSala;
 }
 
-int Sala::getNumeroSala()
+int Sala::getIdSala()
 {
-	return _numeroSala;
+	return _idSala;
 }
 
+void Sala::setPrecioAsiento(float precioAsiento)
+{
+	_precioAsiento = precioAsiento;
+}
 
+float Sala::getPrecioAsiento()
+{
+	return _precioAsiento;
+}
 
 
 void Sala::setEstado(bool estado)
@@ -50,21 +38,24 @@ bool Sala::getEstado() const
 
 Sala::Sala()
 {
-	_numeroSala = 0;
+	_idSala = 0;
 	_estado = true;
+	_precioAsiento = 0;
 }
 
-Sala::Sala(int numeroSala)
+Sala::Sala(int idSala, float precioAsiento)
 {
-	_numeroSala = numeroSala;
+	_idSala = idSala;
+	_precioAsiento = precioAsiento;
 	_estado = true;
 }
 
 
 void Sala::mostrarDetalles() const
 {
-	cout << "Numero de sala: " << _numeroSala << endl;
+	cout << "Numero de sala: " << _idSala << endl;
 	cout << "Capacidad maxima de asientos: " << 100 << endl;
+	cout << "Precio de entrada: " << _precioAsiento << endl;
 }
 
 

@@ -12,6 +12,8 @@ class ArchivoPeliculas
 		Pelicula leerRegistro(int posicion);
 		int contarRegistros();
 		bool grabarRegistro(Pelicula pelicula);
+		void generarBackUp();
+		void restaurarBackUp();
 
 };
 

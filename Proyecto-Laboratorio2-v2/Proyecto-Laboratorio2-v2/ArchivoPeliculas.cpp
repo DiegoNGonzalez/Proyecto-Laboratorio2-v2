@@ -34,3 +34,37 @@ bool ArchivoPeliculas::grabarRegistro(Pelicula pelicula) {
 	fclose(p);
 	return escribio;
 };
+
+void ArchivoPeliculas::generarBackUp() {
+	FILE* p;
+	FILE* pBackUp;
+	Pelicula pelicula;
+	p = fopen(_nombre, "rb");
+	pBackUp = fopen("backUp/peliculaBKP.dat", "wb");
+	if (p == NULL || pBackUp == NULL) {
+		std::cout << "Error al generar back up" << std::endl;
+		return;
+	}
+	while (fread(&pelicula, sizeof pelicula, 1, p) == 1) {
+		fwrite(&pelicula, sizeof pelicula, 1, pBackUp);
+	}
+	fclose(p);
+	fclose(pBackUp);
+}
+
+void ArchivoPeliculas::restaurarBackUp() {
+	FILE* p;
+	FILE* pBackUp;
+	Pelicula pelicula;
+	p = fopen(_nombre, "wb");
+	pBackUp = fopen("backUp/peliculaBKP.dat", "rb");
+	if (p == NULL || pBackUp == NULL) {
+		std::cout << "Error al restaurar back up" << std::endl;
+		return;
+	}
+	while (fread(&pelicula, sizeof pelicula, 1, pBackUp) == 1) {
+		fwrite(&pelicula, sizeof pelicula, 1, p);
+	}
+	fclose(p);
+	fclose(pBackUp);
+}
