@@ -11,7 +11,7 @@ Sistema::Sistema()
 	Pelicula vecPeliculas[5];
 	Sala vecSalas[5];
 	Funcion vecFunciones[25];
-	int matrizSalasxFuncion[25][10][10]={0};
+	//int matrizSalasxFuncion[10][10]={0};
 	_admin1 = Administrador(01, "DT", "Carlos", "Tevez", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
 }
@@ -105,20 +105,19 @@ void Sistema::mostrarMenuAdmin() {
 
 	int op = 1, y = 0;
 	Funcion f1;
+	ArchivoFunciones archiFunciones("funcion.dat");
 
 	do {
 		rlutil::setConsoleTitle("MENU ADMIN CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem(" Cargar peliculas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem(" Ver peliculas cargadas ", 50, 11, y == 1);
-		showItem(" Cargar salas ", 50, 12, y == 2);
-		showItem(" Ver salas cargadas ", 50, 13, y == 3);
-		showItem(" Cargar Funciones ", 50, 14, y == 4);
-		showItem(" Ver Funciones cargadas ", 50, 15, y == 5);
-		showItem(" Cerrar sesion ", 50, 16, y == 6);
-		showItem("  SALIR   ", 50, 17, y == 7);
+		showItem(" Menu Peliculas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem(" Menu Salas ", 50, 11, y == 1);
+		showItem(" Menu Funciones ", 50, 12, y == 2);
+		showItem(" Menu BackUp ", 50, 13, y == 3);
+		showItem(" Cerrar sesion ", 50, 14, y == 4);
+		showItem("  SALIR   ", 50, 15, y == 5);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -136,52 +135,37 @@ void Sistema::mostrarMenuAdmin() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 7) y = 7;
+			if (y > 5) y = 5;
 			break;
 		case 1: // ENTER
 			switch (y)
 			{
 			case 0: {
 				system("cls");
-				_admin1.cargarPeliculas(vecPeliculas);
+				_admin1.menuPeliculas();
 				system("cls");
 				break;
 			}
 			case 1:
 				system("cls");
-				_admin1.verPeliculasCargadas(vecPeliculas);
-				system("pause");
+				_admin1.menuSalas();
 				system("cls");
 				break;
 			case 2:
 				system("cls");
-				_admin1.cargarSalas(vecSalas);
+				_admin1.menuFunciones();
 				system("cls");
 				break;
 			case 3:
 				system("cls");
-				_admin1.verSalasCargadas(vecSalas);
-				system("pause");
+				_admin1.menuBackUp();
 				system("cls");
 				break;
 			case 4:
-				system("cls");
-				_admin1.cargarFunciones(vecFunciones, vecPeliculas, vecSalas);
-				system("pause");
-				system("cls");
-				break;
-
-			case 5:
-				system("cls");
-				_admin1.verFuncionesCargadas(vecFunciones);
-				system("pause");
-				system("cls");
-				break;
-			case 6:
 				login(_admin1, _vendedor1);
 				op = 0;
 				break;
-			case 7: // Si el cursor esta en la opcion SALIR
+			case 5: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}
@@ -193,7 +177,8 @@ void Sistema::mostrarMenuAdmin() {
 }
 
 void Sistema::mostrarMenuVendedor() {
-
+	DiagramaSala diagramaSala;
+	ArchivoDiagrama archiDiagrama("diagrama.dat");
 	int op = 1, y = 0;
 	Funcion f1;
 	int aux, fila, columna, contadorEntradas=0, contadorGeneralEntradas=0;
@@ -233,7 +218,7 @@ void Sistema::mostrarMenuVendedor() {
 			{
 			case 0: {
 				system("cls");
-				_admin1.verFuncionesCargadas(vecFunciones);
+				_admin1.verFuncionesCargadas();
 				system("pause");
 				system("cls");
 				break;
@@ -242,41 +227,61 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion a mostrar sala:";
 				std::cin >> aux;
-				_vendedor1.mostrarCapacidadSala(matrizSalasxFuncion, aux);
+				int pos = archiDiagrama.buscarDiagrama(aux);
+				if (pos != -1) {
+					archiDiagrama.mostrarRegistro(pos);
+				}
+				else {
+					system("pause");
+				}
 				system("cls");
 
 				break;
 			}
-			case 2:
-				system("cls");	
+			case 2: {
+				system("cls");
 				std::cout << "Ingrese el id de la funcion para la cual quiere reservar un asiento: ";
 				std::cin >> aux;
+				int pos = archiDiagrama.buscarDiagrama(aux);
 				std::cout << "Ingrese fila: ";
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				_vendedor1.reservarAsiento(fila, columna,matrizSalasxFuncion,aux);
+				if (pos != -1) {
+					archiDiagrama.reservarAsientoEnRegistro(pos, fila, columna);
+				}
+				else {
+					system("pause");
+				}
 				contadorEntradas++;
 				system("pause");
 				system("cls");
 				break;
-			case 3:
+			}
+			case 3: {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion para la cual quiere cancelar un asiento: ";
 				std::cin >> aux;
+				int pos = archiDiagrama.buscarDiagrama(aux);
 				std::cout << "Ingrese fila: ";
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
-				_vendedor1.cancelarReserva(fila, columna, matrizSalasxFuncion, aux);
+				if (pos != -1) {
+					archiDiagrama.cancelarReservaEnRegistro(pos, fila, columna);
+				}
+				else {
+					system("pause");
+				}
 				contadorEntradas--;
 				system("pause");
 				system("cls");
 
 				break;
+			}
 			case 4:
 				system("cls");
-				_vendedor1.venderEntradas(contadorEntradas, vecFunciones, aux, contadorGeneralEntradas);
+				_vendedor1.venderEntradas(contadorEntradas, aux, contadorGeneralEntradas);
 				contadorEntradas = 0;
 				system("pause");
 				system("cls");

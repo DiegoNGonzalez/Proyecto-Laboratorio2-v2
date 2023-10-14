@@ -745,5 +745,6 @@ namespace rlutil {
 		~CursorHider() { showcursor(); }
 	};
 
-	} // namespace rlutil
+	
+	} //namespace rlutil
 #endif#pragma once
