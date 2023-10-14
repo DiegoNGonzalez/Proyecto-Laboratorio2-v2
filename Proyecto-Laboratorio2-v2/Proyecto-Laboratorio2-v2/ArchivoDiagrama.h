@@ -1,6 +1,8 @@
 #pragma once
 #include "DiagramaSala.h"
 #include <cstring>
+#include <Windows.h>
+#include "rlutil.h"
 class ArchivoDiagrama
 {
 private:
@@ -16,5 +18,8 @@ private:
 		void mostrarRegistro(int idFuncion);
 		bool reservarAsientoEnRegistro(int idFuncion, int fila, int columna);
 		bool cancelarReservaEnRegistro(int idFuncion, int fila, int columna);
+		int buscarDiagrama(int valorBuscado);
+		bool generarBackUp();
+		bool restaurarBackUp();
 };
 

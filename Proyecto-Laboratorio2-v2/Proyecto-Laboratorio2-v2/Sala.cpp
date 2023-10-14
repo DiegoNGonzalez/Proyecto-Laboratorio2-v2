@@ -4,99 +4,58 @@
 
 using namespace std;
 
-//private:
-//	int _numeroSala;
-//	int _capacidadMaximaAsientos;
-//	float _precioEntrada;
-//	Pelicula _pelicula;
-//	public:
-//
-//		void setNumeroSala(int numeroSala);
-//		int getNumeroSala();
-//		void setCapacidadMaximaAsientos(int capacidadMaximaAsientos);
-//		int getCapacidadMaximaAsientos();
-//		void setPrecioEntrada(float precioEntrada);
-//		float getPrecioEntrada();
-//		void setPelicula(Pelicula pelicula);
-//		Pelicula getPelicula();
-//		Sala();
-//		Sala(int numeroSala, int capacidadMaximaAsientos, float precioEntrada);
-//		void asignarPelicula(Pelicula pelicula);
-//		void mostrarDetalles();
-//};
 
-void Sala::setNumeroSala(int numeroSala)
+void Sala::setIdSala(int idSala)
 {
-	_numeroSala = numeroSala;
+	_idSala = idSala;
 }
 
-int Sala::getNumeroSala()
+int Sala::getIdSala()
 {
-	return _numeroSala;
+	return _idSala;
+}
+
+void Sala::setPrecioAsiento(float precioAsiento)
+{
+	_precioAsiento = precioAsiento;
+}
+
+float Sala::getPrecioAsiento()
+{
+	return _precioAsiento;
 }
 
 
-int Sala::getCapacidadMaximaAsientos()
+void Sala::setEstado(bool estado)
 {
-	return _capacidadMaximaAsientos;
+	_estado = estado;
 }
 
+bool Sala::getEstado() const
+{
+	return _estado;
+}
 
 Sala::Sala()
 {
-	_numeroSala = 0;
-	_capacidadMaximaAsientos = 0;
+	_idSala = 0;
+	_estado = true;
+	_precioAsiento = 0;
 }
 
-Sala::Sala(int numeroSala, int capacidadMaxima)
+Sala::Sala(int idSala, float precioAsiento)
 {
-	_numeroSala = numeroSala;
-	/*_filas= filas;
-	_columnas = columnas;*/
-	_capacidadMaximaAsientos = capacidadMaxima;
+	_idSala = idSala;
+	_precioAsiento = precioAsiento;
+	_estado = true;
 }
 
 
 void Sala::mostrarDetalles() const
 {
-	cout << "Numero de sala: " << _numeroSala << endl;
-	cout << "Capacidad maxima de asientos: " << _capacidadMaximaAsientos << endl;
-}
-
-void Sala::descontarAsientos()
-{
-	_capacidadMaximaAsientos--;
-}
-
-void Sala::descontarAsientos(int cantidad)
-{
-	_capacidadMaximaAsientos -= cantidad;
-}
-bool Sala::hayAsientosDisponibles()
-{
-	if (_capacidadMaximaAsientos > 0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-}
-
-float Sala:: porcentajeOcupacion() {
-	return _capacidadMaximaAsientos / 100.f;
-
+	cout << "Numero de sala: " << _idSala << endl;
+	cout << "Capacidad maxima de asientos: " << 100 << endl;
+	cout << "Precio de entrada: $" << _precioAsiento << endl;
 }
 
 
-int Sala::getFilas() const
-{
-	return _filas;
-}
-
-
-int Sala::getColumnas() const
-{
-	return _columnas;
-}

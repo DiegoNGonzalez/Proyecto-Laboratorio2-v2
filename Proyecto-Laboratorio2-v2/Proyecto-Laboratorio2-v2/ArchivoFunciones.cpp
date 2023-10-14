@@ -37,3 +37,97 @@ bool ArchivoFunciones::grabarRegistro(Funcion funcion) {
 	fclose(p);
 	return escribio;
 };
+
+bool ArchivoFunciones::generarBackUp() {
+	FILE* p;
+	FILE* pBackUp;
+	Funcion funcion;
+	bool pudoEscribir = false;
+	p = fopen(_nombre, "rb");
+	pBackUp = fopen("backUp/funcionBKP.dat", "wb");
+	if (p == NULL || pBackUp == NULL) {
+		std::cout << "Error al generar back up" << std::endl;
+		return false;
+	}
+	while (fread(&funcion, sizeof funcion, 1, p) == 1) {
+		fwrite(&funcion, sizeof funcion, 1, pBackUp);
+	}
+	fclose(p);
+	fclose(pBackUp);
+	pudoEscribir = true;
+	int porcentaje = 25;
+	for (int x = 0;x < 4;x++) {
+
+		std::cout << "Restaurando archivo de seguridad: ";
+		std::cout << porcentaje * (x + 1);
+		std::cout << "%";
+		Sleep(1000);
+		system("cls");
+		rlutil::hidecursor();
+	}
+	if (pudoEscribir == true) {
+		std::cout << "BackUp generado con exito" << std::endl;
+	}
+	else {
+		std::cout << "No se pudo generar el BackUp" << std::endl;
+	}
+	system("pause");
+	return pudoEscribir;
+}
+
+bool ArchivoFunciones::restaurarBackUp() {
+	FILE* p;
+	FILE* pBackUp;
+	Funcion funcion;
+	bool pudoEscribir = false;
+	p = fopen(_nombre, "wb");
+	pBackUp = fopen("backUp/funcionBKP.dat", "rb");
+	if (p == NULL || pBackUp == NULL) {
+		std::cout << "Error al restaurar back up" << std::endl;
+		return false;
+	}
+	while (fread(&funcion, sizeof funcion, 1, pBackUp) == 1) {
+		fwrite(&funcion, sizeof funcion, 1, p);
+	}
+	fclose(p);
+	fclose(pBackUp);
+	pudoEscribir = true;
+	int porcentaje = 25;
+	for (int x = 0;x < 4;x++) {
+
+		std::cout << "Restaurando archivo de seguridad: ";
+		std::cout << porcentaje * (x + 1);
+		std::cout << "%";
+		Sleep(1000);
+		system("cls");
+		rlutil::hidecursor();
+	}
+	if (pudoEscribir == true) {
+		std::cout << "BackUp restaurado con exito" << std::endl;
+	}
+	else {
+		std::cout << "No se pudo restaurar el BackUp" << std::endl;
+	}
+	system("pause");
+	return pudoEscribir;
+}
+
+int ArchivoFunciones::validarId() {
+	FILE* p;
+	int idMax = 0, contarReg;
+
+	p = fopen(_nombre, "rb");
+	if (p == NULL) {
+		return 1;
+	}
+	contarReg = contarRegistros();
+	for (int i = 0; i < contarReg; i++) {
+		Funcion funcion = leerRegistro(i);
+		if (funcion.getIdFuncion() > idMax) {
+			idMax = funcion.getIdFuncion();
+		}
+	}
+	fclose(p);
+	return idMax + 1;
+
+}

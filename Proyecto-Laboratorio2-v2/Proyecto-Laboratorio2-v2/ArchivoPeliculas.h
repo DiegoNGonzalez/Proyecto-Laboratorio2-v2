@@ -1,6 +1,8 @@
 #pragma once
 #include <cstring>
 #include "Pelicula.h"
+#include <Windows.h>
+#include "rlutil.h"
 class ArchivoPeliculas
 {
 	private:
@@ -12,6 +14,9 @@ class ArchivoPeliculas
 		Pelicula leerRegistro(int posicion);
 		int contarRegistros();
 		bool grabarRegistro(Pelicula pelicula);
+		bool generarBackUp();
+		bool restaurarBackUp();
+		int validarId();
 
 };
 

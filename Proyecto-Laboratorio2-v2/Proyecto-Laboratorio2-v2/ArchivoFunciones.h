@@ -1,6 +1,8 @@
 #pragma once
+#include <Windows.h>
 #include <cstring>
 #include "Funcion.h"
+#include "rlutil.h"
 class ArchivoFunciones
 {
 private:
@@ -12,5 +14,8 @@ public:
 	Funcion leerRegistro(int posicion);
 	int contarRegistros();
 	bool grabarRegistro(Funcion funcion);
+	bool generarBackUp();
+	bool restaurarBackUp();
+	int validarId();
 };
 
