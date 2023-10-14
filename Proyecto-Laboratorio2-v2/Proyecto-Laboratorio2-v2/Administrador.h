@@ -1,4 +1,5 @@
 #pragma once
+#include <Windows.h>
 #include "rlutil.h"
 #include "Persona.h"
 #include "Funcion.h"
@@ -10,7 +11,7 @@
 #include "ArchivoSalas.h"
 #include "ArchivoDiagrama.h"
 #include "DiagramaSala.h"
-#include "funcionesGlobales.h"
+
 
 class Administrador : public Persona
 {

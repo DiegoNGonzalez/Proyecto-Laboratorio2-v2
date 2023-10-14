@@ -142,7 +142,7 @@ int ArchivoDiagrama::buscarDiagrama(int valorBuscado) {
 	for (int i = 0; i < cantidadRegistros; i++)
 	{
 		diagrama = leerRegistro(i);
-		if (diagrama.getidFuncion() == valorBuscado) {
+		if (diagrama.getIdFuncion() == valorBuscado) {
 			return i;
 		}
 	}
@@ -150,15 +150,16 @@ int ArchivoDiagrama::buscarDiagrama(int valorBuscado) {
 			return -1;
 }
 
-void ArchivoDiagrama::generarBackUp() {
+bool ArchivoDiagrama::generarBackUp() {
 		FILE* archivo = fopen(_nombre, "rb");
 	FILE* archivoBackUp = fopen("backUp/diagramaBKP.dat", "wb");
+	bool pudoEscribir= false;
 	if (archivo == NULL)
 	{
-		std::cout << "Error al abrir el archivo" << std::endl;
+		std::cout << "Error al abrir el archivo, Falla BackUp" << std::endl;
+		return false;
 	}
-	else
-	{
+	
 		DiagramaSala diagrama;
 		while (fread(&diagrama, sizeof(DiagramaSala), 1, archivo))
 		{
@@ -166,18 +167,39 @@ void ArchivoDiagrama::generarBackUp() {
 		}
 		fclose(archivo);
 		fclose(archivoBackUp);
-	}
+		pudoEscribir = true;
+		int porcentaje = 25;
+		for (int x = 0;x < 4;x++) {
+
+			std::cout << "Restaurando archivo de seguridad: ";
+			std::cout << porcentaje * (x + 1);
+			std::cout << "%";
+			Sleep(1000);
+			system("cls");
+			rlutil::hidecursor();
+		}
+		if (pudoEscribir == true) {
+			std::cout << "BackUp generado con exito" << std::endl;
+		}
+		else {
+			std::cout << "No se pudo generar el BackUp" << std::endl;
+		}
+		system("pause");
+		return pudoEscribir;
+
+	
 }
 
-void ArchivoDiagrama::restaurarBackUp() {
+bool ArchivoDiagrama::restaurarBackUp() {
 		FILE* archivoBackUp = fopen("backUp/diagramaBKP.dat", "rb");
 	FILE* archivo = fopen(_nombre, "wb");
+	bool pudoEscribir = false;
 	if (archivoBackUp == NULL)
 	{
-		std::cout << "Error al abrir el archivo" << std::endl;
+		std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
+		return false;
 	}
-	else
-	{
+
 		DiagramaSala diagrama;
 		while (fread(&diagrama, sizeof(DiagramaSala), 1, archivoBackUp))
 		{
@@ -185,5 +207,23 @@ void ArchivoDiagrama::restaurarBackUp() {
 		}
 		fclose(archivoBackUp);
 		fclose(archivo);
-	}
+		pudoEscribir = true;
+		int porcentaje = 25;
+		for (int x = 0;x < 4;x++) {
+			
+			std::cout << "Restaurando archivo de seguridad: ";
+			std::cout << porcentaje * (x + 1);
+			std::cout << "%";
+			Sleep(1000);
+			system("cls");
+			rlutil::hidecursor();
+		}
+		if (pudoEscribir == true) {
+			std::cout << "BackUp restaurado con exito" << std::endl;
+		}
+		else {
+			std::cout << "No se pudo restaurar el BackUp" << std::endl;
+		}
+		system ("pause");
+		return pudoEscribir;
 }

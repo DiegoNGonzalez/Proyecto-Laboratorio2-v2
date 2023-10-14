@@ -7,8 +7,9 @@ cargarPeliculas() {
 	std::string director;
 	std::string clasificacionEdad;
 	std::string genero;
-	int duracion, id;
+	int duracion, id= archiPeliculas.validarId();
 	Pelicula pelicula;
+	std::cout << "Pelicula nro: "<< id << std::endl;
 	std::cin.ignore();
 	std::cout << "Ingrese el titulo: ";
 	std::getline(std::cin, titulo);
@@ -20,8 +21,10 @@ cargarPeliculas() {
 	std::getline(std::cin, genero);
 	std::cout << "Ingrese la duracion en minutos: ";
 	std::cin >> duracion;
-	std::cout << "Ingrese el id: ";
-	std::cin >> id;
+	while (duracion <= 0) {
+		std::cout << "Ingrese la duracion en minutos: ";
+		std::cin >> duracion;
+	}
 	std::cout << std::endl;
 	pelicula = Pelicula(id, titulo, director, clasificacionEdad, genero, duracion);
 
@@ -35,7 +38,7 @@ void Administrador::verPeliculasCargadas() {
 	int cantidadRegistros = archiPeliculas.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiPeliculas.leerRegistro(i);
-		std::cout << "////////  PELICULA  #" << i + 1 << "  ////////" << std::endl;
+		std::cout << "////////  PELICULA  #" << registro.getId() << "  ////////" << std::endl;
 		registro.mostrarDetalles();
 		std::cout << std::endl;
 	}
@@ -43,13 +46,16 @@ void Administrador::verPeliculasCargadas() {
 }
 void Administrador::cargarSalas() {
 	ArchivoSalas archiSalas("sala.dat");
-	int idSala;
 	Sala sala;
+	int idSala= archiSalas.validarId();
+	std::cout << "Sala nro: "<< idSala << std::endl;
 	float precioEntrada;
-	std::cout << "Ingrese el numero de sala: ";
-	std::cin >> idSala;
 	std::cout << "Ingrese el precio de la entrada: ";
 	std::cin >> precioEntrada;
+	while (precioEntrada <= 0) {
+		std::cout << "Ingrese el precio de la entrada: ";
+		std::cin >> precioEntrada;
+	}
 	sala = Sala(idSala, precioEntrada);
 	archiSalas.grabarRegistro(sala);
 
@@ -61,7 +67,7 @@ void Administrador::verSalasCargadas() {
 	int cantidadRegistros = archiSalas.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiSalas.leerRegistro(i);
-		std::cout << "////////  SALA  #" << i + 1 << "  ////////" << std::endl;
+		std::cout << "////////  SALA  #" << registro.getIdSala() << "  ////////" << std::endl;
 		registro.mostrarDetalles();
 		std::cout << std::endl;
 	}
@@ -77,7 +83,7 @@ Pelicula Administrador::seleccionarPelicula() {
 	int contador;
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiPeliculas.leerRegistro(i);
-		std::cout << "////////  PELICULA  #" << i + 1 << "  ////////" << std::endl;
+		std::cout << "////////  PELICULA  #" << registro.getId() << "  ////////" << std::endl;
 		registro.mostrarDetalles();
 		std::cout << std::endl;
 	}
@@ -110,7 +116,7 @@ Sala Administrador::seleccionarSala() {
 	int cantidadRegistros = archiSalas.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiSalas.leerRegistro(i);
-		std::cout << "////////  SALA  #" << i + 1 << "  ////////" << std::endl;
+		std::cout << "////////  SALA  #" << registro.getIdSala() << "  ////////" << std::endl;
 		registro.mostrarDetalles();
 		std::cout << std::endl;
 	}
@@ -140,7 +146,7 @@ void Administrador::cargarFunciones() {
 	ArchivoFunciones archiFunciones("funcion.dat");
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
 	Funcion funcion;
-	int idFuncion;
+	int idFuncion= archiFunciones.validarId();
 	const int filas = 10;
 	const int columnas = 10;
 	Pelicula pelicula;
@@ -150,18 +156,42 @@ void Administrador::cargarFunciones() {
 	int  dia, mes, anio, hora, minuto;
 	pelicula = seleccionarPelicula();
 	sala = seleccionarSala();
-	std::cout << "Ingrese el id de la funcion: ";
-	std::cin >> idFuncion;
+	std::cout << "Funcion nro: "<< idFuncion<<std::endl ;
 	std::cout << "Ingrese el dia de la funcion: ";
 	std::cin >> dia;
+	while (dia <= 0 || dia > 31)
+	{
+		std::cout << "Ingrese el dia de la funcion: ";
+		std::cin >> dia;
+	}
 	std::cout << "Ingrese el mes de la funcion: ";
 	std::cin >> mes;
+	while (mes <= 0 || mes > 12)
+	{
+		std::cout << "Ingrese el mes de la funcion: ";
+		std::cin >> mes;
+	}
 	std::cout << "Ingrese el anio de la funcion: ";
 	std::cin >> anio;
+	while (anio < 2023)
+	{
+		std::cout << "Ingrese el anio de la funcion: ";
+		std::cin >> anio;
+	}
 	std::cout << "Ingrese la hora de la funcion: ";
 	std::cin >> hora;
+	while (hora < 0 || hora > 23)
+	{
+		std::cout << "Ingrese la hora de la funcion: ";
+		std::cin >> hora;
+	}
 	std::cout << "Ingrese los minutos de la funcion: ";
 	std::cin >> minuto;
+	while (minuto < 0 || minuto > 59)
+	{
+		std::cout << "Ingrese los minutos de la funcion: ";
+		std::cin >> minuto;
+	}
 	diagramaSala = DiagramaSala(idFuncion);
 	archiDiagrama.grabarRegistro(diagramaSala);
 	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
@@ -175,7 +205,7 @@ void Administrador::verFuncionesCargadas() {
 	int cantidadRegistros = archiFunciones.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiFunciones.leerRegistro(i);
-		std::cout << "////////  FUNCION  #" << i + 1 << "  ////////" << std::endl;
+		std::cout << "////////  FUNCION  #" << registro.getIdFuncion() << "  ////////" << std::endl;
 		registro.mostrarDetalles();
 		std::cout << std::endl;
 	}
@@ -254,4 +284,198 @@ void Administrador::menuPeliculas() {
 			}
 		}
 	} while (op != 0);
+}
+
+void Administrador::menuSalas() {
+	int op = 1, y = 0;
+
+	do {
+		rlutil::setConsoleTitle("MENU SALAS"); // establece el titulo de la consola
+		rlutil::hidecursor(); // oculta el cursor
+		//rlutil::cls(); // limpia la pantalla
+
+		showItem1(" Cargar salas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem1(" Ver salas cargadas ", 50, 11, y == 1);
+		showItem1(" Volver ", 50, 12, y == 2);
+
+		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+	
+	switch (key) // evalua el codigo de tecla
+	{
+	case 14: // flecha ARRIBA
+		rlutil::locate(28, 10 + y);
+		std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+		y--;
+		if (y < 0) y = 0; // validacion para que no se salga de las opciones
+		break;
+	case 15: // flecha ABAJO
+		rlutil::locate(28, 10 + y);
+		std::cout << " " << std::endl;
+		y++;
+		if (y > 2) y = 2;
+		break;
+	case 1: // ENTER
+		switch (y)
+		{
+		case 0: {
+			system("cls");
+			cargarSalas();
+			system("cls");
+			break;
+		}
+		case 1:
+			system("cls");
+			verSalasCargadas();
+			system("pause");
+			system("cls");
+			break;
+		case 2: // Si el cursor esta en la opcion SALIR
+			op = 0; // sale del programa
+			break;
+		}
+	}
+} while (op != 0);
+}
+
+void Administrador::menuFunciones() {
+
+	int op = 1, y = 0;
+
+	do {
+		rlutil::setConsoleTitle("MENU FUNCIONES"); // establece el titulo de la consola
+		rlutil::hidecursor(); // oculta el cursor
+		//rlutil::cls(); // limpia la pantalla
+
+		showItem1(" Cargar funciones ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem1(" Ver funciones cargadas ", 50, 11, y == 1);
+		showItem1(" Volver ", 50, 12, y == 2);
+
+		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+		switch (key) // evalua el codigo de tecla
+		{
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
+			break;
+		case 15: // flecha ABAJO
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl;
+			y++;
+			if (y > 2) y = 2;
+			break;
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: {
+				system("cls");
+				cargarFunciones();
+				system("cls");
+				break;
+			}
+			case 1:
+				system("cls");
+				verFuncionesCargadas();
+				system("pause");
+				system("cls");
+				break;
+			case 2: // Si el cursor esta en la opcion SALIR
+				op = 0; // sale del programa
+				break;
+			}
+		}
+	} while (op != 0);
+
+
+
+}
+
+void Administrador::menuBackUp() {
+	int op = 1, y = 0;
+	ArchivoDiagrama archiDiagrama("diagrama.dat");
+	ArchivoPeliculas archiPeliculas("pelicula.dat");
+	ArchivoSalas archiSalas("sala.dat");
+	ArchivoFunciones archiFunciones("funcion.dat");
+	do {
+		rlutil::setConsoleTitle("MENU BACKUP"); // establece el titulo de la consola
+		rlutil::hidecursor(); // oculta el cursor
+		//rlutil::cls(); // limpia la pantalla
+
+		showItem1(" Generar BackUp peliculas ", 50, 10, y == 0);
+		showItem1(" Cargar BackUp peliculas ", 50, 11, y == 1);
+		showItem1(" Generar BackUp salas ", 50, 12, y == 2);
+		showItem1(" Cargar BackUp salas ", 50, 13, y == 3);
+		showItem1(" Generar BackUp funciones ", 50, 14, y == 4);
+		showItem1(" Cargar BackUp funciones ", 50, 15, y == 5);
+		showItem1(" Generar BackUp Diagrama Sala ", 50, 16, y == 6);
+		showItem1(" Cargar BackUp Diagrama Sala ", 50, 17, y == 7);
+		showItem1(" Volver ", 50, 18, y == 8);
+
+		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+		switch (key) // evalua el codigo de tecla
+		{
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
+			break;
+		case 15: // flecha ABAJO
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl;
+			y++;
+			if (y > 8) y = 8;
+			break;
+			case 1: // ENTER
+				switch (y)
+				{
+				case 0: {
+					system("cls");
+					archiPeliculas.generarBackUp();
+					system("cls");
+					break;
+				}
+				case 1:
+					system("cls");
+					archiPeliculas.restaurarBackUp();
+					system("cls");
+					break;
+				case 2:
+					system("cls");
+					archiSalas.generarBackUp();
+					system("cls");
+					break;
+				case 3:
+					system("cls");
+					archiSalas.restaurarBackUp();
+					system("cls");
+					break;
+				case 4:
+					system("cls");
+					archiFunciones.generarBackUp();
+					system("cls");
+					break;
+				case 5:
+					system("cls");
+					archiFunciones.restaurarBackUp();
+					system("cls");
+					break;
+				case 6:
+					system("cls");
+					archiDiagrama.generarBackUp();
+					system("cls");
+					break;
+				case 7:
+					system("cls");
+					archiDiagrama.restaurarBackUp();
+					system("cls");
+					break;
+				case 8: // Si el cursor esta en la opcion SALIR
+					op = 0; // sale del programa
+					break;
+				}
+		
+		}
+	}while (op != 0);
 }

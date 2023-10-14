@@ -47,11 +47,11 @@ bool DiagramaSala::cancelarReserva( int fila, int columna) {
 	}
 
 
-void DiagramaSala::setidFuncion(int idFuncion) {
+void DiagramaSala::setIdFuncion(int idFuncion) {
 	_idFuncion = idFuncion;
 }
 
-int DiagramaSala::getidFuncion() {
+int DiagramaSala::getIdFuncion() {
 	return _idFuncion;
 }
 
@@ -72,6 +72,7 @@ int DiagramaSala::getidFuncion() {
 		 }
 
 	 }
+	 std::cout << std::endl;
 	 system("pause");
  }
 

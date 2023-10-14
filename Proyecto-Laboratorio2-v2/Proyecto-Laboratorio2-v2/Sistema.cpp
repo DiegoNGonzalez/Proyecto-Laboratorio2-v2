@@ -4,7 +4,6 @@
 #include "Windows.h"
 #include "rlutil.h"
 #include <conio.h>
-#include "funcionesGlobales.h"
 using namespace std;
 
 Sistema::Sistema()
@@ -114,14 +113,11 @@ void Sistema::mostrarMenuAdmin() {
 		//rlutil::cls(); // limpia la pantalla
 
 		showItem(" Menu Peliculas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem(" Ver peliculas cargadas ", 50, 11, y == 1);
-		showItem(" Cargar salas ", 50, 12, y == 2);
-		showItem(" Ver salas cargadas ", 50, 13, y == 3);
-		showItem(" Cargar Funciones ", 50, 14, y == 4);
-		showItem(" Ver Funciones cargadas ", 50, 15, y == 5);
-		showItem(" pruieba ", 50, 16, y == 6);
-		showItem(" Cerrar sesion ", 50, 17, y == 7);
-		showItem("  SALIR   ", 50, 18, y == 8);
+		showItem(" Menu Salas ", 50, 11, y == 1);
+		showItem(" Menu Funciones ", 50, 12, y == 2);
+		showItem(" Menu BackUp ", 50, 13, y == 3);
+		showItem(" Cerrar sesion ", 50, 14, y == 4);
+		showItem("  SALIR   ", 50, 15, y == 5);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -139,7 +135,7 @@ void Sistema::mostrarMenuAdmin() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 8) y = 8;
+			if (y > 5) y = 5;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -152,45 +148,24 @@ void Sistema::mostrarMenuAdmin() {
 			}
 			case 1:
 				system("cls");
-				_admin1.verPeliculasCargadas();
-				system("pause");
+				_admin1.menuSalas();
 				system("cls");
 				break;
 			case 2:
 				system("cls");
-				_admin1.cargarSalas();
+				_admin1.menuFunciones();
 				system("cls");
 				break;
 			case 3:
 				system("cls");
-				_admin1.verSalasCargadas();
-				system("pause");
+				_admin1.menuBackUp();
 				system("cls");
 				break;
 			case 4:
-				system("cls");
-				_admin1.cargarFunciones();
-				system("pause");
-				system("cls");
-				break;
-
-			case 5:
-				system("cls");
-				_admin1.verFuncionesCargadas();
-				system("pause");
-				system("cls");
-				break;
-			case 6:
-				system("cls");
-				archiFunciones.generarBackUp();
-				system("pause");
-				system("cls");
-				break;
-			case 7:
 				login(_admin1, _vendedor1);
 				op = 0;
 				break;
-			case 8: // Si el cursor esta en la opcion SALIR
+			case 5: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}
