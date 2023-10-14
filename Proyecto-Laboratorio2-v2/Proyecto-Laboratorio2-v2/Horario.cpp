@@ -2,34 +2,34 @@
 #include <ctime>
 #include <iostream>
 int Horario::getSegundo() {
-    return _segundo;
+	return _segundo;
 }
 int Horario::getMinuto() {
-    return _minuto;
+	return _minuto;
 }
 int Horario::getHora() {
-    return _hora;
+	return _hora;
 }
 void Horario::setSegundo(int segundo) {
-    _segundo = segundo;
+	_segundo = segundo;
 }
 void Horario::setMinuto(int minuto) {
-    _minuto = minuto;
+	_minuto = minuto;
 }
 void Horario::setHora(int hora) {
-    _hora = hora;
+	_hora = hora;
 }
 Horario::Horario() {
-    time_t t = time(NULL);
-    struct tm* f = localtime(&t);
-    _segundo = (*f).tm_sec; // Indirecciona f y accede a tm_mday
-    _minuto = f->tm_min; // Indirecciona f y accede a tm_mon
-    _hora = f->tm_hour;
+	time_t t = time(NULL);
+	struct tm* f = localtime(&t);
+	_segundo = (*f).tm_sec; // Indirecciona f y accede a tm_mday
+	_minuto = f->tm_min; // Indirecciona f y accede a tm_mon
+	_hora = f->tm_hour;
 }
-Horario::Horario( int minuto, int hora) {
-    
-    setMinuto(minuto);
-    setHora(hora);
+Horario::Horario(int minuto, int hora) {
+
+	setMinuto(minuto);
+	setHora(hora);
 }
 
 void Horario::mostrarHorario() {

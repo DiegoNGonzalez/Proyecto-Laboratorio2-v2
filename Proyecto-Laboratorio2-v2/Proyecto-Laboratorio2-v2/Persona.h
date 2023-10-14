@@ -24,6 +24,6 @@ public:
 	std::string getCargo() const;
 	std::string mostrarDatos();
 	Persona();
-	Persona(int legajo,std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
+	Persona(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
 };
 

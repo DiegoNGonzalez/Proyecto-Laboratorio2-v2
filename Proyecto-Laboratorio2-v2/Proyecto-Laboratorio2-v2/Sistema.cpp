@@ -1,10 +1,11 @@
 #include "Sistema.h"
 #include <iostream>
+#include <filesystem>
 #include <string>
 #include "Windows.h"
 #include "rlutil.h"
 #include <conio.h>
-using namespace std;
+
 
 Sistema::Sistema()
 {
@@ -28,16 +29,19 @@ Vendedor Sistema::getVendedor() const {
 
 void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 
-	string usuario;
-	string contrasenia;
+	std::string usuario;
+	std::string contrasenia;
 	int intentos = 0;
 	bool login = false;
-
+	rlutil::setConsoleTitle("LOGIN- SISTEMA DE CINE");
 	do {
 		system("cls");
-		cout << "Ingrese su usuario: ";
-		cin >> usuario;
-		cout << "Ingrese su contrasenia: ";
+		rlutil::setColor(rlutil::COLOR::LIGHTBLUE);
+		rlutil::locate(50, 10);
+		std::cout << "Ingrese su usuario: ";
+		std::cin >> usuario;
+		rlutil::locate(50, 11);
+		std::cout << "Ingrese su contrasenia: ";
 		//cin >> contrasenia;
 		contrasenia = "";
 		char caracter;
@@ -48,46 +52,53 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 				break;
 			else if (caracter == 8) { // 8 es el código ASCII de la tecla Retroceso, para borrar un carácter
 				if (contrasenia.length() > 0) {
-					cout << "\b \b"; // Borramos el carácter en pantalla y retrocedemos el cursor
+					std::cout << "\b \b"; // Borramos el carácter en pantalla y retrocedemos el cursor
 					contrasenia.pop_back(); // Eliminamos el último carácter de la contraseña
 				}
 			}
 			else {
 				contrasenia += caracter; // Agregamos el carácter a la contraseña
-				cout << "*"; // Mostramos un asterisco en lugar del carácter
+				std::cout << "*"; // Mostramos un asterisco en lugar del carácter
 			}
 		}
 		if (usuario == admin1.getUsuario() && contrasenia == admin1.getContrasenia()) {
-			cout << endl;
-			cout << "Bienvenido " << admin1.getNombre() << " " << admin1.getApellido() << endl;
+			std::cout << std::endl;
+			rlutil::locate(50, 12);
+			std::cout << "Bienvenido " << admin1.getNombre() << " " << admin1.getApellido() << std::endl;
 			login = true;
+			rlutil::locate(50, 13);
 			system("pause");
 			system("cls");
 			mostrarMenuAdmin();
 		}
 		else if (usuario == vendedor1.getUsuario() && contrasenia == vendedor1.getContrasenia()) {
-			cout << endl;
-			cout << "Bienvenido " << vendedor1.getNombre() << " " << vendedor1.getApellido() << endl;
+			std::cout << std::endl;
+			rlutil::locate(50, 12);
+			std::cout << "Bienvenido " << vendedor1.getNombre() << " " << vendedor1.getApellido() << std::endl;
 			login = true;
+			rlutil::locate(50, 13);
 			system("pause");
 			system("cls");
 			mostrarMenuVendedor();
 		}
 		else {
-			cout << endl;
-			cout << "Usuario o contrasenia incorrectos" << endl;
+			std::cout << std::endl;
+			rlutil::locate(50, 12);
+			std::cout << "Usuario o contrasenia incorrectos" << std::endl;
 			intentos++;
+			rlutil::locate(50, 13);
 			system("pause");
 			system("cls");
 		}
 	} while (intentos < 3 && login == false);
+	rlutil::setColor(rlutil::COLOR::WHITE);
 }
 
 // Funcion para mostrar las opciones del menu
 void showItem(const char* text, int posx, int posy, bool selected) {
 
 	if (selected) {
-		rlutil::setBackgroundColor(rlutil::COLOR::BLUE);
+		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
 		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
 		std::cout << (char)175 << "  " << text << "  " << (char)174 << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
 	}
@@ -181,7 +192,7 @@ void Sistema::mostrarMenuVendedor() {
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
 	int op = 1, y = 0;
 	Funcion f1;
-	int aux, fila, columna, contadorEntradas=0, contadorGeneralEntradas=0;
+	int aux, fila, columna, contadorEntradas = 0, contadorGeneralEntradas = 0;
 	do {
 		rlutil::setConsoleTitle("MENU VENDEDOR CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
@@ -288,7 +299,7 @@ void Sistema::mostrarMenuVendedor() {
 				break;
 			case 5:
 				login(_admin1, _vendedor1);
-				op=0;
+				op = 0;
 				break;
 			case 6: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
@@ -296,4 +307,52 @@ void Sistema::mostrarMenuVendedor() {
 			}
 		}
 	} while (op != 0);
+}
+
+void Sistema::bienvenida() {
+	rlutil::setConsoleTitle("SISTEMA DE CINE");
+	rlutil::setColor(rlutil::COLOR::LIGHTBLUE);
+	rlutil::hidecursor();
+	rlutil::locate(50, 10);
+	std::cout << "BIENVENIDO AL SISTEMA DE CINE" << std::endl;
+	Sleep(1000);
+	rlutil::locate(50, 11);
+	std::cout << "Cargando archivos." << std::endl;
+	Sleep(1000);
+	rlutil::locate(50, 12);
+	std::cout << "Cargando archivos.." << std::endl;
+	Sleep(1000);
+	rlutil::locate(50, 13);
+	std::cout << "Cargando archivos..." << std::endl;
+	Sleep(1000);
+	if (crearDirectorioBackUP()) {
+		rlutil::locate(50, 14);
+		std::cout << "Directorio de BackUp creado correctamente" << std::endl;
+	}
+	else {
+		rlutil::locate(50, 14);
+		std::cout << "Directorio de BackUp ya existente" << std::endl;
+	}
+	Sleep(1000);
+	rlutil::locate(50, 15);
+	std::cout << "Presione cualquier tecla para continuar" << std::endl;
+	rlutil::setColor(rlutil::COLOR::WHITE);
+	_getch();
+	system("cls");
+}
+
+
+
+
+bool Sistema::crearDirectorioBackUP() {
+	bool creado = false;
+	std::string ruta = "backUp/";
+	if (std::filesystem::is_directory(ruta)) {
+		creado = true;
+		return false;
+	}
+	else {
+		creado = std::filesystem::create_directory(ruta);
+	}
+	return creado;
 }

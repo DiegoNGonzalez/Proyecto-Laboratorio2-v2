@@ -4,9 +4,9 @@
 using namespace std;
 
 
- void Funcion::setPelicula(const Pelicula pelicula )
+void Funcion::setPelicula(const Pelicula pelicula)
 {
-	 	_pelicula = pelicula;
+	_pelicula = pelicula;
 }
 
 Pelicula Funcion::getPelicula()
@@ -76,7 +76,7 @@ void Funcion::mostrarDetalles()
 	_sala.mostrarDetalles();
 	cout << "Fecha y hora de la funcion: " << endl;
 	_fechaHoraFuncion.mostrarFechaHora();
-	
+
 
 }
 

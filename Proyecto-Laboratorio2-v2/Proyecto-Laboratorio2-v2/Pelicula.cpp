@@ -3,33 +3,13 @@
 #include <string>
 using namespace std;
 
-//private:
-//	std::string _titulo;
-//	std::string _director;
-//	std::string _clasificacionEdad;
-//	std::string _genero;
-//	Horario _duracion;
-//	public:
-//		void setTitulo(std::string titulo);
-//		std::string getTitulo();
-//		void setDirector(std::string director);
-//		std::string getDirector();
-//		void setClasificacionEdad(std::string clasificacionEdad);
-//		std::string getClasificacionEdad();
-//		void setGenero(std::string genero);
-//		std::string getGenero();
-//		void setDuracion(Horario duracion);
-//		Horario getDuracion();
-//		Pelicula();
-//		Pelicula(std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, Horario duracion);
-//		void mostrarDetalles();
 
 void Pelicula::setId(int id)
 {
 	_id = id;
 }
 
-int Pelicula::getId() 
+int Pelicula::getId()
 {
 	return _id;
 }
@@ -95,10 +75,10 @@ bool Pelicula::getEstado() const
 }
 Pelicula::Pelicula()
 {
-	 strcpy(_titulo, "Transformers");
-	 strcpy(_director, "Julian Alvarez");
-	 strcpy(_clasificacionEdad, "+18");
-	 strcpy(_genero,"Accion");
+	strcpy(_titulo, "Transformers");
+	strcpy(_director, "Julian Alvarez");
+	strcpy(_clasificacionEdad, "+18");
+	strcpy(_genero, "Accion");
 	_duracion = 0;
 	_estado = true;
 }
@@ -109,7 +89,7 @@ Pelicula::Pelicula(int id, std::string titulo, std::string director, std::string
 	strcpy(_director, director.c_str());
 	strcpy(_clasificacionEdad, clasificacionEdad.c_str());
 	strcpy(_genero, genero.c_str());
-	_duracion=duracion;
+	_duracion = duracion;
 	_id = id;
 	_estado = true;
 }
@@ -120,7 +100,7 @@ void Pelicula::mostrarDetalles() const
 	cout << "Director: " << _director << endl;
 	cout << "Clasificacion de edad: " << _clasificacionEdad << endl;
 	cout << "Genero: " << _genero << endl;
-	cout << "Duracion: " <<_duracion <<" min."<< endl;
+	cout << "Duracion: " << _duracion << " min." << endl;
 	cout << "Id: " << _id << endl;
 }
 

@@ -17,9 +17,9 @@ Funcion ArchivoFunciones::leerRegistro(int posicion) {
 int ArchivoFunciones::contarRegistros() {
 	FILE* p;
 	p = fopen(_nombre, "rb");
-	if (p == NULL) { 
+	if (p == NULL) {
 		std::cout << "Error al contar" << std::endl;
-		return -1; 
+		return -1;
 	};
 	fseek(p, 0, 2);
 	int tam = ftell(p);
