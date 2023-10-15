@@ -53,7 +53,7 @@ Sala::Sala(int idSala, float precioAsiento)
 
 void Sala::mostrarDetalles() const
 {
-	cout << "Numero de sala: " << _idSala << endl;
+	cout << "||||| SALA # " << _idSala <<"|||||" << endl;
 	cout << "Capacidad maxima de asientos: " << 100 << endl;
 	cout << "Precio de entrada: $" << _precioAsiento << endl;
 }

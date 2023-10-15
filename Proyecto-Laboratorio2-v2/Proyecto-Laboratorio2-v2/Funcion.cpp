@@ -69,13 +69,15 @@ Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, in
 
 void Funcion::mostrarDetalles()
 {
-	cout << "id funcion " << _idFuncion << endl;
-	cout << "Pelicula: " << endl;
+	cout << "|||||| FUNCION  #" << _idFuncion <<" ||||||" << endl;
+	cout << endl;
 	_pelicula.mostrarDetalles();
-	cout << "Sala: " << endl;
+	cout << endl;
 	_sala.mostrarDetalles();
 	cout << "Fecha y hora de la funcion: " << endl;
 	_fechaHoraFuncion.mostrarFechaHora();
+	cout << endl;
+	cout <<"||||||||||||||||||||||||||||||||||"<< endl;
 
 
 }

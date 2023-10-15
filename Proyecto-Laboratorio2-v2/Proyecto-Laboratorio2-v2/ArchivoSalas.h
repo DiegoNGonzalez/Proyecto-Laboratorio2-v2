@@ -17,6 +17,7 @@ public:
 	bool generarBackUp();
 	bool restaurarBackUp();
 	int validarId();
+	int buscarPosSalaxID(int valorBuscado);
 
 };
 

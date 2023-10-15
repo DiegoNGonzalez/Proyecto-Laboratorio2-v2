@@ -107,6 +107,142 @@ Pelicula Administrador::seleccionarPelicula() {
 	} while (contador == cantidadRegistros);
 
 }
+Pelicula Administrador::buscarPeliculaxID(int valorBuscado) {
+	ArchivoPeliculas archivoPeliculas("pelicula.dat");
+	Pelicula pelicula;
+	int pos = archivoPeliculas.buscarPosPeliculaxID(valorBuscado);
+	if (pos >= 0) {
+		pelicula = archivoPeliculas.leerRegistro(pos);
+		return pelicula;
+	}
+	else {
+		return pelicula;
+	}
+
+}
+
+bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
+	ArchivoFunciones archivoFunciones("funcion.dat");
+	ArchivoPeliculas archivoPeliculas("pelicula.dat");
+	ArchivoSalas archivoSalas("sala.dat");
+	ArchivoDiagrama archivoDiagrama("diagrama.dat");
+	bool pudoEscribir = false;
+	Funcion funcion;
+	Pelicula pelicula;
+	Sala sala;
+	FechaHorario fechaHorario;
+	DiagramaSala diagrama;
+	int opcion;
+	int posicionFuncion = archivoFunciones.buscarPosFuncionxID(idFuncion);
+	if (posicionFuncion >= 0) {
+		funcion = archivoFunciones.leerRegistro(posicionFuncion);
+		do {
+			funcion.mostrarDetalles();
+			rlutil::locate(50, 10);
+			std::cout << "Que desea modificar?" << std::endl;
+			rlutil::locate(50, 11);
+			std::cout << "1. Pelicula" << std::endl;
+			rlutil::locate(50, 12);
+			std::cout << "2. Sala" << std::endl;
+			rlutil::locate(50, 13);
+			std::cout << "3. Fecha Y Hora" << std::endl;
+			rlutil::locate(50, 14);
+			std::cout << "4. Volver" << std::endl;
+			rlutil::locate(50, 15);
+			std::cout << "Ingrese una opcion: ";
+			std::cin >> opcion;
+			switch (opcion) {
+			case 1: {
+				system("cls");
+				int posicionPelicula, idPelicula;
+				verPeliculasCargadas();
+				std::cout << "Ingrese el id de la pelicula seleccionada: ";
+				std::cin >> idPelicula;
+				posicionPelicula = archivoPeliculas.buscarPosPeliculaxID(idPelicula);
+				pelicula = archivoPeliculas.leerRegistro(posicionPelicula);
+				funcion.setPelicula(pelicula);
+				archivoFunciones.grabarRegistro(funcion, posicionFuncion);
+				rlutil::locate(50, 17);
+				system("cls");
+				std::cout << "Pelicula modificada con exito" << std::endl;
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 2: {
+				system("cls");
+				int posicionSala, idSala;
+				verSalasCargadas();
+				std::cout << "Ingrese el id de la sala seleccionada: ";
+				std::cin >> idSala;
+				posicionSala = archivoSalas.buscarPosSalaxID(idSala);
+				sala = archivoSalas.leerRegistro(posicionSala);
+				funcion.setSala(sala);
+				archivoFunciones.grabarRegistro(funcion, posicionFuncion);
+				rlutil::locate(50, 17);
+				system("cls");
+				std::cout << "Sala modificada con exito" << std::endl;
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3: {
+				system ("cls");
+				int dia, mes, anio, hora, minuto;
+				std::cout << "Ingrese el dia de la funcion: ";
+				std::cin >> dia;
+				while (dia <= 0 || dia > 31)
+				{
+					std::cout << "Dia no valido, reingrese el dia de la funcion: ";
+					std::cin >> dia;
+				}
+				std::cout << "Ingrese el mes de la funcion: ";
+				std::cin >> mes;
+				while (mes <= 0 || mes > 12)
+				{
+					std::cout << "Mes no valido, reingrese el mes de la funcion: ";
+					std::cin >> mes;
+				}
+				std::cout << "Ingrese el anio de la funcion: ";
+				std::cin >> anio;
+				while (anio < 2023)
+				{
+					std::cout << "Anio no valido, reingrese el anio de la funcion: ";
+					std::cin >> anio;
+				}
+				std::cout << "Ingrese la hora de la funcion: ";
+				std::cin >> hora;
+				while (hora < 0 || hora > 23)
+				{
+					std::cout << "Hora no valida, reingrese la hora de la funcion: ";
+					std::cin >> hora;
+				}
+				std::cout << "Ingrese los minutos de la funcion: ";
+				std::cin >> minuto;
+				while (minuto < 0 || minuto > 59)
+				{
+					std::cout << "Minutos no validos, reingrese los minutos de la funcion: ";
+					std::cin >> minuto;
+				}
+				fechaHorario = FechaHorario(dia, mes, anio, minuto, hora);
+				funcion.setFechaHoraFuncion(fechaHorario);
+				archivoFunciones.grabarRegistro(funcion, posicionFuncion);
+				rlutil::locate(50, 17);
+				system("cls");
+				std::cout << "Fecha y hora modificada con exito" << std::endl;
+				system("pause");
+				system("cls");
+				break;
+
+			}
+
+
+			}
+		} while (opcion != 4);
+		pudoEscribir = true;
+	}
+	return pudoEscribir;
+}
 
 Sala Administrador::seleccionarSala() {
 	ArchivoSalas archiSalas("sala.dat");
@@ -142,6 +278,19 @@ Sala Administrador::seleccionarSala() {
 
 }
 
+Sala Administrador::buscarSalaxID(int valorBuscado) {
+	ArchivoSalas archivoSalas("sala.dat");
+	Sala sala;
+	int pos = archivoSalas.buscarPosSalaxID(valorBuscado);
+	if (pos >= 0) {
+		sala = archivoSalas.leerRegistro(pos);
+		return sala;
+	}
+	else {
+		return sala;
+	}
+
+}
 void Administrador::cargarFunciones() {
 	ArchivoFunciones archiFunciones("funcion.dat");
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
@@ -161,35 +310,35 @@ void Administrador::cargarFunciones() {
 	std::cin >> dia;
 	while (dia <= 0 || dia > 31)
 	{
-		std::cout << "Ingrese el dia de la funcion: ";
+		std::cout << "Dia no valido, reingrese el dia de la funcion: ";
 		std::cin >> dia;
 	}
 	std::cout << "Ingrese el mes de la funcion: ";
 	std::cin >> mes;
 	while (mes <= 0 || mes > 12)
 	{
-		std::cout << "Ingrese el mes de la funcion: ";
+		std::cout << "Mes no valido, reingrese el mes de la funcion: ";
 		std::cin >> mes;
 	}
 	std::cout << "Ingrese el anio de la funcion: ";
 	std::cin >> anio;
 	while (anio < 2023)
 	{
-		std::cout << "Ingrese el anio de la funcion: ";
+		std::cout << "Anio no valido, reingrese el anio de la funcion: ";
 		std::cin >> anio;
 	}
 	std::cout << "Ingrese la hora de la funcion: ";
 	std::cin >> hora;
 	while (hora < 0 || hora > 23)
 	{
-		std::cout << "Ingrese la hora de la funcion: ";
+		std::cout << "Hora no valida, reingrese la hora de la funcion: ";
 		std::cin >> hora;
 	}
 	std::cout << "Ingrese los minutos de la funcion: ";
 	std::cin >> minuto;
 	while (minuto < 0 || minuto > 59)
 	{
-		std::cout << "Ingrese los minutos de la funcion: ";
+		std::cout << "Minutos no validos, reingrese los minutos de la funcion: ";
 		std::cin >> minuto;
 	}
 	diagramaSala = DiagramaSala(idFuncion);
@@ -205,7 +354,6 @@ void Administrador::verFuncionesCargadas() {
 	int cantidadRegistros = archiFunciones.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiFunciones.leerRegistro(i);
-		std::cout << "////////  FUNCION  #" << registro.getIdFuncion() << "  ////////" << std::endl;
 		registro.mostrarDetalles();
 		std::cout << std::endl;
 	}
@@ -235,6 +383,7 @@ void showItem1(const char* text, int posx, int posy, bool selected) {
 }
 void Administrador::menuPeliculas() {
 	int op = 1, y = 0;
+	ArchivoPeliculas archiPeliculas("pelicula.dat");
 
 	do {
 		rlutil::setConsoleTitle("MENU PELICULAS"); // establece el titulo de la consola
@@ -243,7 +392,8 @@ void Administrador::menuPeliculas() {
 
 		showItem1(" Cargar peliculas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
 		showItem1(" Ver peliculas cargadas ", 50, 11, y == 1);
-		showItem1(" Volver ", 50, 12, y == 2);
+		showItem1("Buscar pelicula x ID", 50, 12, y == 2);
+		showItem1(" Volver ", 50, 13, y == 3);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -261,7 +411,7 @@ void Administrador::menuPeliculas() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 2) y = 2;
+			if (y > 3) y = 3;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -278,7 +428,25 @@ void Administrador::menuPeliculas() {
 				system("pause");
 				system("cls");
 				break;
-			case 2: // Si el cursor esta en la opcion SALIR
+
+			case 2: {
+				system("cls");
+				int id, pos;
+				std::cout << "Ingrese el id de la pelicula a buscar: ";
+				std::cin >> id;
+				pos = archiPeliculas.buscarPosPeliculaxID(id);
+				if (pos >= 0) {
+					archiPeliculas.leerRegistro(pos).mostrarDetalles();
+				}
+				else {
+					std::cout << "No se encontro el id." << std::endl;
+				}
+
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}
@@ -329,6 +497,7 @@ void Administrador::menuSalas() {
 				system("pause");
 				system("cls");
 				break;
+
 			case 2: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
@@ -338,7 +507,7 @@ void Administrador::menuSalas() {
 }
 
 void Administrador::menuFunciones() {
-
+	ArchivoFunciones archiFunciones("funcion.dat");
 	int op = 1, y = 0;
 
 	do {
@@ -348,7 +517,9 @@ void Administrador::menuFunciones() {
 
 		showItem1(" Cargar funciones ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
 		showItem1(" Ver funciones cargadas ", 50, 11, y == 1);
-		showItem1(" Volver ", 50, 12, y == 2);
+		showItem1(" Buscar funcion x ID ", 50, 12, y == 2);
+		showItem1(" Modificar funcion ", 50, 13, y == 3);
+		showItem1(" Volver ", 50, 14, y == 4);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 		switch (key) // evalua el codigo de tecla
@@ -363,7 +534,7 @@ void Administrador::menuFunciones() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 2) y = 2;
+			if (y > 4) y = 4;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -380,7 +551,27 @@ void Administrador::menuFunciones() {
 				system("pause");
 				system("cls");
 				break;
-			case 2: // Si el cursor esta en la opcion SALIR
+			case 2: {
+				system("cls");
+				int id;
+				std::cout << "Ingrese el id de la funcion a buscar: ";
+				std::cin >> id;
+				archiFunciones.buscarFuncionxID(id).mostrarDetalles();
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3: {
+				system("cls");
+				int id;
+				std::cout << "Ingrese el id de la funcion a modificar: ";
+				std::cin >> id;
+				modificarFuncionEnRegistro(id);
+				system("cls");
+				Sleep(1000);
+				break;
+			}
+			case 4: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}

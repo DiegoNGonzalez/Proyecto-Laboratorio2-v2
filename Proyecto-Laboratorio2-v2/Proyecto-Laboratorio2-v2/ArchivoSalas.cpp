@@ -131,3 +131,18 @@ int ArchivoSalas::validarId() {
 	return idMax + 1;
 
 }
+
+int ArchivoSalas::buscarPosSalaxID(int valorBuscado) {
+	Sala sala;
+	int cantidadRegistros=contarRegistros();
+	for (int i = 0; i < cantidadRegistros; i++)
+	{
+		sala = leerRegistro(i);
+		if (sala.getIdSala() == valorBuscado) {
+			return i;
+		}
+	}
+	std::cout << "No se encontro el id." << std::endl;
+	return -1;
+
+}

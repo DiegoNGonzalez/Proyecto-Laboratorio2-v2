@@ -23,9 +23,12 @@ public:
 	void cargarSalas();
 	void verSalasCargadas();
 	Pelicula seleccionarPelicula();
+	Pelicula buscarPeliculaxID(int valorBuscado);
 	Sala seleccionarSala();
+	Sala buscarSalaxID(int valorBuscado);
 	void cargarFunciones();
 	void verFuncionesCargadas();
+	bool modificarFuncionEnRegistro(int idFuncion);
 	void verVentas();
 	void generarReporte();
 	Administrador();
@@ -34,5 +37,6 @@ public:
 	void menuSalas();
 	void menuFunciones();
 	void menuBackUp();
+
 
 };

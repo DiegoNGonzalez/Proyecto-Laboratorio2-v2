@@ -136,7 +136,7 @@ bool ArchivoDiagrama::cancelarReservaEnRegistro(int idFuncion, int fila, int col
 	}
 }
 
-int ArchivoDiagrama::buscarDiagrama(int valorBuscado) {
+int ArchivoDiagrama::buscarPosDiagramaxID(int valorBuscado) {
 	DiagramaSala diagrama;
 	int cantidadRegistros = contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++)

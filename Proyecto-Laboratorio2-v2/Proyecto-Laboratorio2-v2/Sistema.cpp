@@ -64,9 +64,13 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		if (usuario == admin1.getUsuario() && contrasenia == admin1.getContrasenia()) {
 			std::cout << std::endl;
 			rlutil::locate(50, 12);
+			std::cout << "Validando credenciales..."<< std::endl;
+			Sleep(1500);
+			rlutil::locate(50, 13);
 			std::cout << "Bienvenido " << admin1.getNombre() << " " << admin1.getApellido() << std::endl;
 			login = true;
-			rlutil::locate(50, 13);
+			Sleep(1000);
+			rlutil::locate(50, 14);
 			system("pause");
 			system("cls");
 			mostrarMenuAdmin();
@@ -74,9 +78,13 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		else if (usuario == vendedor1.getUsuario() && contrasenia == vendedor1.getContrasenia()) {
 			std::cout << std::endl;
 			rlutil::locate(50, 12);
+			std::cout << "Validando credenciales..." << std::endl;
+			Sleep(1500);
+			rlutil::locate(50, 13);
 			std::cout << "Bienvenido " << vendedor1.getNombre() << " " << vendedor1.getApellido() << std::endl;
 			login = true;
-			rlutil::locate(50, 13);
+			Sleep(1000);
+			rlutil::locate(50, 14);
 			system("pause");
 			system("cls");
 			mostrarMenuVendedor();
@@ -84,9 +92,13 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		else {
 			std::cout << std::endl;
 			rlutil::locate(50, 12);
+			std::cout << "Validando credenciales..." << std::endl;
+			Sleep(1500);
+			rlutil::locate(50, 13);
 			std::cout << "Usuario o contrasenia incorrectos" << std::endl;
 			intentos++;
-			rlutil::locate(50, 13);
+			Sleep(1000);
+			rlutil::locate(50, 14);
 			system("pause");
 			system("cls");
 		}
@@ -177,6 +189,10 @@ void Sistema::mostrarMenuAdmin() {
 				op = 0;
 				break;
 			case 5: // Si el cursor esta en la opcion SALIR
+				system("cls");
+				rlutil::locate(50, 16);
+				std::cout <<"SALIENDO DEL PROGRAMA . . ."<< std::endl;
+				Sleep(1000);
 				op = 0; // sale del programa
 				break;
 			}
@@ -238,7 +254,7 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion a mostrar sala:";
 				std::cin >> aux;
-				int pos = archiDiagrama.buscarDiagrama(aux);
+				int pos = archiDiagrama.buscarPosDiagramaxID(aux);
 				if (pos != -1) {
 					archiDiagrama.mostrarRegistro(pos);
 				}
@@ -253,7 +269,7 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion para la cual quiere reservar un asiento: ";
 				std::cin >> aux;
-				int pos = archiDiagrama.buscarDiagrama(aux);
+				int pos = archiDiagrama.buscarPosDiagramaxID(aux);
 				std::cout << "Ingrese fila: ";
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
@@ -273,7 +289,7 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion para la cual quiere cancelar un asiento: ";
 				std::cin >> aux;
-				int pos = archiDiagrama.buscarDiagrama(aux);
+				int pos = archiDiagrama.buscarPosDiagramaxID(aux);
 				std::cout << "Ingrese fila: ";
 				std::cin >> fila;
 				std::cout << "Ingrese el nro de asiento: ";
@@ -335,9 +351,8 @@ void Sistema::bienvenida() {
 	}
 	Sleep(1000);
 	rlutil::locate(50, 15);
-	std::cout << "Presione cualquier tecla para continuar" << std::endl;
+	system("pause");
 	rlutil::setColor(rlutil::COLOR::WHITE);
-	_getch();
 	system("cls");
 }
 
