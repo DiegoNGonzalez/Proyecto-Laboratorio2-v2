@@ -54,6 +54,14 @@ bool Funcion::getEstado() const
 {
 	return _estado;
 }
+void Funcion::setContadorEntrada(int contadorEntrada)
+{
+	_contadorEntrada = contadorEntrada;
+}
+int Funcion::getContadorEntrada() const
+{
+	return _contadorEntrada;
+}
 Funcion::Funcion()
 {
 }
@@ -65,6 +73,7 @@ Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, in
 	_fechaHoraFuncion = fechaHoraFuncion;
 	_estado = true;
 	_idFuncion = idFuncion;
+	_contadorEntrada = 0;
 }
 
 void Funcion::mostrarDetalles()
@@ -76,12 +85,22 @@ void Funcion::mostrarDetalles()
 	_sala.mostrarDetalles();
 	cout << "Fecha y hora de la funcion: " << endl;
 	_fechaHoraFuncion.mostrarFechaHora();
-	cout << endl;
 	cout <<"||||||||||||||||||||||||||||||||||"<< endl;
-
-
 }
 
+void Funcion::mostrarDetallesEntradas()
+{
+	cout << "|||||| FUNCION  #" << _idFuncion << " ||||||" << endl;
+	cout << endl;
+	_pelicula.mostrarDetalles();
+	cout << endl;
+	_sala.mostrarDetalles();
+	cout << "Fecha y hora de la funcion: " << endl;
+	_fechaHoraFuncion.mostrarFechaHora();
+	cout << " Entradas Reservadas: " << _contadorEntrada << endl;
+	cout << endl;
+	cout << "||||||||||||||||||||||||||||||||||" << endl;
+}
 
 
 

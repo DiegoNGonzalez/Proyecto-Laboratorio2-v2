@@ -17,6 +17,7 @@ public:
 	int getIdFuncion();
 	void mostrarSala();
 	void setSalaDeCine(int fila, int columna, int estado);
+	void 
 
 
 

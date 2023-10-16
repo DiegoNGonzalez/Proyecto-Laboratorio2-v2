@@ -5,7 +5,7 @@
 class Funcion
 {
 private:
-	int _idFuncion;
+	int _idFuncion, _contadorEntrada;
 	Pelicula _pelicula;
 	Sala _sala;
 	FechaHorario _fechaHoraFuncion;
@@ -21,9 +21,12 @@ public:
 	int getIdFuncion() const;
 	void setEstado(bool estado);
 	bool getEstado() const;
+	void setContadorEntrada(int contadorEntrada);
+	int getContadorEntrada() const;
 	Funcion();
 	Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, int idFuncion);
 	void mostrarDetalles();
+	void mostrarDetallesEntradas();
 
 
 

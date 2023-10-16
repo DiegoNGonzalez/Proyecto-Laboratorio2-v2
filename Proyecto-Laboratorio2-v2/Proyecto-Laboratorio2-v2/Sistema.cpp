@@ -202,8 +202,9 @@ void Sistema::mostrarMenuAdmin() {
 void Sistema::mostrarMenuVendedor() {
 	DiagramaSala diagramaSala;
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
+	ArchivoFunciones archiFunciones("funcion.dat");
 	int op = 1, y = 0;
-	Funcion f1;
+	Funcion funcionAuxiliar;
 	int aux, fila, columna, contadorEntradas = 0, contadorGeneralEntradas = 0;
 	do {
 		rlutil::setConsoleTitle("MENU VENDEDOR CINE"); // establece el titulo de la consola
@@ -241,7 +242,7 @@ void Sistema::mostrarMenuVendedor() {
 			{
 			case 0: {
 				system("cls");
-				_admin1.verFuncionesCargadas();
+				_admin1.verFuncionesCargadasEntradas();
 				system("pause");
 				system("cls");
 				break;
@@ -271,12 +272,16 @@ void Sistema::mostrarMenuVendedor() {
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
 				if (pos != -1) {
-					archiDiagrama.reservarAsientoEnRegistro(pos, fila, columna);
+					if (archiDiagrama.reservarAsientoEnRegistro(pos, fila, columna)) {
+						int posFuncion = archiFunciones.buscarPosFuncionxID(aux);
+						funcionAuxiliar = archiFunciones.buscarFuncionxID(aux);
+						funcionAuxiliar.setContadorEntrada(funcionAuxiliar.getContadorEntrada() + 1);
+						archiFunciones.grabarRegistro(funcionAuxiliar, posFuncion);
+					}
 				}
 				else {
 					system("pause");
 				}
-				contadorEntradas++;
 				system("pause");
 				system("cls");
 				break;
@@ -291,12 +296,16 @@ void Sistema::mostrarMenuVendedor() {
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
 				if (pos != -1) {
-					archiDiagrama.cancelarReservaEnRegistro(pos, fila, columna);
+					if (archiDiagrama.cancelarReservaEnRegistro(pos, fila, columna)) {
+						int posFuncion = archiFunciones.buscarPosFuncionxID(aux);
+						funcionAuxiliar = archiFunciones.buscarFuncionxID(aux);
+						funcionAuxiliar.setContadorEntrada(funcionAuxiliar.getContadorEntrada() - 1);
+						archiFunciones.grabarRegistro(funcionAuxiliar, posFuncion);
+					}
 				}
 				else {
 					system("pause");
 				}
-				contadorEntradas--;
 				system("pause");
 				system("cls");
 
@@ -304,8 +313,8 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 4:
 				system("cls");
-				_vendedor1.venderEntradas(contadorEntradas, aux, contadorGeneralEntradas);
-				contadorEntradas = 0;
+				_admin1.verFuncionesCargadasEntradas();
+				_vendedor1.venderEntradas();
 				system("pause");
 				system("cls");
 				break;

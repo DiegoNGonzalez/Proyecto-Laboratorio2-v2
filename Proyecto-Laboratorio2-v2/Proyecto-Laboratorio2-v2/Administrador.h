@@ -31,6 +31,7 @@ public:
 	bool darDeBajaSala();
 	void cargarFunciones();
 	void verFuncionesCargadas();
+	void verFuncionesCargadasEntradas();
 	bool modificarFuncionEnRegistro(int idFuncion);
 	bool verificarEstadoPeliculas(int idPelicula);
 	bool verificarEstadoSalas(int idSaLa);

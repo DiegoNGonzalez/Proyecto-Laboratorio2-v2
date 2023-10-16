@@ -9,29 +9,28 @@ Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::strin
 }
 
 
-void Vendedor::venderEntradas(int contadorEntradas, int idFuncion, int contadorGeneralEntradas) {
-	//FILE* f;
-	//f = fopen("funcion.dat", "rb");
-	//if (f == NULL) {
-	//	std::cout << "ERROR AL QUERER ABRIR EL ARCHIVO DE LAS FUNCIONES" << std::endl;
-	//}
-	//else {
-	//	// Mueve la posición del puntero en el archivo al registro correcto
-	//	fseek(f, (idFuncion - 1) * sizeof(Funcion), SEEK_SET);
+void Vendedor::venderEntradas() {
+	ArchivoDiagrama archivoDiagrama("diagrama.dat");
+	ArchivoFunciones archivoFunciones("funcion.dat");
+	ArchivoVenta archivoVenta("venta.dat");
+	DiagramaSala diagramaAux;
+	Funcion funcionAux;
+	Venta ventaAux;
+	int idFuncion, entradas, idVenta=archivoVenta.validarId();
+	float valorSalaAuxiliar, importeVenta;
+	std::cout << "Ingrese el ID de la funcion: ";
+	std::cin >> idFuncion;
+	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(idFuncion);
+	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
+	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
 
-	//	// Lee la información de la función desde el archivo
-	//	if (fread(&vecFunciones[idFuncion - 1], sizeof(Funcion), 1, f) == 1) {
-	//		std::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
-	//		std::cout << "El total a abonar es: $" << vecFunciones[idFuncion - 1].getPrecioEntrada() * contadorEntradas << std::endl;
-	//		std::cout << "¡Entrada vendida con éxito!\n";
-	//	}
-	//	else {
-	//		std::cout << "No se pudo leer la información de la función desde el archivo." << std::endl;
-	//	}
+	valorSalaAuxiliar = funcionAux.getSala().getPrecioAsiento();
+	entradas = funcionAux.getContadorEntrada();
+	importeVenta = valorSalaAuxiliar * entradas;
+	ventaAux=Venta(idVenta, entradas, funcionAux, importeVenta);
+	archivoVenta.grabarRegistro(ventaAux);
+	funcionAux.setContadorEntrada(0);
+	archivoFunciones.grabarRegistro(funcionAux, posAuxiliar);
 
-	//	contadorGeneralEntradas += contadorEntradas;
-	//	std::cout << "Cantidad de entradas vendidas en total: " << contadorGeneralEntradas << std::endl;
-	//	fclose(f);
-	//}
-	std::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
+	std::cout << "Venta realizada con exito" << std::endl;
 }

@@ -338,6 +338,25 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 	return pudoEscribir;
 }
 
+void Administrador::verVentas()
+{
+}
+
+void Administrador::verFuncionesCargadasEntradas()
+{
+	darDeBajaFuncionxSalaOxPelicula();
+	ArchivoFunciones archiFunciones("funcion.dat");
+	Funcion registro;
+	int cantidadRegistros = archiFunciones.contarRegistros();
+	for (int i = 0; i < cantidadRegistros; i++) {
+		registro = archiFunciones.leerRegistro(i);
+		if (registro.getEstado()&&registro.getContadorEntrada()>0) {
+			registro.mostrarDetallesEntradas();
+			std::cout << std::endl;
+		}
+	}
+}
+
 bool Administrador::verificarEstadoPeliculas(int idPelicula)
 {
 	ArchivoPeliculas archivoPeliculas("pelicula.dat");
@@ -815,6 +834,7 @@ void Administrador::menuFunciones() {
 				int idFuncion;
 				std::cout << "Ingrese el id de la funcion a eliminar: ";
 				std::cin >> idFuncion;
+				system("cls");
 				darDeBajaFuncion(idFuncion);
 				system("pause");
 				system("cls");

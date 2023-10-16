@@ -63,6 +63,12 @@
     <ClCompile Include="ArchivoDiagrama.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Venta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ArchivoVenta.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sistema.h">
@@ -111,6 +117,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ArchivoDiagrama.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Venta.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ArchivoVenta.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
