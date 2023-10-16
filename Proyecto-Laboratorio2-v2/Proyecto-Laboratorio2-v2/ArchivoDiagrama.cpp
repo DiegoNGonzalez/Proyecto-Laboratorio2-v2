@@ -76,7 +76,7 @@ void ArchivoDiagrama::mostrarRegistro(int pos)
 	*/
 	diagrama = leerRegistro(pos);
 	if (diagrama.getEstado() == true) {
-		diagrama.mostrarSala();
+		diagrama.mostrarSala(); 
 	}
 	else {
 		std::cout << "La funcion fue dada de baja." << std::endl;
