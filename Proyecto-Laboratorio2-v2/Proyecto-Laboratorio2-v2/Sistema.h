@@ -9,12 +9,8 @@
 class Sistema
 {
 private:
-	Pelicula vecPeliculas[5];
-	Sala vecSalas[5];
-	Funcion vecFunciones[25];
 	Administrador _admin1;
 	Vendedor _vendedor1;
-	int matrizSalasxFuncion[25][10][10] = { 0 };
 
 public:
 	Administrador getAdmin() const;
@@ -24,6 +20,7 @@ public:
 	void mostrarMenuAdmin();
 	void mostrarMenuVendedor();
 	bool crearDirectorioBackUP();
+	void creditos();
 
 	Sistema();
 

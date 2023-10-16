@@ -1,7 +1,6 @@
 #include "Administrador.h"
 #include <iostream>
-void Administrador::
-cargarPeliculas() {
+void Administrador::cargarPeliculas() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
 	std::string titulo;
 	std::string director;
@@ -50,22 +49,27 @@ bool Administrador::darDeBajaPelicula() {
 	Pelicula pelicula;
 	int id;
 	int posicionPelicula;
+	verPeliculasCargadas();
 	std::cout << "Ingrese el id de la pelicula a dar de baja: ";
 	std::cin >> id;
-	posicionPelicula = archiPeliculas.buscarPosPeliculaxID(id);
-	if (posicionPelicula >= 0) {
-		pelicula = archiPeliculas.leerRegistro(posicionPelicula);
-		pelicula.mostrarDetalles();
-		pelicula.setEstado(false);
-		if (archiPeliculas.grabarRegistro(pelicula, posicionPelicula)) {
-			std::cout << "La pelicula: "<< pelicula.getTitulo() <<" fue dada de baja exitosamente." << std::endl;
-			return true;
-		}
-		else {
-			std::cout << "No se pudo dar de baja la pelicula." << std::endl;
-			return false;
-		}
+	if (confirmarAccion()) {
 
+		system("cls");
+		posicionPelicula = archiPeliculas.buscarPosPeliculaxID(id);
+		if (posicionPelicula >= 0) {
+			pelicula = archiPeliculas.leerRegistro(posicionPelicula);
+			pelicula.mostrarDetalles();
+			pelicula.setEstado(false);
+			if (archiPeliculas.grabarRegistro(pelicula, posicionPelicula)) {
+				std::cout << "La pelicula: " << pelicula.getTitulo() << " fue dada de baja exitosamente." << std::endl;
+				return true;
+			}
+			else {
+				std::cout << "No se pudo dar de baja la pelicula." << std::endl;
+				return false;
+			}
+
+		}
 	}
 }
 void Administrador::cargarSalas() {
@@ -98,24 +102,31 @@ void Administrador::verSalasCargadas() {
 	}
 }
 
-bool Administrador::modificarSalaEnRegistro(int nroSala){
+bool Administrador::modificarSalaEnRegistro(int nroSala) {
 	ArchivoSalas archivoSalas("sala.dat");
 	Sala sala;
 	int posicionSala = archivoSalas.buscarPosSalaxID(nroSala);
 	sala = archivoSalas.leerRegistro(posicionSala);
 	sala.mostrarDetalles();
 	std::cout << std::endl;
-	float precioNew;
+	float precioNuevo;
 	std::cout << "Nuevo valor de Entrada: ";
-	std::cin >> precioNew;
-	sala.setPrecioAsiento(precioNew);
-	if (archivoSalas.grabarRegistro(sala, posicionSala)) {
-	std::cout << "El precio de la Entrada a la sala #" << sala.getIdSala() << " fue modificado exitosamente." << std::endl;
-		return true;
+	std::cin >> precioNuevo;
+	while (precioNuevo <= 0) {
+		std::cout << "Monto incorrecto, reingrese el nuevo valor de Entrada: ";
+		std::cin >> precioNuevo;
 	}
-	else {
-		std::cout << "No se pudo modificar el precio de la sala" << std::endl;
-		return false;
+	if (confirmarAccion()) {
+
+		sala.setPrecioAsiento(precioNuevo);
+		if (archivoSalas.grabarRegistro(sala, posicionSala)) {
+			std::cout << "El precio de la Entrada a la sala #" << sala.getIdSala() << " fue modificado exitosamente." << std::endl;
+			return true;
+		}
+		else {
+			std::cout << "No se pudo modificar el precio de la sala" << std::endl;
+			return false;
+		}
 	}
 
 }
@@ -126,23 +137,26 @@ bool Administrador::darDeBajaSala() {
 	int posicionSala;
 	std::cout << "Ingrese el id de la sala a dar de baja: ";
 	std::cin >> id;
-	system("cls");
-	posicionSala = archiSalas.buscarPosSalaxID(id);
-	if (posicionSala >= 0) {
-		sala = archiSalas.leerRegistro(posicionSala);
-		sala.mostrarDetalles();
-		sala.setEstado(false);
-		if (archiSalas.grabarRegistro(sala, posicionSala)) {
-			std::cout << "La sala #" << sala.getIdSala() << " fue dada de baja exitosamente." << std::endl;
-			return true;
-		}
-		else {
-			std::cout << "No se pudo dar de baja la sala." << std::endl;
-			return false;
-		}
+	if (confirmarAccion()) {
 
+		system("cls");
+		posicionSala = archiSalas.buscarPosSalaxID(id);
+		if (posicionSala >= 0) {
+			sala = archiSalas.leerRegistro(posicionSala);
+			sala.mostrarDetalles();
+			sala.setEstado(false);
+			if (archiSalas.grabarRegistro(sala, posicionSala)) {
+				std::cout << "La sala #" << sala.getIdSala() << " fue dada de baja exitosamente." << std::endl;
+				return true;
+			}
+			else {
+				std::cout << "No se pudo dar de baja la sala." << std::endl;
+				return false;
+			}
+
+		}
 	}
-}	
+}
 
 Pelicula Administrador::seleccionarPelicula() {
 
@@ -154,9 +168,10 @@ Pelicula Administrador::seleccionarPelicula() {
 	int contador;
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiPeliculas.leerRegistro(i);
-		std::cout << "////////  PELICULA  #" << registro.getId() << "  ////////" << std::endl;
-		registro.mostrarDetalles();
-		std::cout << std::endl;
+		if (registro.getEstado()) {
+			registro.mostrarDetalles();
+			std::cout << std::endl;
+		}
 	}
 	do {
 		contador = 0;
@@ -229,13 +244,15 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 				verPeliculasCargadas();
 				std::cout << "Ingrese el id de la pelicula seleccionada: ";
 				std::cin >> idPelicula;
-				posicionPelicula = archivoPeliculas.buscarPosPeliculaxID(idPelicula);
-				pelicula = archivoPeliculas.leerRegistro(posicionPelicula);
-				funcion.setPelicula(pelicula);
-				archivoFunciones.grabarRegistro(funcion, posicionFuncion);
-				rlutil::locate(50, 17);
-				system("cls");
-				std::cout << "Pelicula modificada con exito" << std::endl;
+				if (confirmarAccion()) {
+					posicionPelicula = archivoPeliculas.buscarPosPeliculaxID(idPelicula);
+					pelicula = archivoPeliculas.leerRegistro(posicionPelicula);
+					funcion.setPelicula(pelicula);
+					archivoFunciones.grabarRegistro(funcion, posicionFuncion);
+					rlutil::locate(50, 17);
+					system("cls");
+					std::cout << "Pelicula " << pelicula.getTitulo() << " asignada con exito" << std::endl;
+				}
 				system("pause");
 				system("cls");
 				break;
@@ -246,19 +263,22 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 				verSalasCargadas();
 				std::cout << "Ingrese el id de la sala seleccionada: ";
 				std::cin >> idSala;
-				posicionSala = archivoSalas.buscarPosSalaxID(idSala);
-				sala = archivoSalas.leerRegistro(posicionSala);
-				funcion.setSala(sala);
-				archivoFunciones.grabarRegistro(funcion, posicionFuncion);
-				rlutil::locate(50, 17);
-				system("cls");
-				std::cout << "Sala modificada con exito" << std::endl;
+				if (confirmarAccion()) {
+					posicionSala = archivoSalas.buscarPosSalaxID(idSala);
+					sala = archivoSalas.leerRegistro(posicionSala);
+					funcion.setSala(sala);
+					archivoFunciones.grabarRegistro(funcion, posicionFuncion);
+					rlutil::locate(50, 17);
+					system("cls");
+					std::cout << "Sala " << sala.getIdSala() << " asignada con exito" << std::endl;
+
+				}
 				system("pause");
 				system("cls");
 				break;
 			}
 			case 3: {
-				system ("cls");
+				system("cls");
 				int dia, mes, anio, hora, minuto;
 				std::cout << "Ingrese el dia de la funcion: ";
 				std::cin >> dia;
@@ -295,12 +315,15 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 					std::cout << "Minutos no validos, reingrese los minutos de la funcion: ";
 					std::cin >> minuto;
 				}
-				fechaHorario = FechaHorario(dia, mes, anio, minuto, hora);
-				funcion.setFechaHoraFuncion(fechaHorario);
-				archivoFunciones.grabarRegistro(funcion, posicionFuncion);
-				rlutil::locate(50, 17);
-				system("cls");
-				std::cout << "Fecha y hora modificada con exito" << std::endl;
+				if (confirmarAccion()) {
+
+					fechaHorario = FechaHorario(dia, mes, anio, minuto, hora);
+					funcion.setFechaHoraFuncion(fechaHorario);
+					archivoFunciones.grabarRegistro(funcion, posicionFuncion);
+					rlutil::locate(50, 17);
+					system("cls");
+					std::cout << "Fecha y hora modificada con exito" << std::endl;
+				}
 				system("pause");
 				system("cls");
 				break;
@@ -315,6 +338,115 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 	return pudoEscribir;
 }
 
+bool Administrador::verificarEstadoPeliculas(int idPelicula)
+{
+	ArchivoPeliculas archivoPeliculas("pelicula.dat");
+	Pelicula pelicula;
+	int posicionPelicula = archivoPeliculas.buscarPosPeliculaxID(idPelicula);
+	if (posicionPelicula >= 0) {
+		pelicula = archivoPeliculas.leerRegistro(posicionPelicula);
+		if (pelicula.getEstado()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+
+}
+
+bool Administrador::verificarEstadoSalas(int idSala)
+{
+	ArchivoSalas archivoSalas("sala.dat");
+	Sala sala;
+	int posicionSala = archivoSalas.buscarPosSalaxID(idSala);
+	if (posicionSala >= 0) {
+		sala = archivoSalas.leerRegistro(posicionSala);
+		if (sala.getEstado()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+
+}
+
+void Administrador::darDeBajaFuncionxSalaOxPelicula()
+{
+	ArchivoFunciones archivoFunciones("funcion.dat");
+	ArchivoDiagrama archivoDiagrama("diagrama.dat");
+	ArchivoSalas archivoSalas("sala.dat");
+	ArchivoPeliculas archivoPeliculas("pelicula.dat");
+	Funcion funcion;
+	DiagramaSala diagrama;
+	Sala sala;
+	Pelicula pelicula;
+	int idSala, idPelicula;
+	int posicionFuncion, posicionDiagrama, posicionPelicula, posicionSala;
+	int cantidaRegistrosFunciones = archivoFunciones.contarRegistros();
+	int cantidadRegistrosDiagrama = archivoDiagrama.contarRegistros();
+
+	for (int i = 0; i < cantidaRegistrosFunciones; i++) {
+		funcion = archivoFunciones.leerRegistro(i);
+		for (int j = 0;j < cantidadRegistrosDiagrama;j++) {
+			diagrama = archivoDiagrama.leerRegistro(j);
+			idPelicula = funcion.getPelicula().getId();
+			idSala = funcion.getSala().getIdSala();
+			posicionSala = archivoSalas.buscarPosSalaxID(idSala);
+			posicionPelicula = archivoPeliculas.buscarPosPeliculaxID(idPelicula);
+			sala = archivoSalas.leerRegistro(posicionSala);
+			pelicula = archivoPeliculas.leerRegistro(posicionPelicula);
+			if (sala.getEstado() == false || pelicula.getEstado() == false) {
+				funcion.setEstado(false);
+				diagrama.setEstado(false);
+				archivoFunciones.grabarRegistro(funcion, i);
+				archivoDiagrama.grabarRegistro(diagrama, j);
+			}
+
+		}
+	}
+
+}
+
+bool Administrador::darDeBajaFuncion(int idFuncion)
+{
+	ArchivoFunciones archivoFunciones("funcion.dat");
+	ArchivoDiagrama archivoDiagrama("diagrama.dat");
+	Funcion funcion;
+	DiagramaSala diagrama;
+	int posicionFuncion, posicionDiagrama;
+	posicionFuncion = archivoFunciones.buscarPosFuncionxID(idFuncion);
+	posicionDiagrama = archivoDiagrama.buscarPosDiagramaxID(idFuncion);
+
+	if (confirmarAccion()) {
+
+		if (posicionFuncion >= 0 && posicionDiagrama >= 0) {
+			funcion = archivoFunciones.leerRegistro(posicionFuncion);
+			diagrama = archivoDiagrama.leerRegistro(posicionDiagrama);
+			funcion.setEstado(false);
+			diagrama.setEstado(false);
+			if (archivoFunciones.grabarRegistro(funcion, posicionFuncion) && archivoDiagrama.grabarRegistro(diagrama, posicionDiagrama)) {
+				std::cout << "La funcion #" << funcion.getIdFuncion() << " fue dada de baja exitosamente." << std::endl;
+				return true;
+			}
+			else {
+				std::cout << "No se pudo dar de baja la funcion." << std::endl;
+				return false;
+			}
+
+		}
+	}
+
+
+}
+
 Sala Administrador::seleccionarSala() {
 	ArchivoSalas archiSalas("sala.dat");
 	Sala registro;
@@ -323,9 +455,11 @@ Sala Administrador::seleccionarSala() {
 	int cantidadRegistros = archiSalas.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiSalas.leerRegistro(i);
-		std::cout << "////////  SALA  #" << registro.getIdSala() << "  ////////" << std::endl;
-		registro.mostrarDetalles();
-		std::cout << std::endl;
+		if (registro.getEstado()) {
+			registro.mostrarDetalles();
+			std::cout << std::endl;
+
+		}
 	}
 	do {
 		contador = 0;
@@ -420,27 +554,18 @@ void Administrador::cargarFunciones() {
 }
 
 void Administrador::verFuncionesCargadas() {
+	darDeBajaFuncionxSalaOxPelicula();
 	ArchivoFunciones archiFunciones("funcion.dat");
-	ArchivoPeliculas archiPeliculas("pelicula.dat");
-	ArchivoSalas archiSalas("sala.dat");
-	ArchivoDiagrama archiDiagrama("diagrama.dat");
-	Pelicula pelicula;
-	Sala sala;
-	DiagramaSala diagrama;
 	Funcion registro;
 	int cantidadRegistros = archiFunciones.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiFunciones.leerRegistro(i);
-		diagrama = archiDiagrama.leerRegistro(i);
-		if (registro.getPelicula().getEstado()==false || registro.getSala().getEstado() ==false) {
-			registro.setEstado(false);
-			diagrama.setEstado(false);
-			archiFunciones.grabarRegistro(registro, i);
-			archiDiagrama.grabarRegistro(diagrama, i);
-			std::cout << std::endl;
-		}
+		if (registro.getEstado()) {
+
 			registro.mostrarDetalles();
 			std::cout << std::endl;
+		}
+
 	}
 
 }
@@ -631,7 +756,8 @@ void Administrador::menuFunciones() {
 		showItem1(" Ver funciones cargadas ", 50, 11, y == 1);
 		showItem1(" Buscar funcion x ID ", 50, 12, y == 2);
 		showItem1(" Modificar funcion ", 50, 13, y == 3);
-		showItem1(" Volver ", 50, 14, y == 4);
+		showItem1(" Eliminar funcion ", 50, 14, y == 4);
+		showItem1(" Volver ", 50, 15, y == 5);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 		switch (key) // evalua el codigo de tecla
@@ -646,7 +772,7 @@ void Administrador::menuFunciones() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 4) y = 4;
+			if (y > 5) y = 5;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -683,7 +809,18 @@ void Administrador::menuFunciones() {
 				Sleep(1000);
 				break;
 			}
-			case 4: // Si el cursor esta en la opcion SALIR
+			case 4: {
+				system("cls");
+				verFuncionesCargadas();
+				int idFuncion;
+				std::cout << "Ingrese el id de la funcion a eliminar: ";
+				std::cin >> idFuncion;
+				darDeBajaFuncion(idFuncion);
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 5: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}
@@ -781,4 +918,22 @@ void Administrador::menuBackUp() {
 
 		}
 	} while (op != 0);
+}
+
+bool Administrador::confirmarAccion()
+{
+	char siONo;
+	std::cout << "Esta seguro que desea modificar o eliminar? (s/n): ";
+	std::cin >> siONo;
+	while (siONo != 's' && siONo != 'S' && siONo != 'n' && siONo != 'N') {
+		std::cout << "Opcion no valida, reingrese (s/n): ";
+		std::cin >> siONo;
+	}
+	if (siONo == 's' || siONo == 'S') {
+		return true;
+	}
+	else {
+		std::cout << "Accion cancelada." << std::endl;
+		return false;
+	}
 }

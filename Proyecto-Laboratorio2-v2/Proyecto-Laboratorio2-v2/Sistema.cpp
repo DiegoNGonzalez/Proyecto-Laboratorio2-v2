@@ -9,9 +9,6 @@
 
 Sistema::Sistema()
 {
-	Pelicula vecPeliculas[5];
-	Sala vecSalas[5];
-	Funcion vecFunciones[25];
 	_admin1 = Administrador(01, "DT", "Carlos", "Tevez", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
 }
@@ -368,4 +365,59 @@ bool Sistema::crearDirectorioBackUP() {
 		creado = std::filesystem::create_directory(ruta);
 	}
 	return creado;
+}
+
+void Sistema::creditos()
+{
+	system ("cls");
+	rlutil::setConsoleTitle("CREDITOS");
+	rlutil::setColor(rlutil::COLOR::WHITE);
+	rlutil::locate(40, 7);
+	std::cout << "DISEÑADO Y DESARROLLADO POR: " << std::endl;
+	rlutil::locate(40, 9);
+	std::cout << "-----------------------------------------" << std::endl;
+	rlutil::locate(40, 10);
+	std::cout << "Bombieri Rodrigo. " << std::endl;
+	rlutil::locate(40, 11);
+	std::cout << "Github: " <<"https://github.com/RodrigoBombieri" << std::endl;
+	rlutil::locate(40, 12);
+	std::cout << "Linkedin: " << "https://www.linkedin.com/in/rodrigobombieri-dev/" << std::endl;
+	rlutil::locate(40, 13);
+	std::cout<<"Email: "<< "rodrigo.bombieri@alumnos.frgp.utn.edu.ar" << std::endl;
+	rlutil::locate(40, 14);
+	std::cout<< "-----------------------------------------"<< std::endl;
+	rlutil::locate(40, 15);
+	std::cout << "Caceres Tomas. " << std::endl;
+	rlutil::locate(40, 16);
+	std::cout << "Github: " << "https://github.com/tomyok" << std::endl;
+	rlutil::locate(40, 17);
+	std::cout << "Linkedin: " << "https://www.linkedin.com/in/tomas-caceres-1106b6274/" << std::endl;
+	rlutil::locate(40, 18);
+	std::cout << "Email: " << "tomas.caceres2@alumnos.frgp.utn.edu.ar" << std::endl;
+	rlutil::locate(40, 19);
+	std::cout << "-----------------------------------------" << std::endl;
+	rlutil::locate(40, 20);
+	std::cout << "Damonte Agustin. " << std::endl;
+	rlutil::locate(40, 21);
+	std::cout << "Github: " << "https://github.com/agudamonte" << std::endl;
+	rlutil::locate(40, 22);
+	std::cout << "Linkedin: " << "https://www.linkedin.com/in/agustindamonte/" << std::endl;
+	rlutil::locate(40, 23);
+	std::cout << "Email: " << "agustin.damonte@frgp.utn.edu.ar" << std::endl;
+	rlutil::locate(40, 24);
+	std::cout << "-----------------------------------------" << std::endl;
+	rlutil::locate(40, 25);
+	std::cout << "Gonzalez Valenzuela Diego. " << std::endl;
+	rlutil::locate(40, 26);
+	std::cout << "Github: " << "https://github.com/DiegoNGonzalez" << std::endl;
+	rlutil::locate(40, 27);
+	std::cout << "Linkedin: " << "https://www.linkedin.com/in/diegongonzalez/" << std::endl;
+	rlutil::locate(40, 28);
+	std::cout << "Email: " << "diego.gonzalez2@frgp.utn.edu.ar" << std::endl;
+	rlutil::locate(40, 29);
+	std::cout << "-----------------------------------------" << std::endl;
+	rlutil::locate(40, 30);
+	std::cout << "GRACIAS POR UTILIZAR NUESTRO SISTEMA" << std::endl;
+	Sleep(2000);
+	rlutil::setColor(rlutil::COLOR::WHITE);
 }

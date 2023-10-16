@@ -32,6 +32,10 @@ public:
 	void cargarFunciones();
 	void verFuncionesCargadas();
 	bool modificarFuncionEnRegistro(int idFuncion);
+	bool verificarEstadoPeliculas(int idPelicula);
+	bool verificarEstadoSalas(int idSaLa);
+	void darDeBajaFuncionxSalaOxPelicula();
+	bool darDeBajaFuncion(int idFuncion);
 	void verVentas();
 	void generarReporte();
 	Administrador();
@@ -40,6 +44,7 @@ public:
 	void menuSalas();
 	void menuFunciones();
 	void menuBackUp();
+	bool confirmarAccion();
 
 
 };
