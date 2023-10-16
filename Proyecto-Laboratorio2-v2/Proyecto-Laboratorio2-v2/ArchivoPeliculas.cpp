@@ -16,9 +16,10 @@ Pelicula ArchivoPeliculas::leerRegistro(int posicion) {
 int ArchivoPeliculas::contarRegistros() {
 	FILE* p;
 	p = fopen(_nombre, "rb");
-	if (p == NULL) { 
+	if (p == NULL) {
 		std::cout << "Error al contar" << std::endl;
-		return -1; };
+		return -1;
+	};
 	fseek(p, 0, 2);
 	int tam = ftell(p);
 	fclose(p);
@@ -27,9 +28,10 @@ int ArchivoPeliculas::contarRegistros() {
 bool ArchivoPeliculas::grabarRegistro(Pelicula pelicula) {
 	FILE* p;
 	p = fopen(_nombre, "ab");
-	if (p == NULL) { 
+	if (p == NULL) {
 		std::cout << "Error al grabar registro" << std::endl;
-		return false; };
+		return false;
+	};
 	int escribio = fwrite(&pelicula, sizeof pelicula, 1, p);
 	fclose(p);
 	return escribio;
@@ -111,22 +113,22 @@ bool ArchivoPeliculas::restaurarBackUp() {
 }
 
 int ArchivoPeliculas::validarId() {
-		FILE* p;
-		int idMax = 0, contarReg;
+	FILE* p;
+	int idMax = 0, contarReg;
 
-		p = fopen(_nombre, "rb");
-		if (p == NULL) {
-			return 1;
+	p = fopen(_nombre, "rb");
+	if (p == NULL) {
+		return 1;
+	}
+	contarReg = contarRegistros();
+	for (int i = 0; i < contarReg; i++) {
+		Pelicula pelicula = leerRegistro(i);
+		if (pelicula.getId() > idMax) {
+			idMax = pelicula.getId();
 		}
-		contarReg = contarRegistros();
-		for (int i = 0; i < contarReg; i++) {
-			Pelicula pelicula = leerRegistro(i);
-			if (pelicula.getId() > idMax) {
-				idMax = pelicula.getId();
-			}
-		}
-		fclose(p);
-		return idMax + 1;
+	}
+	fclose(p);
+	return idMax + 1;
 
-	
+
 }

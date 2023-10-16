@@ -16,9 +16,6 @@
 class Administrador : public Persona
 {
 private:
-	/*Pelicula _vecPeliculas[5];
-	Sala _vecSalas[5];
-	Funcion _vecFunciones[25];*/
 
 public:
 	void cargarPeliculas();

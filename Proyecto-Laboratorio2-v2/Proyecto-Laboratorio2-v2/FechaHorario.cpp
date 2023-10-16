@@ -5,47 +5,47 @@
 
 
 Fecha FechaHorario::getFecha() {
-    return _fecha;
+	return _fecha;
 }
 Horario FechaHorario::getHorario() {
-    return _horario;
+	return _horario;
 }
 void FechaHorario::setFecha(Fecha fecha) {
-    _fecha = fecha;
+	_fecha = fecha;
 }
 void FechaHorario::setHorario(Horario horario) {
-    _horario = horario;
+	_horario = horario;
 }
 void FechaHorario::setFecha(int dia, int mes, int anio) {
-    _fecha.setDia(dia);
-    _fecha.setMes(mes);
-    _fecha.setAnio(anio);
+	_fecha.setDia(dia);
+	_fecha.setMes(mes);
+	_fecha.setAnio(anio);
 }
-void FechaHorario::setHorario( int minuto, int hora) {
-    _horario = Horario( minuto, hora);
+void FechaHorario::setHorario(int minuto, int hora) {
+	_horario = Horario(minuto, hora);
 }
 
 FechaHorario::FechaHorario(Fecha fecha, Horario horario) {
-    _fecha = fecha;
-    _horario = horario;
+	_fecha = fecha;
+	_horario = horario;
 }
 
 FechaHorario::FechaHorario() {
 
 }
 
-FechaHorario::FechaHorario(int dia, int mes, int anio,  int minuto, int hora) {
-    _fecha.setDia(dia);
-    _fecha.setMes(mes);
-    _fecha.setAnio(anio);
-    _horario.setMinuto(minuto);
-    _horario.setHora(hora);
+FechaHorario::FechaHorario(int dia, int mes, int anio, int minuto, int hora) {
+	_fecha.setDia(dia);
+	_fecha.setMes(mes);
+	_fecha.setAnio(anio);
+	_horario.setMinuto(minuto);
+	_horario.setHora(hora);
 
 }
-void FechaHorario::mostrarFechaHora(){
-    _fecha.mostrarFecha();
-    std::cout << " ";
-    _horario.mostrarHorario();
-     std::cout << std::endl;
+void FechaHorario::mostrarFechaHora() {
+	_fecha.mostrarFecha();
+	std::cout << " ";
+	_horario.mostrarHorario();
+	std::cout << std::endl;
 
 }

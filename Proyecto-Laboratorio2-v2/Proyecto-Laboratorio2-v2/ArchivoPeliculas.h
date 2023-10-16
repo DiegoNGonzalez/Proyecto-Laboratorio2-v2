@@ -5,18 +5,18 @@
 #include "rlutil.h"
 class ArchivoPeliculas
 {
-	private:
+private:
 	char _nombre[30];
-	public:
-		ArchivoPeliculas(const char* nombre) {
+public:
+	ArchivoPeliculas(const char* nombre) {
 		strcpy(_nombre, nombre);
 	}
-		Pelicula leerRegistro(int posicion);
-		int contarRegistros();
-		bool grabarRegistro(Pelicula pelicula);
-		bool generarBackUp();
-		bool restaurarBackUp();
-		int validarId();
+	Pelicula leerRegistro(int posicion);
+	int contarRegistros();
+	bool grabarRegistro(Pelicula pelicula);
+	bool generarBackUp();
+	bool restaurarBackUp();
+	int validarId();
 
 };
 

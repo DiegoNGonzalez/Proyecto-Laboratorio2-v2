@@ -16,9 +16,10 @@ Sala ArchivoSalas::leerRegistro(int posicion) {
 int ArchivoSalas::contarRegistros() {
 	FILE* p;
 	p = fopen(_nombre, "rb");
-	if (p == NULL) { 
+	if (p == NULL) {
 		std::cout << "Error al contar" << std::endl;
-		return -1; };
+		return -1;
+	};
 	fseek(p, 0, 2);
 	int tam = ftell(p);
 	fclose(p);
@@ -27,9 +28,10 @@ int ArchivoSalas::contarRegistros() {
 bool ArchivoSalas::grabarRegistro(Sala sala) {
 	FILE* p;
 	p = fopen(_nombre, "ab");
-	if (p == NULL) { 
+	if (p == NULL) {
 		std::cout << "Error al grabar registro" << std::endl;
-		return false; };
+		return false;
+	};
 	int escribio = fwrite(&sala, sizeof sala, 1, p);
 	fclose(p);
 	return escribio;
@@ -118,7 +120,7 @@ int ArchivoSalas::validarId() {
 	if (p == NULL) {
 		return 1;
 	}
-	contarReg= contarRegistros();
+	contarReg = contarRegistros();
 	for (int i = 0; i < contarReg; i++) {
 		Sala sala = leerRegistro(i);
 		if (sala.getIdSala() > idMax) {
@@ -127,5 +129,5 @@ int ArchivoSalas::validarId() {
 	}
 	fclose(p);
 	return idMax + 1;
-	
+
 }

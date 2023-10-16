@@ -1,7 +1,7 @@
 #include "Vendedor.h"
 #include <iostream>
 Vendedor::Vendedor() : Persona() {
-	
+
 }
 
 Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia) : Persona(legajo, cargo, nombre, apellido, usuario, contrasenia) {
@@ -9,7 +9,7 @@ Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::strin
 }
 
 
-void Vendedor::venderEntradas(int contadorEntradas,  int idFuncion, int contadorGeneralEntradas) {
+void Vendedor::venderEntradas(int contadorEntradas, int idFuncion, int contadorGeneralEntradas) {
 	//FILE* f;
 	//f = fopen("funcion.dat", "rb");
 	//if (f == NULL) {
@@ -33,5 +33,5 @@ void Vendedor::venderEntradas(int contadorEntradas,  int idFuncion, int contador
 	//	std::cout << "Cantidad de entradas vendidas en total: " << contadorGeneralEntradas << std::endl;
 	//	fclose(f);
 	//}
-	std ::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
+	std::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
 }

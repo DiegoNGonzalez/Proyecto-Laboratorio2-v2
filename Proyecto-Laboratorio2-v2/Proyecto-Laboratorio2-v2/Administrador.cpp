@@ -7,9 +7,9 @@ cargarPeliculas() {
 	std::string director;
 	std::string clasificacionEdad;
 	std::string genero;
-	int duracion, id= archiPeliculas.validarId();
+	int duracion, id = archiPeliculas.validarId();
 	Pelicula pelicula;
-	std::cout << "Pelicula nro: "<< id << std::endl;
+	std::cout << "Pelicula nro: " << id << std::endl;
 	std::cin.ignore();
 	std::cout << "Ingrese el titulo: ";
 	std::getline(std::cin, titulo);
@@ -47,8 +47,8 @@ void Administrador::verPeliculasCargadas() {
 void Administrador::cargarSalas() {
 	ArchivoSalas archiSalas("sala.dat");
 	Sala sala;
-	int idSala= archiSalas.validarId();
-	std::cout << "Sala nro: "<< idSala << std::endl;
+	int idSala = archiSalas.validarId();
+	std::cout << "Sala nro: " << idSala << std::endl;
 	float precioEntrada;
 	std::cout << "Ingrese el precio de la entrada: ";
 	std::cin >> precioEntrada;
@@ -146,7 +146,7 @@ void Administrador::cargarFunciones() {
 	ArchivoFunciones archiFunciones("funcion.dat");
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
 	Funcion funcion;
-	int idFuncion= archiFunciones.validarId();
+	int idFuncion = archiFunciones.validarId();
 	const int filas = 10;
 	const int columnas = 10;
 	Pelicula pelicula;
@@ -156,7 +156,7 @@ void Administrador::cargarFunciones() {
 	int  dia, mes, anio, hora, minuto;
 	pelicula = seleccionarPelicula();
 	sala = seleccionarSala();
-	std::cout << "Funcion nro: "<< idFuncion<<std::endl ;
+	std::cout << "Funcion nro: " << idFuncion << std::endl;
 	std::cout << "Ingrese el dia de la funcion: ";
 	std::cin >> dia;
 	while (dia <= 0 || dia > 31)
@@ -195,7 +195,7 @@ void Administrador::cargarFunciones() {
 	diagramaSala = DiagramaSala(idFuncion);
 	archiDiagrama.grabarRegistro(diagramaSala);
 	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
-	funcion = Funcion(pelicula, sala, fechaHoraFuncion,idFuncion );
+	funcion = Funcion(pelicula, sala, fechaHoraFuncion, idFuncion);
 	archiFunciones.grabarRegistro(funcion);
 }
 
@@ -222,7 +222,7 @@ Administrador::Administrador(int legajo, std::string cargo, std::string nombre, 
 void showItem1(const char* text, int posx, int posy, bool selected) {
 
 	if (selected) {
-		rlutil::setBackgroundColor(rlutil::COLOR::BLUE);
+		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
 		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
 		std::cout << (char)175 << "  " << text << "  " << (char)174 << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
 	}
@@ -299,42 +299,42 @@ void Administrador::menuSalas() {
 		showItem1(" Volver ", 50, 12, y == 2);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
-	
-	switch (key) // evalua el codigo de tecla
-	{
-	case 14: // flecha ARRIBA
-		rlutil::locate(28, 10 + y);
-		std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
-		y--;
-		if (y < 0) y = 0; // validacion para que no se salga de las opciones
-		break;
-	case 15: // flecha ABAJO
-		rlutil::locate(28, 10 + y);
-		std::cout << " " << std::endl;
-		y++;
-		if (y > 2) y = 2;
-		break;
-	case 1: // ENTER
-		switch (y)
+
+		switch (key) // evalua el codigo de tecla
 		{
-		case 0: {
-			system("cls");
-			cargarSalas();
-			system("cls");
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
 			break;
+		case 15: // flecha ABAJO
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl;
+			y++;
+			if (y > 2) y = 2;
+			break;
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: {
+				system("cls");
+				cargarSalas();
+				system("cls");
+				break;
+			}
+			case 1:
+				system("cls");
+				verSalasCargadas();
+				system("pause");
+				system("cls");
+				break;
+			case 2: // Si el cursor esta en la opcion SALIR
+				op = 0; // sale del programa
+				break;
+			}
 		}
-		case 1:
-			system("cls");
-			verSalasCargadas();
-			system("pause");
-			system("cls");
-			break;
-		case 2: // Si el cursor esta en la opcion SALIR
-			op = 0; // sale del programa
-			break;
-		}
-	}
-} while (op != 0);
+	} while (op != 0);
 }
 
 void Administrador::menuFunciones() {
@@ -427,55 +427,55 @@ void Administrador::menuBackUp() {
 			y++;
 			if (y > 8) y = 8;
 			break;
-			case 1: // ENTER
-				switch (y)
-				{
-				case 0: {
-					system("cls");
-					archiPeliculas.generarBackUp();
-					system("cls");
-					break;
-				}
-				case 1:
-					system("cls");
-					archiPeliculas.restaurarBackUp();
-					system("cls");
-					break;
-				case 2:
-					system("cls");
-					archiSalas.generarBackUp();
-					system("cls");
-					break;
-				case 3:
-					system("cls");
-					archiSalas.restaurarBackUp();
-					system("cls");
-					break;
-				case 4:
-					system("cls");
-					archiFunciones.generarBackUp();
-					system("cls");
-					break;
-				case 5:
-					system("cls");
-					archiFunciones.restaurarBackUp();
-					system("cls");
-					break;
-				case 6:
-					system("cls");
-					archiDiagrama.generarBackUp();
-					system("cls");
-					break;
-				case 7:
-					system("cls");
-					archiDiagrama.restaurarBackUp();
-					system("cls");
-					break;
-				case 8: // Si el cursor esta en la opcion SALIR
-					op = 0; // sale del programa
-					break;
-				}
-		
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: {
+				system("cls");
+				archiPeliculas.generarBackUp();
+				system("cls");
+				break;
+			}
+			case 1:
+				system("cls");
+				archiPeliculas.restaurarBackUp();
+				system("cls");
+				break;
+			case 2:
+				system("cls");
+				archiSalas.generarBackUp();
+				system("cls");
+				break;
+			case 3:
+				system("cls");
+				archiSalas.restaurarBackUp();
+				system("cls");
+				break;
+			case 4:
+				system("cls");
+				archiFunciones.generarBackUp();
+				system("cls");
+				break;
+			case 5:
+				system("cls");
+				archiFunciones.restaurarBackUp();
+				system("cls");
+				break;
+			case 6:
+				system("cls");
+				archiDiagrama.generarBackUp();
+				system("cls");
+				break;
+			case 7:
+				system("cls");
+				archiDiagrama.restaurarBackUp();
+				system("cls");
+				break;
+			case 8: // Si el cursor esta en la opcion SALIR
+				op = 0; // sale del programa
+				break;
+			}
+
 		}
-	}while (op != 0);
+	} while (op != 0);
 }
