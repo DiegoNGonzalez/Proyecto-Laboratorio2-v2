@@ -12,7 +12,6 @@ Sistema::Sistema()
 	Pelicula vecPeliculas[5];
 	Sala vecSalas[5];
 	Funcion vecFunciones[25];
-	//int matrizSalasxFuncion[10][10]={0};
 	_admin1 = Administrador(01, "DT", "Carlos", "Tevez", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
 }
@@ -363,7 +362,6 @@ bool Sistema::crearDirectorioBackUP() {
 	bool creado = false;
 	std::string ruta = "backUp/";
 	if (std::filesystem::is_directory(ruta)) {
-		creado = true;
 		return false;
 	}
 	else {

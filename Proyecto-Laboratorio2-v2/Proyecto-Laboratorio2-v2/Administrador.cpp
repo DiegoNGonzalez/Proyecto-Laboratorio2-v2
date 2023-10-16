@@ -38,11 +38,35 @@ void Administrador::verPeliculasCargadas() {
 	int cantidadRegistros = archiPeliculas.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiPeliculas.leerRegistro(i);
-		std::cout << "////////  PELICULA  #" << registro.getId() << "  ////////" << std::endl;
-		registro.mostrarDetalles();
-		std::cout << std::endl;
+		if (registro.getEstado()) {
+			registro.mostrarDetalles();
+			std::cout << std::endl;
+		}
 	}
 
+}
+bool Administrador::darDeBajaPelicula() {
+	ArchivoPeliculas archiPeliculas("pelicula.dat");
+	Pelicula pelicula;
+	int id;
+	int posicionPelicula;
+	std::cout << "Ingrese el id de la pelicula a dar de baja: ";
+	std::cin >> id;
+	posicionPelicula = archiPeliculas.buscarPosPeliculaxID(id);
+	if (posicionPelicula >= 0) {
+		pelicula = archiPeliculas.leerRegistro(posicionPelicula);
+		pelicula.mostrarDetalles();
+		pelicula.setEstado(false);
+		if (archiPeliculas.grabarRegistro(pelicula, posicionPelicula)) {
+			std::cout << "La pelicula: "<< pelicula.getTitulo() <<" fue dada de baja exitosamente." << std::endl;
+			return true;
+		}
+		else {
+			std::cout << "No se pudo dar de baja la pelicula." << std::endl;
+			return false;
+		}
+
+	}
 }
 void Administrador::cargarSalas() {
 	ArchivoSalas archiSalas("sala.dat");
@@ -67,11 +91,58 @@ void Administrador::verSalasCargadas() {
 	int cantidadRegistros = archiSalas.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiSalas.leerRegistro(i);
-		std::cout << "////////  SALA  #" << registro.getIdSala() << "  ////////" << std::endl;
-		registro.mostrarDetalles();
-		std::cout << std::endl;
+		if (registro.getEstado()) {
+			registro.mostrarDetalles();
+			std::cout << std::endl;
+		}
 	}
 }
+
+bool Administrador::modificarSalaEnRegistro(int nroSala){
+	ArchivoSalas archivoSalas("sala.dat");
+	Sala sala;
+	int posicionSala = archivoSalas.buscarPosSalaxID(nroSala);
+	sala = archivoSalas.leerRegistro(posicionSala);
+	sala.mostrarDetalles();
+	std::cout << std::endl;
+	float precioNew;
+	std::cout << "Nuevo valor de Entrada: ";
+	std::cin >> precioNew;
+	sala.setPrecioAsiento(precioNew);
+	if (archivoSalas.grabarRegistro(sala, posicionSala)) {
+	std::cout << "El precio de la Entrada a la sala #" << sala.getIdSala() << " fue modificado exitosamente." << std::endl;
+		return true;
+	}
+	else {
+		std::cout << "No se pudo modificar el precio de la sala" << std::endl;
+		return false;
+	}
+
+}
+bool Administrador::darDeBajaSala() {
+	ArchivoSalas archiSalas("sala.dat");
+	Sala sala;
+	int id;
+	int posicionSala;
+	std::cout << "Ingrese el id de la sala a dar de baja: ";
+	std::cin >> id;
+	system("cls");
+	posicionSala = archiSalas.buscarPosSalaxID(id);
+	if (posicionSala >= 0) {
+		sala = archiSalas.leerRegistro(posicionSala);
+		sala.mostrarDetalles();
+		sala.setEstado(false);
+		if (archiSalas.grabarRegistro(sala, posicionSala)) {
+			std::cout << "La sala #" << sala.getIdSala() << " fue dada de baja exitosamente." << std::endl;
+			return true;
+		}
+		else {
+			std::cout << "No se pudo dar de baja la sala." << std::endl;
+			return false;
+		}
+
+	}
+}	
 
 Pelicula Administrador::seleccionarPelicula() {
 
@@ -350,12 +421,26 @@ void Administrador::cargarFunciones() {
 
 void Administrador::verFuncionesCargadas() {
 	ArchivoFunciones archiFunciones("funcion.dat");
+	ArchivoPeliculas archiPeliculas("pelicula.dat");
+	ArchivoSalas archiSalas("sala.dat");
+	ArchivoDiagrama archiDiagrama("diagrama.dat");
+	Pelicula pelicula;
+	Sala sala;
+	DiagramaSala diagrama;
 	Funcion registro;
 	int cantidadRegistros = archiFunciones.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiFunciones.leerRegistro(i);
-		registro.mostrarDetalles();
-		std::cout << std::endl;
+		diagrama = archiDiagrama.leerRegistro(i);
+		if (registro.getPelicula().getEstado()==false || registro.getSala().getEstado() ==false) {
+			registro.setEstado(false);
+			diagrama.setEstado(false);
+			archiFunciones.grabarRegistro(registro, i);
+			archiDiagrama.grabarRegistro(diagrama, i);
+			std::cout << std::endl;
+		}
+			registro.mostrarDetalles();
+			std::cout << std::endl;
 	}
 
 }
@@ -392,8 +477,9 @@ void Administrador::menuPeliculas() {
 
 		showItem1(" Cargar peliculas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
 		showItem1(" Ver peliculas cargadas ", 50, 11, y == 1);
-		showItem1("Buscar pelicula x ID", 50, 12, y == 2);
-		showItem1(" Volver ", 50, 13, y == 3);
+		showItem1(" Buscar pelicula x ID", 50, 12, y == 2);
+		showItem1(" Eliminar Pelicula ", 50, 13, y == 3);
+		showItem1(" Volver ", 50, 14, y == 4);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -411,7 +497,7 @@ void Administrador::menuPeliculas() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 3) y = 3;
+			if (y > 4) y = 4;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -446,7 +532,13 @@ void Administrador::menuPeliculas() {
 				system("cls");
 				break;
 			}
-			case 3: // Si el cursor esta en la opcion SALIR
+			case 3:
+				system("cls");
+				darDeBajaPelicula();
+				system("pause");
+				system("cls");
+				break;
+			case 4: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}
@@ -464,7 +556,9 @@ void Administrador::menuSalas() {
 
 		showItem1(" Cargar salas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
 		showItem1(" Ver salas cargadas ", 50, 11, y == 1);
-		showItem1(" Volver ", 50, 12, y == 2);
+		showItem1(" Modificar Precio Sala ", 50, 12, y == 2);
+		showItem1(" Eliminar Sala ", 50, 13, y == 3);
+		showItem1(" Volver ", 50, 14, y == 4);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -480,7 +574,7 @@ void Administrador::menuSalas() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 2) y = 2;
+			if (y > 4)y = 4;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -497,8 +591,26 @@ void Administrador::menuSalas() {
 				system("pause");
 				system("cls");
 				break;
-
-			case 2: // Si el cursor esta en la opcion SALIR
+			case 2: {
+				system("cls");
+				int nroSala;
+				verSalasCargadas();
+				std::cout << "Ingrese el Nro de sala a modificar el precio: ";
+				std::cin >> nroSala;
+				system("cls");
+				modificarSalaEnRegistro(nroSala);
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3:
+				system("cls");
+				verSalasCargadas();
+				darDeBajaSala();
+				system("pause");
+				system("cls");
+				break;
+			case 4: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}

@@ -14,6 +14,7 @@ public:
 	Sala leerRegistro(int posicion);
 	int contarRegistros();
 	bool grabarRegistro(Sala sala);
+	bool grabarRegistro(Sala sala, int posicionSala);
 	bool generarBackUp();
 	bool restaurarBackUp();
 	int validarId();

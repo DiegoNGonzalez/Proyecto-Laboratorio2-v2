@@ -24,8 +24,11 @@ public:
 	void verSalasCargadas();
 	Pelicula seleccionarPelicula();
 	Pelicula buscarPeliculaxID(int valorBuscado);
+	bool darDeBajaPelicula();
 	Sala seleccionarSala();
 	Sala buscarSalaxID(int valorBuscado);
+	bool modificarSalaEnRegistro(int nroSala);
+	bool darDeBajaSala();
 	void cargarFunciones();
 	void verFuncionesCargadas();
 	bool modificarFuncionEnRegistro(int idFuncion);
