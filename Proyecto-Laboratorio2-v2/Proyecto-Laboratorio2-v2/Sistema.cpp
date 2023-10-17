@@ -203,6 +203,7 @@ void Sistema::mostrarMenuVendedor() {
 	DiagramaSala diagramaSala;
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
 	ArchivoFunciones archiFunciones("funcion.dat");
+	ArchivoVenta archiVenta("venta.dat");
 	int op = 1, y = 0;
 	Funcion funcionAuxiliar;
 	int aux, fila, columna, contadorEntradas = 0, contadorGeneralEntradas = 0;
@@ -272,11 +273,12 @@ void Sistema::mostrarMenuVendedor() {
 				std::cout << "Ingrese el nro de asiento: ";
 				std::cin >> columna;
 				if (pos != -1) {
-					if (archiDiagrama.reservarAsientoEnRegistro(pos, fila, columna)) {
-						int posFuncion = archiFunciones.buscarPosFuncionxID(aux);
-						funcionAuxiliar = archiFunciones.buscarFuncionxID(aux);
-						funcionAuxiliar.setContadorEntrada(funcionAuxiliar.getContadorEntrada() + 1);
-						archiFunciones.grabarRegistro(funcionAuxiliar, posFuncion);
+					_vendedor1.venderEntradas(aux, fila, columna);
+					std::cout << std::endl;
+					int cantRegistrosVentas= archiVenta.contarRegistros();
+					for (int i = 0; i < cantRegistrosVentas; i++) {
+						Venta ventaAux = archiVenta.leerRegistro(i);
+						ventaAux.mostrarVenta();
 					}
 				}
 				else {
@@ -314,7 +316,7 @@ void Sistema::mostrarMenuVendedor() {
 			case 4:
 				system("cls");
 				_admin1.verFuncionesCargadasEntradas();
-				_vendedor1.venderEntradas();
+				//_vendedor1.venderEntradas();
 				system("pause");
 				system("cls");
 				break;

@@ -9,7 +9,7 @@ private:
 public:
 	Vendedor();
 	Vendedor(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
-	void venderEntradas();
+	void venderEntradas(int idFuncion, int fila, int columna);
 
 
 };

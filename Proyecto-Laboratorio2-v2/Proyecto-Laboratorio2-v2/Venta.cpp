@@ -3,7 +3,6 @@
 void Venta::mostrarVenta()
 {
 	std::cout << "ID Venta: " << _idVenta << std::endl;
-	std::cout << "Cantidad de entradas: " << _cantidadEntradas << std::endl;
 	std::cout << "Importe: " << _importe << std::endl;
 	_funcion.mostrarDetalles();
 }
@@ -12,10 +11,9 @@ Venta::Venta()
 {
 }
 
-Venta::Venta(int idVenta, int cantidadEntradas, Funcion funcion, float importe)
+Venta::Venta(int idVenta, Funcion funcion, float importe)
 {
 	_idVenta = idVenta;
-	_cantidadEntradas = cantidadEntradas;
 	_funcion = funcion;
 	_importe = importe;
 }

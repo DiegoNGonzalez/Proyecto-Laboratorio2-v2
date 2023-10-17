@@ -9,28 +9,22 @@ Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::strin
 }
 
 
-void Vendedor::venderEntradas() {
+void Vendedor::venderEntradas(int idFuncion, int fila, int columna) {
 	ArchivoDiagrama archivoDiagrama("diagrama.dat");
 	ArchivoFunciones archivoFunciones("funcion.dat");
 	ArchivoVenta archivoVenta("venta.dat");
 	DiagramaSala diagramaAux;
 	Funcion funcionAux;
 	Venta ventaAux;
-	int idFuncion, entradas, idVenta=archivoVenta.validarId();
-	float valorSalaAuxiliar, importeVenta;
-	std::cout << "Ingrese el ID de la funcion: ";
-	std::cin >> idFuncion;
+	int idVenta=archivoVenta.validarId();
+	float importeVenta;
 	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(idFuncion);
 	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
 	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
-
-	valorSalaAuxiliar = funcionAux.getSala().getPrecioAsiento();
-	entradas = funcionAux.getContadorEntrada();
-	importeVenta = valorSalaAuxiliar * entradas;
-	ventaAux=Venta(idVenta, entradas, funcionAux, importeVenta);
-	archivoVenta.grabarRegistro(ventaAux);
-	funcionAux.setContadorEntrada(0);
-	archivoFunciones.grabarRegistro(funcionAux, posAuxiliar);
-
-	std::cout << "Venta realizada con exito" << std::endl;
+	importeVenta = funcionAux.getSala().getPrecioAsiento();
+	if (archivoDiagrama.reservarAsientoEnRegistro(posAuxiliar, fila, columna)) {
+		ventaAux=Venta(idVenta, funcionAux, importeVenta);
+		archivoVenta.grabarRegistro(ventaAux);
+		//std::cout << "Venta realizada con exito" << std::endl;
+	}
 }

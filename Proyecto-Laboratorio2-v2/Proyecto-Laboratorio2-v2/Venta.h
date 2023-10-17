@@ -3,12 +3,12 @@
 
 class Venta{
 private:
-	int _idVenta, _cantidadEntradas;
+	int _idVenta;
 	Funcion _funcion;
 	float _importe;
 public:
 	Venta();
-	Venta(int idVenta, int cantidadEntradas, Funcion funcion, float importe);
+	Venta(int idVenta, Funcion funcion, float importe);
 	int getIdVenta();
 	void setIdVenta(int idVenta);
 	void mostrarVenta();
