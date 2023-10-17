@@ -30,7 +30,6 @@ void Administrador::cargarPeliculas() {
 	archiPeliculas.grabarRegistro(pelicula);
 
 }
-
 void Administrador::verPeliculasCargadas() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
 	Pelicula registro;
@@ -101,7 +100,6 @@ void Administrador::verSalasCargadas() {
 		}
 	}
 }
-
 bool Administrador::modificarSalaEnRegistro(int nroSala) {
 	ArchivoSalas archivoSalas("sala.dat");
 	Sala sala;
@@ -157,7 +155,6 @@ bool Administrador::darDeBajaSala() {
 		}
 	}
 }
-
 Pelicula Administrador::seleccionarPelicula() {
 
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
@@ -206,7 +203,6 @@ Pelicula Administrador::buscarPeliculaxID(int valorBuscado) {
 	}
 
 }
-
 bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 	ArchivoFunciones archivoFunciones("funcion.dat");
 	ArchivoPeliculas archivoPeliculas("pelicula.dat");
@@ -337,26 +333,9 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 	}
 	return pudoEscribir;
 }
-
 void Administrador::verVentas()
 {
 }
-
-void Administrador::verFuncionesCargadasEntradas()
-{
-	darDeBajaFuncionxSalaOxPelicula();
-	ArchivoFunciones archiFunciones("funcion.dat");
-	Funcion registro;
-	int cantidadRegistros = archiFunciones.contarRegistros();
-	for (int i = 0; i < cantidadRegistros; i++) {
-		registro = archiFunciones.leerRegistro(i);
-		if (registro.getEstado()&&registro.getContadorEntrada()>0) {
-			registro.mostrarDetallesEntradas();
-			std::cout << std::endl;
-		}
-	}
-}
-
 bool Administrador::verificarEstadoPeliculas(int idPelicula)
 {
 	ArchivoPeliculas archivoPeliculas("pelicula.dat");
@@ -376,7 +355,6 @@ bool Administrador::verificarEstadoPeliculas(int idPelicula)
 	}
 
 }
-
 bool Administrador::verificarEstadoSalas(int idSala)
 {
 	ArchivoSalas archivoSalas("sala.dat");
@@ -396,7 +374,6 @@ bool Administrador::verificarEstadoSalas(int idSala)
 	}
 
 }
-
 void Administrador::darDeBajaFuncionxSalaOxPelicula()
 {
 	ArchivoFunciones archivoFunciones("funcion.dat");
@@ -433,7 +410,6 @@ void Administrador::darDeBajaFuncionxSalaOxPelicula()
 	}
 
 }
-
 bool Administrador::darDeBajaFuncion(int idFuncion)
 {
 	ArchivoFunciones archivoFunciones("funcion.dat");
@@ -465,7 +441,6 @@ bool Administrador::darDeBajaFuncion(int idFuncion)
 
 
 }
-
 Sala Administrador::seleccionarSala() {
 	ArchivoSalas archiSalas("sala.dat");
 	Sala registro;
@@ -501,7 +476,6 @@ Sala Administrador::seleccionarSala() {
 	} while (contador == cantidadRegistros);
 
 }
-
 Sala Administrador::buscarSalaxID(int valorBuscado) {
 	ArchivoSalas archivoSalas("sala.dat");
 	Sala sala;
@@ -571,7 +545,6 @@ void Administrador::cargarFunciones() {
 	funcion = Funcion(pelicula, sala, fechaHoraFuncion, idFuncion);
 	archiFunciones.grabarRegistro(funcion);
 }
-
 void Administrador::verFuncionesCargadas() {
 	darDeBajaFuncionxSalaOxPelicula();
 	ArchivoFunciones archiFunciones("funcion.dat");
@@ -588,11 +561,9 @@ void Administrador::verFuncionesCargadas() {
 	}
 
 }
-
 Administrador::Administrador() : Persona() {
 
 }
-
 Administrador::Administrador(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia) : Persona(legajo, cargo, nombre, apellido, usuario, contrasenia) {
 
 }
@@ -689,7 +660,6 @@ void Administrador::menuPeliculas() {
 		}
 	} while (op != 0);
 }
-
 void Administrador::menuSalas() {
 	int op = 1, y = 0;
 
@@ -761,7 +731,6 @@ void Administrador::menuSalas() {
 		}
 	} while (op != 0);
 }
-
 void Administrador::menuFunciones() {
 	ArchivoFunciones archiFunciones("funcion.dat");
 	int op = 1, y = 0;
@@ -850,7 +819,6 @@ void Administrador::menuFunciones() {
 
 
 }
-
 void Administrador::menuBackUp() {
 	int op = 1, y = 0;
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
@@ -939,7 +907,6 @@ void Administrador::menuBackUp() {
 		}
 	} while (op != 0);
 }
-
 bool Administrador::confirmarAccion()
 {
 	char siONo;

@@ -21,12 +21,9 @@ public:
 	int getIdFuncion() const;
 	void setEstado(bool estado);
 	bool getEstado() const;
-	void setContadorEntrada(int contadorEntrada);
-	int getContadorEntrada() const;
 	Funcion();
 	Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, int idFuncion);
 	void mostrarDetalles();
-	void mostrarDetallesEntradas();
 
 
 

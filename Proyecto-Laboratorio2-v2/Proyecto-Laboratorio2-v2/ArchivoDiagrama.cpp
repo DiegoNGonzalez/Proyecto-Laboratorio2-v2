@@ -66,7 +66,7 @@ void ArchivoDiagrama::mostrarRegistro(int pos)
 {
 	DiagramaSala diagrama;
 	diagrama = leerRegistro(pos);
-	if (diagrama.getEstado() == true) {
+	if (diagrama.getEstado()) {
 		diagrama.mostrarSala();
 	}
 	else {

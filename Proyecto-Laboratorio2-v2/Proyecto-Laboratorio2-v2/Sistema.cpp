@@ -214,9 +214,9 @@ void Sistema::mostrarMenuVendedor() {
 
 		showItem(" FUNCIONES CARGADAS ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
 		showItem(" MOSTRAR SALA, SE NECESITA ID DE FUNCION. ", 50, 11, y == 1);
-		showItem(" RESERVAR ASIENTOS ", 50, 12, y == 2);
-		showItem(" CANCELAR ASIENTOS ", 50, 13, y == 3);
-		showItem(" VENTA DE ASIENTOS ", 50, 14, y == 4);
+		showItem(" VENTA DE ASIENTOS ", 50, 12, y == 2);
+		showItem(" CANCELAR VENTA DE ASIENTOS ", 50, 13, y == 3);
+		showItem(" VER VENTAS ", 50, 14, y == 4);
 		showItem(" CERRAR SESION ", 50, 15, y == 5);
 		showItem("  SALIR   ", 50, 16, y == 6);
 
@@ -243,7 +243,7 @@ void Sistema::mostrarMenuVendedor() {
 			{
 			case 0: {
 				system("cls");
-				_admin1.verFuncionesCargadasEntradas();
+				_admin1.verFuncionesCargadas();
 				system("pause");
 				system("cls");
 				break;
@@ -265,7 +265,7 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 2: {
 				system("cls");
-				std::cout << "Ingrese el id de la funcion para la cual quiere reservar un asiento: ";
+				std::cout << "Ingrese el id de la funcion para la cual quiere vender un asiento: ";
 				std::cin >> aux;
 				int pos = archiDiagrama.buscarPosDiagramaxID(aux);
 				std::cout << "Ingrese fila: ";
@@ -275,11 +275,6 @@ void Sistema::mostrarMenuVendedor() {
 				if (pos != -1) {
 					_vendedor1.venderEntradas(aux, fila, columna);
 					std::cout << std::endl;
-					int cantRegistrosVentas= archiVenta.contarRegistros();
-					for (int i = 0; i < cantRegistrosVentas; i++) {
-						Venta ventaAux = archiVenta.leerRegistro(i);
-						ventaAux.mostrarVenta();
-					}
 				}
 				else {
 					system("pause");
@@ -290,7 +285,7 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 3: {
 				system("cls");
-				std::cout << "Ingrese el id de la funcion para la cual quiere cancelar un asiento: ";
+				std::cout << "Ingrese el id de la funcion para la cual quiere cancelar la venta de un asiento: ";
 				std::cin >> aux;
 				int pos = archiDiagrama.buscarPosDiagramaxID(aux);
 				std::cout << "Ingrese fila: ";
@@ -301,7 +296,6 @@ void Sistema::mostrarMenuVendedor() {
 					if (archiDiagrama.cancelarReservaEnRegistro(pos, fila, columna)) {
 						int posFuncion = archiFunciones.buscarPosFuncionxID(aux);
 						funcionAuxiliar = archiFunciones.buscarFuncionxID(aux);
-						funcionAuxiliar.setContadorEntrada(funcionAuxiliar.getContadorEntrada() - 1);
 						archiFunciones.grabarRegistro(funcionAuxiliar, posFuncion);
 					}
 				}
@@ -313,13 +307,17 @@ void Sistema::mostrarMenuVendedor() {
 
 				break;
 			}
-			case 4:
+			case 4: {
 				system("cls");
-				_admin1.verFuncionesCargadasEntradas();
-				//_vendedor1.venderEntradas();
+				int cantRegistrosVentas = archiVenta.contarRegistros();
+				for (int i = 0; i < cantRegistrosVentas; i++) {
+					Venta ventaAux = archiVenta.leerRegistro(i);
+					ventaAux.mostrarVenta();
+				}
 				system("pause");
 				system("cls");
 				break;
+			}
 			case 5:
 				login(_admin1, _vendedor1);
 				op = 0;
