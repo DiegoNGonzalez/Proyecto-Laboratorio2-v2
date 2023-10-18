@@ -1,19 +1,19 @@
-#include "ArchivoVenta.h"
+#include "ArchivoEntrada.h"
 
-Venta ArchivoVenta::leerRegistro(int posicion) {
-	Venta venta;
+Entrada ArchivoEntrada::leerRegistro(int posicion) {
+	Entrada entrada;
 	FILE* p;
 	p = fopen(_nombre, "rb");
 	if (p == NULL) {
 		std::cout << "Error al tratar de leer" << std::endl;
-		return venta;
+		return entrada;
 	}
-	fseek(p, posicion * sizeof(Venta), SEEK_SET);
-	fread(&venta, sizeof(Venta), 1, p);
+	fseek(p, posicion * sizeof(Entrada), SEEK_SET);
+	fread(&entrada, sizeof(Entrada), 1, p);
 	fclose(p);
-	return venta;
+	return entrada;
 }
-int ArchivoVenta::contarRegistros() {
+int ArchivoEntrada::contarRegistros() {
 	FILE* p;
 	p = fopen(_nombre, "rb");
 	if (p == NULL) {
@@ -23,35 +23,35 @@ int ArchivoVenta::contarRegistros() {
 	fseek(p, 0, 2);
 	int tam = ftell(p);
 	fclose(p);
-	return tam / sizeof(Venta);
+	return tam / sizeof(Entrada);
 };
-bool ArchivoVenta::grabarRegistro(Venta venta) {
+bool ArchivoEntrada::grabarRegistro(Entrada entrada) {
 	FILE* p;
 	p = fopen(_nombre, "ab");
 	if (p == NULL) {
 		std::cout << "Error al grabar registro" << std::endl;
 		return false;
 	};
-	int escribio = fwrite(&venta, sizeof Venta, 1, p);
+	int escribio = fwrite(&entrada, sizeof Entrada, 1, p);
 	fclose(p);
 	return escribio;
 };
 
-bool ArchivoVenta::grabarRegistro(Venta venta, int posicion) {
+bool ArchivoEntrada::grabarRegistro(Entrada entrada, int posicion) {
 	bool pudoEscribir;
 	FILE* p = fopen(_nombre, "rb+");
 	if (p == nullptr) {
 		return false;
 	}
-	fseek(p, posicion * sizeof(Venta), SEEK_SET);
-	pudoEscribir = fwrite(&venta, sizeof(Venta), 1, p);
+	fseek(p, posicion * sizeof(Entrada), SEEK_SET);
+	pudoEscribir = fwrite(&entrada, sizeof(Entrada), 1, p);
 	fclose(p);
 	return pudoEscribir;
 }
-bool ArchivoVenta::generarBackUp() {
+bool ArchivoEntrada::generarBackUp() {
 	FILE* p;
 	FILE* pBackUp;
-	Venta venta;
+	Entrada entrada;
 	bool pudoEscribir = false;
 	p = fopen(_nombre, "rb");
 	pBackUp = fopen("backUp/VentaBKP.dat", "wb");
@@ -59,8 +59,8 @@ bool ArchivoVenta::generarBackUp() {
 		std::cout << "Error al generar back up" << std::endl;
 		return false;
 	}
-	while (fread(&venta, sizeof Venta, 1, p) == 1) {
-		fwrite(&venta, sizeof Venta, 1, pBackUp);
+	while (fread(&entrada, sizeof Entrada, 1, p) == 1) {
+		fwrite(&entrada, sizeof Entrada, 1, pBackUp);
 	}
 	fclose(p);
 	fclose(pBackUp);
@@ -85,10 +85,10 @@ bool ArchivoVenta::generarBackUp() {
 	return pudoEscribir;
 }
 
-bool ArchivoVenta::restaurarBackUp() {
+bool ArchivoEntrada::restaurarBackUp() {
 	FILE* p;
 	FILE* pBackUp;
-	Venta venta;
+	Entrada entrada;
 	bool pudoEscribir = false;
 	p = fopen(_nombre, "wb");
 	pBackUp = fopen("backUp/VentaBKP.dat", "rb");
@@ -96,8 +96,8 @@ bool ArchivoVenta::restaurarBackUp() {
 		std::cout << "Error al restaurar back up" << std::endl;
 		return false;
 	}
-	while (fread(&venta, sizeof Venta, 1, pBackUp) == 1) {
-		fwrite(&venta, sizeof Venta, 1, p);
+	while (fread(&entrada, sizeof Entrada, 1, pBackUp) == 1) {
+		fwrite(&entrada, sizeof Entrada, 1, p);
 	}
 	fclose(p);
 	fclose(pBackUp);
@@ -122,7 +122,7 @@ bool ArchivoVenta::restaurarBackUp() {
 	return pudoEscribir;
 }
 
-int ArchivoVenta::validarId() {
+int ArchivoEntrada::validarId() {
 	FILE* p;
 	int idMax = 0, contarReg;
 
@@ -132,9 +132,9 @@ int ArchivoVenta::validarId() {
 	}
 	contarReg = contarRegistros();
 	for (int i = 0; i < contarReg; i++) {
-		Venta venta = leerRegistro(i);
-		if (venta.getIdVenta() > idMax) {
-			idMax = venta.getIdVenta();
+		Entrada venta = leerRegistro(i);
+		if (venta.getidEntrada() > idMax) {
+			idMax = venta.getidEntrada();
 		}
 	}
 	fclose(p);
@@ -142,13 +142,13 @@ int ArchivoVenta::validarId() {
 
 }
 
-int ArchivoVenta::buscarPosVentaxID(int valorBuscado) {
-	Venta venta;
+int ArchivoEntrada::buscarPosEntradaxID(int valorBuscado) {
+	Entrada venta;
 	int cantidadRegistros = contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++)
 	{
 		venta = leerRegistro(i);
-		if (venta.getIdVenta() == valorBuscado) {
+		if (venta.getidEntrada() == valorBuscado) {
 			return i;
 		}
 	}
@@ -156,9 +156,9 @@ int ArchivoVenta::buscarPosVentaxID(int valorBuscado) {
 	return -1;
 }
 
-Venta ArchivoVenta::buscarVentaxID(int valorBuscado) {
-	Venta venta;
-	int pos = buscarPosVentaxID(valorBuscado);
+Entrada ArchivoEntrada::buscarEntradaxID(int valorBuscado) {
+	Entrada venta;
+	int pos = buscarPosEntradaxID(valorBuscado);
 	if (pos >= 0) {
 		venta = leerRegistro(pos);
 		return venta;
@@ -169,14 +169,14 @@ Venta ArchivoVenta::buscarVentaxID(int valorBuscado) {
 	}
 }
 
-int ArchivoVenta::buscarPosVentaxAsientoVendido(int idFuncion, int fila, int columna)
+int ArchivoEntrada::buscarPosVentaxAsientoVendido(int idFuncion, int fila, int columna)
 {
-	Venta venta;
+	Entrada entrada;
 	int cantidadRegistros = contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++)
 	{
-		venta = leerRegistro(i);
-		if (venta.getFuncion().getIdFuncion() == idFuncion && venta.getFilaAsiento() == fila && venta.getColumnaAsiento() == columna) {
+		entrada = leerRegistro(i);
+		if (entrada.getFuncion().getIdFuncion() == idFuncion && entrada.getFilaAsiento() == fila && entrada.getColumnaAsiento() == columna) {
 			return i;
 		}
 	}
@@ -184,9 +184,9 @@ int ArchivoVenta::buscarPosVentaxAsientoVendido(int idFuncion, int fila, int col
 	return -1;
 }
 
-Venta ArchivoVenta::buscarVentaxAsientoVendido(int idFuncion, int fila, int columna)
+Entrada ArchivoEntrada::buscarVentaxAsientoVendido(int idFuncion, int fila, int columna)
 {
-	Venta venta;
+	Entrada venta;
 	int pos = buscarPosVentaxAsientoVendido(idFuncion, fila, columna);
 	if (pos >= 0) {
 		venta = leerRegistro(pos);
@@ -198,9 +198,9 @@ Venta ArchivoVenta::buscarVentaxAsientoVendido(int idFuncion, int fila, int colu
 	}
 }
 
-void ArchivoVenta::verVentasCargadas()
+void ArchivoEntrada::verVentasCargadas()
 {
-	Venta venta;
+	Entrada venta;
 	int contador = 0;
 	int cantidadRegistros = contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++)

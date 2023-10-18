@@ -12,11 +12,11 @@ Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::strin
 void Vendedor::venderEntradas(int idFuncion) {
 	ArchivoDiagrama archivoDiagrama("diagrama.dat");
 	ArchivoFunciones archivoFunciones("funcion.dat");
-	ArchivoVenta archivoVenta("venta.dat");
+	ArchivoEntrada archivoVenta("venta.dat");
 	DiagramaSala diagramaAux;
 	Funcion funcionAux;
-	Venta ventaAux;
-	int idVenta=archivoVenta.validarId();
+	Entrada ventaAux;
+	int idEntrada=archivoVenta.validarId();
 	float importeVenta;
 	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(idFuncion);
 	int fila, columna;
@@ -28,24 +28,24 @@ void Vendedor::venderEntradas(int idFuncion) {
 	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
 	importeVenta = funcionAux.getSala().getPrecioAsiento();
 	if (archivoDiagrama.reservarAsientoEnRegistro(posAuxiliar, fila, columna)) {
-		ventaAux=Venta(idVenta, funcionAux, importeVenta, fila, columna);
+		ventaAux=Entrada(idEntrada, funcionAux, importeVenta, fila, columna);
 		archivoVenta.grabarRegistro(ventaAux);
 		//std::cout << "Venta realizada con exito" << std::endl;
 	}
 }
 
-void Vendedor::cancelarVenta(int idVenta)
+void Vendedor::cancelarVenta(int idEntrada)
 {
 	ArchivoDiagrama archivoDiagrama("diagrama.dat");
 	ArchivoFunciones archivoFunciones("funcion.dat");
-	ArchivoVenta archivoVenta("venta.dat");
+	ArchivoEntrada archivoVenta("venta.dat");
 	DiagramaSala diagramaAux;
 	Funcion funcionAux;
-	Venta ventaAux;
-	//int idVenta = archivoVenta.validarId();
+	Entrada ventaAux;
+	//int idEntrada = archivoVenta.validarId();
 	//float importeVenta;
-	int posVenta= archivoVenta.buscarPosVentaxID(idVenta);
-	ventaAux = archivoVenta.buscarVentaxID(idVenta);
+	int posVenta= archivoVenta.buscarPosEntradaxID(idEntrada);
+	ventaAux = archivoVenta.buscarEntradaxID(idEntrada);
 	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(ventaAux.getFuncion().getIdFuncion());
 	int fila= ventaAux.getFilaAsiento(), columna= ventaAux.getColumnaAsiento();
 	/*std::cout << "Ingrese la fila del asiento: ";
@@ -56,7 +56,7 @@ void Vendedor::cancelarVenta(int idVenta)
 	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
 	//importeVenta = funcionAux.getSala().getPrecioAsiento();
 	if (archivoDiagrama.cancelarReservaEnRegistro(posAuxiliar, fila, columna)) {
-		//ventaAux = Venta(idVenta, funcionAux, importeVenta);
+		//ventaAux = Venta(idEntrada, funcionAux, importeVenta);
 		ventaAux.setEstado(false);
 		archivoVenta.grabarRegistro(ventaAux, posVenta);
 		//std::cout << "Venta realizada con exito" << std::endl;

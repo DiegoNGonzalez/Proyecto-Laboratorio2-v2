@@ -1,5 +1,5 @@
 #include "ArchivoFunciones.h"
-#include <iostream>
+//#include <iostream>
 
 Funcion ArchivoFunciones::leerRegistro(int posicion) {
 	Funcion funcion;

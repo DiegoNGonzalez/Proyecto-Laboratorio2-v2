@@ -108,12 +108,12 @@ void showItem(const char* text, int posx, int posy, bool selected) {
 	if (selected) {
 		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
 		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
-		std::cout << ">>" << "  " << text << "  " << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
+		std::cout << ">>" << "  " << text << "  " <<"<<" << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
 	}
 	else {
 		rlutil::setBackgroundColor(rlutil::COLOR::BLACK);
 		rlutil::locate(posx - 3, posy);
-		std::cout << "   " << text << "   " << std::endl; // si no esta seleccionado, imprime el texto sin las flechitas
+		std::cout << "   " << text << "   " << "  " << std::endl; // si no esta seleccionado, imprime el texto sin las flechitas
 	}
 	rlutil::setBackgroundColor(rlutil::COLOR::BLACK); // cuando llega a la ultima opcion, cambia el color del cursor al color normal
 }
@@ -203,10 +203,10 @@ void Sistema::mostrarMenuVendedor() {
 	DiagramaSala diagramaSala;
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
 	ArchivoFunciones archiFunciones("funcion.dat");
-	ArchivoVenta archiVenta("venta.dat");
+	ArchivoEntrada archiVenta("venta.dat");
 	int op = 1, y = 0;
 	Funcion funcionAuxiliar;
-	int idFuncion, idVenta;
+	int idFuncion, idEntrada;
 	do {
 		rlutil::setConsoleTitle("MENU VENDEDOR CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
@@ -283,10 +283,10 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				archiVenta.verVentasCargadas();
 				std::cout << "Ingrese el id de la venta a cancelar: ";
-				std::cin >> idVenta;
-				int pos = archiVenta.buscarPosVentaxID(idVenta);
+				std::cin >> idEntrada;
+				int pos = archiVenta.buscarPosEntradaxID(idEntrada);
 				if (pos != -1) {
-					_vendedor1.cancelarVenta(idVenta);
+					_vendedor1.cancelarVenta(idEntrada);
 				}
 				else {
 					system("pause");

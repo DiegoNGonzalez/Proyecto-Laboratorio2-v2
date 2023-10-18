@@ -63,10 +63,10 @@
     <ClCompile Include="ArchivoDiagrama.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Venta.cpp">
+    <ClCompile Include="Entrada.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ArchivoVenta.cpp">
+    <ClCompile Include="ArchivoEntrada.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,10 +119,10 @@
     <ClInclude Include="ArchivoDiagrama.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Venta.h">
+    <ClInclude Include="Entrada.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ArchivoVenta.h">
+    <ClInclude Include="ArchivoEntrada.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

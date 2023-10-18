@@ -1,8 +1,8 @@
-#include "Venta.h"
+#include "Entrada.h"
 
-void Venta::mostrarVenta()
+void Entrada::mostrarVenta()
 {
-	std::cout << "ID Venta: " << _idVenta << std::endl;
+	std::cout << "ID Venta: " << _idEntrada << std::endl;
 	std::cout << "Importe: $" << _importe << std::endl;
 	std::cout << "Fecha y hora de la venta" << std::endl;
 	_fechaHora.mostrarFechaHora();
@@ -15,13 +15,13 @@ void Venta::mostrarVenta()
 	//_funcion.mostrarDetalles();
 }
 
-Venta::Venta()
+Entrada::Entrada()
 {
 }
 
-Venta::Venta(int idVenta, Funcion funcion, float importe, int fila, int columna)
+Entrada::Entrada(int idEntrada, Funcion funcion, float importe, int fila, int columna)
 {
-	_idVenta = idVenta;
+	_idEntrada = idEntrada;
 	_funcion = funcion;
 	_importe = importe;
 	_estado = true;
@@ -30,72 +30,72 @@ Venta::Venta(int idVenta, Funcion funcion, float importe, int fila, int columna)
 	_columnaAsiento = columna;
 }
 
-int Venta::getIdVenta()
+int Entrada::getidEntrada()
 {
-	return _idVenta;
+	return _idEntrada;
 }
 
-void Venta::setIdVenta(int idVenta)
+void Entrada::setidEntrada(int idEntrada)
 {
-	_idVenta = idVenta;
+	_idEntrada = idEntrada;
 }
 
-Funcion Venta::getFuncion()
+Funcion Entrada::getFuncion()
 {
 	return _funcion;
 }
 
-float Venta::getImporte()
+float Entrada::getImporte()
 {
 	return _importe;
 }
 
-void Venta::setFuncion(Funcion funcion)
+void Entrada::setFuncion(Funcion funcion)
 {
 	_funcion = funcion;
 }
 
-void Venta::setImporte(float importe)
+void Entrada::setImporte(float importe)
 {
 	_importe = importe;
 }
 
-bool Venta::getEstado()
+bool Entrada::getEstado()
 {
 	return _estado;
 }
 
-void Venta::setEstado(bool estado)
+void Entrada::setEstado(bool estado)
 {
 		_estado = estado;
 }
 
-FechaHorario Venta::getFechaHora()
+FechaHorario Entrada::getFechaHora()
 {
 	return _fechaHora;
 }
 
-void Venta::setFechaHora(FechaHorario fechaHora)
+void Entrada::setFechaHora(FechaHorario fechaHora)
 {
 		_fechaHora = fechaHora;
 }
 
-int Venta::getFilaAsiento()
+int Entrada::getFilaAsiento()
 {
 	return _filaAsiento ;
 }
 
-void Venta::setFilaAsiento(int filaAsiento)
+void Entrada::setFilaAsiento(int filaAsiento)
 {
 	_filaAsiento = filaAsiento;
 }
 
-int Venta::getColumnaAsiento()
+int Entrada::getColumnaAsiento()
 {
 	return _columnaAsiento ;
 }
 
-void Venta::setColumnaAsiento(int columnaAsiento)
+void Entrada::setColumnaAsiento(int columnaAsiento)
 {
 	_columnaAsiento = columnaAsiento;
 }

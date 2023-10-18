@@ -1,8 +1,8 @@
 #pragma once
-#include <Windows.h>
+//#include <Windows.h>
 #include <cstring>
 #include "Funcion.h"
-#include "rlutil.h"
+//#include "rlutil.h"
 #include "ArchivoPeliculas.h"
 #include "ArchivoSalas.h"
 #include "ArchivoDiagrama.h"

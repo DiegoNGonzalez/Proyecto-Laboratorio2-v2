@@ -1,16 +1,15 @@
 #pragma once
 #include <Windows.h>
-#include "rlutil.h"
+//#include "rlutil.h"
 #include "Persona.h"
-#include "Funcion.h"
-#include "Pelicula.h"
-#include "Sala.h"
-#include <vector>
+//#include "Funcion.h"
+//#include "Pelicula.h"
+//#include "Sala.h"
 #include "ArchivoFunciones.h"
-#include "ArchivoPeliculas.h"
-#include "ArchivoSalas.h"
-#include "ArchivoDiagrama.h"
-#include "DiagramaSala.h"
+//#include "ArchivoPeliculas.h"
+//#include "ArchivoSalas.h"
+//#include "ArchivoDiagrama.h"
+//#include "DiagramaSala.h"
 
 
 class Administrador : public Persona

@@ -1,4 +1,15 @@
 #include "Administrador.h"
+//#include <Windows.h>
+//#include "rlutil.h"
+//#include "Persona.h"
+//#include "Funcion.h"
+//#include "Pelicula.h"
+//#include "Sala.h"
+//#include "ArchivoFunciones.h"
+//#include "ArchivoPeliculas.h"
+//#include "ArchivoSalas.h"
+//#include "ArchivoDiagrama.h"
+//#include "DiagramaSala.h"
 #include <iostream>
 void Administrador::cargarPeliculas() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
@@ -590,12 +601,12 @@ void showItem1(const char* text, int posx, int posy, bool selected) {
 	if (selected) {
 		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
 		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
-		std::cout << ">>" << "  " << text << "  " << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
+		std::cout << ">>" << "  " << text << "  " << "<<" << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
 	}
 	else {
 		rlutil::setBackgroundColor(rlutil::COLOR::BLACK);
 		rlutil::locate(posx - 3, posy);
-		std::cout << "   " << text << "   " << std::endl; // si no esta seleccionado, imprime el texto sin las flechitas
+		std::cout << "   " << text << "   " << "   " << std::endl; // si no esta seleccionado, imprime el texto sin las flechitas
 	}
 	rlutil::setBackgroundColor(rlutil::COLOR::BLACK); // cuando llega a la ultima opcion, cambia el color del cursor al color normal
 }

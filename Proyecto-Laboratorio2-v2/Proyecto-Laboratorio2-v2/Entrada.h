@@ -1,9 +1,9 @@
 #pragma once
 #include "ArchivoFunciones.h"
 
-class Venta{
+class Entrada{
 private:
-	int _idVenta;
+	int _idEntrada;
 	Funcion _funcion;
 	float _importe;
 	bool _estado;
@@ -11,10 +11,10 @@ private:
 	int _filaAsiento;
 	int _columnaAsiento;
 public:
-	Venta();
-	Venta(int idVenta, Funcion funcion, float importe, int fila,int columna);
-	int getIdVenta();
-	void setIdVenta(int idVenta);
+	Entrada();
+	Entrada(int idEntrada, Funcion funcion, float importe, int fila,int columna);
+	int getidEntrada();
+	void setidEntrada(int idEntrada);
 	void mostrarVenta();
 	Funcion getFuncion();
 	float getImporte();
