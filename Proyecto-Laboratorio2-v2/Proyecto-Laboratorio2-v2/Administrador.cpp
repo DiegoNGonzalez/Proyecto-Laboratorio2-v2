@@ -33,13 +33,19 @@ void Administrador::cargarPeliculas() {
 void Administrador::verPeliculasCargadas() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
 	Pelicula registro;
+	int contador=0;
 	int cantidadRegistros = archiPeliculas.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiPeliculas.leerRegistro(i);
 		if (registro.getEstado()) {
 			registro.mostrarDetalles();
 			std::cout << std::endl;
+			contador++;
 		}
+	}
+	if (contador == 0) {
+		system("cls");
+		std::cout << "No hay peliculas cargadas" << std::endl;
 	}
 
 }
@@ -91,13 +97,19 @@ void Administrador::cargarSalas() {
 void Administrador::verSalasCargadas() {
 	ArchivoSalas archiSalas("sala.dat");
 	Sala registro;
+	int contador = 0;
 	int cantidadRegistros = archiSalas.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiSalas.leerRegistro(i);
 		if (registro.getEstado()) {
 			registro.mostrarDetalles();
 			std::cout << std::endl;
+			contador++;
 		}
+	}
+	if (contador == 0) {
+		system ("cls");
+		std::cout << "No hay salas cargadas" << std::endl;
 	}
 }
 bool Administrador::modificarSalaEnRegistro(int nroSala) {
@@ -549,6 +561,7 @@ void Administrador::verFuncionesCargadas() {
 	darDeBajaFuncionxSalaOxPelicula();
 	ArchivoFunciones archiFunciones("funcion.dat");
 	Funcion registro;
+	int contador = 0;
 	int cantidadRegistros = archiFunciones.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiFunciones.leerRegistro(i);
@@ -556,8 +569,13 @@ void Administrador::verFuncionesCargadas() {
 
 			registro.mostrarDetalles();
 			std::cout << std::endl;
+			contador++;
 		}
 
+	}
+	if (contador == 0) {
+		system("cls");
+		std::cout << "No hay funciones cargadas" << std::endl;
 	}
 
 }
@@ -572,7 +590,7 @@ void showItem1(const char* text, int posx, int posy, bool selected) {
 	if (selected) {
 		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
 		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
-		std::cout << (char)175 << "  " << text << "  " << (char)174 << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
+		std::cout << ">>" << "  " << text << "  " << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
 	}
 	else {
 		rlutil::setBackgroundColor(rlutil::COLOR::BLACK);

@@ -37,11 +37,11 @@ bool DiagramaSala::cancelarReserva(int fila, int columna) {
 	}
 
 	if (salaDeCine[fila - 1][columna - 1] == 0) {
-		std::cout << "El asiento no está reservado.\n";
+		std::cout << "El asiento no está vendido.\n";
 		return false;
 	}
 
-	std::cout << "¡Reserva cancelada con éxito!\n";
+	std::cout << "¡Venta cancelada con éxito!\n";
 	return true;
 }
 

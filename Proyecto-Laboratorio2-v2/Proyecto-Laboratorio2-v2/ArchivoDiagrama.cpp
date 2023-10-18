@@ -97,13 +97,13 @@ bool ArchivoDiagrama::reservarAsientoEnRegistro(int pos, int fila, int columna) 
 
 }
 
-bool ArchivoDiagrama::cancelarReservaEnRegistro(int idFuncion, int fila, int columna) {
+bool ArchivoDiagrama::cancelarReservaEnRegistro(int pos, int fila, int columna) {
 	DiagramaSala diagrama;
-	diagrama = leerRegistro(idFuncion);
+	diagrama = leerRegistro(pos);
 	if (diagrama.getEstado()) {
 		if (diagrama.cancelarReserva(fila, columna)) {
 			diagrama.setSalaDeCine(fila, columna, 0);
-			grabarRegistro(diagrama, idFuncion);
+			grabarRegistro(diagrama, pos);
 			return true;
 		}
 		else {

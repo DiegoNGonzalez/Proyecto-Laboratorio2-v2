@@ -17,5 +17,8 @@ public:
 	int validarId();
 	int buscarPosVentaxID(int valorBuscado);
 	Venta buscarVentaxID(int valorBuscado);
+	int buscarPosVentaxAsientoVendido(int idFuncion, int fila, int columna);
+	Venta buscarVentaxAsientoVendido(int idFuncion, int fila, int columna);
+	void verVentasCargadas();
 };
 

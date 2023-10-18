@@ -108,7 +108,7 @@ void showItem(const char* text, int posx, int posy, bool selected) {
 	if (selected) {
 		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
 		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
-		std::cout << (char)175 << "  " << text << "  " << (char)174 << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
+		std::cout << ">>" << "  " << text << "  " << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
 	}
 	else {
 		rlutil::setBackgroundColor(rlutil::COLOR::BLACK);
@@ -206,7 +206,7 @@ void Sistema::mostrarMenuVendedor() {
 	ArchivoVenta archiVenta("venta.dat");
 	int op = 1, y = 0;
 	Funcion funcionAuxiliar;
-	int aux, fila, columna, contadorEntradas = 0, contadorGeneralEntradas = 0;
+	int idFuncion, idVenta;
 	do {
 		rlutil::setConsoleTitle("MENU VENDEDOR CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
@@ -251,8 +251,8 @@ void Sistema::mostrarMenuVendedor() {
 			case 1: {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion a mostrar sala:";
-				std::cin >> aux;
-				int pos = archiDiagrama.buscarPosDiagramaxID(aux);
+				std::cin >> idFuncion;
+				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					archiDiagrama.mostrarRegistro(pos);
 				}
@@ -266,14 +266,10 @@ void Sistema::mostrarMenuVendedor() {
 			case 2: {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion para la cual quiere vender un asiento: ";
-				std::cin >> aux;
-				int pos = archiDiagrama.buscarPosDiagramaxID(aux);
-				std::cout << "Ingrese fila: ";
-				std::cin >> fila;
-				std::cout << "Ingrese el nro de asiento: ";
-				std::cin >> columna;
+				std::cin >> idFuncion;
+				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
-					_vendedor1.venderEntradas(aux, fila, columna);
+					_vendedor1.venderEntradas(idFuncion);
 					std::cout << std::endl;
 				}
 				else {
@@ -285,19 +281,12 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 3: {
 				system("cls");
-				std::cout << "Ingrese el id de la funcion para la cual quiere cancelar la venta de un asiento: ";
-				std::cin >> aux;
-				int pos = archiDiagrama.buscarPosDiagramaxID(aux);
-				std::cout << "Ingrese fila: ";
-				std::cin >> fila;
-				std::cout << "Ingrese el nro de asiento: ";
-				std::cin >> columna;
+				archiVenta.verVentasCargadas();
+				std::cout << "Ingrese el id de la venta a cancelar: ";
+				std::cin >> idVenta;
+				int pos = archiVenta.buscarPosVentaxID(idVenta);
 				if (pos != -1) {
-					if (archiDiagrama.cancelarReservaEnRegistro(pos, fila, columna)) {
-						int posFuncion = archiFunciones.buscarPosFuncionxID(aux);
-						funcionAuxiliar = archiFunciones.buscarFuncionxID(aux);
-						archiFunciones.grabarRegistro(funcionAuxiliar, posFuncion);
-					}
+					_vendedor1.cancelarVenta(idVenta);
 				}
 				else {
 					system("pause");
@@ -309,11 +298,7 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 4: {
 				system("cls");
-				int cantRegistrosVentas = archiVenta.contarRegistros();
-				for (int i = 0; i < cantRegistrosVentas; i++) {
-					Venta ventaAux = archiVenta.leerRegistro(i);
-					ventaAux.mostrarVenta();
-				}
+				archiVenta.verVentasCargadas();
 				system("pause");
 				system("cls");
 				break;

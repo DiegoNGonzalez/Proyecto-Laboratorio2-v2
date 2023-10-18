@@ -168,3 +168,50 @@ Venta ArchivoVenta::buscarVentaxID(int valorBuscado) {
 		return venta;
 	}
 }
+
+int ArchivoVenta::buscarPosVentaxAsientoVendido(int idFuncion, int fila, int columna)
+{
+	Venta venta;
+	int cantidadRegistros = contarRegistros();
+	for (int i = 0; i < cantidadRegistros; i++)
+	{
+		venta = leerRegistro(i);
+		if (venta.getFuncion().getIdFuncion() == idFuncion && venta.getFilaAsiento() == fila && venta.getColumnaAsiento() == columna) {
+			return i;
+		}
+	}
+	std::cout << "No se encontro el id." << std::endl;
+	return -1;
+}
+
+Venta ArchivoVenta::buscarVentaxAsientoVendido(int idFuncion, int fila, int columna)
+{
+	Venta venta;
+	int pos = buscarPosVentaxAsientoVendido(idFuncion, fila, columna);
+	if (pos >= 0) {
+		venta = leerRegistro(pos);
+		return venta;
+	}
+	else {
+		std::cout << "No se encontro el id." << std::endl;
+		return venta;
+	}
+}
+
+void ArchivoVenta::verVentasCargadas()
+{
+	Venta venta;
+	int contador = 0;
+	int cantidadRegistros = contarRegistros();
+	for (int i = 0; i < cantidadRegistros; i++)
+	{
+		venta = leerRegistro(i);
+		if (venta.getEstado()) {
+			venta.mostrarVenta();
+			contador++;
+		}
+	}
+	if (contador == 0) {
+		std::cout << "No hay ventas cargadas" << std::endl;
+	}
+}
