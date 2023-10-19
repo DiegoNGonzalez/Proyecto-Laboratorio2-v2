@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-class Persona
+class Empleado
 {
 protected:
 	int _legajo;
@@ -23,7 +23,7 @@ public:
 	void setCargo(std::string cargo);
 	std::string getCargo() const;
 	std::string mostrarDatos();
-	Persona();
-	Persona(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
+	Empleado();
+	Empleado(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
 };
 

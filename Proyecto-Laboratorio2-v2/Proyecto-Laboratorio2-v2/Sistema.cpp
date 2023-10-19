@@ -1,10 +1,11 @@
-#include "Sistema.h"
+ï»¿#include "Sistema.h"
 #include <iostream>
 #include <filesystem>
 #include <string>
 #include "Windows.h"
 #include "rlutil.h"
 #include <conio.h>
+#include "InformesMaker.h"
 
 
 Sistema::Sistema()
@@ -42,25 +43,25 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		contrasenia = "";
 		char caracter;
 		while (true) {
-			caracter = _getch(); // Capturamos un carácter sin mostrarlo en pantalla
+			caracter = _getch(); // Capturamos un carÃ¡cter sin mostrarlo en pantalla
 
-			if (caracter == 13) // 13 es el código ASCII de la tecla Enter, terminamos cuando se presiona Enter
+			if (caracter == 13) // 13 es el cÃ³digo ASCII de la tecla Enter, terminamos cuando se presiona Enter
 				break;
-			else if (caracter == 8) { // 8 es el código ASCII de la tecla Retroceso, para borrar un carácter
+			else if (caracter == 8) { // 8 es el cÃ³digo ASCII de la tecla Retroceso, para borrar un carÃ¡cter
 				if (contrasenia.length() > 0) {
-					std::cout << "\b \b"; // Borramos el carácter en pantalla y retrocedemos el cursor
-					contrasenia.pop_back(); // Eliminamos el último carácter de la contraseña
+					std::cout << "\b \b"; // Borramos el carÃ¡cter en pantalla y retrocedemos el cursor
+					contrasenia.pop_back(); // Eliminamos el Ãºltimo carÃ¡cter de la contraseÃ±a
 				}
 			}
 			else {
-				contrasenia += caracter; // Agregamos el carácter a la contraseña
-				std::cout << "*"; // Mostramos un asterisco en lugar del carácter
+				contrasenia += caracter; // Agregamos el carÃ¡cter a la contraseÃ±a
+				std::cout << "*"; // Mostramos un asterisco en lugar del carÃ¡cter
 			}
 		}
 		if (usuario == admin1.getUsuario() && contrasenia == admin1.getContrasenia()) {
 			std::cout << std::endl;
 			rlutil::locate(50, 12);
-			std::cout << "Validando credenciales..."<< std::endl;
+			std::cout << "Validando credenciales..." << std::endl;
 			Sleep(1500);
 			rlutil::locate(50, 13);
 			std::cout << "Bienvenido " << admin1.getNombre() << " " << admin1.getApellido() << std::endl;
@@ -108,7 +109,7 @@ void showItem(const char* text, int posx, int posy, bool selected) {
 	if (selected) {
 		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
 		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
-		std::cout << ">>" << "  " << text << "  " <<"<<" << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
+		std::cout << ">>" << "  " << text << "  " << "<<" << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
 	}
 	else {
 		rlutil::setBackgroundColor(rlutil::COLOR::BLACK);
@@ -135,10 +136,11 @@ void Sistema::mostrarMenuAdmin() {
 		showItem(" Menu Salas ", 50, 11, y == 1);
 		showItem(" Menu Funciones ", 50, 12, y == 2);
 		showItem(" Menu BackUp ", 50, 13, y == 3);
-		showItem(" Cerrar sesion ", 50, 14, y == 4);
-		showItem("  SALIR   ", 50, 15, y == 5);
+		showItem(" Menu Informes", 50, 14, y == 4); // ---- NUEVO MENU INFORMES
+		showItem(" Cerrar sesion ", 50, 15, y == 5); // Pase cerrar sesion para abajo, cambia y == 4 a y ==5
+		showItem("  SALIR   ", 50, 16, y == 6); // mismo comentario linea anterior
 
-		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+		int key = rlutil::getkey(); // Lee una pulsaciÃ³n de tecla y devuelve un cÃ³digo ASCII de tecla.
 
 
 
@@ -154,7 +156,7 @@ void Sistema::mostrarMenuAdmin() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 5) y = 5;
+			if (y > 6) y = 6; // -- agregue otra opcion, por eso cambie el 5 a 6
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -180,14 +182,19 @@ void Sistema::mostrarMenuAdmin() {
 				_admin1.menuBackUp();
 				system("cls");
 				break;
-			case 4:
+			 case 4: // ---- NUEVO MENU INFORMES
+				 system("cls");
+				 mostrarMenuInformes();
+				 system("cls");
+				 break;
+			case 5: // Pase cerrar sesion para abajo, cambia case de 4 a 5
 				login(_admin1, _vendedor1);
 				op = 0;
 				break;
-			case 5: // Si el cursor esta en la opcion SALIR
+			case 6: // Si el cursor esta en la opcion SALIR		// -- tambien cambie el case de 5 a 6
 				system("cls");
 				rlutil::locate(50, 16);
-				std::cout <<"SALIENDO DEL PROGRAMA . . ."<< std::endl;
+				std::cout << "SALIENDO DEL PROGRAMA . . ." << std::endl;
 				Sleep(1000);
 				op = 0; // sale del programa
 				break;
@@ -220,7 +227,7 @@ void Sistema::mostrarMenuVendedor() {
 		showItem(" CERRAR SESION ", 50, 15, y == 5);
 		showItem("  SALIR   ", 50, 16, y == 6);
 
-		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+		int key = rlutil::getkey(); // Lee una pulsaciÃ³n de tecla y devuelve un cÃ³digo ASCII de tecla.
 
 
 
@@ -315,6 +322,87 @@ void Sistema::mostrarMenuVendedor() {
 	} while (op != 0);
 }
 
+void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
+	Pelicula pelicula;
+	ArchivoPeliculas archiPeliculas("peliculas.dat");
+	char nombrePelicula[30];
+
+	InformesMaker informesMaker;
+
+	int op = 1, y = 0;
+	do {
+		rlutil::setConsoleTitle("MENU INFORMES"); // establece el titulo de la consola
+		rlutil::hidecursor();
+
+		showItem(" 1- Total Recaudado por pelicula", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem(" 2- Total recaudado por dia ", 50, 11, y == 1);
+		showItem(" 3- Total recaudado por mes ", 50, 12, y == 2);
+		showItem(" 4- Total recaudado anual", 50, 13, y == 3);
+		showItem(" Volver", 50, 14, y == 4);
+
+		int key = rlutil::getkey();
+
+		switch (key)
+		{
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
+			break;
+		case 15: // flecha ABAJO													    
+			rlutil::locate(28, 11 + y);
+			std::cout << " " << std::endl;
+			y++;
+			if (y > 5) y = 5;
+			break;
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: { // TOTAL RECAUDADO POR PELICULA
+				system("cls");
+
+				informesMaker.mostrarInfomeRecaXPelicula(); 
+
+
+
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 1: {
+				system("cls");
+				std::cout << "Total recaudado por dia" << std::endl;
+				std::cout << "Ingrese el dia que desea saber la recaudacion" << std::endl;
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 2: {
+				system("cls");
+				std::cout << "Total recaudado por mes" << std::endl;
+				std::cout << "Ingrese el mes " << std::endl;
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3: {
+				system("cls");
+				std::cout << "Total recaudado anual" << std::endl;
+				std::cout << "Ingrese el anio" << std::endl;
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 4: 
+				op = 0; 
+				break;
+			}
+
+		}
+	} while (op != 0);
+}
+
 void Sistema::bienvenida() {
 	rlutil::setConsoleTitle("SISTEMA DE CINE");
 	rlutil::setColor(rlutil::COLOR::LIGHTBLUE);
@@ -363,23 +451,23 @@ bool Sistema::crearDirectorioBackUP() {
 
 void Sistema::creditos()
 {
-	system ("cls");
+	system("cls");
 	rlutil::setConsoleTitle("CREDITOS");
 	rlutil::setColor(rlutil::COLOR::WHITE);
 	rlutil::locate(40, 7);
-	std::cout << "DISEÑADO Y DESARROLLADO POR: " << std::endl;
+	std::cout << "DISEÃ‘ADO Y DESARROLLADO POR: " << std::endl;
 	rlutil::locate(40, 9);
 	std::cout << "-----------------------------------------" << std::endl;
 	rlutil::locate(40, 10);
 	std::cout << "Bombieri Rodrigo. " << std::endl;
 	rlutil::locate(40, 11);
-	std::cout << "Github: " <<"https://github.com/RodrigoBombieri" << std::endl;
+	std::cout << "Github: " << "https://github.com/RodrigoBombieri" << std::endl;
 	rlutil::locate(40, 12);
 	std::cout << "Linkedin: " << "https://www.linkedin.com/in/rodrigobombieri-dev/" << std::endl;
 	rlutil::locate(40, 13);
-	std::cout<<"Email: "<< "rodrigo.bombieri@alumnos.frgp.utn.edu.ar" << std::endl;
+	std::cout << "Email: " << "rodrigo.bombieri@alumnos.frgp.utn.edu.ar" << std::endl;
 	rlutil::locate(40, 14);
-	std::cout<< "-----------------------------------------"<< std::endl;
+	std::cout << "-----------------------------------------" << std::endl;
 	rlutil::locate(40, 15);
 	std::cout << "Caceres Tomas. " << std::endl;
 	rlutil::locate(40, 16);

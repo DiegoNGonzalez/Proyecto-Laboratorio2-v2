@@ -1,9 +1,9 @@
 #pragma once
-#include "Persona.h"
+#include "Empleado.h"
 #include "Funcion.h"
 #include "ArchivoFunciones.h"
 #include "ArchivoEntrada.h"
-class Vendedor : public Persona
+class Vendedor : public Empleado
 {
 private:
 public:
