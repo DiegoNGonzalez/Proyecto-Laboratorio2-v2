@@ -14,9 +14,12 @@ public:
 	Pelicula leerRegistro(int posicion);
 	int contarRegistros();
 	bool grabarRegistro(Pelicula pelicula);
+	bool grabarRegistro(Pelicula pelicula, int posicion);
 	bool generarBackUp();
 	bool restaurarBackUp();
 	int validarId();
+	int buscarPosPeliculaxID(int valorBuscado);
+	//Pelicula buscarPeliculaxID(int valorBuscado);
 
 };
 

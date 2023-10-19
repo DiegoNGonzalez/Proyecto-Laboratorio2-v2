@@ -1,5 +1,5 @@
 #include "ArchivoFunciones.h"
-#include <iostream>
+//#include <iostream>
 
 Funcion ArchivoFunciones::leerRegistro(int posicion) {
 	Funcion funcion;
@@ -38,6 +38,17 @@ bool ArchivoFunciones::grabarRegistro(Funcion funcion) {
 	return escribio;
 };
 
+bool ArchivoFunciones::grabarRegistro(Funcion funcion, int posicion) {
+	bool pudoEscribir;
+	FILE* p = fopen(_nombre, "rb+");
+	if (p == nullptr) {
+		return false;
+	}
+	fseek(p, posicion * sizeof(Funcion), SEEK_SET);
+	pudoEscribir = fwrite(&funcion, sizeof(Funcion), 1, p);
+	fclose(p);
+	return pudoEscribir;
+}
 bool ArchivoFunciones::generarBackUp() {
 	FILE* p;
 	FILE* pBackUp;
@@ -131,3 +142,31 @@ int ArchivoFunciones::validarId() {
 	return idMax + 1;
 
 }
+
+int ArchivoFunciones::buscarPosFuncionxID(int valorBuscado) {
+	Funcion funcion;
+	int cantidadRegistros = contarRegistros();
+	for (int i = 0; i < cantidadRegistros; i++)
+	{
+		funcion = leerRegistro(i);
+		if (funcion.getIdFuncion() == valorBuscado) {
+			return i;
+		}
+	}
+	std::cout << "No se encontro el id." << std::endl;
+	return -1;
+}
+
+Funcion ArchivoFunciones::buscarFuncionxID(int valorBuscado) {
+	Funcion funcion;
+	int pos = buscarPosFuncionxID(valorBuscado);
+	if (pos >= 0) {
+	funcion = leerRegistro(pos);
+	return funcion;
+	}
+	else {
+		std::cout << "No se encontro el id." << std::endl;
+		return funcion;
+	}
+}
+

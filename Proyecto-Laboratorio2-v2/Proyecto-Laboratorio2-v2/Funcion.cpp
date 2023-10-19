@@ -3,53 +3,42 @@
 #include <string>
 using namespace std;
 
-
 void Funcion::setPelicula(const Pelicula pelicula)
 {
 	_pelicula = pelicula;
 }
-
 Pelicula Funcion::getPelicula()
 {
 	return _pelicula;
 }
-
 void Funcion::setSala(Sala sala)
 {
 	_sala = sala;
 }
-
 Sala Funcion::getSala()
 {
 	return _sala;
 }
-
 void Funcion::setFechaHoraFuncion(FechaHorario fechaHoraFuncion)
 {
 	_fechaHoraFuncion = fechaHoraFuncion;
 }
-
 FechaHorario Funcion::getFechaHoraFuncion()
 {
 	return _fechaHoraFuncion;
 }
-
 void Funcion::setIdFuncion(int idFuncion)
 {
 	_idFuncion = idFuncion;
 }
-
 int Funcion::getIdFuncion() const
 {
 	return _idFuncion;
 }
-
-
 void Funcion::setEstado(bool estado)
 {
 	_estado = estado;
 }
-
 bool Funcion::getEstado() const
 {
 	return _estado;
@@ -57,7 +46,6 @@ bool Funcion::getEstado() const
 Funcion::Funcion()
 {
 }
-
 Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, int idFuncion)
 {
 	_pelicula = pelicula;
@@ -66,21 +54,14 @@ Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, in
 	_estado = true;
 	_idFuncion = idFuncion;
 }
-
 void Funcion::mostrarDetalles()
 {
-	cout << "id funcion " << _idFuncion << endl;
-	cout << "Pelicula: " << endl;
+	cout << "|||||| FUNCION  #" << _idFuncion <<" ||||||" << endl;
+	cout << endl;
 	_pelicula.mostrarDetalles();
-	cout << "Sala: " << endl;
+	cout << endl;
 	_sala.mostrarDetalles();
 	cout << "Fecha y hora de la funcion: " << endl;
 	_fechaHoraFuncion.mostrarFechaHora();
-
-
+	cout <<"||||||||||||||||||||||||||||||||||"<< endl;
 }
-
-
-
-
-

@@ -5,7 +5,7 @@
 class Funcion
 {
 private:
-	int _idFuncion;
+	int _idFuncion, _contadorEntrada;
 	Pelicula _pelicula;
 	Sala _sala;
 	FechaHorario _fechaHoraFuncion;

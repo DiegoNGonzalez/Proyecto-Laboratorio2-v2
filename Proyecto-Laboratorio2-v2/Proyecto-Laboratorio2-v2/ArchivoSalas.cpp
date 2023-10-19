@@ -36,7 +36,17 @@ bool ArchivoSalas::grabarRegistro(Sala sala) {
 	fclose(p);
 	return escribio;
 };
-
+bool ArchivoSalas::grabarRegistro(Sala sala, int posicionSala) {
+	bool pudoEscribir;
+	FILE* p = fopen(_nombre, "rb+");
+	if (p == nullptr) {
+		return false;
+	}
+	fseek(p, posicionSala * sizeof(Sala), SEEK_SET);
+	pudoEscribir = fwrite(&sala, sizeof(Sala), 1, p);
+	fclose(p);
+	return pudoEscribir;
+};
 bool ArchivoSalas::generarBackUp() {
 	FILE* p;
 	FILE* pBackUp;
@@ -129,5 +139,20 @@ int ArchivoSalas::validarId() {
 	}
 	fclose(p);
 	return idMax + 1;
+
+}
+
+int ArchivoSalas::buscarPosSalaxID(int valorBuscado) {
+	Sala sala;
+	int cantidadRegistros=contarRegistros();
+	for (int i = 0; i < cantidadRegistros; i++)
+	{
+		sala = leerRegistro(i);
+		if (sala.getIdSala() == valorBuscado) {
+			return i;
+		}
+	}
+	std::cout << "No se encontro el id." << std::endl;
+	return -1;
 
 }

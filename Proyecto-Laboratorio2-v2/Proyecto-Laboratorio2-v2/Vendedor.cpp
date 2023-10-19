@@ -9,29 +9,56 @@ Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::strin
 }
 
 
-void Vendedor::venderEntradas(int contadorEntradas, int idFuncion, int contadorGeneralEntradas) {
-	//FILE* f;
-	//f = fopen("funcion.dat", "rb");
-	//if (f == NULL) {
-	//	std::cout << "ERROR AL QUERER ABRIR EL ARCHIVO DE LAS FUNCIONES" << std::endl;
-	//}
-	//else {
-	//	// Mueve la posición del puntero en el archivo al registro correcto
-	//	fseek(f, (idFuncion - 1) * sizeof(Funcion), SEEK_SET);
+void Vendedor::venderEntradas(int idFuncion) {
+	ArchivoDiagrama archivoDiagrama("diagrama.dat");
+	ArchivoFunciones archivoFunciones("funcion.dat");
+	ArchivoEntrada archivoEntrada("venta.dat");
+	DiagramaSala diagramaAux;
+	Funcion funcionAux;
+	Entrada ventaAux;
+	int idEntrada=archivoEntrada.validarId();
+	float importeVenta;
+	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(idFuncion);
+	int fila, columna;
+	std::cout << "Ingrese la fila del asiento: ";
+	std::cin >> fila;
+	std::cout << "Ingrese el nro del asiento: ";
+	std::cin >> columna;
+	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
+	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
+	importeVenta = funcionAux.getSala().getPrecioAsiento();
+	if (archivoDiagrama.reservarAsientoEnRegistro(posAuxiliar, fila, columna)) {
+		ventaAux=Entrada(idEntrada, funcionAux, importeVenta, fila, columna);
+		archivoEntrada.grabarRegistro(ventaAux);
+		//std::cout << "Venta realizada con exito" << std::endl;
+	}
+}
 
-	//	// Lee la información de la función desde el archivo
-	//	if (fread(&vecFunciones[idFuncion - 1], sizeof(Funcion), 1, f) == 1) {
-	//		std::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
-	//		std::cout << "El total a abonar es: $" << vecFunciones[idFuncion - 1].getPrecioEntrada() * contadorEntradas << std::endl;
-	//		std::cout << "¡Entrada vendida con éxito!\n";
-	//	}
-	//	else {
-	//		std::cout << "No se pudo leer la información de la función desde el archivo." << std::endl;
-	//	}
-
-	//	contadorGeneralEntradas += contadorEntradas;
-	//	std::cout << "Cantidad de entradas vendidas en total: " << contadorGeneralEntradas << std::endl;
-	//	fclose(f);
-	//}
-	std::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
+void Vendedor::cancelarVenta(int idEntrada)
+{
+	ArchivoDiagrama archivoDiagrama("diagrama.dat");
+	ArchivoFunciones archivoFunciones("funcion.dat");
+	ArchivoEntrada archivoVenta("venta.dat");
+	DiagramaSala diagramaAux;
+	Funcion funcionAux;
+	Entrada ventaAux;
+	//int idEntrada = archivoVenta.validarId();
+	//float importeVenta;
+	int posVenta= archivoVenta.buscarPosEntradaxID(idEntrada);
+	ventaAux = archivoVenta.buscarEntradaxID(idEntrada);
+	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(ventaAux.getFuncion().getIdFuncion());
+	int fila= ventaAux.getFilaAsiento(), columna= ventaAux.getColumnaAsiento();
+	/*std::cout << "Ingrese la fila del asiento: ";
+	std::cin >> fila;
+	std::cout << "Ingrese la columna del asiento: ";
+	std::cin >> columna;*/
+	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
+	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
+	//importeVenta = funcionAux.getSala().getPrecioAsiento();
+	if (archivoDiagrama.cancelarReservaEnRegistro(posAuxiliar, fila, columna)) {
+		//ventaAux = Venta(idEntrada, funcionAux, importeVenta);
+		ventaAux.setEstado(false);
+		archivoVenta.grabarRegistro(ventaAux, posVenta);
+		//std::cout << "Venta realizada con exito" << std::endl;
+	}
 }

@@ -37,6 +37,17 @@ bool ArchivoPeliculas::grabarRegistro(Pelicula pelicula) {
 	return escribio;
 };
 
+bool ArchivoPeliculas::grabarRegistro(Pelicula diagrama, int posicion) {
+	bool pudoEscribir;
+	FILE* p = fopen(_nombre, "rb+");
+	if (p == nullptr) {
+		return false;
+	}
+	fseek(p, posicion * sizeof(Pelicula), SEEK_SET);
+	pudoEscribir = fwrite(&diagrama, sizeof(Pelicula), 1, p);
+	fclose(p);
+	return pudoEscribir;
+}
 bool ArchivoPeliculas::generarBackUp() {
 	FILE* p;
 	FILE* pBackUp;
@@ -132,3 +143,20 @@ int ArchivoPeliculas::validarId() {
 
 
 }
+
+int ArchivoPeliculas::buscarPosPeliculaxID(int valorBuscado) {
+	
+	Pelicula pelicula;
+	int cantidadRegistros=contarRegistros();
+	for (int i = 0; i < cantidadRegistros; i++)
+	{
+		pelicula = leerRegistro(i);
+		if (pelicula.getId() == valorBuscado && pelicula.getEstado() == true) {
+			return i;
+		}
+	}
+	std::cout << "No se encontro el id." << std::endl;
+	return -1;
+	
+}
+

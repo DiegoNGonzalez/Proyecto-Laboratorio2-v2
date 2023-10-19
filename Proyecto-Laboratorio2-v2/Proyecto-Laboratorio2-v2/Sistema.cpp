@@ -9,10 +9,6 @@
 
 Sistema::Sistema()
 {
-	Pelicula vecPeliculas[5];
-	Sala vecSalas[5];
-	Funcion vecFunciones[25];
-	//int matrizSalasxFuncion[10][10]={0};
 	_admin1 = Administrador(01, "DT", "Carlos", "Tevez", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
 }
@@ -64,9 +60,13 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		if (usuario == admin1.getUsuario() && contrasenia == admin1.getContrasenia()) {
 			std::cout << std::endl;
 			rlutil::locate(50, 12);
+			std::cout << "Validando credenciales..."<< std::endl;
+			Sleep(1500);
+			rlutil::locate(50, 13);
 			std::cout << "Bienvenido " << admin1.getNombre() << " " << admin1.getApellido() << std::endl;
 			login = true;
-			rlutil::locate(50, 13);
+			Sleep(1000);
+			rlutil::locate(50, 14);
 			system("pause");
 			system("cls");
 			mostrarMenuAdmin();
@@ -74,9 +74,13 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		else if (usuario == vendedor1.getUsuario() && contrasenia == vendedor1.getContrasenia()) {
 			std::cout << std::endl;
 			rlutil::locate(50, 12);
+			std::cout << "Validando credenciales..." << std::endl;
+			Sleep(1500);
+			rlutil::locate(50, 13);
 			std::cout << "Bienvenido " << vendedor1.getNombre() << " " << vendedor1.getApellido() << std::endl;
 			login = true;
-			rlutil::locate(50, 13);
+			Sleep(1000);
+			rlutil::locate(50, 14);
 			system("pause");
 			system("cls");
 			mostrarMenuVendedor();
@@ -84,9 +88,13 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		else {
 			std::cout << std::endl;
 			rlutil::locate(50, 12);
+			std::cout << "Validando credenciales..." << std::endl;
+			Sleep(1500);
+			rlutil::locate(50, 13);
 			std::cout << "Usuario o contrasenia incorrectos" << std::endl;
 			intentos++;
-			rlutil::locate(50, 13);
+			Sleep(1000);
+			rlutil::locate(50, 14);
 			system("pause");
 			system("cls");
 		}
@@ -100,12 +108,12 @@ void showItem(const char* text, int posx, int posy, bool selected) {
 	if (selected) {
 		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
 		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
-		std::cout << (char)175 << "  " << text << "  " << (char)174 << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
+		std::cout << ">>" << "  " << text << "  " <<"<<" << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
 	}
 	else {
 		rlutil::setBackgroundColor(rlutil::COLOR::BLACK);
 		rlutil::locate(posx - 3, posy);
-		std::cout << "   " << text << "   " << std::endl; // si no esta seleccionado, imprime el texto sin las flechitas
+		std::cout << "   " << text << "   " << "  " << std::endl; // si no esta seleccionado, imprime el texto sin las flechitas
 	}
 	rlutil::setBackgroundColor(rlutil::COLOR::BLACK); // cuando llega a la ultima opcion, cambia el color del cursor al color normal
 }
@@ -177,6 +185,10 @@ void Sistema::mostrarMenuAdmin() {
 				op = 0;
 				break;
 			case 5: // Si el cursor esta en la opcion SALIR
+				system("cls");
+				rlutil::locate(50, 16);
+				std::cout <<"SALIENDO DEL PROGRAMA . . ."<< std::endl;
+				Sleep(1000);
 				op = 0; // sale del programa
 				break;
 			}
@@ -190,9 +202,11 @@ void Sistema::mostrarMenuAdmin() {
 void Sistema::mostrarMenuVendedor() {
 	DiagramaSala diagramaSala;
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
+	ArchivoFunciones archiFunciones("funcion.dat");
+	ArchivoEntrada archiVenta("venta.dat");
 	int op = 1, y = 0;
-	Funcion f1;
-	int aux, fila, columna, contadorEntradas = 0, contadorGeneralEntradas = 0;
+	Funcion funcionAuxiliar;
+	int idFuncion, idEntrada;
 	do {
 		rlutil::setConsoleTitle("MENU VENDEDOR CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
@@ -200,9 +214,9 @@ void Sistema::mostrarMenuVendedor() {
 
 		showItem(" FUNCIONES CARGADAS ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
 		showItem(" MOSTRAR SALA, SE NECESITA ID DE FUNCION. ", 50, 11, y == 1);
-		showItem(" RESERVAR ASIENTOS ", 50, 12, y == 2);
-		showItem(" CANCELAR ASIENTOS ", 50, 13, y == 3);
-		showItem(" VENTA DE ASIENTOS ", 50, 14, y == 4);
+		showItem(" VENTA DE ASIENTOS ", 50, 12, y == 2);
+		showItem(" CANCELAR VENTA DE ASIENTOS ", 50, 13, y == 3);
+		showItem(" VER VENTAS ", 50, 14, y == 4);
 		showItem(" CERRAR SESION ", 50, 15, y == 5);
 		showItem("  SALIR   ", 50, 16, y == 6);
 
@@ -237,8 +251,8 @@ void Sistema::mostrarMenuVendedor() {
 			case 1: {
 				system("cls");
 				std::cout << "Ingrese el id de la funcion a mostrar sala:";
-				std::cin >> aux;
-				int pos = archiDiagrama.buscarDiagrama(aux);
+				std::cin >> idFuncion;
+				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					archiDiagrama.mostrarRegistro(pos);
 				}
@@ -251,52 +265,44 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 2: {
 				system("cls");
-				std::cout << "Ingrese el id de la funcion para la cual quiere reservar un asiento: ";
-				std::cin >> aux;
-				int pos = archiDiagrama.buscarDiagrama(aux);
-				std::cout << "Ingrese fila: ";
-				std::cin >> fila;
-				std::cout << "Ingrese el nro de asiento: ";
-				std::cin >> columna;
+				std::cout << "Ingrese el id de la funcion para la cual quiere vender un asiento: ";
+				std::cin >> idFuncion;
+				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
-					archiDiagrama.reservarAsientoEnRegistro(pos, fila, columna);
+					_vendedor1.venderEntradas(idFuncion);
+					std::cout << std::endl;
 				}
 				else {
 					system("pause");
 				}
-				contadorEntradas++;
 				system("pause");
 				system("cls");
 				break;
 			}
 			case 3: {
 				system("cls");
-				std::cout << "Ingrese el id de la funcion para la cual quiere cancelar un asiento: ";
-				std::cin >> aux;
-				int pos = archiDiagrama.buscarDiagrama(aux);
-				std::cout << "Ingrese fila: ";
-				std::cin >> fila;
-				std::cout << "Ingrese el nro de asiento: ";
-				std::cin >> columna;
+				archiVenta.verVentasCargadas();
+				std::cout << "Ingrese el id de la venta a cancelar: ";
+				std::cin >> idEntrada;
+				int pos = archiVenta.buscarPosEntradaxID(idEntrada);
 				if (pos != -1) {
-					archiDiagrama.cancelarReservaEnRegistro(pos, fila, columna);
+					_vendedor1.cancelarVenta(idEntrada);
 				}
 				else {
 					system("pause");
 				}
-				contadorEntradas--;
 				system("pause");
 				system("cls");
 
 				break;
 			}
-			case 4:
+			case 4: {
 				system("cls");
-				_vendedor1.venderEntradas(contadorEntradas, aux, contadorGeneralEntradas);
-				contadorEntradas = 0;
+				archiVenta.verVentasCargadas();
 				system("pause");
 				system("cls");
 				break;
+			}
 			case 5:
 				login(_admin1, _vendedor1);
 				op = 0;
@@ -335,9 +341,8 @@ void Sistema::bienvenida() {
 	}
 	Sleep(1000);
 	rlutil::locate(50, 15);
-	std::cout << "Presione cualquier tecla para continuar" << std::endl;
+	system("pause");
 	rlutil::setColor(rlutil::COLOR::WHITE);
-	_getch();
 	system("cls");
 }
 
@@ -348,11 +353,65 @@ bool Sistema::crearDirectorioBackUP() {
 	bool creado = false;
 	std::string ruta = "backUp/";
 	if (std::filesystem::is_directory(ruta)) {
-		creado = true;
 		return false;
 	}
 	else {
 		creado = std::filesystem::create_directory(ruta);
 	}
 	return creado;
+}
+
+void Sistema::creditos()
+{
+	system ("cls");
+	rlutil::setConsoleTitle("CREDITOS");
+	rlutil::setColor(rlutil::COLOR::WHITE);
+	rlutil::locate(40, 7);
+	std::cout << "DISEÑADO Y DESARROLLADO POR: " << std::endl;
+	rlutil::locate(40, 9);
+	std::cout << "-----------------------------------------" << std::endl;
+	rlutil::locate(40, 10);
+	std::cout << "Bombieri Rodrigo. " << std::endl;
+	rlutil::locate(40, 11);
+	std::cout << "Github: " <<"https://github.com/RodrigoBombieri" << std::endl;
+	rlutil::locate(40, 12);
+	std::cout << "Linkedin: " << "https://www.linkedin.com/in/rodrigobombieri-dev/" << std::endl;
+	rlutil::locate(40, 13);
+	std::cout<<"Email: "<< "rodrigo.bombieri@alumnos.frgp.utn.edu.ar" << std::endl;
+	rlutil::locate(40, 14);
+	std::cout<< "-----------------------------------------"<< std::endl;
+	rlutil::locate(40, 15);
+	std::cout << "Caceres Tomas. " << std::endl;
+	rlutil::locate(40, 16);
+	std::cout << "Github: " << "https://github.com/tomyok" << std::endl;
+	rlutil::locate(40, 17);
+	std::cout << "Linkedin: " << "https://www.linkedin.com/in/tomas-caceres-1106b6274/" << std::endl;
+	rlutil::locate(40, 18);
+	std::cout << "Email: " << "tomas.caceres2@alumnos.frgp.utn.edu.ar" << std::endl;
+	rlutil::locate(40, 19);
+	std::cout << "-----------------------------------------" << std::endl;
+	rlutil::locate(40, 20);
+	std::cout << "Damonte Agustin. " << std::endl;
+	rlutil::locate(40, 21);
+	std::cout << "Github: " << "https://github.com/agudamonte" << std::endl;
+	rlutil::locate(40, 22);
+	std::cout << "Linkedin: " << "https://www.linkedin.com/in/agustindamonte/" << std::endl;
+	rlutil::locate(40, 23);
+	std::cout << "Email: " << "agustin.damonte@frgp.utn.edu.ar" << std::endl;
+	rlutil::locate(40, 24);
+	std::cout << "-----------------------------------------" << std::endl;
+	rlutil::locate(40, 25);
+	std::cout << "Gonzalez Valenzuela Diego. " << std::endl;
+	rlutil::locate(40, 26);
+	std::cout << "Github: " << "https://github.com/DiegoNGonzalez" << std::endl;
+	rlutil::locate(40, 27);
+	std::cout << "Linkedin: " << "https://www.linkedin.com/in/diegongonzalez/" << std::endl;
+	rlutil::locate(40, 28);
+	std::cout << "Email: " << "diego.gonzalez2@frgp.utn.edu.ar" << std::endl;
+	rlutil::locate(40, 29);
+	std::cout << "-----------------------------------------" << std::endl;
+	rlutil::locate(40, 30);
+	std::cout << "GRACIAS POR UTILIZAR NUESTRO SISTEMA" << std::endl;
+	Sleep(2000);
+	rlutil::setColor(rlutil::COLOR::WHITE);
 }

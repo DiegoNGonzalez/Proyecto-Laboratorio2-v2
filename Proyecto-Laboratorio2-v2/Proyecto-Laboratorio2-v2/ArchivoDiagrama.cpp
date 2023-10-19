@@ -65,79 +65,57 @@ bool ArchivoDiagrama::grabarRegistro(DiagramaSala diagrama, int pos) {
 void ArchivoDiagrama::mostrarRegistro(int pos)
 {
 	DiagramaSala diagrama;
-	/*
-	int cantidadRegistros = contarRegistros();
-	for (int i = 0; i < cantidadRegistros; i++)
-	{
-		diagrama = leerRegistro(i);
-		if (diagrama.getidFuncion() == pos) {
-			diagrama.mostrarSala();
-			
-		}
-	*/
 	diagrama = leerRegistro(pos);
-	diagrama.mostrarSala();
+	if (diagrama.getEstado()) {
+		diagrama.mostrarSala();
+	}
+	else {
+		std::cout << "La funcion fue dada de baja." << std::endl;
+		system("pause");
+	}
 
 }
 
 bool ArchivoDiagrama::reservarAsientoEnRegistro(int pos, int fila, int columna) {
 	DiagramaSala diagrama;
 	diagrama = leerRegistro(pos);
-	if (diagrama.reservarAsiento(fila, columna)) {
+	if (diagrama.getEstado()) {
+		if (diagrama.reservarAsiento(fila, columna)) {
 
-		diagrama.setSalaDeCine(fila, columna, 1);
-		grabarRegistro(diagrama, pos);
-		return true;
-	}
-	else {
-		return false;
-	}
-	std::cout << "id funcion inexistente" << std::endl;
-
-	/*
-
-	diagrama = leerRegistro(idFuncion);
-	if (diagrama.reservarAsiento(fila, columna)) {
-		diagrama.setSalaDeCine(fila, columna, 1);
-		grabarRegistro(diagrama, idFuncion);
-		return true;
-	}
-	else {
-		return false;
-	}
-	*/
-}
-
-bool ArchivoDiagrama::cancelarReservaEnRegistro(int idFuncion, int fila, int columna) {
-	DiagramaSala diagrama;
-	/*int cantidadRegistros = contarRegistros();
-	for (int i = 0; i < cantidadRegistros; i++)
-	{
-		diagrama = leerRegistro(i);
-		if (diagrama.getidFuncion() == idFuncion) {
-			if (diagrama.cancelarReserva(fila, columna)) {
-				diagrama.setSalaDeCine(fila, columna, 0);
-				grabarRegistro(diagrama, idFuncion);
-				return true;
-			}
-			else {
-				return false;
-			}
+			diagrama.setSalaDeCine(fila, columna, 1);
+			grabarRegistro(diagrama, pos);
+			return true;
 		}
-	}*/
-
-	diagrama = leerRegistro(idFuncion);
-	if (diagrama.cancelarReserva(fila, columna)) {
-		diagrama.setSalaDeCine(fila, columna, 0);
-		grabarRegistro(diagrama, idFuncion);
-		return true;
+		else {
+			return false;
+		}
+		std::cout << "id funcion inexistente" << std::endl;
 	}
 	else {
-		return false;
+		std::cout << "La funcion fue dada de baja." << std::endl;
+	}
+
+}
+
+bool ArchivoDiagrama::cancelarReservaEnRegistro(int pos, int fila, int columna) {
+	DiagramaSala diagrama;
+	diagrama = leerRegistro(pos);
+	if (diagrama.getEstado()) {
+		if (diagrama.cancelarReserva(fila, columna)) {
+			diagrama.setSalaDeCine(fila, columna, 0);
+			grabarRegistro(diagrama, pos);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		std::cout << "La funcion fue dada de baja." << std::endl;
 	}
 }
 
-int ArchivoDiagrama::buscarDiagrama(int valorBuscado) {
+int ArchivoDiagrama::buscarPosDiagramaxID(int valorBuscado) {
 	DiagramaSala diagrama;
 	int cantidadRegistros = contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++)
@@ -170,7 +148,7 @@ bool ArchivoDiagrama::generarBackUp() {
 	fclose(archivoBackUp);
 	pudoEscribir = true;
 	int porcentaje = 25;
-	for (int x = 0;x < 4;x++) {
+	for (int x = 0; x < 4; x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
 		std::cout << porcentaje * (x + 1);
@@ -210,7 +188,7 @@ bool ArchivoDiagrama::restaurarBackUp() {
 	fclose(archivo);
 	pudoEscribir = true;
 	int porcentaje = 25;
-	for (int x = 0;x < 4;x++) {
+	for (int x = 0; x < 4; x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
 		std::cout << porcentaje * (x + 1);

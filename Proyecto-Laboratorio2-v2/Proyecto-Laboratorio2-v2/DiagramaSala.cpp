@@ -8,8 +8,7 @@ DiagramaSala::DiagramaSala() {
 }
 DiagramaSala::DiagramaSala(int idFuncion) {
 	_idFuncion = idFuncion;
-
-
+	_estado = true;
 }
 
 bool DiagramaSala::reservarAsiento(int fila, int columna) {
@@ -38,12 +37,22 @@ bool DiagramaSala::cancelarReserva(int fila, int columna) {
 	}
 
 	if (salaDeCine[fila - 1][columna - 1] == 0) {
-		std::cout << "El asiento no está reservado.\n";
+		std::cout << "El asiento no está vendido.\n";
 		return false;
 	}
 
-	std::cout << "¡Reserva cancelada con éxito!\n";
+	std::cout << "¡Venta cancelada con éxito!\n";
 	return true;
+}
+
+void DiagramaSala::setEstado(bool est)
+{
+		_estado = est;
+}
+
+bool DiagramaSala::getEstado()
+{
+	return _estado;
 }
 
 
@@ -69,6 +78,7 @@ void DiagramaSala::mostrarSala() {
 				std::cout << "\033[41m "; // Asiento reservado
 			}
 			std::cout << "\033[0m ";
+			rlutil::setColor(rlutil::LIGHTBLUE);
 		}
 
 	}

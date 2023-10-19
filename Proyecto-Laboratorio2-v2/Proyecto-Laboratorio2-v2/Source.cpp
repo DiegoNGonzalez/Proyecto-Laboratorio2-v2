@@ -8,20 +8,21 @@
 #include "Sistema.h"
 #include "Persona.h"
 #include "Administrador.h"
+#include <locale.h>
 
 
 using namespace std;
 
 
-
 int main() {
 
-
+	setlocale(LC_ALL, "spanish");
 
 	Sistema sistema;
 	sistema = Sistema();
 	sistema.bienvenida();
 	sistema.login(sistema.getAdmin(), sistema.getVendedor());
+	sistema.creditos();
 
 	return 0;
 }
