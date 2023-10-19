@@ -19,6 +19,7 @@ public:
 	void bienvenida();
 	void mostrarMenuAdmin();
 	void mostrarMenuVendedor();
+	void mostrarMenuInformes();
 	bool crearDirectorioBackUP();
 	void creditos();
 
