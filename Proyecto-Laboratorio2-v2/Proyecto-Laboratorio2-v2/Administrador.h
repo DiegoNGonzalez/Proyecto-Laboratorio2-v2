@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 //#include "rlutil.h"
-#include "Persona.h"
+#include "Empleado.h"
 //#include "Funcion.h"
 //#include "Pelicula.h"
 //#include "Sala.h"
@@ -12,7 +12,7 @@
 //#include "DiagramaSala.h"
 
 
-class Administrador : public Persona
+class Administrador : public Empleado
 {
 private:
 

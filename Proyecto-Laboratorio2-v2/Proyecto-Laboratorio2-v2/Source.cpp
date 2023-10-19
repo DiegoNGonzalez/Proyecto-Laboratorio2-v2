@@ -6,7 +6,7 @@
 #include "Sala.h"
 #include "Funcion.h"
 #include "Sistema.h"
-#include "Persona.h"
+#include "Empleado.h"
 #include "Administrador.h"
 #include <locale.h>
 

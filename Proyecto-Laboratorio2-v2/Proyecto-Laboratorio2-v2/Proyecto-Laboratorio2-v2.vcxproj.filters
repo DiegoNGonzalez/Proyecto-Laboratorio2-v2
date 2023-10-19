@@ -39,7 +39,7 @@
     <ClCompile Include="Sala.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Persona.cpp">
+    <ClCompile Include="Empleado.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Administrador.cpp">
@@ -69,6 +69,9 @@
     <ClCompile Include="ArchivoEntrada.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InformesMaker.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sistema.h">
@@ -92,7 +95,7 @@
     <ClInclude Include="Sala.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Persona.h">
+    <ClInclude Include="Empleado.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Administrador.h">
@@ -123,6 +126,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ArchivoEntrada.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InformesMaker.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

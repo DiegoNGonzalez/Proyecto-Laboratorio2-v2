@@ -591,10 +591,10 @@ void Administrador::verFuncionesCargadas() {
 	}
 
 }
-Administrador::Administrador() : Persona() {
+Administrador::Administrador() : Empleado() {
 
 }
-Administrador::Administrador(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia) : Persona(legajo, cargo, nombre, apellido, usuario, contrasenia) {
+Administrador::Administrador(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia) : Empleado(legajo, cargo, nombre, apellido, usuario, contrasenia) {
 
 }
 void showItem1(const char* text, int posx, int posy, bool selected) {
