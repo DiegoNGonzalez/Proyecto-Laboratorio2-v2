@@ -5,6 +5,7 @@
 #include "Windows.h"
 #include "rlutil.h"
 #include <conio.h>
+#include "InformesMaker.h"
 
 
 Sistema::Sistema()
@@ -326,6 +327,8 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 	ArchivoPeliculas archiPeliculas("peliculas.dat");
 	char nombrePelicula[30];
 
+	InformesMaker informesMaker;
+
 	int op = 1, y = 0;
 	do {
 		rlutil::setConsoleTitle("MENU INFORMES"); // establece el titulo de la consola
@@ -358,15 +361,10 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 			{
 			case 0: { // TOTAL RECAUDADO POR PELICULA
 				system("cls");
-				int cantidadPelis = archiPeliculas.contarRegistros();
 
-				std::cout << "Total recaudado por pelicula" << std::endl;
-				for (int i = 0; i < cantidadPelis; i++) {
-					pelicula = archiPeliculas.leerRegistro(i);
-					std::cout << "TITULO " << i << std::endl;
-				}
+				informesMaker.mostrarInfomeRecaXPelicula(); 
 
-				std::cout << "Ingrese el id de la pelicula" << std::endl;
+
 
 				system("pause");
 				system("cls");

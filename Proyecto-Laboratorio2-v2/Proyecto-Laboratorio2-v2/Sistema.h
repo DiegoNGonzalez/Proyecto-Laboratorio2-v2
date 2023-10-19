@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <vector>  // chequear si corresponde incluirlo aca
 #include "Pelicula.h"
 #include "Sala.h"
 #include "Funcion.h"
