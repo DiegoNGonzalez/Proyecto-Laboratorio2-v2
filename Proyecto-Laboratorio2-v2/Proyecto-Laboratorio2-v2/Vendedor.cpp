@@ -12,11 +12,11 @@ Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::strin
 void Vendedor::venderEntradas(int idFuncion) {
 	ArchivoDiagrama archivoDiagrama("diagrama.dat");
 	ArchivoFunciones archivoFunciones("funcion.dat");
-	ArchivoEntrada archivoVenta("venta.dat");
+	ArchivoEntrada archivoEntrada("venta.dat");
 	DiagramaSala diagramaAux;
 	Funcion funcionAux;
 	Entrada ventaAux;
-	int idEntrada=archivoVenta.validarId();
+	int idEntrada=archivoEntrada.validarId();
 	float importeVenta;
 	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(idFuncion);
 	int fila, columna;
@@ -29,7 +29,7 @@ void Vendedor::venderEntradas(int idFuncion) {
 	importeVenta = funcionAux.getSala().getPrecioAsiento();
 	if (archivoDiagrama.reservarAsientoEnRegistro(posAuxiliar, fila, columna)) {
 		ventaAux=Entrada(idEntrada, funcionAux, importeVenta, fila, columna);
-		archivoVenta.grabarRegistro(ventaAux);
+		archivoEntrada.grabarRegistro(ventaAux);
 		//std::cout << "Venta realizada con exito" << std::endl;
 	}
 }

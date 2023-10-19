@@ -215,14 +215,15 @@ Pelicula Administrador::seleccionarPelicula() {
 }
 Pelicula Administrador::buscarPeliculaxID(int valorBuscado) {
 	ArchivoPeliculas archivoPeliculas("pelicula.dat");
-	Pelicula pelicula;
 	int pos = archivoPeliculas.buscarPosPeliculaxID(valorBuscado);
 	if (pos >= 0) {
+
+		Pelicula pelicula;
 		pelicula = archivoPeliculas.leerRegistro(pos);
 		return pelicula;
 	}
 	else {
-		return pelicula;
+		std::cout <<"No se encontro la pelicula"<< std::endl;
 	}
 
 }
@@ -666,10 +667,8 @@ void Administrador::menuPeliculas() {
 				std::cin >> id;
 				pos = archiPeliculas.buscarPosPeliculaxID(id);
 				if (pos >= 0) {
-					archiPeliculas.leerRegistro(pos).mostrarDetalles();
-				}
-				else {
-					std::cout << "No se encontro el id." << std::endl;
+					buscarPeliculaxID(id).mostrarDetalles();
+					//archiPeliculas.leerRegistro(pos).mostrarDetalles();
 				}
 
 				system("pause");

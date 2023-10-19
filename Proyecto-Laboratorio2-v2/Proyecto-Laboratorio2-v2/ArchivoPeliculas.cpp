@@ -151,7 +151,7 @@ int ArchivoPeliculas::buscarPosPeliculaxID(int valorBuscado) {
 	for (int i = 0; i < cantidadRegistros; i++)
 	{
 		pelicula = leerRegistro(i);
-		if (pelicula.getId() == valorBuscado) {
+		if (pelicula.getId() == valorBuscado && pelicula.getEstado() == true) {
 			return i;
 		}
 	}
