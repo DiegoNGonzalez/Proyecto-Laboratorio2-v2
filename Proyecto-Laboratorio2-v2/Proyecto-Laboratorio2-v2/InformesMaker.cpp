@@ -43,8 +43,11 @@ void InformesMaker::mostrarInfomeRecaXPelicula() {
 
 			}
 			else {
-				std::cout << "La recaudacion de la pelicula " << pelicula.getTitulo() << " con id " << idPelicula << " es de $" << recaudacion << std::endl;
-
+				//uso la libreria iomanip para que se muestre como una tabla
+				std::cout << " " << std::left << std::setw(36) << "____________________________________" <<""<< std::endl;
+				std::cout << "|" << std::left << std::setw(15) << "TITULO" << "|" << std::setw(4) << "ID" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
+				std::cout << "|" << std::left << std::setw(15) << pelicula.getTitulo() << "|" << std::setw(4) << idPelicula << "|" << std::setw(1) <<"$" << std::setw(14) << recaudacion << "|" << std::endl;
+				std::cout << "|" << std::left << std::setw(15) << "_______________" << "|" << std::setw(4) << "____" << "|" << std::setw(15) << "_______________" << "|" << std::endl;
 			}
 
 		}
