@@ -61,7 +61,7 @@ void Funcion::mostrarDetalles()
 	_pelicula.mostrarDetalles();
 	cout << endl;
 	_sala.mostrarDetalles();
-	cout << "Fecha y hora de la funcion: " << endl;
+	cout << "Fecha y hora de la funcion: ";
 	_fechaHoraFuncion.mostrarFechaHora();
 	cout << std::endl << "------------------------------------"<< endl;
 }
