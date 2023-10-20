@@ -78,7 +78,7 @@ void InformesMaker::mostrarInformeRecaXDia() {
 
 	int recaudacion = 0;
 
-	std::cout << "INGRESAR LA FECHA\n" << std::endl ;
+	std::cout << "INGRESAR LA FECHA\n" << std::endl;
 	std::cout << "Ingrese el dia: ";
 	std::cin >> dia;
 	std::cout << "Ingrese el mes: ";
@@ -110,21 +110,7 @@ void InformesMaker::mostrarInformeRecaXDia() {
 
 // Funcion comparar Fechas -- esto deberia ir en otra clase, despues lo acomodamos
 bool compararFechas(Fecha fecha1, Fecha fecha2) {
-
-	int dia1, dia2;
-	int mes1, mes2;
-	int anio1, anio2;
-
-	dia1 = fecha1.getDia();
-	dia2 = fecha2.getDia();
-
-	mes1 = fecha1.getMes();
-	mes2 = fecha2.getMes();
-
-	anio1 = fecha1.getAnio();
-	anio2 = fecha2.getAnio();
-
-	if (dia1 == dia2 && mes1 == mes2 && anio1 == anio2) {
+	if (fecha1.getDia() == fecha2.getDia() && fecha1.getMes() == fecha2.getMes() && fecha1.getAnio() == fecha2.getAnio()) {
 		return true;
 	}
 	else {

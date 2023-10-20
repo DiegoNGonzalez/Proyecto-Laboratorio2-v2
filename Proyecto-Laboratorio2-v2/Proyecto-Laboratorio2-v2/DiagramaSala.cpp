@@ -14,16 +14,16 @@ DiagramaSala::DiagramaSala(int idFuncion) {
 bool DiagramaSala::reservarAsiento(int fila, int columna) {
 
 	if (fila < 1 || fila > 10 || columna < 1 || columna > 10) {
-		std::cout << "El asiento especificado no existe.\n";
+		std::cout << std::endl << "El asiento no existe.\n";
 		return false;
 	}
 
 	if (salaDeCine[fila - 1][columna - 1] == 1) {
-		std::cout << "El asiento ya está reservado.\n";
+		std::cout << std::endl << "El asiento ya está vendido!.\n";
 		return false;
 	}
 
-	std::cout << "¡Asiento reservado con éxito!\n";
+	std::cout << std::endl << "¡Venta del asiento realizada con exito!\n";
 	return true;
 }
 
@@ -32,22 +32,22 @@ bool DiagramaSala::cancelarReserva(int fila, int columna) {
 
 
 	if (fila < 1 || fila > 10 || columna < 1 || columna > 10) {
-		std::cout << "El asiento especificado no existe.\n";
+		std::cout << std::endl << "El asiento no existe.\n";
 		return false;
 	}
 
 	if (salaDeCine[fila - 1][columna - 1] == 0) {
-		std::cout << "El asiento no está vendido.\n";
+		std::cout << std::endl << "El asiento esta disponible.\n";
 		return false;
 	}
 
-	std::cout << "¡Venta cancelada con éxito!\n";
+	std::cout << std::endl << "¡Venta del asiento cancelada con éxito!\n";
 	return true;
 }
 
 void DiagramaSala::setEstado(bool est)
 {
-		_estado = est;
+	_estado = est;
 }
 
 bool DiagramaSala::getEstado()
@@ -66,8 +66,7 @@ int DiagramaSala::getIdFuncion() {
 
 
 void DiagramaSala::mostrarSala() {
-	std::cout << "ID de la función: " << _idFuncion << std::endl;
-	std::cout << "Estado actual de la sala de cine:\n";
+	std::cout << "------- SALA DE CINE DE LA FUNCION #" << _idFuncion <<  " -------\n";
 	for (int f = 0; f < 10; f++) {
 		std::cout << std::endl;
 		for (int c = 0; c < 10; c++) {
