@@ -16,10 +16,8 @@ public:
 	void setIdFuncion(int idFuncion);
 	int getIdFuncion();
 	void mostrarSala();
+	void mostrarAsientosPorFilaDisponible(int fila);
 	void setSalaDeCine(int fila, int columna, int estado);
-
-
-
 
 };
 

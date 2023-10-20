@@ -88,3 +88,11 @@ void DiagramaSala::mostrarSala() {
 void DiagramaSala::setSalaDeCine(int fila, int columna, int estado) {
 	salaDeCine[fila - 1][columna - 1] = estado;
 }
+
+void DiagramaSala::mostrarAsientosPorFilaDisponible(int fila) {
+	for (int i = 0; i < 10; i++) {
+		if (salaDeCine[fila - 1][i] == 0) {
+			std::cout << "EL ASIENTO " <<  i + 1 << " ESTA DISPONIBLE" << std::endl;
+		}
+	}
+}

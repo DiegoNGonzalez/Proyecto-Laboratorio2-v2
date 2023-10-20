@@ -286,14 +286,11 @@ void Sistema::mostrarMenuVendedor() {
 			case 3: {
 				system("cls");
 				archiVenta.verVentasCargadas();
-				std::cout << "INGRESE EL NRO DE LA VENTA A CANCELAR: ";
+				std::cout << "NRO DE LA VENTA A CANCELAR: ";
 				std::cin >> idEntrada;
 				int pos = archiVenta.buscarPosEntradaxID(idEntrada);
 				if (pos != -1) {
 					_vendedor1.cancelarVenta(idEntrada);
-				}
-				else {
-					system("pause");
 				}
 				system("pause");
 				system("cls");
