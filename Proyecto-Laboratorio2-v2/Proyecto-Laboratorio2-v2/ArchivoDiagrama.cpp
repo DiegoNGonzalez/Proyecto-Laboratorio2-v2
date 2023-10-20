@@ -89,10 +89,10 @@ bool ArchivoDiagrama::reservarAsientoEnRegistro(int pos, int fila, int columna) 
 		else {
 			return false;
 		}
-		std::cout << "id funcion inexistente" << std::endl;
+		std::cout << "LA FUNCION #" << diagrama.getIdFuncion() << " NO EXISTE." << std::endl;
 	}
 	else {
-		std::cout << "La funcion fue dada de baja." << std::endl;
+		std::cout << "LA FUNCION #" << diagrama.getIdFuncion() << " FUE DADA DE BAJA." << std::endl;
 	}
 
 }
@@ -111,7 +111,7 @@ bool ArchivoDiagrama::cancelarReservaEnRegistro(int pos, int fila, int columna) 
 		}
 	}
 	else {
-		std::cout << "La funcion fue dada de baja." << std::endl;
+		std::cout << "LA FUNCION #" << diagrama.getIdFuncion() << " FUE DADA DE BAJA." << std::endl;
 	}
 }
 
@@ -125,7 +125,7 @@ int ArchivoDiagrama::buscarPosDiagramaxID(int valorBuscado) {
 			return i;
 		}
 	}
-	std::cout << "No se encontro el id." << std::endl;
+	std::cout << std::endl << "NRO DE FUNCION INEXISTENTE." << std::endl;
 	return -1;
 }
 

@@ -2,17 +2,17 @@
 
 void Entrada::mostrarVenta()
 {
-	std::cout << "ID Venta: " << _idEntrada << std::endl;
-	std::cout << "Importe: $" << _importe << std::endl;
-	std::cout << "Fecha y hora de la venta" << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
+	std::cout << "VENTA # " << _idEntrada << std::endl;
+	std::cout << "IMPORTE $" << _importe << std::endl;
+	std::cout << "FECHA Y HORA: ";
 	_fechaHora.mostrarFechaHora();
-	std::cout <<"Funcion nro# "<< _funcion.getIdFuncion() << std::endl;
-	std::cout <<"Pelicula: "<< _funcion.getPelicula().getTitulo() << std::endl;
-	std::cout << "Sala: " << _funcion.getSala().getIdSala() << std::endl;
-	std::cout << "Fila del asiento: " << _filaAsiento << std::endl;
-	std::cout << "Nro de asiento: " << _columnaAsiento << std::endl;
-
-	//_funcion.mostrarDetalles();
+	std::cout <<"FUNCION #"<< _funcion.getIdFuncion() << std::endl;
+	std::cout <<"PELICULA: "<< _funcion.getPelicula().getTitulo() << std::endl;
+	std::cout << "SALA: " << _funcion.getSala().getIdSala() << std::endl;
+	std::cout << "FILA DEL ASIENTO: " << _filaAsiento << std::endl;
+	std::cout << "NRO DEL ASIENTO: " << _columnaAsiento << std::endl;
+	std::cout << "-------------------------------------" << std::endl;
 }
 
 Entrada::Entrada()

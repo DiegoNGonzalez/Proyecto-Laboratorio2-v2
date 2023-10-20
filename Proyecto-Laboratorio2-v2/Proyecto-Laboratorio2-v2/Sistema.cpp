@@ -132,11 +132,11 @@ void Sistema::mostrarMenuAdmin() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem(" Menu Peliculas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem(" Menu Salas ", 50, 11, y == 1);
-		showItem(" Menu Funciones ", 50, 12, y == 2);
-		showItem(" Menu BackUp ", 50, 13, y == 3);
-		showItem(" Menu Informes", 50, 14, y == 4); // ---- NUEVO MENU INFORMES
+		showItem(" PELICULAS ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem(" SALAS ", 50, 11, y == 1);
+		showItem(" FUNCIONES ", 50, 12, y == 2);
+		showItem(" BACKUP ", 50, 13, y == 3);
+		showItem(" INFORMES ", 50, 14, y == 4); // ---- NUEVO MENU INFORMES
 		showItem(" Cerrar sesion ", 50, 15, y == 5); // Pase cerrar sesion para abajo, cambia y == 4 a y ==5
 		showItem("  SALIR   ", 50, 16, y == 6); // mismo comentario linea anterior
 
@@ -182,11 +182,11 @@ void Sistema::mostrarMenuAdmin() {
 				_admin1.menuBackUp();
 				system("cls");
 				break;
-			 case 4: // ---- NUEVO MENU INFORMES
-				 system("cls");
-				 mostrarMenuInformes();
-				 system("cls");
-				 break;
+			case 4: // ---- NUEVO MENU INFORMES
+				system("cls");
+				mostrarMenuInformes();
+				system("cls");
+				break;
 			case 5: // Pase cerrar sesion para abajo, cambia case de 4 a 5
 				login(_admin1, _vendedor1);
 				op = 0;
@@ -220,9 +220,9 @@ void Sistema::mostrarMenuVendedor() {
 		//rlutil::cls(); // limpia la pantalla
 
 		showItem(" FUNCIONES CARGADAS ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem(" MOSTRAR SALA, SE NECESITA ID DE FUNCION. ", 50, 11, y == 1);
-		showItem(" VENTA DE ASIENTOS ", 50, 12, y == 2);
-		showItem(" CANCELAR VENTA DE ASIENTOS ", 50, 13, y == 3);
+		showItem(" MOSTRAR SALA DE CINE ", 50, 11, y == 1);
+		showItem(" VENTA DE ASIENTO ", 50, 12, y == 2);
+		showItem(" CANCELAR VENTA DE ASIENTO ", 50, 13, y == 3);
 		showItem(" VER VENTAS ", 50, 14, y == 4);
 		showItem(" CERRAR SESION ", 50, 15, y == 5);
 		showItem("  SALIR   ", 50, 16, y == 6);
@@ -257,7 +257,7 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 1: {
 				system("cls");
-				std::cout << "Ingrese el id de la funcion a mostrar sala:";
+				std::cout << "INGRESE EL NRO DE LA FUNCION:";
 				std::cin >> idFuncion;
 				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
@@ -272,15 +272,12 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 2: {
 				system("cls");
-				std::cout << "Ingrese el id de la funcion para la cual quiere vender un asiento: ";
+				std::cout << "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ";
 				std::cin >> idFuncion;
 				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					_vendedor1.venderEntradas(idFuncion);
 					std::cout << std::endl;
-				}
-				else {
-					system("pause");
 				}
 				system("pause");
 				system("cls");
@@ -289,7 +286,7 @@ void Sistema::mostrarMenuVendedor() {
 			case 3: {
 				system("cls");
 				archiVenta.verVentasCargadas();
-				std::cout << "Ingrese el id de la venta a cancelar: ";
+				std::cout << "INGRESE EL NRO DE LA VENTA A CANCELAR: ";
 				std::cin >> idEntrada;
 				int pos = archiVenta.buscarPosEntradaxID(idEntrada);
 				if (pos != -1) {
@@ -361,19 +358,14 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 			{
 			case 0: { // TOTAL RECAUDADO POR PELICULA
 				system("cls");
-
-				informesMaker.mostrarInfomeRecaXPelicula(); 
-
-
-
+				informesMaker.mostrarInfomeRecaXPelicula();
 				system("pause");
 				system("cls");
 				break;
 			}
 			case 1: {
 				system("cls");
-				std::cout << "Total recaudado por dia" << std::endl;
-				std::cout << "Ingrese el dia que desea saber la recaudacion" << std::endl;
+				informesMaker.mostrarInformeRecaXDia();
 				system("pause");
 				system("cls");
 				break;
@@ -394,8 +386,8 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 				system("cls");
 				break;
 			}
-			case 4: 
-				op = 0; 
+			case 4:
+				op = 0;
 				break;
 			}
 
