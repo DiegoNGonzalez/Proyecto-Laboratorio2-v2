@@ -182,11 +182,11 @@ void Sistema::mostrarMenuAdmin() {
 				_admin1.menuBackUp();
 				system("cls");
 				break;
-			 case 4: // ---- NUEVO MENU INFORMES
-				 system("cls");
-				 mostrarMenuInformes();
-				 system("cls");
-				 break;
+			case 4: // ---- NUEVO MENU INFORMES
+				system("cls");
+				mostrarMenuInformes();
+				system("cls");
+				break;
 			case 5: // Pase cerrar sesion para abajo, cambia case de 4 a 5
 				login(_admin1, _vendedor1);
 				op = 0;
@@ -361,19 +361,14 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 			{
 			case 0: { // TOTAL RECAUDADO POR PELICULA
 				system("cls");
-
-				informesMaker.mostrarInfomeRecaXPelicula(); 
-
-
-
+				informesMaker.mostrarInfomeRecaXPelicula();
 				system("pause");
 				system("cls");
 				break;
 			}
 			case 1: {
 				system("cls");
-				std::cout << "Total recaudado por dia" << std::endl;
-				std::cout << "Ingrese el dia que desea saber la recaudacion" << std::endl;
+				informesMaker.mostrarInformeRecaXDia();
 				system("pause");
 				system("cls");
 				break;
@@ -394,8 +389,8 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 				system("cls");
 				break;
 			}
-			case 4: 
-				op = 0; 
+			case 4:
+				op = 0;
 				break;
 			}
 

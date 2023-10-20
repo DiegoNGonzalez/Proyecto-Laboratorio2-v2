@@ -11,6 +11,7 @@ private:
 public:
 	InformesMaker();
 	void mostrarInfomeRecaXPelicula();
+	void mostrarInformeRecaXDia();
 
 };
 
