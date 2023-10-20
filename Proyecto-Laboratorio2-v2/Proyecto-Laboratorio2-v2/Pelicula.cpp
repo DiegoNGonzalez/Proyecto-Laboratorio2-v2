@@ -96,12 +96,12 @@ Pelicula::Pelicula(int id, std::string titulo, std::string director, std::string
 
 void Pelicula::mostrarDetalles() const
 {
-	cout << "|||| PELICULA  #" << _id << " ||||" << endl;
-	cout << "Titulo: " << _titulo << endl;
-	cout << "Director: " << _director << endl;
-	cout << "Clasificacion de edad: " << _clasificacionEdad << endl;
-	cout << "Genero: " << _genero << endl;
-	cout << "Duracion: " << _duracion << " min." << endl;
+	cout << "--------- PELICULA #" << _id << " ---------" << endl;
+	cout << "TITULO: " << _titulo << endl;
+	cout << "DIRECTOR: " << _director << endl;
+	cout << "CLASIFICACION DE EDAD: " << _clasificacionEdad << endl;
+	cout << "GENERO: " << _genero << endl;
+	cout << "DURACION: " << _duracion << " MINUTOS." << endl;
 }
 
 

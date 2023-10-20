@@ -2,6 +2,7 @@
 //#include  "ArchivoPeliculas.h"	
 #include "ArchivoEntrada.h"
 #include "Administrador.h"
+#include <iomanip>
 
 
 class InformesMaker {
@@ -10,6 +11,7 @@ private:
 public:
 	InformesMaker();
 	void mostrarInfomeRecaXPelicula();
+	void mostrarInformeRecaXDia();
 
 };
 

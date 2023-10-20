@@ -19,20 +19,21 @@ void Administrador::cargarPeliculas() {
 	std::string genero;
 	int duracion, id = archiPeliculas.validarId();
 	Pelicula pelicula;
-	std::cout << "Pelicula nro: " << id << std::endl;
+	std::cout << "PELICULA NRO:" << id << std::endl;
+	std::cout << "POR FAVOR INGRESE LOS SIGUIENTES CAMPOS OBLIGATORIOS:" << std::endl;
 	std::cin.ignore();
-	std::cout << "Ingrese el titulo: ";
+	std::cout << "TITULO: ";
 	std::getline(std::cin, titulo);
-	std::cout << "Ingrese el director: ";
+	std::cout << "DIRECTOR: ";
 	std::getline(std::cin, director);
-	std::cout << "Ingrese la clasificacion de edad: ";
+	std::cout << "CLASIFICACION DE EDAD: ";
 	std::getline(std::cin, clasificacionEdad);
-	std::cout << "Ingrese el genero: ";
+	std::cout << "GENERO: ";
 	std::getline(std::cin, genero);
-	std::cout << "Ingrese la duracion en minutos: ";
+	std::cout << "DURACION: ";
 	std::cin >> duracion;
 	while (duracion <= 0) {
-		std::cout << "Ingrese la duracion en minutos: ";
+		std::cout << "DURACION: ";
 		std::cin >> duracion;
 	}
 	std::cout << std::endl;
@@ -44,7 +45,7 @@ void Administrador::cargarPeliculas() {
 void Administrador::verPeliculasCargadas() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
 	Pelicula registro;
-	int contador=0;
+	int contador = 0;
 	int cantidadRegistros = archiPeliculas.contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++) {
 		registro = archiPeliculas.leerRegistro(i);
@@ -56,7 +57,7 @@ void Administrador::verPeliculasCargadas() {
 	}
 	if (contador == 0) {
 		system("cls");
-		std::cout << "No hay peliculas cargadas" << std::endl;
+		std::cout << "NO HAY PELICULAS EN CARTELERA." << std::endl;
 	}
 
 }
@@ -66,7 +67,7 @@ bool Administrador::darDeBajaPelicula() {
 	int id;
 	int posicionPelicula;
 	verPeliculasCargadas();
-	std::cout << "Ingrese el id de la pelicula a dar de baja: ";
+	std::cout << "NRO DE PELICULA PARA ELIMINAR DE LA CARTELERA: ";
 	std::cin >> id;
 	if (confirmarAccion()) {
 
@@ -77,11 +78,11 @@ bool Administrador::darDeBajaPelicula() {
 			pelicula.mostrarDetalles();
 			pelicula.setEstado(false);
 			if (archiPeliculas.grabarRegistro(pelicula, posicionPelicula)) {
-				std::cout << "La pelicula: " << pelicula.getTitulo() << " fue dada de baja exitosamente." << std::endl;
+				std::cout << "LA PELICULA DE TITULO: " << pelicula.getTitulo() << " FUE ELIMINADA DE LA CARTELERA EXITOSAMENTE." << std::endl;
 				return true;
 			}
 			else {
-				std::cout << "No se pudo dar de baja la pelicula." << std::endl;
+				std::cout << "ERROR AL QUERER ELIMINAR LA PELICULA DE LA CARTELERA." << std::endl;
 				return false;
 			}
 
@@ -92,12 +93,12 @@ void Administrador::cargarSalas() {
 	ArchivoSalas archiSalas("sala.dat");
 	Sala sala;
 	int idSala = archiSalas.validarId();
-	std::cout << "Sala nro: " << idSala << std::endl;
+	std::cout << "SALA #" << idSala << std::endl;
 	float precioEntrada;
-	std::cout << "Ingrese el precio de la entrada: ";
+	std::cout << "PRECIO DE ENTRADA $";
 	std::cin >> precioEntrada;
 	while (precioEntrada <= 0) {
-		std::cout << "Ingrese el precio de la entrada: ";
+		std::cout << "EL PRECIO NO PUEDE SER NEGATIVO, POR FAVOR INGRESE UN NUEVO PRECIO DE ENTRADA $";
 		std::cin >> precioEntrada;
 	}
 	sala = Sala(idSala, precioEntrada);
@@ -119,8 +120,8 @@ void Administrador::verSalasCargadas() {
 		}
 	}
 	if (contador == 0) {
-		system ("cls");
-		std::cout << "No hay salas cargadas" << std::endl;
+		system("cls");
+		std::cout << std::endl << "NO HAY SALAS." << std::endl;
 	}
 }
 bool Administrador::modificarSalaEnRegistro(int nroSala) {
@@ -131,21 +132,21 @@ bool Administrador::modificarSalaEnRegistro(int nroSala) {
 	sala.mostrarDetalles();
 	std::cout << std::endl;
 	float precioNuevo;
-	std::cout << "Nuevo valor de Entrada: ";
+	std::cout << "NUEVO IMPORTE DE ENTRADA $";
 	std::cin >> precioNuevo;
 	while (precioNuevo <= 0) {
-		std::cout << "Monto incorrecto, reingrese el nuevo valor de Entrada: ";
+		std::cout << "EL IMPORTE NO PUEDE SER NEGATIVO. POR FAVOR, INGRESE UN NUEVO IMPORTE DE ENTRADA $ ";
 		std::cin >> precioNuevo;
 	}
 	if (confirmarAccion()) {
 
 		sala.setPrecioAsiento(precioNuevo);
 		if (archivoSalas.grabarRegistro(sala, posicionSala)) {
-			std::cout << "El precio de la Entrada a la sala #" << sala.getIdSala() << " fue modificado exitosamente." << std::endl;
+			std::cout << "PRECIO DE LA ENTRADA A LA SALA #" << sala.getIdSala() << " FUE MODIFICADA EXITOSAMENTE." << std::endl;
 			return true;
 		}
 		else {
-			std::cout << "No se pudo modificar el precio de la sala" << std::endl;
+			std::cout << "ERROR AL QUERER MODIFICAR EL PRECIO DE LA SALA #" << sala.getIdSala() << std::endl;
 			return false;
 		}
 	}
@@ -156,7 +157,7 @@ bool Administrador::darDeBajaSala() {
 	Sala sala;
 	int id;
 	int posicionSala;
-	std::cout << "Ingrese el id de la sala a dar de baja: ";
+	std::cout << "NRO DE SALA A ELIMINAR #";
 	std::cin >> id;
 	if (confirmarAccion()) {
 
@@ -167,11 +168,11 @@ bool Administrador::darDeBajaSala() {
 			sala.mostrarDetalles();
 			sala.setEstado(false);
 			if (archiSalas.grabarRegistro(sala, posicionSala)) {
-				std::cout << "La sala #" << sala.getIdSala() << " fue dada de baja exitosamente." << std::endl;
+				std::cout << "LA SALA #" << sala.getIdSala() << " FUE ELIMINADA EXITOSAMENTE." << std::endl;
 				return true;
 			}
 			else {
-				std::cout << "No se pudo dar de baja la sala." << std::endl;
+				std::cout << "ERROR AL QUERER ELIMINAR EL PRECIO DE LA SALA #" << sala.getIdSala() << std::endl;
 				return false;
 			}
 
@@ -195,7 +196,7 @@ Pelicula Administrador::seleccionarPelicula() {
 	}
 	do {
 		contador = 0;
-		std::cout << "Ingrese el id de la pelicula seleccionada: ";
+		std::cout << "NRO DE PELICULA QUE DESEA ELEGIR: ";
 		std::cin >> id;
 		for (int i = 0; i < cantidadRegistros; i++) {
 			registro = archiPeliculas.leerRegistro(i);
@@ -208,7 +209,7 @@ Pelicula Administrador::seleccionarPelicula() {
 			}
 		}
 		if (contador == cantidadRegistros) {
-			std::cout << "No se encontro la pelicula" << std::endl;
+			std::cout << "NRO DE PELICULA INEXISTENTE." << std::endl;
 		}
 	} while (contador == cantidadRegistros);
 
@@ -223,7 +224,7 @@ Pelicula Administrador::buscarPeliculaxID(int valorBuscado) {
 		return pelicula;
 	}
 	else {
-		std::cout <<"No se encontro la pelicula"<< std::endl;
+		std::cout << "NRO DE PELICULA INEXISTENTE." << std::endl;
 	}
 
 }
@@ -244,25 +245,24 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 		funcion = archivoFunciones.leerRegistro(posicionFuncion);
 		do {
 			funcion.mostrarDetalles();
+			std::cout << "" << std::endl;
 			rlutil::locate(50, 10);
-			std::cout << "Que desea modificar?" << std::endl;
+			std::cout << "1. MODIFICAR PELICULA" << std::endl;
 			rlutil::locate(50, 11);
-			std::cout << "1. Pelicula" << std::endl;
+			std::cout << "2. MODIFICAR SALA" << std::endl;
 			rlutil::locate(50, 12);
-			std::cout << "2. Sala" << std::endl;
+			std::cout << "3. MODIFICAR FECHA Y HORA" << std::endl;
 			rlutil::locate(50, 13);
-			std::cout << "3. Fecha Y Hora" << std::endl;
-			rlutil::locate(50, 14);
 			std::cout << "4. Volver" << std::endl;
-			rlutil::locate(50, 15);
-			std::cout << "Ingrese una opcion: ";
+			rlutil::locate(50, 14);
+			std::cout << "INGRESE UN NRO: ";
 			std::cin >> opcion;
 			switch (opcion) {
 			case 1: {
 				system("cls");
 				int posicionPelicula, idPelicula;
 				verPeliculasCargadas();
-				std::cout << "Ingrese el id de la pelicula seleccionada: ";
+				std::cout << "NRO DE PELICULA QUE DESEA CAMBIAR: ";
 				std::cin >> idPelicula;
 				if (confirmarAccion()) {
 					posicionPelicula = archivoPeliculas.buscarPosPeliculaxID(idPelicula);
@@ -271,7 +271,7 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 					archivoFunciones.grabarRegistro(funcion, posicionFuncion);
 					rlutil::locate(50, 17);
 					system("cls");
-					std::cout << "Pelicula " << pelicula.getTitulo() << " asignada con exito" << std::endl;
+					std::cout << "LA PELICULA: " << pelicula.getTitulo() << " ASIGNADA CON EXITO A LA FUNCION #" << funcion.getIdFuncion() << std::endl;
 				}
 				system("pause");
 				system("cls");
@@ -281,7 +281,7 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 				system("cls");
 				int posicionSala, idSala;
 				verSalasCargadas();
-				std::cout << "Ingrese el id de la sala seleccionada: ";
+				std::cout << "NRO DE SALA QUE DESEA CAMBIAR";
 				std::cin >> idSala;
 				if (confirmarAccion()) {
 					posicionSala = archivoSalas.buscarPosSalaxID(idSala);
@@ -290,7 +290,7 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 					archivoFunciones.grabarRegistro(funcion, posicionFuncion);
 					rlutil::locate(50, 17);
 					system("cls");
-					std::cout << "Sala " << sala.getIdSala() << " asignada con exito" << std::endl;
+					std::cout << "SALA #" << sala.getIdSala() << " ASIGNADA CON EXITO A LA FUNCION #" << funcion.getIdFuncion() << std::endl;
 
 				}
 				system("pause");
@@ -300,39 +300,40 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 			case 3: {
 				system("cls");
 				int dia, mes, anio, hora, minuto;
-				std::cout << "Ingrese el dia de la funcion: ";
+				std::cout << "POR FAVOR, INGRESE LOS SIGUIENTES CAMPOS:" << std::endl << std::endl;
+				std::cout << "DIA: ";
 				std::cin >> dia;
 				while (dia <= 0 || dia > 31)
 				{
 					std::cout << "Dia no valido, reingrese el dia de la funcion: ";
 					std::cin >> dia;
 				}
-				std::cout << "Ingrese el mes de la funcion: ";
+				std::cout << "MES: ";
 				std::cin >> mes;
 				while (mes <= 0 || mes > 12)
 				{
 					std::cout << "Mes no valido, reingrese el mes de la funcion: ";
 					std::cin >> mes;
 				}
-				std::cout << "Ingrese el anio de la funcion: ";
+				std::cout << "AÑO: ";
 				std::cin >> anio;
 				while (anio < 2023)
 				{
 					std::cout << "Anio no valido, reingrese el anio de la funcion: ";
 					std::cin >> anio;
 				}
-				std::cout << "Ingrese la hora de la funcion: ";
+				std::cout << "HORA: ";
 				std::cin >> hora;
 				while (hora < 0 || hora > 23)
 				{
 					std::cout << "Hora no valida, reingrese la hora de la funcion: ";
 					std::cin >> hora;
 				}
-				std::cout << "Ingrese los minutos de la funcion: ";
+				std::cout << "MINUTOS: ";
 				std::cin >> minuto;
 				while (minuto < 0 || minuto > 59)
 				{
-					std::cout << "Minutos no validos, reingrese los minutos de la funcion: ";
+					std::cout << "Minutos no validos, reingrese los minutos: ";
 					std::cin >> minuto;
 				}
 				if (confirmarAccion()) {
@@ -342,7 +343,7 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 					archivoFunciones.grabarRegistro(funcion, posicionFuncion);
 					rlutil::locate(50, 17);
 					system("cls");
-					std::cout << "Fecha y hora modificada con exito" << std::endl;
+					std::cout << "FECHA Y HORA MODIFICADA CON EXITO." << std::endl;
 				}
 				system("pause");
 				system("cls");
@@ -415,7 +416,7 @@ void Administrador::darDeBajaFuncionxSalaOxPelicula()
 
 	for (int i = 0; i < cantidaRegistrosFunciones; i++) {
 		funcion = archivoFunciones.leerRegistro(i);
-		for (int j = 0;j < cantidadRegistrosDiagrama;j++) {
+		for (int j = 0; j < cantidadRegistrosDiagrama; j++) {
 			diagrama = archivoDiagrama.leerRegistro(j);
 			idPelicula = funcion.getPelicula().getId();
 			idSala = funcion.getSala().getIdSala();
@@ -452,11 +453,11 @@ bool Administrador::darDeBajaFuncion(int idFuncion)
 			funcion.setEstado(false);
 			diagrama.setEstado(false);
 			if (archivoFunciones.grabarRegistro(funcion, posicionFuncion) && archivoDiagrama.grabarRegistro(diagrama, posicionDiagrama)) {
-				std::cout << "La funcion #" << funcion.getIdFuncion() << " fue dada de baja exitosamente." << std::endl;
+				std::cout << "FUNCION #" << funcion.getIdFuncion() << " FUE DADA DE BAJA EXITOSAMENTE." << std::endl;
 				return true;
 			}
 			else {
-				std::cout << "No se pudo dar de baja la funcion." << std::endl;
+				std::cout << "ERROR AL QUERER DAR DE BAJA LA FUNCION #" << funcion.getIdFuncion() << std::endl;
 				return false;
 			}
 
@@ -481,7 +482,7 @@ Sala Administrador::seleccionarSala() {
 	}
 	do {
 		contador = 0;
-		std::cout << "Ingrese el numero de la sala seleccionada: ";
+		std::cout << "NRO DE SALA QUE DESEA SELECCIONAR: ";
 		std::cin >> numeroSala;
 		for (int i = 0; i < cantidadRegistros; i++) {
 			registro = archiSalas.leerRegistro(i);
@@ -495,7 +496,7 @@ Sala Administrador::seleccionarSala() {
 
 		}
 		if (contador == cantidadRegistros) {
-			std::cout << "No se encontro la sala" << std::endl;
+			std::cout << "NRO DE SALA INEXISTENTE" << std::endl;
 		}
 	} while (contador == cantidadRegistros);
 
@@ -527,40 +528,41 @@ void Administrador::cargarFunciones() {
 	int  dia, mes, anio, hora, minuto;
 	pelicula = seleccionarPelicula();
 	sala = seleccionarSala();
-	std::cout << "Funcion nro: " << idFuncion << std::endl;
-	std::cout << "Ingrese el dia de la funcion: ";
+	std::cout << "FUNCION #" << idFuncion << std::endl << std::endl;
+	std::cout << "POR FAVOR, INGRESE LOS SIGUIENTES CAMPOS:" << std::endl << std::endl;
+	std::cout << "DIA: ";
 	std::cin >> dia;
 	while (dia <= 0 || dia > 31)
 	{
 		std::cout << "Dia no valido, reingrese el dia de la funcion: ";
 		std::cin >> dia;
 	}
-	std::cout << "Ingrese el mes de la funcion: ";
+	std::cout << "MES: ";
 	std::cin >> mes;
 	while (mes <= 0 || mes > 12)
 	{
 		std::cout << "Mes no valido, reingrese el mes de la funcion: ";
 		std::cin >> mes;
 	}
-	std::cout << "Ingrese el anio de la funcion: ";
+	std::cout << "AÑO: ";
 	std::cin >> anio;
 	while (anio < 2023)
 	{
 		std::cout << "Anio no valido, reingrese el anio de la funcion: ";
 		std::cin >> anio;
 	}
-	std::cout << "Ingrese la hora de la funcion: ";
+	std::cout << "HORA: ";
 	std::cin >> hora;
 	while (hora < 0 || hora > 23)
 	{
 		std::cout << "Hora no valida, reingrese la hora de la funcion: ";
 		std::cin >> hora;
 	}
-	std::cout << "Ingrese los minutos de la funcion: ";
+	std::cout << "MINUTOS: ";
 	std::cin >> minuto;
 	while (minuto < 0 || minuto > 59)
 	{
-		std::cout << "Minutos no validos, reingrese los minutos de la funcion: ";
+		std::cout << "Minutos no validos, reingrese los minutos: ";
 		std::cin >> minuto;
 	}
 	diagramaSala = DiagramaSala(idFuncion);
@@ -587,7 +589,7 @@ void Administrador::verFuncionesCargadas() {
 	}
 	if (contador == 0) {
 		system("cls");
-		std::cout << "No hay funciones cargadas" << std::endl;
+		std::cout << "NO HAY FUNCIONES." << std::endl;
 	}
 
 }
@@ -620,10 +622,10 @@ void Administrador::menuPeliculas() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem1(" Cargar peliculas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem1(" Ver peliculas cargadas ", 50, 11, y == 1);
-		showItem1(" Buscar pelicula x ID", 50, 12, y == 2);
-		showItem1(" Eliminar Pelicula ", 50, 13, y == 3);
+		showItem1(" INGRESAR NUEVA PELICULA A CARTELERA ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem1(" VER PELICULAS EN CARTELERA ", 50, 11, y == 1);
+		showItem1(" BUSCAR PELICULA", 50, 12, y == 2);
+		showItem1(" ELIMINAR PELICULA DE LA CARTELERA ", 50, 13, y == 3);
 		showItem1(" Volver ", 50, 14, y == 4);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
@@ -663,12 +665,11 @@ void Administrador::menuPeliculas() {
 			case 2: {
 				system("cls");
 				int id, pos;
-				std::cout << "Ingrese el id de la pelicula a buscar: ";
+				std::cout << "NRO DE PELICULA A BUSCAR: ";
 				std::cin >> id;
 				pos = archiPeliculas.buscarPosPeliculaxID(id);
 				if (pos >= 0) {
 					buscarPeliculaxID(id).mostrarDetalles();
-					//archiPeliculas.leerRegistro(pos).mostrarDetalles();
 				}
 
 				system("pause");
@@ -696,10 +697,10 @@ void Administrador::menuSalas() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem1(" Cargar salas ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem1(" Ver salas cargadas ", 50, 11, y == 1);
-		showItem1(" Modificar Precio Sala ", 50, 12, y == 2);
-		showItem1(" Eliminar Sala ", 50, 13, y == 3);
+		showItem1(" INGRESAR SALA ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem1(" VER SALAS DISPONIBLES", 50, 11, y == 1);
+		showItem1(" MODIFICAR PRECIO DE SALA ", 50, 12, y == 2);
+		showItem1(" ELIMINAR SALA ", 50, 13, y == 3);
 		showItem1(" Volver ", 50, 14, y == 4);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
@@ -737,7 +738,7 @@ void Administrador::menuSalas() {
 				system("cls");
 				int nroSala;
 				verSalasCargadas();
-				std::cout << "Ingrese el Nro de sala a modificar el precio: ";
+				std::cout << "NRO DE SALA A CAMBIAR PRECIO: ";
 				std::cin >> nroSala;
 				system("cls");
 				modificarSalaEnRegistro(nroSala);
@@ -768,11 +769,11 @@ void Administrador::menuFunciones() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem1(" Cargar funciones ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem1(" Ver funciones cargadas ", 50, 11, y == 1);
-		showItem1(" Buscar funcion x ID ", 50, 12, y == 2);
-		showItem1(" Modificar funcion ", 50, 13, y == 3);
-		showItem1(" Eliminar funcion ", 50, 14, y == 4);
+		showItem1(" INGRESAR FUNCION ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		showItem1(" VER FUNCIONES DISPONIBLES ", 50, 11, y == 1);
+		showItem1(" BUSCAR FUNCION ", 50, 12, y == 2);
+		showItem1(" MODIFICAR FUNCION ", 50, 13, y == 3);
+		showItem1(" ELIMINAR FUNCION ", 50, 14, y == 4);
 		showItem1(" Volver ", 50, 15, y == 5);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
@@ -808,7 +809,7 @@ void Administrador::menuFunciones() {
 			case 2: {
 				system("cls");
 				int id;
-				std::cout << "Ingrese el id de la funcion a buscar: ";
+				std::cout << "NRO DE FUNCION A BUSCAR: ";
 				std::cin >> id;
 				archiFunciones.buscarFuncionxID(id).mostrarDetalles();
 				system("pause");
@@ -818,7 +819,7 @@ void Administrador::menuFunciones() {
 			case 3: {
 				system("cls");
 				int id;
-				std::cout << "Ingrese el id de la funcion a modificar: ";
+				std::cout << "NRO DE FUNCION A MODIFICAR: ";
 				std::cin >> id;
 				modificarFuncionEnRegistro(id);
 				system("cls");
@@ -829,7 +830,7 @@ void Administrador::menuFunciones() {
 				system("cls");
 				verFuncionesCargadas();
 				int idFuncion;
-				std::cout << "Ingrese el id de la funcion a eliminar: ";
+				std::cout << "NRO DE FUNCION A ELIMINAR: ";
 				std::cin >> idFuncion;
 				system("cls");
 				darDeBajaFuncion(idFuncion);
@@ -858,14 +859,14 @@ void Administrador::menuBackUp() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem1(" Generar BackUp peliculas ", 50, 10, y == 0);
-		showItem1(" Cargar BackUp peliculas ", 50, 11, y == 1);
-		showItem1(" Generar BackUp salas ", 50, 12, y == 2);
-		showItem1(" Cargar BackUp salas ", 50, 13, y == 3);
-		showItem1(" Generar BackUp funciones ", 50, 14, y == 4);
-		showItem1(" Cargar BackUp funciones ", 50, 15, y == 5);
-		showItem1(" Generar BackUp Diagrama Sala ", 50, 16, y == 6);
-		showItem1(" Cargar BackUp Diagrama Sala ", 50, 17, y == 7);
+		showItem1(" GENERAR BACKUP PELICULAS ", 50, 10, y == 0);
+		showItem1(" RECUPERAR BACKUP PELICULAS ", 50, 11, y == 1);
+		showItem1(" GENERAR BACKUP SALAS ", 50, 12, y == 2);
+		showItem1(" RECUPERAR BACKUP SALAS ", 50, 13, y == 3);
+		showItem1(" GENERAR BACKUP FUNCIONES ", 50, 14, y == 4);
+		showItem1(" RECUPERAR BACKUP FUNCIONES ", 50, 15, y == 5);
+		showItem1(" GENERAR BACKUP GRAFICOS SALA ", 50, 16, y == 6);
+		showItem1(" RECUPERAR BACKUP GRAFICOS SALA ", 50, 17, y == 7);
 		showItem1(" Volver ", 50, 18, y == 8);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
