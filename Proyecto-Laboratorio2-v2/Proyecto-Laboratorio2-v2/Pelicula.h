@@ -28,7 +28,7 @@ public:
 	void setEstado(bool estado);
 	bool getEstado() const;
 	Pelicula();
-	Pelicula(int id, std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, int duracion);
+	Pelicula(int id, const char *titulo, const char *director, const char *clasificacionEdad, const char *genero, int duracion);
 	void mostrarDetalles() const;
 };
 

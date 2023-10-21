@@ -1,4 +1,5 @@
 #include "ArchivoFunciones.h"
+#include "funcionesGlobales.h"
 //#include <iostream>
 
 Funcion ArchivoFunciones::leerRegistro(int posicion) {
@@ -66,7 +67,8 @@ bool ArchivoFunciones::generarBackUp() {
 	fclose(p);
 	fclose(pBackUp);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0;x < 4;x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -82,7 +84,7 @@ bool ArchivoFunciones::generarBackUp() {
 	else {
 		std::cout << "No se pudo generar el BackUp" << std::endl;
 	}
-	system("pause");
+	system("pause");*/
 	return pudoEscribir;
 }
 
@@ -103,7 +105,8 @@ bool ArchivoFunciones::restaurarBackUp() {
 	fclose(p);
 	fclose(pBackUp);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0;x < 4;x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -119,7 +122,7 @@ bool ArchivoFunciones::restaurarBackUp() {
 	else {
 		std::cout << "No se pudo restaurar el BackUp" << std::endl;
 	}
-	system("pause");
+	system("pause");*/
 	return pudoEscribir;
 }
 
