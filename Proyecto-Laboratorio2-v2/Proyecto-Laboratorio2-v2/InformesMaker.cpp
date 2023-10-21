@@ -98,8 +98,9 @@ void InformesMaker::mostrarInformeRecaXDia() {
 	}
 
 	if (recaudacion > 0) {
+		std::cout << std::endl;
 		fechaInforme.mostrarFecha();
-		std::cout << "\nLa recaudacion del dia fue de: " << recaudacion << std::endl;
+		std::cout << "\nLa recaudacion del dia fue de: $" << recaudacion << std::endl << std::endl;
 	}
 	else {
 		fechaInforme.mostrarFecha();
