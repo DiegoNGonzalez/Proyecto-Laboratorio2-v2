@@ -147,6 +147,7 @@
     <ClCompile Include="ArchivoSalas.cpp" />
     <ClCompile Include="ArchivoEntrada.cpp" />
     <ClCompile Include="DiagramaSala.cpp" />
+    <ClCompile Include="funcionesGlobales.cpp" />
     <ClCompile Include="InformesMaker.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="Fecha.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="ArchivoSalas.h" />
     <ClInclude Include="ArchivoEntrada.h" />
     <ClInclude Include="DiagramaSala.h" />
+    <ClInclude Include="funcionesGlobales.h" />
     <ClInclude Include="InformesMaker.h" />
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Fecha.h" />
