@@ -1,4 +1,5 @@
 #include "ArchivoSalas.h"
+#include "funcionesGlobales.h"
 #include <iostream>
 Sala ArchivoSalas::leerRegistro(int posicion) {
 	Sala sala;
@@ -65,7 +66,8 @@ bool ArchivoSalas::generarBackUp() {
 	fclose(p);
 	fclose(pBackUp);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0;x < 4;x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -81,7 +83,7 @@ bool ArchivoSalas::generarBackUp() {
 	else {
 		std::cout << "No se pudo generar el BackUp" << std::endl;
 	}
-	system("pause");
+	system("pause");*/
 	return pudoEscribir;
 }
 
@@ -102,7 +104,8 @@ bool ArchivoSalas::restaurarBackUp() {
 	fclose(p);
 	fclose(pBackUp);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0;x < 4;x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -118,7 +121,7 @@ bool ArchivoSalas::restaurarBackUp() {
 	else {
 		std::cout << "No se pudo restaurar el BackUp" << std::endl;
 	}
-	system("pause");
+	system("pause");*/
 	return pudoEscribir;
 }
 

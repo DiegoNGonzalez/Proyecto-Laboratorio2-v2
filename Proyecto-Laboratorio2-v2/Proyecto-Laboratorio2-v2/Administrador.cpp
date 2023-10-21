@@ -1,4 +1,6 @@
+#include <iostream>
 #include "Administrador.h"
+#include "funcionesGlobales.h"
 //#include <Windows.h>
 //#include "rlutil.h"
 //#include "Persona.h"
@@ -10,28 +12,34 @@
 //#include "ArchivoSalas.h"
 //#include "ArchivoDiagrama.h"
 //#include "DiagramaSala.h"
+<<<<<<< HEAD
 #include <stdio.h>
 #include <cstdio>
 #include <iostream>
+=======
+>>>>>>> 8e36f9306dc8b489dc97aa72369f2c5c15d8244d
 void Administrador::cargarPeliculas() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
-	std::string titulo;
-	std::string director;
-	std::string clasificacionEdad;
-	std::string genero;
+	char titulo[30];
+	char director[30];
+	char clasificacionEdad[30];
+	char genero[30];
 	int duracion, id = archiPeliculas.validarId();
 	Pelicula pelicula;
 	std::cout << "PELICULA NRO:" << id << std::endl;
 	std::cout << "POR FAVOR INGRESE LOS SIGUIENTES CAMPOS OBLIGATORIOS:" << std::endl;
 	std::cin.ignore();
 	std::cout << "TITULO: ";
-	std::getline(std::cin, titulo);
+	funcionesGlobales::cargarCadena(titulo, 29);
+	std::cin.ignore();
 	std::cout << "DIRECTOR: ";
-	std::getline(std::cin, director);
+	funcionesGlobales::cargarCadena(director, 29);
+	std::cin.ignore();
 	std::cout << "CLASIFICACION DE EDAD: ";
-	std::getline(std::cin, clasificacionEdad);
+	funcionesGlobales::cargarCadena(clasificacionEdad, 29);
+	std::cin.ignore();
 	std::cout << "GENERO: ";
-	std::getline(std::cin, genero);
+	funcionesGlobales::cargarCadena(genero, 29);
 	duracion=funcionesGlobales::validarMinimo(1,"Ingrese la duracion en minutos: ", "Lo ingresado no es un numero, reingrese un numero: ", "La duración tiene que ser mayor a 1 minuto, reingrese: ");
 	std::cout << std::endl;
 	pelicula = Pelicula(id, titulo, director, clasificacionEdad, genero, duracion);
@@ -64,8 +72,9 @@ bool Administrador::darDeBajaPelicula() {
 	int id;
 	int posicionPelicula;
 	verPeliculasCargadas();
-	std::cout << "NRO DE PELICULA PARA ELIMINAR DE LA CARTELERA: ";
-	std::cin >> id;
+	/*std::cout << "NRO DE PELICULA PARA ELIMINAR DE LA CARTELERA: ";
+	std::cin >> id;*/
+	id = funcionesGlobales::validarMinimo(1, "NRO DE PELICULA PARA ELIMINAR DE LA CARTELERA: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor a 1, reingrese: ");
 	if (confirmarAccion()) {
 
 		system("cls");
@@ -92,12 +101,9 @@ void Administrador::cargarSalas() {
 	int idSala = archiSalas.validarId();
 	std::cout << "SALA #" << idSala << std::endl;
 	float precioEntrada;
-	std::cout << "PRECIO DE ENTRADA $";
-	std::cin >> precioEntrada;
-	while (precioEntrada <= 0) {
-		std::cout << "EL PRECIO NO PUEDE SER NEGATIVO, POR FAVOR INGRESE UN NUEVO PRECIO DE ENTRADA $";
-		std::cin >> precioEntrada;
-	}
+	/*std::cout << "PRECIO DE ENTRADA $";
+	std::cin >> precioEntrada;*/
+	precioEntrada = funcionesGlobales::validarMinimoFloat(1, "PRECIO DE ENTRADA $", "Lo ingresado no es un numero, reingrese un numero: ", "El precio de la entrada tiene que ser positivo, reingrese: ");
 	sala = Sala(idSala, precioEntrada);
 	archiSalas.grabarRegistro(sala);
 
@@ -129,12 +135,9 @@ bool Administrador::modificarSalaEnRegistro(int nroSala) {
 	sala.mostrarDetalles();
 	std::cout << std::endl;
 	float precioNuevo;
-	std::cout << "NUEVO IMPORTE DE ENTRADA $";
-	std::cin >> precioNuevo;
-	while (precioNuevo <= 0) {
-		std::cout << "EL IMPORTE NO PUEDE SER NEGATIVO. POR FAVOR, INGRESE UN NUEVO IMPORTE DE ENTRADA $ ";
-		std::cin >> precioNuevo;
-	}
+	/*std::cout << "NUEVO IMPORTE DE ENTRADA $";
+	std::cin >> precioNuevo;*/
+	precioNuevo = funcionesGlobales::validarMinimoFloat(1, "NUEVO IMPORTE DE ENTRADA $", "Lo ingresado no es un numero, reingrese un numero: ", "El precio de la entrada tiene que ser positivo, reingrese: ");
 	if (confirmarAccion()) {
 
 		sala.setPrecioAsiento(precioNuevo);
@@ -154,8 +157,9 @@ bool Administrador::darDeBajaSala() {
 	Sala sala;
 	int id;
 	int posicionSala;
-	std::cout << "NRO DE SALA A ELIMINAR #";
-	std::cin >> id;
+	/*std::cout << "NRO DE SALA A ELIMINAR #";
+	std::cin >> id;*/
+	id = funcionesGlobales::validarInt("NRO DE SALA A ELIMINAR #", "Lo ingresado no es un numero, reingrese un numero: ");
 	if (confirmarAccion()) {
 
 		system("cls");
@@ -193,12 +197,12 @@ Pelicula Administrador::seleccionarPelicula() {
 	}
 	do {
 		contador = 0;
-		std::cout << "NRO DE PELICULA QUE DESEA ELEGIR: ";
-		std::cin >> id;
+		/*std::cout << "NRO DE PELICULA QUE DESEA ELEGIR: ";
+		std::cin >> id;*/
+		id = funcionesGlobales::validarInt("NRO DE PELICULA QUE DESEA ELEGIR: ", "Lo ingresado no es un numero, reingrese un numero: ");
 		for (int i = 0; i < cantidadRegistros; i++) {
 			registro = archiPeliculas.leerRegistro(i);
 			if (registro.getId() == id) {
-
 				return registro;
 			}
 			else {
@@ -252,15 +256,17 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 			rlutil::locate(50, 13);
 			std::cout << "4. Volver" << std::endl;
 			rlutil::locate(50, 14);
-			std::cout << "INGRESE UN NRO: ";
-			std::cin >> opcion;
+			/*std::cout << "INGRESE UN NRO: ";
+			std::cin >> opcion;*/
+			opcion=funcionesGlobales::validarRango(1, 4, "INGRESE UN NRO: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1 ", " y menor o igual a 4, reingrese: ");
 			switch (opcion) {
 			case 1: {
 				system("cls");
 				int posicionPelicula, idPelicula;
 				verPeliculasCargadas();
-				std::cout << "NRO DE PELICULA QUE DESEA CAMBIAR: ";
-				std::cin >> idPelicula;
+				/*std::cout << "NRO DE PELICULA QUE DESEA CAMBIAR: ";
+				std::cin >> idPelicula;*/
+				idPelicula = funcionesGlobales::validarMinimo(1, "NRO DE PELICULA QUE DESEA CAMBIAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
 				if (confirmarAccion()) {
 					posicionPelicula = archivoPeliculas.buscarPosPeliculaxID(idPelicula);
 					pelicula = archivoPeliculas.leerRegistro(posicionPelicula);
@@ -278,8 +284,9 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 				system("cls");
 				int posicionSala, idSala;
 				verSalasCargadas();
-				std::cout << "NRO DE SALA QUE DESEA CAMBIAR";
-				std::cin >> idSala;
+				/*std::cout << "NRO DE SALA QUE DESEA CAMBIAR";
+				std::cin >> idSala;*/
+				idSala = funcionesGlobales::validarMinimo(1, "NRO DE SALA QUE DESEA CAMBIAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
 				if (confirmarAccion()) {
 					posicionSala = archivoSalas.buscarPosSalaxID(idSala);
 					sala = archivoSalas.leerRegistro(posicionSala);
@@ -298,41 +305,46 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 				system("cls");
 				int dia, mes, anio, hora, minuto;
 				std::cout << "POR FAVOR, INGRESE LOS SIGUIENTES CAMPOS:" << std::endl << std::endl;
-				std::cout << "DIA: ";
-				std::cin >> dia;
-				while (dia <= 0 || dia > 31)
+				/*std::cout << "DIA: ";
+				std::cin >> dia;*/
+				dia=funcionesGlobales::validarRango(1, 31, "DIA: ", "Dia no valido, reingrese el dia de la funcion: ", "El dia tiene que ser mayor a 1 ", " y menor o igual a 31, reingrese: ");
+				/*while (dia <= 0 || dia > 31)
 				{
 					std::cout << "Dia no valido, reingrese el dia de la funcion: ";
 					std::cin >> dia;
-				}
-				std::cout << "MES: ";
+				}*/
+				mes=funcionesGlobales::validarRango(1, 12, "MES: ", "Mes no valido, reingrese el mes de la funcion: ", "El mes tiene que ser mayor a 1 ", " y menor o igual a 12, reingrese: ");
+				/*std::cout << "MES: ";
 				std::cin >> mes;
 				while (mes <= 0 || mes > 12)
 				{
 					std::cout << "Mes no valido, reingrese el mes de la funcion: ";
 					std::cin >> mes;
-				}
-				std::cout << "AÑO: ";
+				}*/
+				anio=funcionesGlobales::validarMinimo(2023, "AÑO: ", "Anio no valido, reingrese el anio de la funcion: ", "El anio tiene que ser mayor a 2023, reingrese: ");
+				/*std::cout << "AÑO: ";
 				std::cin >> anio;
 				while (anio < 2023)
 				{
 					std::cout << "Anio no valido, reingrese el anio de la funcion: ";
 					std::cin >> anio;
-				}
-				std::cout << "HORA: ";
+				}*/
+				hora=funcionesGlobales::validarRango(0, 23, "HORA: ", "Hora no valida, reingrese la hora de la funcion: ", "La hora tiene que ser mayor o igual a 0 ", " y menor o igual a 23, reingrese: ");
+				/*std::cout << "HORA: ";
 				std::cin >> hora;
 				while (hora < 0 || hora > 23)
 				{
 					std::cout << "Hora no valida, reingrese la hora de la funcion: ";
 					std::cin >> hora;
-				}
-				std::cout << "MINUTOS: ";
+				}*/
+				minuto=funcionesGlobales::validarRango(0, 59, "MINUTOS: ", "Minutos no validos, reingrese los minutos: ", "Los minutos tienen que ser mayor o igual a 0 ", " y menor o igual a 59, reingrese: ");
+				/*std::cout << "MINUTOS: ";
 				std::cin >> minuto;
 				while (minuto < 0 || minuto > 59)
 				{
 					std::cout << "Minutos no validos, reingrese los minutos: ";
 					std::cin >> minuto;
-				}
+				}*/
 				if (confirmarAccion()) {
 
 					fechaHorario = FechaHorario(dia, mes, anio, minuto, hora);
@@ -479,8 +491,9 @@ Sala Administrador::seleccionarSala() {
 	}
 	do {
 		contador = 0;
-		std::cout << "NRO DE SALA QUE DESEA SELECCIONAR: ";
-		std::cin >> numeroSala;
+		/*std::cout << "NRO DE SALA QUE DESEA SELECCIONAR: ";
+		std::cin >> numeroSala;*/
+		numeroSala = funcionesGlobales::validarMinimo(1, "NRO DE SALA QUE DESEA SELECCIONAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
 		for (int i = 0; i < cantidadRegistros; i++) {
 			registro = archiSalas.leerRegistro(i);
 			if (registro.getIdSala() == numeroSala) {
@@ -529,14 +542,18 @@ void Administrador::cargarFunciones() {
 	std::cout << "POR FAVOR, INGRESE LOS SIGUIENTES CAMPOS:" << std::endl << std::endl;
 	
 	dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "Dia no valido, reingrese el dia de la funcion: ", "El dia tiene que ser mayor a 1 ", " y menor o igual a 31, reingrese: ");
-	std::cout << "MES: ";
+	mes=funcionesGlobales::validarRango(1, 12, "MES: ", "Mes no valido, reingrese el mes de la funcion: ", "El mes tiene que ser mayor a 1 ", " y menor o igual a 12, reingrese: ");
+	anio=funcionesGlobales::validarMinimo(2023, "AÑO: ", "Anio no valido, reingrese el anio de la funcion: ", "El anio tiene que ser mayor a 2023, reingrese: ");
+	hora=funcionesGlobales::validarRango(0, 23, "HORA: ", "Hora no valida, reingrese la hora de la funcion: ", "La hora tiene que ser mayor o igual a 0 ", " y menor o igual a 23, reingrese: ");
+	minuto=funcionesGlobales::validarRango(0, 59, "MINUTOS: ", "Minutos no validos, reingrese los minutos: ", "Los minutos tienen que ser mayor o igual a 0 ", " y menor o igual a 59, reingrese: ");
+	/*std::cout << "MES: ";
 	std::cin >> mes;
 	while (mes <= 0 || mes > 12)
 	{
 		std::cout << "Mes no valido, reingrese el mes de la funcion: ";
 		std::cin >> mes;
-	}
-	std::cout << "AÑO: ";
+	}*/
+	/*std::cout << "AÑO: ";
 	std::cin >> anio;
 	while (anio < 2023)
 	{
@@ -556,7 +573,7 @@ void Administrador::cargarFunciones() {
 	{
 		std::cout << "Minutos no validos, reingrese los minutos: ";
 		std::cin >> minuto;
-	}
+	}*/
 	diagramaSala = DiagramaSala(idFuncion);
 	archiDiagrama.grabarRegistro(diagramaSala);
 	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
@@ -591,20 +608,7 @@ Administrador::Administrador() : Empleado() {
 Administrador::Administrador(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia) : Empleado(legajo, cargo, nombre, apellido, usuario, contrasenia) {
 
 }
-void showItem1(const char* text, int posx, int posy, bool selected) {
 
-	if (selected) {
-		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
-		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
-		std::cout << ">>" << "  " << text << "  " << "<<" << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
-	}
-	else {
-		rlutil::setBackgroundColor(rlutil::COLOR::BLACK);
-		rlutil::locate(posx - 3, posy);
-		std::cout << "   " << text << "   " << "   " << std::endl; // si no esta seleccionado, imprime el texto sin las flechitas
-	}
-	rlutil::setBackgroundColor(rlutil::COLOR::BLACK); // cuando llega a la ultima opcion, cambia el color del cursor al color normal
-}
 void Administrador::menuPeliculas() {
 	int op = 1, y = 0;
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
@@ -614,11 +618,11 @@ void Administrador::menuPeliculas() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem1(" INGRESAR NUEVA PELICULA A CARTELERA ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem1(" VER PELICULAS EN CARTELERA ", 50, 11, y == 1);
-		showItem1(" BUSCAR PELICULA", 50, 12, y == 2);
-		showItem1(" ELIMINAR PELICULA DE LA CARTELERA ", 50, 13, y == 3);
-		showItem1(" Volver ", 50, 14, y == 4);
+		funcionesGlobales::showItem(" INGRESAR NUEVA PELICULA A CARTELERA ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem(" VER PELICULAS EN CARTELERA ", 50, 11, y == 1);
+		funcionesGlobales::showItem(" BUSCAR PELICULA", 50, 12, y == 2);
+		funcionesGlobales::showItem(" ELIMINAR PELICULA DE LA CARTELERA ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" Volver ", 50, 14, y == 4);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -657,10 +661,12 @@ void Administrador::menuPeliculas() {
 			case 2: {
 				system("cls");
 				int id, pos;
-				std::cout << "NRO DE PELICULA A BUSCAR: ";
-				std::cin >> id;
+				/*std::cout << "NRO DE PELICULA A BUSCAR: ";
+				std::cin >> id;*/
+				id=funcionesGlobales::validarMinimo(1, "NRO DE PELICULA A BUSCAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
 				pos = archiPeliculas.buscarPosPeliculaxID(id);
 				if (pos >= 0) {
+					system ("cls");
 					buscarPeliculaxID(id).mostrarDetalles();
 				}
 
@@ -689,11 +695,11 @@ void Administrador::menuSalas() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem1(" INGRESAR SALA ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem1(" VER SALAS DISPONIBLES", 50, 11, y == 1);
-		showItem1(" MODIFICAR PRECIO DE SALA ", 50, 12, y == 2);
-		showItem1(" ELIMINAR SALA ", 50, 13, y == 3);
-		showItem1(" Volver ", 50, 14, y == 4);
+		funcionesGlobales::showItem(" INGRESAR SALA ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem(" VER SALAS DISPONIBLES", 50, 11, y == 1);
+		funcionesGlobales::showItem(" MODIFICAR PRECIO DE SALA ", 50, 12, y == 2);
+		funcionesGlobales::showItem(" ELIMINAR SALA ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" Volver ", 50, 14, y == 4);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -730,8 +736,9 @@ void Administrador::menuSalas() {
 				system("cls");
 				int nroSala;
 				verSalasCargadas();
-				std::cout << "NRO DE SALA A CAMBIAR PRECIO: ";
-				std::cin >> nroSala;
+				/*std::cout << "NRO DE SALA A CAMBIAR PRECIO: ";
+				std::cin >> nroSala;*/
+				nroSala=funcionesGlobales::validarMinimo(1, "NRO DE SALA A CAMBIAR PRECIO: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
 				system("cls");
 				modificarSalaEnRegistro(nroSala);
 				system("pause");
@@ -761,12 +768,12 @@ void Administrador::menuFunciones() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem1(" INGRESAR FUNCION ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem1(" VER FUNCIONES DISPONIBLES ", 50, 11, y == 1);
-		showItem1(" BUSCAR FUNCION ", 50, 12, y == 2);
-		showItem1(" MODIFICAR FUNCION ", 50, 13, y == 3);
-		showItem1(" ELIMINAR FUNCION ", 50, 14, y == 4);
-		showItem1(" Volver ", 50, 15, y == 5);
+		funcionesGlobales::showItem(" INGRESAR FUNCION ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem(" VER FUNCIONES DISPONIBLES ", 50, 11, y == 1);
+		funcionesGlobales::showItem(" BUSCAR FUNCION ", 50, 12, y == 2);
+		funcionesGlobales::showItem(" MODIFICAR FUNCION ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" ELIMINAR FUNCION ", 50, 14, y == 4);
+		funcionesGlobales::showItem(" Volver ", 50, 15, y == 5);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 		switch (key) // evalua el codigo de tecla
@@ -801,8 +808,9 @@ void Administrador::menuFunciones() {
 			case 2: {
 				system("cls");
 				int id;
-				std::cout << "NRO DE FUNCION A BUSCAR: ";
-				std::cin >> id;
+				/*std::cout << "NRO DE FUNCION A BUSCAR: ";
+				std::cin >> id;*/
+				id=funcionesGlobales::validarMinimo(1, "NRO DE FUNCION A BUSCAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
 				archiFunciones.buscarFuncionxID(id).mostrarDetalles();
 				system("pause");
 				system("cls");
@@ -811,8 +819,9 @@ void Administrador::menuFunciones() {
 			case 3: {
 				system("cls");
 				int id;
-				std::cout << "NRO DE FUNCION A MODIFICAR: ";
-				std::cin >> id;
+				/*std::cout << "NRO DE FUNCION A MODIFICAR: ";
+				std::cin >> id;*/
+				id=funcionesGlobales::validarMinimo(1, "NRO DE FUNCION A MODIFICAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
 				modificarFuncionEnRegistro(id);
 				system("cls");
 				Sleep(1000);
@@ -822,8 +831,9 @@ void Administrador::menuFunciones() {
 				system("cls");
 				verFuncionesCargadas();
 				int idFuncion;
-				std::cout << "NRO DE FUNCION A ELIMINAR: ";
-				std::cin >> idFuncion;
+				/*std::cout << "NRO DE FUNCION A ELIMINAR: ";
+				std::cin >> idFuncion;*/
+				idFuncion=funcionesGlobales::validarMinimo(1, "NRO DE FUNCION A ELIMINAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
 				system("cls");
 				darDeBajaFuncion(idFuncion);
 				system("pause");
@@ -851,15 +861,15 @@ void Administrador::menuBackUp() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem1(" GENERAR BACKUP PELICULAS ", 50, 10, y == 0);
-		showItem1(" RECUPERAR BACKUP PELICULAS ", 50, 11, y == 1);
-		showItem1(" GENERAR BACKUP SALAS ", 50, 12, y == 2);
-		showItem1(" RECUPERAR BACKUP SALAS ", 50, 13, y == 3);
-		showItem1(" GENERAR BACKUP FUNCIONES ", 50, 14, y == 4);
-		showItem1(" RECUPERAR BACKUP FUNCIONES ", 50, 15, y == 5);
-		showItem1(" GENERAR BACKUP GRAFICOS SALA ", 50, 16, y == 6);
-		showItem1(" RECUPERAR BACKUP GRAFICOS SALA ", 50, 17, y == 7);
-		showItem1(" Volver ", 50, 18, y == 8);
+		funcionesGlobales::showItem(" GENERAR BACKUP PELICULAS ", 50, 10, y == 0);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP PELICULAS ", 50, 11, y == 1);
+		funcionesGlobales::showItem(" GENERAR BACKUP SALAS ", 50, 12, y == 2);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP SALAS ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" GENERAR BACKUP FUNCIONES ", 50, 14, y == 4);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP FUNCIONES ", 50, 15, y == 5);
+		funcionesGlobales::showItem(" GENERAR BACKUP GRAFICOS SALA ", 50, 16, y == 6);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP GRAFICOS SALA ", 50, 17, y == 7);
+		funcionesGlobales::showItem(" Volver ", 50, 18, y == 8);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 		switch (key) // evalua el codigo de tecla

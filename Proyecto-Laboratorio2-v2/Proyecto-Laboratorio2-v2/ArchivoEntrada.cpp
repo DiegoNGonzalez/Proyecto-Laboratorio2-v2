@@ -1,4 +1,5 @@
 #include "ArchivoEntrada.h"
+#include "funcionesGlobales.h"
 
 Entrada ArchivoEntrada::leerRegistro(int posicion) {
 	Entrada entrada;
@@ -65,7 +66,8 @@ bool ArchivoEntrada::generarBackUp() {
 	fclose(p);
 	fclose(pBackUp);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0; x < 4; x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -80,7 +82,7 @@ bool ArchivoEntrada::generarBackUp() {
 	}
 	else {
 		std::cout << "No se pudo generar el BackUp" << std::endl;
-	}
+	}*/
 	system("pause");
 	return pudoEscribir;
 }
@@ -102,7 +104,8 @@ bool ArchivoEntrada::restaurarBackUp() {
 	fclose(p);
 	fclose(pBackUp);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0; x < 4; x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -118,7 +121,7 @@ bool ArchivoEntrada::restaurarBackUp() {
 	else {
 		std::cout << "No se pudo restaurar el BackUp" << std::endl;
 	}
-	system("pause");
+	system("pause");*/
 	return pudoEscribir;
 }
 

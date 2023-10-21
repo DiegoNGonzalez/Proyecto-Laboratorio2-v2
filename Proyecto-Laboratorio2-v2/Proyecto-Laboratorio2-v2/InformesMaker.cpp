@@ -1,10 +1,6 @@
 #include "InformesMaker.h"
-/*
-@brief compararFechas recibe dos objetos Fecha y devuelve true si son la misma fecha.
-@param fecha1, fecha2
-@return bool, true or false segun corresponda.
-*/
-bool compararFechas(Fecha fecha1, Fecha fecha2);
+#include "funcionesGlobales.h"
+
 
 InformesMaker::InformesMaker() {}
 
@@ -16,8 +12,9 @@ void InformesMaker::mostrarInfomeRecaXPelicula() {
 	std::cout << "LISTADO DE PELICULAS DISPONIBLES " << std::endl << std::endl;
 	admin.verPeliculasCargadas();
 
-	std::cout << "Por favor ingrese el ID de la pelicula: ";
-	std::cin >> idPelicula;
+	/*std::cout << "Por favor ingrese el ID de la pelicula: ";
+	std::cin >> idPelicula;*/
+	idPelicula = funcionesGlobales::validarMinimo(1, "Por favor ingrese el ID de la pelicula: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
 
 
 	Pelicula pelicula; // creo el obj pelicuila
@@ -79,12 +76,15 @@ void InformesMaker::mostrarInformeRecaXDia() {
 	int recaudacion = 0;
 
 	std::cout << "INGRESAR LA FECHA\n" << std::endl;
-	std::cout << "Ingrese el dia: ";
+	dia=funcionesGlobales::validarRango(1, 31, "Ingrese el dia: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 31");
+	mes=funcionesGlobales::validarRango(1, 12, "Ingrese el mes: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 12");
+	anio=funcionesGlobales::validarRango(2020, 2021, "Ingrese el anio: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2021");
+	/*std::cout << "Ingrese el dia: ";
 	std::cin >> dia;
 	std::cout << "Ingrese el mes: ";
 	std::cin >> mes;
 	std::cout << "Ingrese el anio: ";
-	std::cin >> anio;
+	std::cin >> anio;*/
 
 	Fecha fechaInforme(dia, mes, anio);
 
@@ -92,7 +92,7 @@ void InformesMaker::mostrarInformeRecaXDia() {
 		entrada = archiEntrada.leerRegistro(i);	
 		Fecha fechaEntrada = entrada.getFechaHora().getFecha();
 
-		if (compararFechas(fechaEntrada, fechaInforme)) {
+		if (funcionesGlobales::compararFechas(fechaEntrada, fechaInforme)) {
 			recaudacion += entrada.getImporte();
 		}
 	}
@@ -108,12 +108,3 @@ void InformesMaker::mostrarInformeRecaXDia() {
 
 }
 
-// Funcion comparar Fechas -- esto deberia ir en otra clase, despues lo acomodamos
-bool compararFechas(Fecha fecha1, Fecha fecha2) {
-	if (fecha1.getDia() == fecha2.getDia() && fecha1.getMes() == fecha2.getMes() && fecha1.getAnio() == fecha2.getAnio()) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}

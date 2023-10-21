@@ -1,5 +1,6 @@
 #include "ArchivoPeliculas.h"
-#include <iostream>
+#include "funcionesGlobales.h"
+//#include <iostream>
 Pelicula ArchivoPeliculas::leerRegistro(int posicion) {
 	Pelicula pelicula;
 	FILE* p;
@@ -65,7 +66,8 @@ bool ArchivoPeliculas::generarBackUp() {
 	fclose(p);
 	fclose(pBackUp);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0;x < 4;x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -81,7 +83,7 @@ bool ArchivoPeliculas::generarBackUp() {
 	else {
 		std::cout << "No se pudo generar el BackUp" << std::endl;
 	}
-	system("pause");
+	system("pause");*/
 	return pudoEscribir;
 }
 
@@ -102,7 +104,8 @@ bool ArchivoPeliculas::restaurarBackUp() {
 	fclose(p);
 	fclose(pBackUp);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0;x < 4;x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -119,7 +122,7 @@ bool ArchivoPeliculas::restaurarBackUp() {
 	else {
 		std::cout << "No se pudo restaurar el BackUp" << std::endl;
 	}
-	system("pause");
+	system("pause");*/
 	return pudoEscribir;
 }
 
