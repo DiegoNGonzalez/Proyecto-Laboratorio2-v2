@@ -1,5 +1,6 @@
 #include "ArchivoDiagrama.h"
 #include <iostream>
+#include "funcionesGlobales.h"
 
 DiagramaSala ArchivoDiagrama::leerRegistro(int posicion)
 {
@@ -147,7 +148,8 @@ bool ArchivoDiagrama::generarBackUp() {
 	fclose(archivo);
 	fclose(archivoBackUp);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0; x < 4; x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -163,7 +165,7 @@ bool ArchivoDiagrama::generarBackUp() {
 	else {
 		std::cout << "No se pudo generar el BackUp" << std::endl;
 	}
-	system("pause");
+	system("pause");*/
 	return pudoEscribir;
 
 
@@ -187,7 +189,8 @@ bool ArchivoDiagrama::restaurarBackUp() {
 	fclose(archivoBackUp);
 	fclose(archivo);
 	pudoEscribir = true;
-	int porcentaje = 25;
+	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
+	/*int porcentaje = 25;
 	for (int x = 0; x < 4; x++) {
 
 		std::cout << "Restaurando archivo de seguridad: ";
@@ -202,7 +205,7 @@ bool ArchivoDiagrama::restaurarBackUp() {
 	}
 	else {
 		std::cout << "No se pudo restaurar el BackUp" << std::endl;
-	}
+	}*/
 	system("pause");
 	return pudoEscribir;
 }

@@ -3,9 +3,9 @@
 #include <filesystem>
 #include <string>
 #include "Windows.h"
-#include "rlutil.h"
 #include <conio.h>
 #include "InformesMaker.h"
+#include "funcionesGlobales.h"
 
 
 Sistema::Sistema()
@@ -103,21 +103,6 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 	rlutil::setColor(rlutil::COLOR::WHITE);
 }
 
-// Funcion para mostrar las opciones del menu
-void showItem(const char* text, int posx, int posy, bool selected) {
-
-	if (selected) {
-		rlutil::setBackgroundColor(rlutil::COLOR::WHITE);
-		rlutil::locate(posx - 3, posy); // posiciona el cursor en la fila y columna que le pasamos por parametro (en este caso, -2 porque colocamos una flechita en la opcion seleccionada)
-		std::cout << ">>" << "  " << text << "  " << "<<" << std::endl; // imprime una flechita a cada lado con el codigo ASCII, y el texto que le pasamos por parametro
-	}
-	else {
-		rlutil::setBackgroundColor(rlutil::COLOR::BLACK);
-		rlutil::locate(posx - 3, posy);
-		std::cout << "   " << text << "   " << "  " << std::endl; // si no esta seleccionado, imprime el texto sin las flechitas
-	}
-	rlutil::setBackgroundColor(rlutil::COLOR::BLACK); // cuando llega a la ultima opcion, cambia el color del cursor al color normal
-}
 
 
 
@@ -126,19 +111,18 @@ void Sistema::mostrarMenuAdmin() {
 	int op = 1, y = 0;
 	Funcion f1;
 	ArchivoFunciones archiFunciones("funcion.dat");
-
 	do {
 		rlutil::setConsoleTitle("MENU ADMIN CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem(" PELICULAS ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem(" SALAS ", 50, 11, y == 1);
-		showItem(" FUNCIONES ", 50, 12, y == 2);
-		showItem(" BACKUP ", 50, 13, y == 3);
-		showItem(" INFORMES ", 50, 14, y == 4); // ---- NUEVO MENU INFORMES
-		showItem(" Cerrar sesion ", 50, 15, y == 5); // Pase cerrar sesion para abajo, cambia y == 4 a y ==5
-		showItem("  SALIR   ", 50, 16, y == 6); // mismo comentario linea anterior
+		funcionesGlobales::showItem(" PELICULAS ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem(" SALAS ", 50, 11, y == 1);
+		funcionesGlobales::showItem(" FUNCIONES ", 50, 12, y == 2);
+		funcionesGlobales::showItem(" BACKUP ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" INFORMES ", 50, 14, y == 4); // ---- NUEVO MENU INFORMES
+		funcionesGlobales::showItem(" Cerrar sesion ", 50, 15, y == 5); // Pase cerrar sesion para abajo, cambia y == 4 a y ==5
+		funcionesGlobales::showItem("  SALIR   ", 50, 16, y == 6); // mismo comentario linea anterior
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -219,13 +203,13 @@ void Sistema::mostrarMenuVendedor() {
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
-		showItem(" FUNCIONES CARGADAS ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem(" MOSTRAR SALA DE CINE ", 50, 11, y == 1);
-		showItem(" VENTA DE ASIENTO ", 50, 12, y == 2);
-		showItem(" CANCELAR VENTA DE ASIENTO ", 50, 13, y == 3);
-		showItem(" VER VENTAS ", 50, 14, y == 4);
-		showItem(" CERRAR SESION ", 50, 15, y == 5);
-		showItem("  SALIR   ", 50, 16, y == 6);
+		funcionesGlobales::showItem(" FUNCIONES CARGADAS ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem(" MOSTRAR SALA DE CINE ", 50, 11, y == 1);
+		funcionesGlobales::showItem(" VENTA DE ASIENTO ", 50, 12, y == 2);
+		funcionesGlobales::showItem(" CANCELAR VENTA DE ASIENTO ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" VER VENTAS ", 50, 14, y == 4);
+		funcionesGlobales::showItem(" CERRAR SESION ", 50, 15, y == 5);
+		funcionesGlobales::showItem("  SALIR   ", 50, 16, y == 6);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -257,8 +241,9 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 1: {
 				system("cls");
-				std::cout << "INGRESE EL NRO DE LA FUNCION:";
-				std::cin >> idFuncion;
+				/*std::cout << "INGRESE EL NRO DE LA FUNCION:";
+				std::cin >> idFuncion;*/
+				idFuncion=funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
 				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					archiDiagrama.mostrarRegistro(pos);
@@ -272,8 +257,9 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 2: {
 				system("cls");
-				std::cout << "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ";
-				std::cin >> idFuncion;
+				/*std::cout << "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ";
+				std::cin >> idFuncion;*/
+				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
 				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					_vendedor1.venderEntradas(idFuncion);
@@ -286,8 +272,9 @@ void Sistema::mostrarMenuVendedor() {
 			case 3: {
 				system("cls");
 				archiVenta.verVentasCargadas();
-				std::cout << "NRO DE LA VENTA A CANCELAR: ";
-				std::cin >> idEntrada;
+				/*std::cout << "NRO DE LA VENTA A CANCELAR: ";
+				std::cin >> idEntrada;*/
+				idEntrada = funcionesGlobales::validarMinimo(1, "NRO DE LA VENTA A CANCELAR: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
 				int pos = archiVenta.buscarPosEntradaxID(idEntrada);
 				if (pos != -1) {
 					_vendedor1.cancelarVenta(idEntrada);
@@ -328,11 +315,11 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 		rlutil::setConsoleTitle("MENU INFORMES"); // establece el titulo de la consola
 		rlutil::hidecursor();
 
-		showItem(" 1- Total Recaudado por pelicula", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
-		showItem(" 2- Total recaudado por dia ", 50, 11, y == 1);
-		showItem(" 3- Total recaudado por mes ", 50, 12, y == 2);
-		showItem(" 4- Total recaudado anual", 50, 13, y == 3);
-		showItem(" Volver", 50, 14, y == 4);
+		funcionesGlobales::showItem(" 1- Total Recaudado por pelicula", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem(" 2- Total recaudado por dia ", 50, 11, y == 1);
+		funcionesGlobales::showItem(" 3- Total recaudado por mes ", 50, 12, y == 2);
+		funcionesGlobales::showItem(" 4- Total recaudado anual", 50, 13, y == 3);
+		funcionesGlobales::showItem(" Volver", 50, 14, y == 4);
 
 		int key = rlutil::getkey();
 

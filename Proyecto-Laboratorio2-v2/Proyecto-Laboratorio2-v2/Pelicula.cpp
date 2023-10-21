@@ -1,7 +1,6 @@
 #include "Pelicula.h"
 #include <iostream>
 #include <string>
-using namespace std;
 
 
 void Pelicula::setId(int id)
@@ -83,12 +82,12 @@ Pelicula::Pelicula()
 	_estado = true;
 }
 
-Pelicula::Pelicula(int id, std::string titulo, std::string director, std::string clasificacionEdad, std::string genero, int duracion)
+Pelicula::Pelicula(int id, const char *titulo, const char* director, const char* clasificacionEdad, const char* genero, int duracion)
 {
-	strcpy(_titulo, titulo.c_str());
-	strcpy(_director, director.c_str());
-	strcpy(_clasificacionEdad, clasificacionEdad.c_str());
-	strcpy(_genero, genero.c_str());
+	strcpy(_titulo, titulo);
+	strcpy(_director, director);
+	strcpy(_clasificacionEdad, clasificacionEdad);
+	strcpy(_genero, genero);
 	_duracion = duracion;
 	_id = id;
 	_estado = true;
@@ -96,12 +95,12 @@ Pelicula::Pelicula(int id, std::string titulo, std::string director, std::string
 
 void Pelicula::mostrarDetalles() const
 {
-	cout << "--------- PELICULA #" << _id << " ---------" << endl;
-	cout << "TITULO: " << _titulo << endl;
-	cout << "DIRECTOR: " << _director << endl;
-	cout << "CLASIFICACION DE EDAD: " << _clasificacionEdad << endl;
-	cout << "GENERO: " << _genero << endl;
-	cout << "DURACION: " << _duracion << " MINUTOS." << endl;
+	std::cout << "--------- PELICULA #" << _id << " ---------" << std::endl;
+	std::cout << "TITULO: " << _titulo << std::endl;
+	std::cout << "DIRECTOR: " << _director << std::endl;
+	std::cout << "CLASIFICACION DE EDAD: " << _clasificacionEdad << std::endl;
+	std::cout << "GENERO: " << _genero << std::endl;
+	std::cout << "DURACION: " << _duracion << " MINUTOS." << std::endl;
 }
 
 

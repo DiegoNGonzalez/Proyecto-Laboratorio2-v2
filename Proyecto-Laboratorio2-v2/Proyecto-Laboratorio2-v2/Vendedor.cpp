@@ -1,5 +1,6 @@
 #include "Vendedor.h"
 #include <iostream>
+#include "funcionesGlobales.h"
 Vendedor::Vendedor() : Empleado() {
 
 }
@@ -20,14 +21,16 @@ void Vendedor::venderEntradas(int idFuncion) {
 	float importeVenta;
 	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(idFuncion);
 	int fila, columna;
-	std::cout << "FILA DEL ASIENTO A VENDER: ";
-	std::cin >> fila;
+	/*std::cout << "FILA DEL ASIENTO A VENDER: ";
+	std::cin >> fila;*/
+	fila=funcionesGlobales::validarRango(1, 10, "FILA DEL ASIENTO A VENDER: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 10");
 	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
 	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
 	diagramaAux.mostrarAsientosPorFilaDisponible(fila);
 	importeVenta = funcionAux.getSala().getPrecioAsiento();
-	std::cout << "NRO DE ASIENTO A VENDER: ";
-	std::cin >> columna;
+	/*std::cout << "NRO DE ASIENTO A VENDER: ";
+	std::cin >> columna;*/
+	columna=funcionesGlobales::validarRango(1, 10, "NRO DE ASIENTO A VENDER: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 10");
 	if (archivoDiagrama.reservarAsientoEnRegistro(posAuxiliar, fila, columna)) {
 		ventaAux=Entrada(idEntrada, funcionAux, importeVenta, fila, columna);
 		archivoEntrada.grabarRegistro(ventaAux);
