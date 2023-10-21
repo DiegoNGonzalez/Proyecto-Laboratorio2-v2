@@ -10,6 +10,8 @@
 //#include "ArchivoSalas.h"
 //#include "ArchivoDiagrama.h"
 //#include "DiagramaSala.h"
+#include <stdio.h>
+#include <cstdio>
 #include <iostream>
 void Administrador::cargarPeliculas() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
