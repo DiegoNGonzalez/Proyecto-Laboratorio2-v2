@@ -10,6 +10,7 @@
 //#include "ArchivoSalas.h"
 //#include "ArchivoDiagrama.h"
 //#include "DiagramaSala.h"
+#include "funcionesGlobales.h"
 
 
 class Administrador : public Empleado

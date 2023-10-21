@@ -20,13 +20,14 @@ void Vendedor::venderEntradas(int idFuncion) {
 	float importeVenta;
 	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(idFuncion);
 	int fila, columna;
-	std::cout << "Ingrese la fila del asiento: ";
+	std::cout << "FILA DEL ASIENTO A VENDER: ";
 	std::cin >> fila;
-	std::cout << "Ingrese el nro del asiento: ";
-	std::cin >> columna;
 	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
 	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
+	diagramaAux.mostrarAsientosPorFilaDisponible(fila);
 	importeVenta = funcionAux.getSala().getPrecioAsiento();
+	std::cout << "NRO DE ASIENTO A VENDER: ";
+	std::cin >> columna;
 	if (archivoDiagrama.reservarAsientoEnRegistro(posAuxiliar, fila, columna)) {
 		ventaAux=Entrada(idEntrada, funcionAux, importeVenta, fila, columna);
 		archivoEntrada.grabarRegistro(ventaAux);

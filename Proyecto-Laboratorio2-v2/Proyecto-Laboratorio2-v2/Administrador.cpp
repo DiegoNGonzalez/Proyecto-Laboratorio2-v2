@@ -30,12 +30,7 @@ void Administrador::cargarPeliculas() {
 	std::getline(std::cin, clasificacionEdad);
 	std::cout << "GENERO: ";
 	std::getline(std::cin, genero);
-	std::cout << "DURACION: ";
-	std::cin >> duracion;
-	while (duracion <= 0) {
-		std::cout << "DURACION: ";
-		std::cin >> duracion;
-	}
+	duracion=funcionesGlobales::validarMinimo(1,"Ingrese la duracion en minutos: ", "Lo ingresado no es un numero, reingrese un numero: ", "La duración tiene que ser mayor a 1 minuto, reingrese: ");
 	std::cout << std::endl;
 	pelicula = Pelicula(id, titulo, director, clasificacionEdad, genero, duracion);
 
@@ -530,13 +525,8 @@ void Administrador::cargarFunciones() {
 	sala = seleccionarSala();
 	std::cout << "FUNCION #" << idFuncion << std::endl << std::endl;
 	std::cout << "POR FAVOR, INGRESE LOS SIGUIENTES CAMPOS:" << std::endl << std::endl;
-	std::cout << "DIA: ";
-	std::cin >> dia;
-	while (dia <= 0 || dia > 31)
-	{
-		std::cout << "Dia no valido, reingrese el dia de la funcion: ";
-		std::cin >> dia;
-	}
+	
+	dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "Dia no valido, reingrese el dia de la funcion: ", "El dia tiene que ser mayor a 1 ", " y menor o igual a 31, reingrese: ");
 	std::cout << "MES: ";
 	std::cin >> mes;
 	while (mes <= 0 || mes > 12)
