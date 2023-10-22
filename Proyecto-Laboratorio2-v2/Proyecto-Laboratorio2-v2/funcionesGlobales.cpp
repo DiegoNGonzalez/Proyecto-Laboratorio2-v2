@@ -130,4 +130,20 @@ void funcionesGlobales::cargarCadena(char* pal, int tam)
     
 
 }
-
+bool funcionesGlobales::confirmarAccion(std::string textoCout)
+{
+    char siONo;
+    std::cout << textoCout;
+    std::cin >> siONo;
+    while (siONo != 's' && siONo != 'S' && siONo != 'n' && siONo != 'N') {
+        std::cout << "Opcion no valida, reingrese (s/n): ";
+        std::cin >> siONo;
+    }
+    if (siONo == 's' || siONo == 'S') {
+        return true;
+    }
+    else {
+        std::cout << "Accion cancelada." << std::endl;
+        return false;
+    }
+}

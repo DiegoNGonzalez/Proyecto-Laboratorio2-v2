@@ -1,6 +1,7 @@
 #include "ArchivoDiagrama.h"
 #include <iostream>
 #include "funcionesGlobales.h"
+#include <filesystem>
 
 DiagramaSala ArchivoDiagrama::leerRegistro(int posicion)
 {
@@ -132,80 +133,116 @@ int ArchivoDiagrama::buscarPosDiagramaxID(int valorBuscado) {
 
 bool ArchivoDiagrama::generarBackUp() {
 	FILE* archivo = fopen(_nombre, "rb");
-	FILE* archivoBackUp = fopen("backUp/diagramaBKP.dat", "wb");
-	bool pudoEscribir = false;
-	if (archivo == NULL)
-	{
-		std::cout << "Error al abrir el archivo, Falla BackUp" << std::endl;
+	std::string ruta = "backUp/diagramaBKP.dat";
+
+	if (archivo == NULL) {
+		std::cout << "Error al abrir el archivo. Falla BackUp" << std::endl;
 		return false;
 	}
 
-	DiagramaSala diagrama;
-	while (fread(&diagrama, sizeof(DiagramaSala), 1, archivo))
-	{
-		fwrite(&diagrama, sizeof(DiagramaSala), 1, archivoBackUp);
-	}
-	fclose(archivo);
-	fclose(archivoBackUp);
-	pudoEscribir = true;
-	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
-	/*int porcentaje = 25;
-	for (int x = 0; x < 4; x++) {
+	if (std::filesystem::exists(ruta)) {
+		std::cout << "Ya existe un BackUp de diagrama." << std::endl;
+		if (funcionesGlobales::confirmarAccion("Desea sobreescribirlo? (S/N): ")) {
+			FILE* archivoBackUp = fopen("backUp/diagramaBKP.dat", "wb");
+			if (archivoBackUp == NULL) {
+				std::cout << "Error al abrir el archivo de respaldo. Falla BackUp" << std::endl;
+				fclose(archivo);
+				return false;
+			}
 
-		std::cout << "Restaurando archivo de seguridad: ";
-		std::cout << porcentaje * (x + 1);
-		std::cout << "%";
-		Sleep(1000);
-		system("cls");
-		rlutil::hidecursor();
-	}
-	if (pudoEscribir == true) {
-		std::cout << "BackUp generado con exito" << std::endl;
+			DiagramaSala diagrama;
+			while (fread(&diagrama, sizeof(DiagramaSala), 1, archivo) == 1) {
+				fwrite(&diagrama, sizeof(DiagramaSala), 1, archivoBackUp);
+			}
+
+			fclose(archivo);
+			fclose(archivoBackUp);
+			funcionesGlobales::mostrarPorcentaje(true);
+			std::cout << "Copia de seguridad generada con éxito." << std::endl;
+			return true;
+		}
+		else {
+			fclose(archivo);
+			return false;
+		}
 	}
 	else {
-		std::cout << "No se pudo generar el BackUp" << std::endl;
+		FILE* archivoBackUp = fopen("backUp/diagramaBKP.dat", "wb");
+		if (archivoBackUp == NULL) {
+			std::cout << "Error al abrir el archivo de respaldo. Falla BackUp" << std::endl;
+			fclose(archivo);
+			return false;
+		}
+
+		DiagramaSala diagrama;
+		while (fread(&diagrama, sizeof(DiagramaSala), 1, archivo) == 1) {
+			fwrite(&diagrama, sizeof(DiagramaSala), 1, archivoBackUp);
+		}
+
+		fclose(archivo);
+		fclose(archivoBackUp);
+		funcionesGlobales::mostrarPorcentaje(true);
+		std::cout << "Copia de seguridad generada con éxito." << std::endl;
+		return true;
 	}
-	system("pause");*/
-	return pudoEscribir;
-
-
+	fclose(archivo);
+	return false;
 }
+
+
 
 bool ArchivoDiagrama::restaurarBackUp() {
 	FILE* archivoBackUp = fopen("backUp/diagramaBKP.dat", "rb");
-	FILE* archivo = fopen(_nombre, "wb");
-	bool pudoEscribir = false;
+	std::string ruta = "diagrama.dat";
+
 	if (archivoBackUp == NULL)
 	{
 		std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
 		return false;
 	}
-
-	DiagramaSala diagrama;
-	while (fread(&diagrama, sizeof(DiagramaSala), 1, archivoBackUp))
-	{
-		fwrite(&diagrama, sizeof(DiagramaSala), 1, archivo);
-	}
-	fclose(archivoBackUp);
-	fclose(archivo);
-	pudoEscribir = true;
-	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
-	/*int porcentaje = 25;
-	for (int x = 0; x < 4; x++) {
-
-		std::cout << "Restaurando archivo de seguridad: ";
-		std::cout << porcentaje * (x + 1);
-		std::cout << "%";
-		Sleep(1000);
-		system("cls");
-		rlutil::hidecursor();
-	}
-	if (pudoEscribir == true) {
-		std::cout << "BackUp restaurado con exito" << std::endl;
+	if (std::filesystem::exists(ruta)) {
+		std::cout << "Ya existe un archivo de diagrama." << std::endl;
+		if (funcionesGlobales::confirmarAccion("Desea sobreescribirlo? (S/N): ")) {
+			FILE* archivo = fopen("diagrama.dat", "wb");
+			if (archivo == NULL)
+			{
+				std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
+				fclose(archivoBackUp);
+				return false;
+			}
+			DiagramaSala diagrama;
+			while (fread(&diagrama, sizeof(DiagramaSala), 1, archivoBackUp))
+			{
+				fwrite(&diagrama, sizeof(DiagramaSala), 1, archivo);
+			}
+			fclose(archivoBackUp);
+			fclose(archivo);
+			funcionesGlobales::mostrarPorcentaje(true);
+			std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
+			return true;
+		}
+		else {
+			fclose(archivoBackUp);
+			return false;
+		}
 	}
 	else {
-		std::cout << "No se pudo restaurar el BackUp" << std::endl;
-	}*/
-	system("pause");
-	return pudoEscribir;
+		FILE* archivo = fopen("diagrama.dat", "wb");
+		if (archivo == NULL)
+		{
+			std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
+			fclose(archivoBackUp);
+			return false;
+		}
+		DiagramaSala diagrama;
+		while (fread(&diagrama, sizeof(DiagramaSala), 1, archivoBackUp))
+		{
+			fwrite(&diagrama, sizeof(DiagramaSala), 1, archivo);
+		}
+		fclose(archivoBackUp);
+		fclose(archivo);
+		funcionesGlobales::mostrarPorcentaje(true);
+		std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
+		return true;
+	}
 }
