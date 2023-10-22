@@ -76,15 +76,10 @@ void InformesMaker::mostrarInformeRecaXDia() {
 	float recaudacion = 0;
 
 	std::cout << "INGRESAR LA FECHA\n" << std::endl;
+
 	dia = funcionesGlobales::validarRango(1, 31, "Ingrese el dia: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 31");
 	mes = funcionesGlobales::validarRango(1, 12, "Ingrese el mes: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 12");
-	anio = funcionesGlobales::validarRango(2020, 2021, "Ingrese el anio: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2021");
-	/*std::cout << "Ingrese el dia: ";
-	std::cin >> dia;
-	std::cout << "Ingrese el mes: ";
-	std::cin >> mes;
-	std::cout << "Ingrese el anio: ";
-	std::cin >> anio;*/
+	anio = funcionesGlobales::validarRango(2020, 2023, "Ingrese el anio: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2021");
 
 	Fecha fechaInforme(dia, mes, anio);
 
@@ -98,9 +93,13 @@ void InformesMaker::mostrarInformeRecaXDia() {
 	}
 
 	if (recaudacion > 0) {
+		system("cls");
+		std::cout << "\nRECAUDACION POR DIA" << std::endl;
+		std::cout << " " << std::left << std::setw(26) << "__________________________" << "" << std::endl;
+		std::cout << "|" << std::left << std::setw(10) << "FECHA" << " |"  << std::setw(14) << "  RECAUDACION" << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(0) << dia << "/" << mes << "/" << anio <<  " |" << std::setw(3) << "  $" << std::setw(11) << recaudacion << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(26) << "__________________________" << "|" << std::endl;
 		std::cout << std::endl;
-		fechaInforme.mostrarFecha();
-		std::cout << "\nLa recaudacion del dia fue de: $" << recaudacion << std::endl << std::endl;
 	}
 	else {
 		fechaInforme.mostrarFecha();

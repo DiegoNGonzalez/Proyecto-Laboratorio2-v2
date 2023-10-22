@@ -5,7 +5,8 @@
 int funcionesGlobales::validarInt(std::string textoCout, std::string textoError) {
     int nroAvalidar;
 
-    std::cout << textoCout << std::endl;
+    std::cout << textoCout;
+    //<< std::endl; // le saque el salto de linea para que la fecha se ingrese en el mismo renglon
     while (!(std::cin >> nroAvalidar)) {
         std::cout << textoError;
         std::cin.clear();
