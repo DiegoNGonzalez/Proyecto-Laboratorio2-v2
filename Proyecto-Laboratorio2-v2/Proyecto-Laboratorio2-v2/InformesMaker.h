@@ -12,6 +12,8 @@ public:
 	void mostrarInfomeRecaXPelicula();
 	void mostrarInformeRecaXDia();
 	void mostrarInformeRecaXMes();
+	void mostrarInformeRecaXAnio();
+	void mostrarInformeFranjasHorarias();
 
 };
 

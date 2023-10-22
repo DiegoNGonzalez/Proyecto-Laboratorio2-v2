@@ -243,7 +243,7 @@ void Sistema::mostrarMenuVendedor() {
 				system("cls");
 				/*std::cout << "INGRESE EL NRO DE LA FUNCION:";
 				std::cin >> idFuncion;*/
-				idFuncion=funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
+				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
 				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					archiDiagrama.mostrarRegistro(pos);
@@ -319,7 +319,8 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 		funcionesGlobales::showItem(" 2- Total recaudado por dia ", 50, 11, y == 1);
 		funcionesGlobales::showItem(" 3- Total recaudado por mes ", 50, 12, y == 2);
 		funcionesGlobales::showItem(" 4- Total recaudado anual", 50, 13, y == 3);
-		funcionesGlobales::showItem(" Volver", 50, 14, y == 4);
+		funcionesGlobales::showItem(" 5- Total recaudado por franja horaria", 50, 14, y == 4);
+		funcionesGlobales::showItem(" Volver", 50, 15, y == 5);
 
 		int key = rlutil::getkey();
 
@@ -335,7 +336,7 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 			rlutil::locate(28, 11 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 5) y = 5;
+			if (y > 6) y = 6;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -363,13 +364,19 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 			}
 			case 3: {
 				system("cls");
-				std::cout << "Total recaudado anual" << std::endl;
-				std::cout << "Ingrese el anio" << std::endl;
+				informesMaker.mostrarInformeRecaXAnio();
 				system("pause");
 				system("cls");
 				break;
 			}
-			case 4:
+			case 4: {
+				system("cls");
+				informesMaker.mostrarInformeFranjasHorarias();
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 5:
 				op = 0;
 				break;
 			}

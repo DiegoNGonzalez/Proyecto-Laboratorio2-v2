@@ -145,4 +145,34 @@ void InformesMaker::mostrarInformeRecaXMes() {
 
 }
 
+void InformesMaker::mostrarInformeRecaXAnio() {
+	float recaudacion = 0;
+	int anioInforme;
+	anioInforme = funcionesGlobales::validarInt("Ingrese el anio", "ERROR. Ingrese un anio valido");
+
+	ArchivoEntrada archiEntrada("venta.dat");
+	Entrada entrada;
+	int cantidadEntradas = archiEntrada.contarRegistros();
+
+	for (int i = 0; i < cantidadEntradas; i++) {
+		entrada = archiEntrada.leerRegistro(i);
+		int anioEntrada = entrada.getFechaHora().getFecha().getAnio();
+
+		if (anioInforme == anioEntrada) {
+			recaudacion += entrada.getImporte();
+		}
+	}
+
+	if (recaudacion > 0) {
+		std::cout << "LA RECAUDACION EN " << anioInforme << " FUE DE: " << recaudacion << std::endl;
+	}
+	else {
+		std::cout << "No se vendieron entradas en " << anioInforme << std::endl;
+	}
+}
+
+void InformesMaker::mostrarInformeFranjasHorarias(){
+// 
+	std::cout<< "INFORME DE FRANJAS HORARIAS" << std::endl;
+}
 

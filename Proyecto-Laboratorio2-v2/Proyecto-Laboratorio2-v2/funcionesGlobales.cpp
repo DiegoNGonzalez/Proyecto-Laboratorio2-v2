@@ -147,6 +147,5 @@ std::string funcionesGlobales::escribirMes(int mes) {
         "Noviembre",
         "Diciembre"
     };
-
     return vMeses[mes - 1];
 }
