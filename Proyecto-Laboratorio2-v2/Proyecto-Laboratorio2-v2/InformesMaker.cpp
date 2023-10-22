@@ -175,7 +175,95 @@ void InformesMaker::mostrarInformeRecaXAnio() {
 }
 
 void InformesMaker::mostrarInformeFranjasHorarias() {
-	// 
-	std::cout << "INFORME DE FRANJAS HORARIAS" << std::endl;
-}
+	//primera franja 12 a 15hs
+	//segunda franja 15 a 17hs
+	//tercera franja 17 a 20hs
+	//cuarta franja 20 a 23hs
+	//quinta franja 23 a 1hs
 
+	ArchivoEntrada archiEntrada("venta.dat");
+	Entrada entrada;
+
+	int cantidadEntradas = archiEntrada.contarRegistros();
+
+	int cantEntradasFranja1 = 0;
+	int cantEntradasFranja2 = 0;
+	int cantEntradasFranja3 = 0;
+	int cantEntradasFranja4 = 0;
+	int cantEntradasFranja5 = 0;
+
+	float recaudacionFranja1 = 0;
+	float recaudacionFranja2 = 0;
+	float recaudacionFranja3 = 0;
+	float recaudacionFranja4 = 0;
+	float recaudacionFranja5 = 0;
+
+	int fhMax = -1;
+	float recaudacionMax = -1;
+	std::string mensaje = "<- Franja horaria con mayor recaudacion";
+
+	for (int i = 0; i < cantidadEntradas; i++) {
+		entrada = archiEntrada.leerRegistro(i);
+		int horaEntrada = entrada.getFechaHora().getHorario().getHora();
+
+		if (horaEntrada >= 12 && horaEntrada < 15) {
+			cantEntradasFranja1++;
+			recaudacionFranja1 += entrada.getImporte();
+		}
+		else if (horaEntrada >= 15 && horaEntrada < 17) {
+			cantEntradasFranja2++;
+			recaudacionFranja2 += entrada.getImporte();
+		}
+		else if (horaEntrada >= 17 && horaEntrada < 20) {
+			cantEntradasFranja3++;
+			recaudacionFranja3 += entrada.getImporte();
+		}
+		else if (horaEntrada >= 20 && horaEntrada < 23) {
+			cantEntradasFranja4++;
+			recaudacionFranja4 += entrada.getImporte();
+		}
+		else if (horaEntrada >= 23 && horaEntrada < 1) {
+			cantEntradasFranja5++;
+			recaudacionFranja5 += entrada.getImporte();
+		}
+	}
+
+	float porcentajeFranja1 = (cantEntradasFranja1 * 100) / cantidadEntradas;
+	float porcentajeFranja2 = (cantEntradasFranja2 * 100) / cantidadEntradas;
+	float porcentajeFranja3 = (cantEntradasFranja3 * 100) / cantidadEntradas;
+	float porcentajeFranja4 = (cantEntradasFranja4 * 100) / cantidadEntradas;
+	float porcentajeFranja5 = (cantEntradasFranja5 * 100) / cantidadEntradas;
+
+	if (fhMax == -1) {
+		fhMax = 1;
+		recaudacionMax = recaudacionFranja1;
+	}
+	if (recaudacionMax < recaudacionFranja2) {
+		fhMax = 2;
+		recaudacionMax = recaudacionFranja2;
+	}
+	if (recaudacionMax < recaudacionFranja3) {
+		fhMax = 3;
+		recaudacionMax = recaudacionFranja3;
+	}
+	if (recaudacionMax < recaudacionFranja4) {
+		fhMax = 4;
+		recaudacionMax = recaudacionFranja4;
+	}
+	if (recaudacionMax < recaudacionFranja5) {
+		fhMax = 5;
+	}
+
+
+	std::cout << "INFORME DE FRANJAS HORARIAS" << std::endl;
+
+	std::cout << "." << std::left << std::setw(16) << "________________" << "_" << std::setw(15) << "_______________" << "_" << std::setw(12) << "____________" << "_" << std::setw(8) << "________" << "." << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "FRANJA HORARIA" << "|" << std::setw(15) << "CANT ENTRADAS" << "|" << std::setw(12) << "RECAUDACION" << "|" << std::setw(8) << " % REC" << "|" << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "12hs - 15 hs" << "|" << std::setw(15) << cantEntradasFranja1 << "|" << std::setw(12) << recaudacionFranja1 << "|" << std::setw(8) << porcentajeFranja1 << "|" << (fhMax == 1 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "15hs - 17 hs" << "|" << std::setw(15) << cantEntradasFranja2 << "|" << std::setw(12) << recaudacionFranja2 << "|" << std::setw(8) << porcentajeFranja2 << "|" << (fhMax == 2 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "17hs - 20 hs" << "|" << std::setw(15) << cantEntradasFranja3 << "|" << std::setw(12) << recaudacionFranja3 << "|" << std::setw(8) << porcentajeFranja3 << "|" << (fhMax == 3 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "20hs - 23 hs" << "|" << std::setw(15) << cantEntradasFranja4 << "|" << std::setw(12) << recaudacionFranja4 << "|" << std::setw(8) << porcentajeFranja4 << "|" << (fhMax == 4 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "23hs - 01 hs" << "|" << std::setw(15) << cantEntradasFranja5 << "|" << std::setw(12) << recaudacionFranja5 << "|" << std::setw(8) << porcentajeFranja5 << "|" << (fhMax == 5 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "________________" << "|" << std::setw(15) << "_______________" << "|" << std::setw(12) << "____________" << "|" << std::setw(8) << "________" << "|" << std::endl;
+	std::cout << std::endl;
+}
