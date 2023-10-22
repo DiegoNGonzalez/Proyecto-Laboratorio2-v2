@@ -77,9 +77,9 @@ void InformesMaker::mostrarInformeRecaXDia() {
 
 	std::cout << "INGRESAR LA FECHA\n" << std::endl;
 
-	dia = funcionesGlobales::validarRango(1, 31, "Ingrese el dia: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 31");
-	mes = funcionesGlobales::validarRango(1, 12, "Ingrese el mes: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 12");
-	anio = funcionesGlobales::validarRango(2020, 2023, "Ingrese el anio: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2021");
+	dia = funcionesGlobales::validarRango(1, 31, "Ingrese el dia: ", "ERROR. Ingrese un numero valido: ", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 31");
+	mes = funcionesGlobales::validarRango(1, 12, "Ingrese el mes: ", "ERROR. Ingrese un numero valido: ", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 12");
+	anio = funcionesGlobales::validarRango(2020, 2023, "Ingrese el anio: ", "ERROR. Ingrese un numero valido: ", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2021");
 
 	Fecha fechaInforme(dia, mes, anio);
 
@@ -96,8 +96,8 @@ void InformesMaker::mostrarInformeRecaXDia() {
 		system("cls");
 		std::cout << "\nRECAUDACION POR DIA" << std::endl;
 		std::cout << " " << std::left << std::setw(26) << "__________________________" << "" << std::endl;
-		std::cout << "|" << std::left << std::setw(10) << "FECHA" << " |"  << std::setw(14) << "  RECAUDACION" << "|" << std::endl;
-		std::cout << "|" << std::left << std::setw(0) << dia << "/" << mes << "/" << anio <<  " |" << std::setw(3) << "  $" << std::setw(11) << recaudacion << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(10) << "FECHA" << " |" << std::setw(14) << "  RECAUDACION" << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(0) << dia << "/" << mes << "/" << anio << " |" << std::setw(3) << "  $" << std::setw(11) << recaudacion << "|" << std::endl;
 		std::cout << "|" << std::left << std::setw(26) << "__________________________" << "|" << std::endl;
 		std::cout << std::endl;
 	}
@@ -111,8 +111,7 @@ void InformesMaker::mostrarInformeRecaXDia() {
 void InformesMaker::mostrarInformeRecaXMes() {
 	float recaudacion = 0;
 	int mesInforme;
-	mesInforme = funcionesGlobales::validarInt("Ingrese el mes", "ERROR. Ingrese un mes valido");
-	//mes = funcionesGlobales::validarRango(1,12,"Ingrese el mes: ","ERROR. Ingrese un mes valido", "En nro tiene que ser mayor o igual a 1", "El numero tiene que ser menor o igual a 12");
+	mesInforme = funcionesGlobales::validarRango(1, 12, "Ingrese el mes: ", "ERROR. Ingrese un mes valido: ", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 12");
 
 	ArchivoEntrada archiEntrada("venta.dat");
 	Entrada entrada;
@@ -129,14 +128,14 @@ void InformesMaker::mostrarInformeRecaXMes() {
 	}
 
 	if (recaudacion > 0) {
-		std::cout << "LA RECAUDACION EN " << funcionesGlobales::escribirMes(mesInforme) << " FUE DE: " << recaudacion << std::endl;
+		system("cls");
+		std::cout << "RECAUDACION MENSUAL " << std::endl;
 
-		/*
-		std::cout << " " << std::left << std::setw(36) << "____________________________________" << "" << std::endl;
-		std::cout << "|" << std::left << std::setw(15) << "TITULO" << "|" << std::setw(4) << "ID" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
-		std::cout << "|" << std::left << std::setw(15) << pelicula.getTitulo() << "|" << std::setw(4) << idPelicula << "|" << std::setw(1) << "$" << std::setw(14) << recaudacion << "|" << std::endl;
-		std::cout << "|" << std::left << std::setw(15) << "_______________" << "|" << std::setw(4) << "____" << "|" << std::setw(15) << "_______________" << "|" << std::endl;
-		std::cout << std::endl;*/
+		std::cout << " " << std::left << std::setw(15) << "_______________" << "_" << std::setw(15) << "_______________" << "" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << "MES" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << funcionesGlobales::escribirMes(mesInforme) << "|" << std::setw(1) << "$" << std::setw(14) << recaudacion << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << "_______________" << "_" << std::setw(15) << "_______________" << "|" << std::endl;
+		std::cout << std::endl;
 	}
 	else {
 		std::cout << "No se vendieron entradas en " << funcionesGlobales::escribirMes(mesInforme) << std::endl;
@@ -170,8 +169,8 @@ void InformesMaker::mostrarInformeRecaXAnio() {
 	}
 }
 
-void InformesMaker::mostrarInformeFranjasHorarias(){
-// 
-	std::cout<< "INFORME DE FRANJAS HORARIAS" << std::endl;
+void InformesMaker::mostrarInformeFranjasHorarias() {
+	// 
+	std::cout << "INFORME DE FRANJAS HORARIAS" << std::endl;
 }
 
