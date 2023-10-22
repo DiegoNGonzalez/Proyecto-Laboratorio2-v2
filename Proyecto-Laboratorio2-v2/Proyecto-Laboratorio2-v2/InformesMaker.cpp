@@ -92,7 +92,7 @@ void InformesMaker::mostrarInformeRecaXDia() {
 
 	if (recaudacion > 0) {
 		system("cls");
-		std::cout << "\nRECAUDACION POR DIA" << std::endl;
+		std::cout << "RECAUDACION POR DIA" << std::endl;
 		std::cout << " " << std::left << std::setw(26) << "__________________________" << "" << std::endl;
 		std::cout << "|" << std::left << std::setw(10) << "FECHA" << " |" << std::setw(14) << "  RECAUDACION" << "|" << std::endl;
 		std::cout << "|" << std::left << std::setw(0) << dia << "/" << mes << "/" << anio << " |" << std::setw(3) << "  $" << std::setw(11) << recaudacion << "|" << std::endl;
@@ -186,6 +186,8 @@ void InformesMaker::mostrarInformeFranjasHorarias() {
 
 	int cantidadEntradas = archiEntrada.contarRegistros();
 
+	std::string mensaje = "";
+
 	int cantEntradasFranja1 = 0;
 	int cantEntradasFranja2 = 0;
 	int cantEntradasFranja3 = 0;
@@ -200,60 +202,64 @@ void InformesMaker::mostrarInformeFranjasHorarias() {
 
 	int fhMax = -1;
 	float recaudacionMax = -1;
-	std::string mensaje = "<- Franja horaria con mayor recaudacion";
 
 	for (int i = 0; i < cantidadEntradas; i++) {
 		entrada = archiEntrada.leerRegistro(i);
-		int horaEntrada = entrada.getFechaHora().getHorario().getHora();
+		int horaFuncion = entrada.getFuncion().getFechaHoraFuncion().getHorario().getHora();
 
-		if (horaEntrada >= 12 && horaEntrada < 15) {
+		if (horaFuncion >= 12 && horaFuncion < 15) {
 			cantEntradasFranja1++;
 			recaudacionFranja1 += entrada.getImporte();
 		}
-		else if (horaEntrada >= 15 && horaEntrada < 17) {
+		else if (horaFuncion >= 15 && horaFuncion < 17) {
 			cantEntradasFranja2++;
 			recaudacionFranja2 += entrada.getImporte();
 		}
-		else if (horaEntrada >= 17 && horaEntrada < 20) {
+		else if (horaFuncion >= 17 && horaFuncion < 20) {
 			cantEntradasFranja3++;
 			recaudacionFranja3 += entrada.getImporte();
 		}
-		else if (horaEntrada >= 20 && horaEntrada < 23) {
+		else if (horaFuncion >= 20 && horaFuncion < 23) {
 			cantEntradasFranja4++;
 			recaudacionFranja4 += entrada.getImporte();
 		}
-		else if (horaEntrada >= 23 && horaEntrada < 1) {
+		else if (horaFuncion >= 23 || horaFuncion <= 1) {
 			cantEntradasFranja5++;
 			recaudacionFranja5 += entrada.getImporte();
 		}
 	}
 
-	float porcentajeFranja1 = (cantEntradasFranja1 * 100) / cantidadEntradas;
-	float porcentajeFranja2 = (cantEntradasFranja2 * 100) / cantidadEntradas;
-	float porcentajeFranja3 = (cantEntradasFranja3 * 100) / cantidadEntradas;
-	float porcentajeFranja4 = (cantEntradasFranja4 * 100) / cantidadEntradas;
-	float porcentajeFranja5 = (cantEntradasFranja5 * 100) / cantidadEntradas;
+	float porcentajeFranja1 = float(cantEntradasFranja1 * 100) / cantidadEntradas;
+	float porcentajeFranja2 = float(cantEntradasFranja2 * 100) / cantidadEntradas;
+	float porcentajeFranja3 = float(cantEntradasFranja3 * 100) / cantidadEntradas;
+	float porcentajeFranja4 = float(cantEntradasFranja4 * 100) / cantidadEntradas;
+	float porcentajeFranja5 = float(cantEntradasFranja5 * 100) / cantidadEntradas;
+
+
 
 	if (fhMax == -1) {
 		fhMax = 1;
 		recaudacionMax = recaudacionFranja1;
 	}
-	if (recaudacionMax < recaudacionFranja2) {
+	else if (recaudacionMax < recaudacionFranja2) {
 		fhMax = 2;
 		recaudacionMax = recaudacionFranja2;
 	}
-	if (recaudacionMax < recaudacionFranja3) {
+	else if (recaudacionMax < recaudacionFranja3) {
 		fhMax = 3;
 		recaudacionMax = recaudacionFranja3;
 	}
-	if (recaudacionMax < recaudacionFranja4) {
+	else if (recaudacionMax < recaudacionFranja4) {
 		fhMax = 4;
 		recaudacionMax = recaudacionFranja4;
 	}
-	if (recaudacionMax < recaudacionFranja5) {
+	else if (recaudacionMax < recaudacionFranja5) {
 		fhMax = 5;
 	}
 
+	if (recaudacionMax > 0) { // para que no muestre nada si todavia no se vendieron entradas
+		mensaje = "<- Franja horaria con mayor recaudacion";
+	}
 
 	std::cout << "INFORME DE FRANJAS HORARIAS" << std::endl;
 
