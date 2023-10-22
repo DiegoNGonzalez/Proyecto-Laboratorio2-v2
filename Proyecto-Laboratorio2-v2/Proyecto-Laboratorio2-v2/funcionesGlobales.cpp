@@ -27,7 +27,7 @@ int funcionesGlobales::validarRango(int minimo, int maximo, std::string textoCou
     int nroAvalidar;
 
     nroAvalidar = validarInt(textoCout,textoError);
-    while (nroAvalidar<=minimo || nroAvalidar>=maximo) {
+    while (nroAvalidar<minimo || nroAvalidar>maximo) {
         std::cout << textoMinimo << textoMaximo << std::endl;
         nroAvalidar = validarInt(textoCout,textoError);
     }
