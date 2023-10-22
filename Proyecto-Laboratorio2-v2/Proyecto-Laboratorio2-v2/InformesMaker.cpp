@@ -26,7 +26,7 @@ void InformesMaker::mostrarInfomeRecaXPelicula() {
 	int cantidadPeliculas = archivoPeliculas.contarRegistros();
 	int cantidadEntradas = archivoEntrada.contarRegistros();
 
-	int recaudacion = 0;
+	float recaudacion = 0;
 
 	for (int i = 0; i < cantidadPeliculas; i++) {
 
@@ -73,12 +73,12 @@ void InformesMaker::mostrarInformeRecaXDia() {
 	int mes;
 	int anio;
 
-	int recaudacion = 0;
+	float recaudacion = 0;
 
 	std::cout << "INGRESAR LA FECHA\n" << std::endl;
-	dia=funcionesGlobales::validarRango(1, 31, "Ingrese el dia: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 31");
-	mes=funcionesGlobales::validarRango(1, 12, "Ingrese el mes: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 12");
-	anio=funcionesGlobales::validarRango(2020, 2021, "Ingrese el anio: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2021");
+	dia = funcionesGlobales::validarRango(1, 31, "Ingrese el dia: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 31");
+	mes = funcionesGlobales::validarRango(1, 12, "Ingrese el mes: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 12");
+	anio = funcionesGlobales::validarRango(2020, 2021, "Ingrese el anio: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2021");
 	/*std::cout << "Ingrese el dia: ";
 	std::cin >> dia;
 	std::cout << "Ingrese el mes: ";
@@ -89,7 +89,7 @@ void InformesMaker::mostrarInformeRecaXDia() {
 	Fecha fechaInforme(dia, mes, anio);
 
 	for (int i = 0; i < cantEntradas; i++) {
-		entrada = archiEntrada.leerRegistro(i);	
+		entrada = archiEntrada.leerRegistro(i);
 		Fecha fechaEntrada = entrada.getFechaHora().getFecha();
 
 		if (funcionesGlobales::compararFechas(fechaEntrada, fechaInforme)) {
@@ -108,4 +108,41 @@ void InformesMaker::mostrarInformeRecaXDia() {
 	}
 
 }
+
+void InformesMaker::mostrarInformeRecaXMes() {
+	float recaudacion = 0;
+	int mesInforme;
+	mesInforme = funcionesGlobales::validarInt("Ingrese el mes", "ERROR. Ingrese un mes valido");
+	//mes = funcionesGlobales::validarRango(1,12,"Ingrese el mes: ","ERROR. Ingrese un mes valido", "En nro tiene que ser mayor o igual a 1", "El numero tiene que ser menor o igual a 12");
+
+	ArchivoEntrada archiEntrada("venta.dat");
+	Entrada entrada;
+	int cantidadEntradas = archiEntrada.contarRegistros();
+
+	for (int i = 0; i < cantidadEntradas; i++) {
+		entrada = archiEntrada.leerRegistro(i);
+
+		int mesEntrada = entrada.getFechaHora().getFecha().getMes();
+
+		if (mesInforme == mesEntrada) {
+			recaudacion += entrada.getImporte();
+		}
+	}
+
+	if (recaudacion > 0) {
+		std::cout << "LA RECAUDACION EN " << funcionesGlobales::escribirMes(mesInforme) << " FUE DE: " << recaudacion << std::endl;
+
+		/*
+		std::cout << " " << std::left << std::setw(36) << "____________________________________" << "" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << "TITULO" << "|" << std::setw(4) << "ID" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << pelicula.getTitulo() << "|" << std::setw(4) << idPelicula << "|" << std::setw(1) << "$" << std::setw(14) << recaudacion << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << "_______________" << "|" << std::setw(4) << "____" << "|" << std::setw(15) << "_______________" << "|" << std::endl;
+		std::cout << std::endl;*/
+	}
+	else {
+		std::cout << "No se vendieron entradas en " << funcionesGlobales::escribirMes(mesInforme) << std::endl;
+	}
+
+}
+
 

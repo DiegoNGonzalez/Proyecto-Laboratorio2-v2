@@ -4,7 +4,6 @@
 #include "Administrador.h"
 #include <iomanip>
 
-
 class InformesMaker {
 private:
 	int _cantidadInformesXPelicula;
@@ -12,6 +11,7 @@ public:
 	InformesMaker();
 	void mostrarInfomeRecaXPelicula();
 	void mostrarInformeRecaXDia();
+	void mostrarInformeRecaXMes();
 
 };
 

@@ -131,3 +131,22 @@ void funcionesGlobales::cargarCadena(char* pal, int tam)
 
 }
 
+// Agregue para mostrar el mes en letras, lo uso en informes
+std::string funcionesGlobales::escribirMes(int mes) {
+    std::string vMeses[12] = {
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio ",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+    };
+
+    return vMeses[mes - 1];
+}

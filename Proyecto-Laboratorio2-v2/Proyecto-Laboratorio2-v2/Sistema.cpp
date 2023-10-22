@@ -356,8 +356,7 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 			}
 			case 2: {
 				system("cls");
-				std::cout << "Total recaudado por mes" << std::endl;
-				std::cout << "Ingrese el mes " << std::endl;
+				informesMaker.mostrarInformeRecaXMes();
 				system("pause");
 				system("cls");
 				break;
