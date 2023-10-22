@@ -12,12 +12,9 @@ void InformesMaker::mostrarInfomeRecaXPelicula() {
 	std::cout << "LISTADO DE PELICULAS DISPONIBLES " << std::endl << std::endl;
 	admin.verPeliculasCargadas();
 
-	/*std::cout << "Por favor ingrese el ID de la pelicula: ";
-	std::cin >> idPelicula;*/
-	idPelicula = funcionesGlobales::validarMinimo(1, "Por favor ingrese el ID de la pelicula: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
+	idPelicula = funcionesGlobales::validarMinimo(1, "Ingrese el numero de la pelicula: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
 
-
-	Pelicula pelicula; // creo el obj pelicuila
+	Pelicula pelicula;
 	ArchivoPeliculas archivoPeliculas("pelicula.dat");
 
 	Entrada entrada;
@@ -47,11 +44,12 @@ void InformesMaker::mostrarInfomeRecaXPelicula() {
 
 			}
 			else {
-				//uso la libreria <iomanip> para que se muestre como una tabla
-				std::cout << " " << std::left << std::setw(36) << "____________________________________" << "" << std::endl;
-				std::cout << "|" << std::left << std::setw(15) << "TITULO" << "|" << std::setw(4) << "ID" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
-				std::cout << "|" << std::left << std::setw(15) << pelicula.getTitulo() << "|" << std::setw(4) << idPelicula << "|" << std::setw(1) << "$" << std::setw(14) << recaudacion << "|" << std::endl;
-				std::cout << "|" << std::left << std::setw(15) << "_______________" << "|" << std::setw(4) << "____" << "|" << std::setw(15) << "_______________" << "|" << std::endl;
+
+				system("cls");
+				std::cout << "." << std::left << std::setw(31) << "_______________________________" << "." << std::endl;
+				std::cout << "|" << std::left << std::setw(15) << "TITULO" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
+				std::cout << "|" << std::left << std::setw(15) << pelicula.getTitulo() << "|" << std::setw(1) << "$" << std::setw(14) << recaudacion << "|" << std::endl;
+				std::cout << "|" << std::left << std::setw(15) << "_______________" << "|" << std::setw(15) << "_______________" << "|" << std::endl;
 				std::cout << std::endl;
 			}
 
@@ -131,10 +129,10 @@ void InformesMaker::mostrarInformeRecaXMes() {
 		system("cls");
 		std::cout << "RECAUDACION MENSUAL " << std::endl;
 
-		std::cout << " " << std::left << std::setw(15) << "_______________" << "_" << std::setw(15) << "_______________" << "" << std::endl;
+		std::cout << "." << std::left << std::setw(15) << "_______________" << "_" << std::setw(15) << "_______________" << "." << std::endl;
 		std::cout << "|" << std::left << std::setw(15) << "MES" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
 		std::cout << "|" << std::left << std::setw(15) << funcionesGlobales::escribirMes(mesInforme) << "|" << std::setw(1) << "$" << std::setw(14) << recaudacion << "|" << std::endl;
-		std::cout << "|" << std::left << std::setw(15) << "_______________" << "_" << std::setw(15) << "_______________" << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << "_______________" << "|" << std::setw(15) << "_______________" << "|" << std::endl;
 		std::cout << std::endl;
 	}
 	else {
@@ -145,8 +143,7 @@ void InformesMaker::mostrarInformeRecaXMes() {
 
 void InformesMaker::mostrarInformeRecaXAnio() {
 	float recaudacion = 0;
-	int anioInforme;
-	anioInforme = funcionesGlobales::validarInt("Ingrese el anio", "ERROR. Ingrese un anio valido");
+	int anioInforme = funcionesGlobales::validarRango(2020, 2023, "Ingrese el anio: ", "ERROR. Ingrese un anio valido: ", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2023");
 
 	ArchivoEntrada archiEntrada("venta.dat");
 	Entrada entrada;
@@ -162,7 +159,15 @@ void InformesMaker::mostrarInformeRecaXAnio() {
 	}
 
 	if (recaudacion > 0) {
-		std::cout << "LA RECAUDACION EN " << anioInforme << " FUE DE: " << recaudacion << std::endl;
+		system("cls");
+		std::cout << "RECAUDACION ANUAL" << std::endl;
+
+		std::cout << "." << std::left << std::setw(15) << "_______________" << "_" << std::setw(15) << "_______________" << "." << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << "ANIO" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << anioInforme << "|" << std::setw(1) << "$" << std::setw(14) << recaudacion << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << "_______________" << "|" << std::setw(15) << "_______________" << "|" << std::endl;
+		std::cout << std::endl;
+
 	}
 	else {
 		std::cout << "No se vendieron entradas en " << anioInforme << std::endl;
