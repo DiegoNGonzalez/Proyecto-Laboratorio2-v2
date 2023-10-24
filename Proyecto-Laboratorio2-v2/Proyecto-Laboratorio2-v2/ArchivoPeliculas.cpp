@@ -1,6 +1,7 @@
 #include "ArchivoPeliculas.h"
 #include "funcionesGlobales.h"
 //#include <iostream>
+#include <filesystem>
 Pelicula ArchivoPeliculas::leerRegistro(int posicion) {
 	Pelicula pelicula;
 	FILE* p;
@@ -50,82 +51,120 @@ bool ArchivoPeliculas::grabarRegistro(Pelicula diagrama, int posicion) {
 	return pudoEscribir;
 }
 bool ArchivoPeliculas::generarBackUp() {
-	FILE* p;
-	FILE* pBackUp;
-	Pelicula pelicula;
-	bool pudoEscribir = false;
-	p = fopen(_nombre, "rb");
-	pBackUp = fopen("backUp/peliculaBKP.dat", "wb");
-	if (p == NULL || pBackUp == NULL) {
-		std::cout << "Error al generar back up" << std::endl;
+	FILE* archivo = fopen(_nombre, "rb");
+	std::string ruta = "backUp/peliculaBKP.dat";
+
+	if (archivo == NULL) {
+		std::cout << "Error al abrir el archivo. Falla BackUp" << std::endl;
 		return false;
 	}
-	while (fread(&pelicula, sizeof pelicula, 1, p) == 1) {
-		fwrite(&pelicula, sizeof pelicula, 1, pBackUp);
-	}
-	fclose(p);
-	fclose(pBackUp);
-	pudoEscribir = true;
-	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
-	/*int porcentaje = 25;
-	for (int x = 0;x < 4;x++) {
 
-		std::cout << "Restaurando archivo de seguridad: ";
-		std::cout << porcentaje * (x + 1);
-		std::cout << "%";
-		Sleep(1000);
-		system("cls");
-		rlutil::hidecursor();
-	}
-	if (pudoEscribir == true) {
-		std::cout << "BackUp generado con exito" << std::endl;
+	if (std::filesystem::exists(ruta)) {
+		std::cout << "Ya existe un BackUp de Peliculas." << std::endl;
+		if (funcionesGlobales::confirmarAccion("Desea sobreescribirlo? (S/N): ")) {
+			FILE* archivoBackUp = fopen("backUp/peliculaBKP.dat", "wb");
+			if (archivoBackUp == NULL) {
+				std::cout << "Error al abrir el archivo de respaldo. Falla BackUp" << std::endl;
+				fclose(archivo);
+				return false;
+			}
+
+			Pelicula pelicula;
+			while (fread(&pelicula, sizeof(Pelicula), 1, archivo) == 1) {
+				fwrite(&pelicula, sizeof(Pelicula), 1, archivoBackUp);
+			}
+
+			fclose(archivo);
+			fclose(archivoBackUp);
+			funcionesGlobales::mostrarPorcentaje(true);
+			std::cout << "Copia de seguridad generada con éxito." << std::endl;
+			return true;
+		}
+		else {
+			fclose(archivo);
+			return false;
+		}
 	}
 	else {
-		std::cout << "No se pudo generar el BackUp" << std::endl;
+		FILE* archivoBackUp = fopen("backUp/peliculaBKP.dat", "wb");
+		if (archivoBackUp == NULL) {
+			std::cout << "Error al abrir el archivo de respaldo. Falla BackUp" << std::endl;
+			fclose(archivo);
+			return false;
+		}
+
+		Pelicula pelicula;
+		while (fread(&pelicula, sizeof(Pelicula), 1, archivo) == 1) {
+			fwrite(&pelicula, sizeof(Pelicula), 1, archivoBackUp);
+		}
+
+		fclose(archivo);
+		fclose(archivoBackUp);
+		funcionesGlobales::mostrarPorcentaje(true);
+		std::cout << "Copia de seguridad generada con éxito." << std::endl;
+		return true;
 	}
-	system("pause");*/
-	return pudoEscribir;
+	fclose(archivo);
+	return false;
 }
+
+
 
 bool ArchivoPeliculas::restaurarBackUp() {
-	FILE* p;
-	FILE* pBackUp;
-	Pelicula pelicula;
-	bool pudoEscribir = false;
-	p = fopen(_nombre, "wb");
-	pBackUp = fopen("backUp/peliculaBKP.dat", "rb");
-	if (p == NULL || pBackUp == NULL) {
-		std::cout << "Error al restaurar back up" << std::endl;
+	FILE* archivoBackUp = fopen("backUp/peliculaBKP.dat", "rb");
+	std::string ruta = "pelicula.dat";
+
+	if (archivoBackUp == NULL)
+	{
+		std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
 		return false;
 	}
-	while (fread(&pelicula, sizeof pelicula, 1, pBackUp) == 1) {
-		fwrite(&pelicula, sizeof pelicula, 1, p);
-	}
-	fclose(p);
-	fclose(pBackUp);
-	pudoEscribir = true;
-	funcionesGlobales::mostrarPorcentaje(pudoEscribir);
-	/*int porcentaje = 25;
-	for (int x = 0;x < 4;x++) {
-
-		std::cout << "Restaurando archivo de seguridad: ";
-		std::cout << porcentaje * (x + 1);
-		std::cout << "%";
-		Sleep(1000);
-		system("cls");
-		rlutil::hidecursor();
-	}
-
-	if (pudoEscribir == true) {
-		std::cout << "BackUp restaurado con exito" << std::endl;
+	if (std::filesystem::exists(ruta)) {
+		std::cout << "Ya existe un archivo de Peliculas." << std::endl;
+		if (funcionesGlobales::confirmarAccion("Desea sobreescribirlo? (S/N): ")) {
+			FILE* archivo = fopen("venta.dat", "wb");
+			if (archivo == NULL)
+			{
+				std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
+				fclose(archivoBackUp);
+				return false;
+			}
+			Pelicula pelicula;
+			while (fread(&pelicula, sizeof(Pelicula), 1, archivoBackUp))
+			{
+				fwrite(&pelicula, sizeof(Pelicula), 1, archivo);
+			}
+			fclose(archivoBackUp);
+			fclose(archivo);
+			funcionesGlobales::mostrarPorcentaje(true);
+			std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
+			return true;
+		}
+		else {
+			fclose(archivoBackUp);
+			return false;
+		}
 	}
 	else {
-		std::cout << "No se pudo restaurar el BackUp" << std::endl;
+		FILE* archivo = fopen("pelicula.dat", "wb");
+		if (archivo == NULL)
+		{
+			std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
+			fclose(archivoBackUp);
+			return false;
+		}
+		Pelicula pelicula;
+		while (fread(&pelicula, sizeof(Pelicula), 1, archivoBackUp))
+		{
+			fwrite(&pelicula, sizeof(Pelicula), 1, archivo);
+		}
+		fclose(archivoBackUp);
+		fclose(archivo);
+		funcionesGlobales::mostrarPorcentaje(true);
+		std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
+		return true;
 	}
-	system("pause");*/
-	return pudoEscribir;
 }
-
 int ArchivoPeliculas::validarId() {
 	FILE* p;
 	int idMax = 0, contarReg;

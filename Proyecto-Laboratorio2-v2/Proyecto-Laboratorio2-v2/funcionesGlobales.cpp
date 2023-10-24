@@ -4,7 +4,8 @@
 int funcionesGlobales::validarInt(std::string textoCout, std::string textoError) {
     int nroAvalidar;
 
-    std::cout << textoCout << std::endl;
+    std::cout << textoCout;
+    //<< std::endl; // le saque el salto de linea para que la fecha se ingrese en el mismo renglon
     while (!(std::cin >> nroAvalidar)) {
         std::cout << textoError;
         std::cin.clear();
@@ -26,7 +27,7 @@ int funcionesGlobales::validarRango(int minimo, int maximo, std::string textoCou
     int nroAvalidar;
 
     nroAvalidar = validarInt(textoCout,textoError);
-    while (nroAvalidar<=minimo || nroAvalidar>=maximo) {
+    while (nroAvalidar<minimo || nroAvalidar>maximo) {
         std::cout << textoMinimo << textoMaximo << std::endl;
         nroAvalidar = validarInt(textoCout,textoError);
     }
@@ -118,6 +119,7 @@ void funcionesGlobales::mostrarPorcentaje(bool pudoEscribir)
 
 void funcionesGlobales::cargarCadena(char *pal, int tam)
 {
+<<<<<<< HEAD
     int i;
     fflush(stdin);
     for (i = 0; i < tam; i++) {
@@ -134,3 +136,54 @@ void funcionesGlobales::cargarCadena(char *pal, int tam)
     pal[i] = '\0';
     std::cin.ignore(30, '\n');
 }
+=======
+        int i;
+        fflush(stdin);
+       // std::cin.ignore();
+        for (i = 0; i < tam; i++)
+        {
+            pal[i] = std::cin.get();
+            if (pal[i] == '\n') break;
+        }
+        pal[i] = '\0';
+        std::cin.ignore(30,'\n');
+    
+        
+}
+bool funcionesGlobales::confirmarAccion(std::string textoCout)
+{
+    char siONo;
+    std::cout << textoCout;
+    std::cin >> siONo;
+    while (siONo != 's' && siONo != 'S' && siONo != 'n' && siONo != 'N') {
+        std::cout << "Opcion no valida, reingrese (s/n): ";
+        std::cin >> siONo;
+    }
+    if (siONo == 's' || siONo == 'S') {
+        return true;
+    }
+    else {
+        std::cout << "Accion cancelada." << std::endl;
+        return false;
+    }
+}
+
+// Agregue para mostrar el mes en letras, lo uso en informes
+std::string funcionesGlobales::escribirMes(int mes) {
+    std::string vMeses[12] = {
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio ",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+    };
+    return vMeses[mes - 1];
+}
+>>>>>>> 8004fd5614bd8a7e67049fc20d5bd9d3f9006604

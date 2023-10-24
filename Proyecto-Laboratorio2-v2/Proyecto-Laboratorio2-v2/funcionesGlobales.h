@@ -18,5 +18,7 @@ namespace funcionesGlobales{
 	bool compararFechas(Fecha fecha1, Fecha fecha2);
 	void mostrarPorcentaje(bool pudoEscribir);
 	void cargarCadena(char* pal, int tam);
+	bool confirmarAccion(std::string textoCout);
+	std::string escribirMes(int mes);
 
 }
