@@ -31,7 +31,6 @@ void Administrador::cargarPeliculas() {
 	std::cin.ignore();
 	std::cout << "TITULO: ";
 	funcionesGlobales::cargarCadena(titulo, 29);
-<<<<<<< HEAD
 	//std::cin.ignore();
 	std::cout << "DIRECTOR: ";
 	funcionesGlobales::cargarCadena(director, 29);
@@ -39,12 +38,10 @@ void Administrador::cargarPeliculas() {
 	std::cout << "CLASIFICACION DE EDAD: ";
 	funcionesGlobales::cargarCadena(clasificacionEdad, 29);
 	//std::cin.ignore();
-=======
 	std::cout << "DIRECTOR: ";
 	funcionesGlobales::cargarCadena(director, 29);
 	std::cout << "CLASIFICACION DE EDAD: ";
 	funcionesGlobales::cargarCadena(clasificacionEdad, 29);
->>>>>>> 8004fd5614bd8a7e67049fc20d5bd9d3f9006604
 	std::cout << "GENERO: ";
 	funcionesGlobales::cargarCadena(genero, 29);
 	//std::cin.ignore();

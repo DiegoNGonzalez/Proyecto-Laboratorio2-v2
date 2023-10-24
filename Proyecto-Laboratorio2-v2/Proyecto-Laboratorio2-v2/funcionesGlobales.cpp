@@ -119,7 +119,7 @@ void funcionesGlobales::mostrarPorcentaje(bool pudoEscribir)
 
 void funcionesGlobales::cargarCadena(char *pal, int tam)
 {
-<<<<<<< HEAD
+
     int i;
     fflush(stdin);
     for (i = 0; i < tam; i++) {
@@ -136,20 +136,7 @@ void funcionesGlobales::cargarCadena(char *pal, int tam)
     pal[i] = '\0';
     std::cin.ignore(30, '\n');
 }
-=======
-        int i;
-        fflush(stdin);
-       // std::cin.ignore();
-        for (i = 0; i < tam; i++)
-        {
-            pal[i] = std::cin.get();
-            if (pal[i] == '\n') break;
-        }
-        pal[i] = '\0';
-        std::cin.ignore(30,'\n');
-    
-        
-}
+
 bool funcionesGlobales::confirmarAccion(std::string textoCout)
 {
     char siONo;
