@@ -195,7 +195,7 @@ int ArchivoSalas::buscarPosSalaxID(int valorBuscado) {
 			return i;
 		}
 	}
-	std::cout << "No se encontro el id." << std::endl;
+	std::cout << "ID DE SALA INEXISTENTE." << std::endl;
 	return -1;
 
 }

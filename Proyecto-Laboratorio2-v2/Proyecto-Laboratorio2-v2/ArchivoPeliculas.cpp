@@ -197,7 +197,7 @@ int ArchivoPeliculas::buscarPosPeliculaxID(int valorBuscado) {
 			return i;
 		}
 	}
-	std::cout << "No se encontro el id." << std::endl;
+	std::cout << "ID DE PELICULA INEXISTENTE." << std::endl;
 	return -1;
 	
 }

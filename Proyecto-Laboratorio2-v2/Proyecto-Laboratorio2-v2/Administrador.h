@@ -106,7 +106,7 @@ public:
 	bool verificarEstadoPeliculas(int idPelicula);
 	bool verificarEstadoSalas(int idSaLa);
 	void darDeBajaFuncionxSalaOxPelicula();
-	bool darDeBajaFuncion(int idFuncion);
+	bool darDeBajaFuncion();
 	void verVentas();
 	void generarReporte();
 	Administrador();
