@@ -241,35 +241,35 @@ void InformesMaker::mostrarInformeFranjasHorarias() {
 		fhMax = 1;
 		recaudacionMax = recaudacionFranja1;
 	}
-	else if (recaudacionMax < recaudacionFranja2) {
+	 if (recaudacionMax < recaudacionFranja2) {
 		fhMax = 2;
 		recaudacionMax = recaudacionFranja2;
 	}
-	else if (recaudacionMax < recaudacionFranja3) {
+	 if (recaudacionMax < recaudacionFranja3) {
 		fhMax = 3;
 		recaudacionMax = recaudacionFranja3;
 	}
-	else if (recaudacionMax < recaudacionFranja4) {
+	 if (recaudacionMax < recaudacionFranja4) {
 		fhMax = 4;
 		recaudacionMax = recaudacionFranja4;
 	}
-	else if (recaudacionMax < recaudacionFranja5) {
+	 if (recaudacionMax < recaudacionFranja5) {
 		fhMax = 5;
 	}
 
 	if (recaudacionMax > 0) { // para que no muestre nada si todavia no se vendieron entradas
-		mensaje = "<- Franja horaria con mayor recaudacion";
+		mensaje = "<- Franja horaria con mayor concurrencia";
 	}
 
-	std::cout << "INFORME DE FRANJAS HORARIAS" << std::endl;
+	std::cout << "INFORME DE FRANJAS HORARIAS - Concurrencia" << std::endl;
 
 	std::cout << "." << std::left << std::setw(16) << "________________" << "_" << std::setw(15) << "_______________" << "_" << std::setw(12) << "____________" << "_" << std::setw(8) << "________" << "." << std::endl;
-	std::cout << "|" << std::left << std::setw(16) << "FRANJA HORARIA" << "|" << std::setw(15) << "CANT ENTRADAS" << "|" << std::setw(12) << "RECAUDACION" << "|" << std::setw(8) << " % REC" << "|" << std::endl;
-	std::cout << "|" << std::left << std::setw(16) << "12hs - 15 hs" << "|" << std::setw(15) << cantEntradasFranja1 << "|" << std::setw(12) << recaudacionFranja1 << "|" << std::setw(8) << porcentajeFranja1 << "|" << (fhMax == 1 ? mensaje : "") << std::endl;
-	std::cout << "|" << std::left << std::setw(16) << "15hs - 17 hs" << "|" << std::setw(15) << cantEntradasFranja2 << "|" << std::setw(12) << recaudacionFranja2 << "|" << std::setw(8) << porcentajeFranja2 << "|" << (fhMax == 2 ? mensaje : "") << std::endl;
-	std::cout << "|" << std::left << std::setw(16) << "17hs - 20 hs" << "|" << std::setw(15) << cantEntradasFranja3 << "|" << std::setw(12) << recaudacionFranja3 << "|" << std::setw(8) << porcentajeFranja3 << "|" << (fhMax == 3 ? mensaje : "") << std::endl;
-	std::cout << "|" << std::left << std::setw(16) << "20hs - 23 hs" << "|" << std::setw(15) << cantEntradasFranja4 << "|" << std::setw(12) << recaudacionFranja4 << "|" << std::setw(8) << porcentajeFranja4 << "|" << (fhMax == 4 ? mensaje : "") << std::endl;
-	std::cout << "|" << std::left << std::setw(16) << "23hs - 01 hs" << "|" << std::setw(15) << cantEntradasFranja5 << "|" << std::setw(12) << recaudacionFranja5 << "|" << std::setw(8) << porcentajeFranja5 << "|" << (fhMax == 5 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "FRANJA HORARIA" << "|" << std::setw(15) << "CANT ENTRADAS" << "|" << std::setw(12) << "RECAUDACION" << "|" << std::setw(8) << "% CONC" << "|" << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "12hs - 15 hs" << "|" << std::setw(15) << std::setprecision(0)<< cantEntradasFranja1 << "|" << std::setw(12) << recaudacionFranja1 << "|" << std::setw(8) <<std::fixed << std::setprecision(2) << porcentajeFranja1 << "|" << (fhMax == 1 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "15hs - 17 hs" << "|" << std::setw(15) << std::setprecision(0)<< cantEntradasFranja2 << "|" << std::setw(12) << recaudacionFranja2 << "|" << std::setw(8) <<std::fixed << std::setprecision(2) << porcentajeFranja2 << "|" << (fhMax == 2 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "17hs - 20 hs" << "|" << std::setw(15) << std::setprecision(0)<< cantEntradasFranja3 << "|" << std::setw(12) << recaudacionFranja3 << "|" << std::setw(8) <<std::fixed << std::setprecision(2) << porcentajeFranja3 << "|" << (fhMax == 3 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "20hs - 23 hs" << "|" << std::setw(15) << std::setprecision(0)<< cantEntradasFranja4 << "|" << std::setw(12) << recaudacionFranja4 << "|" << std::setw(8) <<std::fixed << std::setprecision(2) << porcentajeFranja4 << "|" << (fhMax == 4 ? mensaje : "") << std::endl;
+	std::cout << "|" << std::left << std::setw(16) << "23hs - 01 hs" << "|" << std::setw(15) << std::setprecision(0)<< cantEntradasFranja5 << "|" << std::setw(12) << recaudacionFranja5 << "|" << std::setw(8) <<std::fixed << std::setprecision(2) << porcentajeFranja5 << "|" << (fhMax == 5 ? mensaje : "") << std::endl;
 	std::cout << "|" << std::left << std::setw(16) << "________________" << "|" << std::setw(15) << "_______________" << "|" << std::setw(12) << "____________" << "|" << std::setw(8) << "________" << "|" << std::endl;
 	std::cout << std::endl;
 }
