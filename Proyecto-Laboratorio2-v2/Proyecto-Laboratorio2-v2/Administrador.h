@@ -115,7 +115,7 @@ public:
 	void menuSalas();
 	void menuFunciones();
 	void menuBackUp();
-	bool confirmarAccion();
+	
 
 
 };

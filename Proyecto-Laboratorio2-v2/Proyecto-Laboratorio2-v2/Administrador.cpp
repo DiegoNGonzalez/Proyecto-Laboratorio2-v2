@@ -12,12 +12,12 @@
 //#include "ArchivoSalas.h"
 //#include "ArchivoDiagrama.h"
 //#include "DiagramaSala.h"
-<<<<<<< HEAD
-#include <stdio.h>
-#include <cstdio>
-#include <iostream>
-=======
->>>>>>> 8e36f9306dc8b489dc97aa72369f2c5c15d8244d
+//<<<<<<< HEAD
+//=======
+//>>>>>>> 8e36f9306dc8b489dc97aa72369f2c5c15d8244d
+
+
+
 void Administrador::cargarPeliculas() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
 	char titulo[30];
@@ -31,15 +31,23 @@ void Administrador::cargarPeliculas() {
 	std::cin.ignore();
 	std::cout << "TITULO: ";
 	funcionesGlobales::cargarCadena(titulo, 29);
-	std::cin.ignore();
+<<<<<<< HEAD
+	//std::cin.ignore();
 	std::cout << "DIRECTOR: ";
 	funcionesGlobales::cargarCadena(director, 29);
-	std::cin.ignore();
+	//std::cin.ignore();
 	std::cout << "CLASIFICACION DE EDAD: ";
 	funcionesGlobales::cargarCadena(clasificacionEdad, 29);
-	std::cin.ignore();
+	//std::cin.ignore();
+=======
+	std::cout << "DIRECTOR: ";
+	funcionesGlobales::cargarCadena(director, 29);
+	std::cout << "CLASIFICACION DE EDAD: ";
+	funcionesGlobales::cargarCadena(clasificacionEdad, 29);
+>>>>>>> 8004fd5614bd8a7e67049fc20d5bd9d3f9006604
 	std::cout << "GENERO: ";
 	funcionesGlobales::cargarCadena(genero, 29);
+	//std::cin.ignore();
 	duracion=funcionesGlobales::validarMinimo(1,"Ingrese la duracion en minutos: ", "Lo ingresado no es un numero, reingrese un numero: ", "La duración tiene que ser mayor a 1 minuto, reingrese: ");
 	std::cout << std::endl;
 	pelicula = Pelicula(id, titulo, director, clasificacionEdad, genero, duracion);
@@ -75,7 +83,7 @@ bool Administrador::darDeBajaPelicula() {
 	/*std::cout << "NRO DE PELICULA PARA ELIMINAR DE LA CARTELERA: ";
 	std::cin >> id;*/
 	id = funcionesGlobales::validarMinimo(1, "NRO DE PELICULA PARA ELIMINAR DE LA CARTELERA: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor a 1, reingrese: ");
-	if (confirmarAccion()) {
+	if (funcionesGlobales::confirmarAccion("Esta por eliminar la pelicula seleccionada, confirmelo (S/N): ")) {
 
 		system("cls");
 		posicionPelicula = archiPeliculas.buscarPosPeliculaxID(id);
@@ -138,7 +146,7 @@ bool Administrador::modificarSalaEnRegistro(int nroSala) {
 	/*std::cout << "NUEVO IMPORTE DE ENTRADA $";
 	std::cin >> precioNuevo;*/
 	precioNuevo = funcionesGlobales::validarMinimoFloat(1, "NUEVO IMPORTE DE ENTRADA $", "Lo ingresado no es un numero, reingrese un numero: ", "El precio de la entrada tiene que ser positivo, reingrese: ");
-	if (confirmarAccion()) {
+	if (funcionesGlobales::confirmarAccion("Esta por cambiar el valor de la entrada, confirmelo (S/N): ")) {
 
 		sala.setPrecioAsiento(precioNuevo);
 		if (archivoSalas.grabarRegistro(sala, posicionSala)) {
@@ -160,7 +168,7 @@ bool Administrador::darDeBajaSala() {
 	/*std::cout << "NRO DE SALA A ELIMINAR #";
 	std::cin >> id;*/
 	id = funcionesGlobales::validarInt("NRO DE SALA A ELIMINAR #", "Lo ingresado no es un numero, reingrese un numero: ");
-	if (confirmarAccion()) {
+	if (funcionesGlobales::confirmarAccion("Esta por eliminar la sala seleccionada, confirmelo (S/N): ")) {
 
 		system("cls");
 		posicionSala = archiSalas.buscarPosSalaxID(id);
@@ -267,7 +275,7 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 				/*std::cout << "NRO DE PELICULA QUE DESEA CAMBIAR: ";
 				std::cin >> idPelicula;*/
 				idPelicula = funcionesGlobales::validarMinimo(1, "NRO DE PELICULA QUE DESEA CAMBIAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
-				if (confirmarAccion()) {
+				if (funcionesGlobales::confirmarAccion("Esta por asignar una nueva pelicula de la funcion, confirmelo (S/N): ")) {
 					posicionPelicula = archivoPeliculas.buscarPosPeliculaxID(idPelicula);
 					pelicula = archivoPeliculas.leerRegistro(posicionPelicula);
 					funcion.setPelicula(pelicula);
@@ -287,7 +295,7 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 				/*std::cout << "NRO DE SALA QUE DESEA CAMBIAR";
 				std::cin >> idSala;*/
 				idSala = funcionesGlobales::validarMinimo(1, "NRO DE SALA QUE DESEA CAMBIAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
-				if (confirmarAccion()) {
+				if (funcionesGlobales::confirmarAccion("Esta por asignar una nueva sala a la funcion, confirmelo (S/N): ")) {
 					posicionSala = archivoSalas.buscarPosSalaxID(idSala);
 					sala = archivoSalas.leerRegistro(posicionSala);
 					funcion.setSala(sala);
@@ -345,7 +353,7 @@ bool Administrador::modificarFuncionEnRegistro(int idFuncion) {
 					std::cout << "Minutos no validos, reingrese los minutos: ";
 					std::cin >> minuto;
 				}*/
-				if (confirmarAccion()) {
+				if (funcionesGlobales::confirmarAccion("Esta por modificar la fecha y hora de la funcion, confirmelo (S/N): ")) {
 
 					fechaHorario = FechaHorario(dia, mes, anio, minuto, hora);
 					funcion.setFechaHoraFuncion(fechaHorario);
@@ -454,7 +462,7 @@ bool Administrador::darDeBajaFuncion(int idFuncion)
 	posicionFuncion = archivoFunciones.buscarPosFuncionxID(idFuncion);
 	posicionDiagrama = archivoDiagrama.buscarPosDiagramaxID(idFuncion);
 
-	if (confirmarAccion()) {
+	if (funcionesGlobales::confirmarAccion("Esta por dar de baja la funcion seleccionada, confirmelo (S/N): ")) {
 
 		if (posicionFuncion >= 0 && posicionDiagrama >= 0) {
 			funcion = archivoFunciones.leerRegistro(posicionFuncion);
@@ -937,21 +945,4 @@ void Administrador::menuBackUp() {
 
 		}
 	} while (op != 0);
-}
-bool Administrador::confirmarAccion()
-{
-	char siONo;
-	std::cout << "Esta seguro que desea modificar o eliminar? (s/n): ";
-	std::cin >> siONo;
-	while (siONo != 's' && siONo != 'S' && siONo != 'n' && siONo != 'N') {
-		std::cout << "Opcion no valida, reingrese (s/n): ";
-		std::cin >> siONo;
-	}
-	if (siONo == 's' || siONo == 'S') {
-		return true;
-	}
-	else {
-		std::cout << "Accion cancelada." << std::endl;
-		return false;
-	}
 }

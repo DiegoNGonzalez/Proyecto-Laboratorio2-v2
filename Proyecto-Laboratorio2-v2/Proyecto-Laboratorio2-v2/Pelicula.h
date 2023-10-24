@@ -16,13 +16,13 @@ public:
 	void setId(int id);
 	int getId();
 	void setTitulo(std::string titulo);
-	char* getTitulo();
+	const char* getTitulo();
 	void setDirector(std::string director);
-	char* getDirector();
+	const char* getDirector();
 	void setClasificacionEdad(std::string clasificacionEdad);
-	char* getClasificacionEdad();
+	const char* getClasificacionEdad();
 	void setGenero(std::string genero);
-	char* getGenero();
+	const char* getGenero();
 	void setDuracion(int duracion);
 	int getDuracion() const;
 	void setEstado(bool estado);
