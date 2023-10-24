@@ -173,4 +173,3 @@ std::string funcionesGlobales::escribirMes(int mes) {
     };
     return vMeses[mes - 1];
 }
->>>>>>> 8004fd5614bd8a7e67049fc20d5bd9d3f9006604
