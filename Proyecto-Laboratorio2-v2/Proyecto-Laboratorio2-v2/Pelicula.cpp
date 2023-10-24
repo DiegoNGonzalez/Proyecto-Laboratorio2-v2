@@ -17,7 +17,7 @@ void Pelicula::setTitulo(std::string titulo)
 	strcpy(_titulo, titulo.c_str());
 }
 
-char* Pelicula::getTitulo()
+const char* Pelicula::getTitulo()
 {
 	return _titulo;
 }
@@ -27,7 +27,7 @@ void Pelicula::setDirector(std::string director)
 	strcpy(_director, director.c_str());
 }
 
-char* Pelicula::getDirector()
+const char* Pelicula::getDirector()
 {
 	return _director;
 }
@@ -37,7 +37,7 @@ void Pelicula::setClasificacionEdad(std::string clasificacionEdad)
 	strcpy(_clasificacionEdad, clasificacionEdad.c_str());
 }
 
-char* Pelicula::getClasificacionEdad()
+const char* Pelicula::getClasificacionEdad()
 {
 	return _clasificacionEdad;
 }
@@ -47,7 +47,7 @@ void Pelicula::setGenero(std::string genero)
 	strcpy(_genero, genero.c_str());
 }
 
-char* Pelicula::getGenero()
+const char* Pelicula::getGenero()
 {
 	return _genero;
 }

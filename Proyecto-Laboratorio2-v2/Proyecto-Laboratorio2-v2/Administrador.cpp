@@ -12,12 +12,12 @@
 //#include "ArchivoSalas.h"
 //#include "ArchivoDiagrama.h"
 //#include "DiagramaSala.h"
-<<<<<<< HEAD
-#include <stdio.h>
-#include <cstdio>
-#include <iostream>
-=======
->>>>>>> 8e36f9306dc8b489dc97aa72369f2c5c15d8244d
+//<<<<<<< HEAD
+//=======
+//>>>>>>> 8e36f9306dc8b489dc97aa72369f2c5c15d8244d
+
+
+
 void Administrador::cargarPeliculas() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
 	char titulo[30];
@@ -31,15 +31,16 @@ void Administrador::cargarPeliculas() {
 	std::cin.ignore();
 	std::cout << "TITULO: ";
 	funcionesGlobales::cargarCadena(titulo, 29);
-	std::cin.ignore();
+	//std::cin.ignore();
 	std::cout << "DIRECTOR: ";
 	funcionesGlobales::cargarCadena(director, 29);
-	std::cin.ignore();
+	//std::cin.ignore();
 	std::cout << "CLASIFICACION DE EDAD: ";
 	funcionesGlobales::cargarCadena(clasificacionEdad, 29);
-	std::cin.ignore();
+	//std::cin.ignore();
 	std::cout << "GENERO: ";
 	funcionesGlobales::cargarCadena(genero, 29);
+	//std::cin.ignore();
 	duracion=funcionesGlobales::validarMinimo(1,"Ingrese la duracion en minutos: ", "Lo ingresado no es un numero, reingrese un numero: ", "La duración tiene que ser mayor a 1 minuto, reingrese: ");
 	std::cout << std::endl;
 	pelicula = Pelicula(id, titulo, director, clasificacionEdad, genero, duracion);

@@ -10,8 +10,8 @@
 
 Sistema::Sistema()
 {
-	_admin1 = Administrador(01, "DT", "Carlos", "Tevez", "Admin", "qwerty");
-	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
+	_admin1 = Administrador(01, "DT", "ADMIN", "01", "Admin", "qwerty");
+	_vendedor1 = Vendedor(02, "Vendedor", "VENDEDOR", "01", "Vendedor", "1234");
 }
 
 Administrador Sistema::getAdmin() const {

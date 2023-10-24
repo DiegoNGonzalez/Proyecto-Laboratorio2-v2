@@ -1,7 +1,6 @@
+
 #include "funcionesGlobales.h"
 #include "rlutil.h"
-#include <cstdio>
-#include <stdio.h>
 int funcionesGlobales::validarInt(std::string textoCout, std::string textoError) {
     int nroAvalidar;
 
@@ -116,18 +115,22 @@ void funcionesGlobales::mostrarPorcentaje(bool pudoEscribir)
     system("pause");
 }
 
-void funcionesGlobales::cargarCadena(char* pal, int tam)
+
+void funcionesGlobales::cargarCadena(char *pal, int tam)
 {
-        int i;
-        fflush(stdin);
-        for (i = 0; i < tam; i++)
-        {
-            pal[i] = std::cin.get();
-            if (pal[i] == '\n') break;
+    int i;
+    fflush(stdin);
+    for (i = 0; i < tam; i++) {
+
+        pal[i] = std::cin.get();
+
+        if (pal[i] == '\n') {
+
+            break;
+
         }
-        pal[i] = '\0';
-        fflush(stdin);
-    
 
+    }
+    pal[i] = '\0';
+    std::cin.ignore(30, '\n');
 }
-
