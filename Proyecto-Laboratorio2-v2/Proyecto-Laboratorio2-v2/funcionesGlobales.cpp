@@ -5,7 +5,8 @@
 int funcionesGlobales::validarInt(std::string textoCout, std::string textoError) {
     int nroAvalidar;
 
-    std::cout << textoCout << std::endl;
+    std::cout << textoCout;
+    //<< std::endl; // le saque el salto de linea para que la fecha se ingrese en el mismo renglon
     while (!(std::cin >> nroAvalidar)) {
         std::cout << textoError;
         std::cin.clear();
@@ -27,7 +28,7 @@ int funcionesGlobales::validarRango(int minimo, int maximo, std::string textoCou
     int nroAvalidar;
 
     nroAvalidar = validarInt(textoCout,textoError);
-    while (nroAvalidar<=minimo || nroAvalidar>=maximo) {
+    while (nroAvalidar<minimo || nroAvalidar>maximo) {
         std::cout << textoMinimo << textoMaximo << std::endl;
         nroAvalidar = validarInt(textoCout,textoError);
     }
@@ -147,4 +148,23 @@ bool funcionesGlobales::confirmarAccion(std::string textoCout)
         std::cout << "Accion cancelada." << std::endl;
         return false;
     }
+}
+
+// Agregue para mostrar el mes en letras, lo uso en informes
+std::string funcionesGlobales::escribirMes(int mes) {
+    std::string vMeses[12] = {
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio ",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+    };
+    return vMeses[mes - 1];
 }
