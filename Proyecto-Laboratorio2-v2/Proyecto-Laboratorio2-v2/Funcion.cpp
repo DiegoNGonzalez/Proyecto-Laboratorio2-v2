@@ -45,6 +45,8 @@ bool Funcion::getEstado() const
 }
 Funcion::Funcion()
 {
+	_estado = false;
+	_idFuncion = 0;
 }
 Funcion::Funcion(Pelicula pelicula, Sala sala, FechaHorario fechaHoraFuncion, int idFuncion)
 {

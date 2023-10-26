@@ -197,7 +197,7 @@ int ArchivoFunciones::buscarPosFuncionxID(int valorBuscado) {
 			return i;
 		}
 	}
-	std::cout << "No se encontro el id." << std::endl;
+	std::cout << "NRO DE FUNCION INEXISTENTE." << std::endl;
 	return -1;
 }
 
@@ -208,9 +208,6 @@ Funcion ArchivoFunciones::buscarFuncionxID(int valorBuscado) {
 	funcion = leerRegistro(pos);
 	return funcion;
 	}
-	else {
-		std::cout << "No se encontro el id." << std::endl;
-		return funcion;
-	}
+	return Funcion::Funcion();
 }
 
