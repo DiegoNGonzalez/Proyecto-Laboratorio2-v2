@@ -49,3 +49,31 @@ void FechaHorario::mostrarFechaHora() {
 	std::cout << std::endl;
 
 }
+
+bool FechaHorario::operator==(FechaHorario fechaHorario)
+{
+	if (_fecha == fechaHorario.getFecha() && _horario == fechaHorario.getHorario()) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool FechaHorario::operator<(FechaHorario fechaHorario)
+{
+	if (_fecha < fechaHorario.getFecha()) {
+		return true;
+	}
+	else if (_fecha == fechaHorario.getFecha()) {
+		if (_horario < fechaHorario.getHorario()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}

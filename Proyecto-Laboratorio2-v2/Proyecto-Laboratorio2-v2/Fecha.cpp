@@ -39,3 +39,40 @@ Fecha::Fecha(int dia, int mes, int anio) {
 void Fecha::mostrarFecha() {
 	std::cout << _dia << "/" << _mes << "/" << _anio;
 }
+
+bool Fecha::operator==(Fecha fecha)
+{
+	if (_dia == fecha.getDia() && _mes == fecha.getMes() && _anio == fecha.getAnio()) {
+
+		return true;
+	} else{
+		return false;
+	}
+}
+
+bool Fecha::operator<(Fecha fecha)
+{
+	if (_anio < fecha.getAnio()) {
+		return true;
+	}
+	else if (_anio == fecha.getAnio()) {
+		if (_mes < fecha.getMes()) {
+			return true;
+		}
+		else if (_mes == fecha.getMes()) {
+			if (_dia < fecha.getDia()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			return false;
+		}
+
+	}
+	else {
+		return false;
+	}
+}

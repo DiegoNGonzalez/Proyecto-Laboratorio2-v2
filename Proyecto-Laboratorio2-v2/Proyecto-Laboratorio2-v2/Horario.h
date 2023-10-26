@@ -12,6 +12,8 @@ public:
 	Horario();
 	Horario(int minuto, int hora);
 	void mostrarHorario();
+	bool operator==(Horario horario); 
+	bool operator<(Horario horario);
 
 private:
 	int _hora, _minuto, _segundo;
