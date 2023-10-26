@@ -33,7 +33,7 @@ Horario::Horario(int minuto, int hora) {
 }
 
 void Horario::mostrarHorario() {
-	if (_minuto = 0) {
+	if (_minuto == 0) {
 		std::cout << _hora << ":" << _minuto<<"0";
 	}
 	else if (_minuto < 10) {
@@ -45,4 +45,27 @@ void Horario::mostrarHorario() {
 	else {
 		std::cout << _hora << ":" << _minuto;
 	}
+}
+
+bool Horario::operator==(Horario horario)
+{
+	if (_hora == horario.getHora() && _minuto == horario.getMinuto()) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool Horario::operator<(Horario horario)
+{
+	if (_hora < horario.getHora()) {
+		return true;
+	}
+	else if (_hora == horario.getHora() && _minuto < horario.getMinuto()) {
+		return true;
+	}else {
+		return false;
+	}
+	
 }

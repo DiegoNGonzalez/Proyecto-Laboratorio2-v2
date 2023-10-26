@@ -10,8 +10,9 @@
 
 Sistema::Sistema()
 {
-	_admin1 = Administrador(01, "DT", "Carlos", "Tevez", "Admin", "qwerty");
+	_admin1 = Administrador(01, "DT", "Juan Roman", "Riquelme", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
+	_fechaHorario = FechaHorario();
 }
 
 Administrador Sistema::getAdmin() const {
@@ -484,4 +485,20 @@ void Sistema::creditos()
 	std::cout << "GRACIAS POR UTILIZAR NUESTRO SISTEMA" << std::endl;
 	Sleep(2000);
 	rlutil::setColor(rlutil::COLOR::WHITE);
+}
+
+void Sistema::verificarFechaYHoraFunciones()
+{
+	
+	ArchivoFunciones archiFunciones("funcion.dat");
+	Funcion funcionAuxiliar;
+	int cantidaReg= archiFunciones.contarRegistros();
+	for (int i = 0; i < cantidaReg; i++) {
+		funcionAuxiliar = archiFunciones.leerRegistro(i);
+		if (funcionAuxiliar.getEstado() && funcionAuxiliar.getFechaHoraFuncion()<_fechaHorario) {
+			funcionAuxiliar.setEstado(false);
+			archiFunciones.grabarRegistro(funcionAuxiliar, i);
+		}
+	}
+
 }

@@ -14,6 +14,8 @@ public:
 	FechaHorario(Fecha fecha, Horario horario);
 	FechaHorario(int dia, int mes, int anio, int minuto, int hora);
 	void mostrarFechaHora();
+	bool operator==(FechaHorario fechaHorario);
+	bool operator<(FechaHorario fechaHorario);
 private:
 	Fecha _fecha;
 	Horario _horario;

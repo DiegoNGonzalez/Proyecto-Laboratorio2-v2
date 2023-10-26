@@ -74,7 +74,7 @@ void DiagramaSala::mostrarSala() {
 				std::cout << "\033[47m "; // Asiento disponible
 			}
 			else {
-				std::cout << "\033[41m "; // Asiento reservado
+				std::cout << "\033[44m "; // Asiento reservado
 			}
 			std::cout << "\033[0m ";
 			rlutil::setColor(rlutil::LIGHTBLUE);

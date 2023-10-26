@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Administrador.h"
 #include "funcionesGlobales.h"
+#include "ArchivoEntrada.h"
 //#include <Windows.h>
 //#include "rlutil.h"
 //#include "Persona.h"
@@ -412,25 +413,25 @@ bool Administrador::darDeBajaFuncion()
 		idFuncion = funcionesGlobales::validarMinimo(1, "NRO DE FUNCION A ELIMINAR: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE FUNCION A ELIMINAR: ", "EL NUMERO DE FUNCION TIENE QUE SER MAYOR A 0.");
 		posicionFuncion = archivoFunciones.buscarPosFuncionxID(idFuncion);
 	} while (posicionFuncion == -1);
-		posicionDiagrama = archivoDiagrama.buscarPosDiagramaxID(idFuncion);
-		if (funcionesGlobales::confirmarAccion("¿DESEA ELIMINAR LA FUNCION? (S/N): ")) {
+	posicionDiagrama = archivoDiagrama.buscarPosDiagramaxID(idFuncion);
+	if (funcionesGlobales::confirmarAccion("¿DESEA ELIMINAR LA FUNCION? (S/N): ")) {
 
-			if (posicionFuncion >= 0 && posicionDiagrama >= 0) {
-				funcion = archivoFunciones.leerRegistro(posicionFuncion);
-				diagrama = archivoDiagrama.leerRegistro(posicionDiagrama);
-				funcion.setEstado(false);
-				diagrama.setEstado(false);
-				if (archivoFunciones.grabarRegistro(funcion, posicionFuncion) && archivoDiagrama.grabarRegistro(diagrama, posicionDiagrama)) {
-					std::cout << "FUNCION #" << funcion.getIdFuncion() << " FUE ELIMINADA EXITOSAMENTE." << std::endl;
-					return true;
-				}
-				else {
-					std::cout << "ERROR AL ELIMINAR LA FUNCION #" << funcion.getIdFuncion() << std::endl;
-					return false;
-				}
-
+		if (posicionFuncion >= 0 && posicionDiagrama >= 0) {
+			funcion = archivoFunciones.leerRegistro(posicionFuncion);
+			diagrama = archivoDiagrama.leerRegistro(posicionDiagrama);
+			funcion.setEstado(false);
+			diagrama.setEstado(false);
+			if (archivoFunciones.grabarRegistro(funcion, posicionFuncion) && archivoDiagrama.grabarRegistro(diagrama, posicionDiagrama)) {
+				std::cout << "FUNCION #" << funcion.getIdFuncion() << " FUE ELIMINADA EXITOSAMENTE." << std::endl;
+				return true;
 			}
+			else {
+				std::cout << "ERROR AL ELIMINAR LA FUNCION #" << funcion.getIdFuncion() << std::endl;
+				return false;
+			}
+
 		}
+	}
 }
 Sala Administrador::seleccionarSala() {
 	ArchivoSalas archiSalas("sala.dat");
@@ -482,6 +483,7 @@ Sala Administrador::buscarSalaxID(int valorBuscado) {
 
 }
 void Administrador::cargarFunciones() {
+	FechaHorario _fechaYHoraSistema = FechaHorario();
 	ArchivoFunciones archiFunciones("funcion.dat");
 	ArchivoDiagrama archiDiagrama("diagrama.dat");
 	Funcion funcion;
@@ -492,20 +494,31 @@ void Administrador::cargarFunciones() {
 	Sala sala;
 	FechaHorario fechaHoraFuncion;
 	DiagramaSala diagramaSala;
-	int  dia, mes, anio, hora, minuto;
+	int  dia, mes, anio, hora, minuto, contador = 0;
 	pelicula = seleccionarPelicula();
 	sala = seleccionarSala();
 	std::cout << "FUNCION #" << idFuncion << std::endl << std::endl;
 	std::cout << "POR FAVOR, INGRESE LOS SIGUIENTES CAMPOS:" << std::endl << std::endl;
+
 
 	dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "INGRESO NO VALIDO, REINGRESE DIA: ", "EL DIA INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 32, REINGRESE DIA: ");
 	mes = funcionesGlobales::validarRango(1, 12, "MES: ", "INGRESO NO VALIDO, REINGRESE MES: ", "EL MES INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 13, REINGRESE MES: ");
 	anio = funcionesGlobales::validarMinimo(2023, "AÑO: ", "INGRESO NO VALIDO, REINGRESE AÑO: ", "EL AÑO TIENE QUE SER IGUAL A 2023, AUN NO AGENDAMOS FUNCIONES PARA AÑOS PROXIMOS, REINGRESE AÑO: ");
 	hora = funcionesGlobales::validarRango(0, 24, "HORA: ", "INGRESO NO VALIDO, REINGRESE HORA: ", "LA HORA TIENE QUE SER MAYOR A 00", " Y MENOR A 25, REINGRESE HORA: ");
 	minuto = funcionesGlobales::validarRango(0, 60, "MINUTOS: ", "INGRESO NO VALIDO, REINGRESE MINUTOS:  ", "LOS MINUTOS TIENEN QUE SER MAYOR O IGUAL A 00 ", " Y MENOR A 60, REINGRESE MINUTOS: ");
+	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
+	while (fechaHoraFuncion < _fechaYHoraSistema) {
+		std::cout << "La fecha o el horario cargado es invalida, reingresela: ";
+		dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "INGRESO NO VALIDO, REINGRESE DIA: ", "EL DIA INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 32, REINGRESE DIA: ");
+		mes = funcionesGlobales::validarRango(1, 12, "MES: ", "INGRESO NO VALIDO, REINGRESE MES: ", "EL MES INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 13, REINGRESE MES: ");
+		anio = funcionesGlobales::validarMinimo(2023, "AÑO: ", "INGRESO NO VALIDO, REINGRESE AÑO: ", "EL AÑO TIENE QUE SER IGUAL A 2023, AUN NO AGENDAMOS FUNCIONES PARA AÑOS PROXIMOS, REINGRESE AÑO: ");
+		hora = funcionesGlobales::validarRango(0, 24, "HORA: ", "INGRESO NO VALIDO, REINGRESE HORA: ", "LA HORA TIENE QUE SER MAYOR A 00", " Y MENOR A 25, REINGRESE HORA: ");
+		minuto = funcionesGlobales::validarRango(0, 60, "MINUTOS: ", "INGRESO NO VALIDO, REINGRESE MINUTOS:  ", "LOS MINUTOS TIENEN QUE SER MAYOR O IGUAL A 00 ", " Y MENOR A 60, REINGRESE MINUTOS: ");
+		fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
+	}
+
 	diagramaSala = DiagramaSala(idFuncion);
 	archiDiagrama.grabarRegistro(diagramaSala);
-	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
 	funcion = Funcion(pelicula, sala, fechaHoraFuncion, idFuncion);
 	archiFunciones.grabarRegistro(funcion);
 }
@@ -778,6 +791,7 @@ void Administrador::menuBackUp() {
 	ArchivoPeliculas archiPeliculas("pelicula.dat");
 	ArchivoSalas archiSalas("sala.dat");
 	ArchivoFunciones archiFunciones("funcion.dat");
+	ArchivoEntrada archiEntrada("venta.dat");
 	do {
 		rlutil::setConsoleTitle("MENU BACKUP"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
@@ -791,7 +805,9 @@ void Administrador::menuBackUp() {
 		funcionesGlobales::showItem(" RECUPERAR BACKUP FUNCIONES ", 50, 15, y == 5);
 		funcionesGlobales::showItem(" GENERAR BACKUP GRAFICOS SALA ", 50, 16, y == 6);
 		funcionesGlobales::showItem(" RECUPERAR BACKUP GRAFICOS SALA ", 50, 17, y == 7);
-		funcionesGlobales::showItem(" Volver ", 50, 18, y == 8);
+		funcionesGlobales::showItem(" GENERAR BACKUP VENTAS ", 50, 18, y == 8);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP VENTAS ", 50, 19, y == 9);
+		funcionesGlobales::showItem(" Volver ", 50, 20, y == 10);
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 		switch (key) // evalua el codigo de tecla
@@ -806,7 +822,7 @@ void Administrador::menuBackUp() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 8) y = 8;
+			if (y > 10) y = 10;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -852,7 +868,17 @@ void Administrador::menuBackUp() {
 				archiDiagrama.restaurarBackUp();
 				system("cls");
 				break;
-			case 8: // Si el cursor esta en la opcion SALIR
+			case 8:
+				system("cls");
+				archiEntrada.generarBackUp();
+				system("cls");
+				break;
+			case 9:
+				system("cls");
+				archiEntrada.restaurarBackUp();
+				system("cls");
+				break;
+			case 10: // Si el cursor esta en la opcion SALIR
 				op = 0; // sale del programa
 				break;
 			}
