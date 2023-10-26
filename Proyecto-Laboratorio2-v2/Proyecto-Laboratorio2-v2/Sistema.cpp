@@ -10,14 +10,11 @@
 
 Sistema::Sistema()
 {
-<<<<<<< HEAD
 	_admin1 = Administrador(01, "DT", "ADMIN", "01", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "VENDEDOR", "01", "Vendedor", "1234");
-=======
 	_admin1 = Administrador(01, "DT", "Juan Roman", "Riquelme", "Admin", "qwerty");
 	_vendedor1 = Vendedor(02, "Vendedor", "Lionel", "Messi", "Vendedor", "1234");
 	_fechaHorario = FechaHorario();
->>>>>>> 615ffa17683b57d71657abcfb54a5c1180f0d037
 }
 
 Administrador Sistema::getAdmin() const {
