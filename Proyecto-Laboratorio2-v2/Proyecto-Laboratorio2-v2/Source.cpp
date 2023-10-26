@@ -20,6 +20,7 @@ int main() {
 
 	Sistema sistema;
 	sistema = Sistema();
+	sistema.verificarFechaYHoraFunciones();
 	sistema.bienvenida();
 	sistema.login(sistema.getAdmin(), sistema.getVendedor());
 	sistema.creditos();

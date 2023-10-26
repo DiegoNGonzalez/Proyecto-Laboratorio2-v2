@@ -11,6 +11,7 @@ class Sistema
 private:
 	Administrador _admin1;
 	Vendedor _vendedor1;
+	FechaHorario _fechaHorario;
 
 public:
 	Administrador getAdmin() const;
@@ -22,6 +23,7 @@ public:
 	void mostrarMenuInformes();
 	bool crearDirectorioBackUP();
 	void creditos();
+	void verificarFechaYHoraFunciones();
 
 	Sistema();
 
