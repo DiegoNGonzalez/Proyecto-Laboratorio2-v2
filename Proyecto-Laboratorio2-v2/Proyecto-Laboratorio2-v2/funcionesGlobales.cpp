@@ -88,12 +88,12 @@ float funcionesGlobales::validarRangoFloat(float minimo, float maximo, std::stri
 	return nroAvalidar;
 }
 
-void funcionesGlobales::mostrarPorcentaje(bool pudoEscribir)
+void funcionesGlobales::mostrarPorcentaje(bool pudoEscribir, std::string mensaje)
 {
 	int porcentaje = 25;
 	for (int x = 0; x < 4; x++) {
 
-		std::cout << "Restaurando archivo de seguridad: ";
+		std::cout << mensaje;
 		std::cout << porcentaje * (x + 1);
 		std::cout << "%";
 		Sleep(1000);
@@ -115,7 +115,7 @@ void funcionesGlobales::cargarCadena(char* pal, int tam)
 	std::getline(std::cin, input);// cadena con espacions
 
 	if (input.length() > tam){
-		input = input.substr(0, tam);// recorta y devuelve la cadena con la cantidad limite
+		input.substr(0, tam);// recorta y devuelve la cadena con la cantidad limite
 	}
 
 	strcpy(pal, input.c_str());

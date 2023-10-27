@@ -77,7 +77,7 @@ bool ArchivoFunciones::generarBackUp() {
 
 			fclose(archivo);
 			fclose(archivoBackUp);
-			funcionesGlobales::mostrarPorcentaje(true);
+			funcionesGlobales::mostrarPorcentaje(true, "Generando Backup ... ");
 			std::cout << "Copia de seguridad generada con éxito." << std::endl;
 			return true;
 		}
@@ -101,7 +101,7 @@ bool ArchivoFunciones::generarBackUp() {
 
 		fclose(archivo);
 		fclose(archivoBackUp);
-		funcionesGlobales::mostrarPorcentaje(true);
+		funcionesGlobales::mostrarPorcentaje(true, "Generando Backup ... ");
 		std::cout << "Copia de seguridad generada con éxito." << std::endl;
 		return true;
 	}
@@ -138,7 +138,7 @@ bool ArchivoFunciones::restaurarBackUp() {
 			}
 			fclose(archivoBackUp);
 			fclose(archivo);
-			funcionesGlobales::mostrarPorcentaje(true);
+			funcionesGlobales::mostrarPorcentaje(true, "Restaurando Backup ... ");
 			std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
 			return true;
 		}
@@ -162,7 +162,7 @@ bool ArchivoFunciones::restaurarBackUp() {
 		}
 		fclose(archivoBackUp);
 		fclose(archivo);
-		funcionesGlobales::mostrarPorcentaje(true);
+		funcionesGlobales::mostrarPorcentaje(true, "Restaurando Backup ... ");
 		std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
 		return true;
 	}

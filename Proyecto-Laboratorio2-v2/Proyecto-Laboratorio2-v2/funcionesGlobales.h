@@ -16,7 +16,7 @@ namespace funcionesGlobales{
 @return bool, true or false segun corresponda.
 */
 	bool compararFechas(Fecha fecha1, Fecha fecha2);
-	void mostrarPorcentaje(bool pudoEscribir);
+	void mostrarPorcentaje(bool pudoEscribir, std::string mensaje);
 	void cargarCadena(char* pal, int tam);
 	bool confirmarAccion(std::string textoCout);
 	std::string escribirMes(int mes);
