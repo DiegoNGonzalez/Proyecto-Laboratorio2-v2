@@ -122,8 +122,9 @@ void Sistema::mostrarMenuAdmin() {
 		funcionesGlobales::showItem(" FUNCIONES ", 50, 12, y == 2);
 		funcionesGlobales::showItem(" BACKUP ", 50, 13, y == 3);
 		funcionesGlobales::showItem(" INFORMES ", 50, 14, y == 4); // ---- NUEVO MENU INFORMES
-		funcionesGlobales::showItem(" Cerrar sesion ", 50, 15, y == 5); // Pase cerrar sesion para abajo, cambia y == 4 a y ==5
-		funcionesGlobales::showItem("  SALIR   ", 50, 16, y == 6); // mismo comentario linea anterior
+		funcionesGlobales::showItem(" LISTADOS", 50, 15, y == 5); // ---- NUEVO MENU LISTADOS
+		funcionesGlobales::showItem(" Cerrar sesion ", 50, 16, y == 6); // Pase cerrar sesion para abajo, cambia y == 4 a y ==5
+		funcionesGlobales::showItem("  SALIR   ", 50, 17, y == 7); // mismo comentario linea anterior
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -141,7 +142,7 @@ void Sistema::mostrarMenuAdmin() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 6) y = 6; // -- agregue otra opcion, por eso cambie el 5 a 6
+			if (y > 7) y = 7; // -- OPCIONES DISPONIBLES
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -172,11 +173,16 @@ void Sistema::mostrarMenuAdmin() {
 				mostrarMenuInformes();
 				system("cls");
 				break;
-			case 5: // Pase cerrar sesion para abajo, cambia case de 4 a 5
+			case 5:	// --- NUEVO MENU LISTADOS
+				system("cls");
+				mostrarMenuListados();
+				system("cls");
+				break;
+			case 6: 
 				login(_admin1, _vendedor1);
 				op = 0;
 				break;
-			case 6: // Si el cursor esta en la opcion SALIR		// -- tambien cambie el case de 5 a 6
+			case 7: // Si el cursor esta en la opcion SALIR		// -- tambien cambie el case de 5 a 6
 				system("cls");
 				rlutil::locate(50, 16);
 				std::cout << "SALIENDO DEL PROGRAMA . . ." << std::endl;
@@ -337,7 +343,7 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 			rlutil::locate(28, 11 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 6) y = 6;
+			if (y > 5) y = 5;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -373,6 +379,99 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 			case 4: {
 				system("cls");
 				informesMaker.mostrarInformeFranjasHorarias();
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 5:
+				op = 0;
+				break;
+			}
+
+		}
+	} while (op != 0);
+}
+
+void Sistema::mostrarMenuListados() {
+	/*Pelicula pelicula;
+	ArchivoPeliculas archiPeliculas("peliculas.dat");*/
+
+	ArchivoEntrada archiventa("venta.dat");
+
+	//char nombrePelicula[30];
+	//InformesMaker informesMaker;
+
+	int op = 1, y = 0;
+	do {
+		rlutil::setConsoleTitle("MENU LISTADOS"); // establece el titulo de la consola
+		rlutil::hidecursor();
+
+		funcionesGlobales::showItem("LISTADO PELICULAS", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem("LISTADO FUNCIONES", 50, 11, y == 1);
+		funcionesGlobales::showItem("LISTADO SALAS", 50, 12, y == 2);
+		funcionesGlobales::showItem("LISTADO VENTAS", 50, 13, y == 3);
+		funcionesGlobales::showItem("OTRO LISTADO - falta ver ", 50, 14, y == 4);
+		funcionesGlobales::showItem(" Volver", 50, 15, y == 5);
+
+		int key = rlutil::getkey();
+
+		switch (key)
+		{
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
+			break;
+		case 15: // flecha ABAJO													    
+			rlutil::locate(28, 11 + y);
+			std::cout << " " << std::endl;
+			y++;																	   
+			if (y > 5) y = 5;
+			break;
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: { 
+				system("cls");
+				std::cout << "LISTADO PELICULAS " << std::endl;
+				_admin1.verPeliculasCargadas();
+				
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 1: {
+				system("cls");
+				std::cout << "LISTADO FUNCIONES" << std::endl;
+				_admin1.verFuncionesCargadas();
+
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 2: {
+				system("cls");
+				std::cout << "LISTADO SALAS" << std::endl;
+				_admin1.verSalasCargadas();
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3: {
+				system("cls");
+				std::cout << "LISTADO VENTAS";
+				//_admin1.verVentas();
+
+				archiventa.verVentasCargadas();
+				
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 4: {
+				system("cls");
+				std::cout << "EXTRA"; // ver si falta otro listado, sino vuela
 				system("pause");
 				system("cls");
 				break;
@@ -489,13 +588,13 @@ void Sistema::creditos()
 
 void Sistema::verificarFechaYHoraFunciones()
 {
-	
+
 	ArchivoFunciones archiFunciones("funcion.dat");
 	Funcion funcionAuxiliar;
-	int cantidaReg= archiFunciones.contarRegistros();
+	int cantidaReg = archiFunciones.contarRegistros();
 	for (int i = 0; i < cantidaReg; i++) {
 		funcionAuxiliar = archiFunciones.leerRegistro(i);
-		if (funcionAuxiliar.getEstado() && funcionAuxiliar.getFechaHoraFuncion()<_fechaHorario) {
+		if (funcionAuxiliar.getEstado() && funcionAuxiliar.getFechaHoraFuncion() < _fechaHorario) {
 			funcionAuxiliar.setEstado(false);
 			archiFunciones.grabarRegistro(funcionAuxiliar, i);
 		}

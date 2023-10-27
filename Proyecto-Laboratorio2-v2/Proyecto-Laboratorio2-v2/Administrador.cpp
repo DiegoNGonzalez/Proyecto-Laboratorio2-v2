@@ -502,23 +502,29 @@ void Administrador::cargarFunciones() {
 	std::cout << "FUNCION #" << idFuncion << std::endl << std::endl;
 	std::cout << "POR FAVOR, INGRESE LOS SIGUIENTES CAMPOS:" << std::endl << std::endl;
 
+	ingresarDatosFuncion(dia, mes, anio, hora, minuto, fechaHoraFuncion);
 
+	// Hay que crear una funcion para que el pedir datos se haga una sola vez.
+	// Hay que validar que el dia y el horario seleccionado, de tal sala, no este ocupado por otra funcion.
 
-	dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "INGRESO NO VALIDO, REINGRESE DIA: ", "EL DIA INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 32, REINGRESE DIA: ");
+	/*dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "INGRESO NO VALIDO, REINGRESE DIA: ", "EL DIA INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 32, REINGRESE DIA: ");
 	mes = funcionesGlobales::validarRango(1, 12, "MES: ", "INGRESO NO VALIDO, REINGRESE MES: ", "EL MES INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 13, REINGRESE MES: ");
 	anio = funcionesGlobales::validarMinimo(2023, "AÑO: ", "INGRESO NO VALIDO, REINGRESE AÑO: ", "EL AÑO TIENE QUE SER IGUAL A 2023, AUN NO AGENDAMOS FUNCIONES PARA AÑOS PROXIMOS, REINGRESE AÑO: ");
 	hora = funcionesGlobales::validarRango(0, 24, "HORA: ", "INGRESO NO VALIDO, REINGRESE HORA: ", "LA HORA TIENE QUE SER MAYOR A 00", " Y MENOR A 25, REINGRESE HORA: ");
 	minuto = funcionesGlobales::validarRango(0, 60, "MINUTOS: ", "INGRESO NO VALIDO, REINGRESE MINUTOS:  ", "LOS MINUTOS TIENEN QUE SER MAYOR O IGUAL A 00 ", " Y MENOR A 60, REINGRESE MINUTOS: ");
-	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
+	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);*/
 
 	while (fechaHoraFuncion < _fechaYHoraSistema) {
 		std::cout << "La fecha o el horario cargado es invalida, reingresela: ";
-		dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "INGRESO NO VALIDO, REINGRESE DIA: ", "EL DIA INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 32, REINGRESE DIA: ");
-		mes = funcionesGlobales::validarRango(1, 12, "MES: ", "INGRESO NO VALIDO, REINGRESE MES: ", "EL MES INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 13, REINGRESE MES: ");
-		anio = funcionesGlobales::validarMinimo(2023, "AÑO: ", "INGRESO NO VALIDO, REINGRESE AÑO: ", "EL AÑO TIENE QUE SER IGUAL A 2023, AUN NO AGENDAMOS FUNCIONES PARA AÑOS PROXIMOS, REINGRESE AÑO: ");
-		hora = funcionesGlobales::validarRango(0, 24, "HORA: ", "INGRESO NO VALIDO, REINGRESE HORA: ", "LA HORA TIENE QUE SER MAYOR A 00", " Y MENOR A 25, REINGRESE HORA: ");
-		minuto = funcionesGlobales::validarRango(0, 60, "MINUTOS: ", "INGRESO NO VALIDO, REINGRESE MINUTOS:  ", "LOS MINUTOS TIENEN QUE SER MAYOR O IGUAL A 00 ", " Y MENOR A 60, REINGRESE MINUTOS: ");
-		fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
+		ingresarDatosFuncion(dia, mes, anio, hora, minuto, fechaHoraFuncion);
+
+		//dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "INGRESO NO VALIDO, REINGRESE DIA: ", "EL DIA INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 32, REINGRESE DIA: ");
+		//mes = funcionesGlobales::validarRango(1, 12, "MES: ", "INGRESO NO VALIDO, REINGRESE MES: ", "EL MES INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 13, REINGRESE MES: ");
+		//anio = funcionesGlobales::validarMinimo(2023, "AÑO: ", "INGRESO NO VALIDO, REINGRESE AÑO: ", "EL AÑO TIENE QUE SER IGUAL A 2023, AUN NO AGENDAMOS FUNCIONES PARA AÑOS PROXIMOS, REINGRESE AÑO: ");
+		//hora = funcionesGlobales::validarRango(0, 24, "HORA: ", "INGRESO NO VALIDO, REINGRESE HORA: ", "LA HORA TIENE QUE SER MAYOR A 00", " Y MENOR A 25, REINGRESE HORA: ");
+		//minuto = funcionesGlobales::validarRango(0, 60, "MINUTOS: ", "INGRESO NO VALIDO, REINGRESE MINUTOS:  ", "LOS MINUTOS TIENEN QUE SER MAYOR O IGUAL A 00 ", " Y MENOR A 60, REINGRESE MINUTOS: ");
+		//fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
+
 	}
 
 	diagramaSala = DiagramaSala(idFuncion);
@@ -526,6 +532,8 @@ void Administrador::cargarFunciones() {
 	funcion = Funcion(pelicula, sala, fechaHoraFuncion, idFuncion);
 	archiFunciones.grabarRegistro(funcion);
 }
+
+
 void Administrador::verFuncionesCargadas() {
 	darDeBajaFuncionxSalaOxPelicula();
 	ArchivoFunciones archiFunciones("funcion.dat");
@@ -890,3 +898,13 @@ void Administrador::menuBackUp() {
 		}
 	} while (op != 0);
 }
+
+void Administrador::ingresarDatosFuncion(int &dia, int &mes, int &anio, int &hora, int &minuto, FechaHorario &fechaHoraFuncion) {
+	dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "INGRESO NO VALIDO, REINGRESE DIA: ", "EL DIA INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 32, REINGRESE DIA: ");
+	mes = funcionesGlobales::validarRango(1, 12, "MES: ", "INGRESO NO VALIDO, REINGRESE MES: ", "EL MES INGRESADO TIENE QUE SER MAYOR A 0 ", " Y MENOR A 13, REINGRESE MES: ");
+	anio = funcionesGlobales::validarMinimo(2023, "AÑO: ", "INGRESO NO VALIDO, REINGRESE AÑO: ", "EL AÑO TIENE QUE SER IGUAL A 2023, AUN NO AGENDAMOS FUNCIONES PARA AÑOS PROXIMOS, REINGRESE AÑO: ");
+	hora = funcionesGlobales::validarRango(0, 24, "HORA: ", "INGRESO NO VALIDO, REINGRESE HORA: ", "LA HORA TIENE QUE SER MAYOR A 00", " Y MENOR A 25, REINGRESE HORA: ");
+	minuto = funcionesGlobales::validarRango(0, 60, "MINUTOS: ", "INGRESO NO VALIDO, REINGRESE MINUTOS:  ", "LOS MINUTOS TIENEN QUE SER MAYOR O IGUAL A 00 ", " Y MENOR A 60, REINGRESE MINUTOS: ");
+	fechaHoraFuncion = FechaHorario(dia, mes, anio, minuto, hora);
+}
+

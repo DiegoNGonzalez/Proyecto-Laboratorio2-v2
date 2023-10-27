@@ -101,6 +101,8 @@ public:
 	* @param int idFuncion
 	* @return true o false segun si pudo o no realizar la accion
 	*/
+	void ingresarDatosFuncion(int &dia, int &mes, int &anio, int &hora, int &minuto, FechaHorario &fechaHoraFuncion);
+
 	bool modificarFuncionEnRegistro(int idFuncion);
 	
 	bool verificarEstadoPeliculas(int idPelicula);
@@ -115,6 +117,8 @@ public:
 	void menuSalas();
 	void menuFunciones();
 	void menuBackUp();
+
+
 	
 
 
