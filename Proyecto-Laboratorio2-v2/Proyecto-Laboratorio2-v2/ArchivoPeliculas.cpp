@@ -56,6 +56,7 @@ bool ArchivoPeliculas::generarBackUp() {
 
 	if (archivo == NULL) {
 		std::cout << "Error al abrir el archivo. Falla BackUp" << std::endl;
+		system("pause");
 		return false;
 	}
 
@@ -76,7 +77,7 @@ bool ArchivoPeliculas::generarBackUp() {
 
 			fclose(archivo);
 			fclose(archivoBackUp);
-			funcionesGlobales::mostrarPorcentaje(true);
+			funcionesGlobales::mostrarPorcentaje(true, "Generando Backup ... ");
 			std::cout << "Copia de seguridad generada con éxito." << std::endl;
 			return true;
 		}
@@ -100,7 +101,7 @@ bool ArchivoPeliculas::generarBackUp() {
 
 		fclose(archivo);
 		fclose(archivoBackUp);
-		funcionesGlobales::mostrarPorcentaje(true);
+		funcionesGlobales::mostrarPorcentaje(true, "Generando Backup ... ");
 		std::cout << "Copia de seguridad generada con éxito." << std::endl;
 		return true;
 	}
@@ -136,7 +137,7 @@ bool ArchivoPeliculas::restaurarBackUp() {
 			}
 			fclose(archivoBackUp);
 			fclose(archivo);
-			funcionesGlobales::mostrarPorcentaje(true);
+			funcionesGlobales::mostrarPorcentaje(true, "Restaurando Backup ... ");
 			std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
 			return true;
 		}
@@ -160,7 +161,7 @@ bool ArchivoPeliculas::restaurarBackUp() {
 		}
 		fclose(archivoBackUp);
 		fclose(archivo);
-		funcionesGlobales::mostrarPorcentaje(true);
+		funcionesGlobales::mostrarPorcentaje(true, "Restaurando Backup ... ");
 		std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
 		return true;
 	}
