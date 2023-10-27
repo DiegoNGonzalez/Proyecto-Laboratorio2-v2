@@ -393,8 +393,10 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 }
 
 void Sistema::mostrarMenuListados() {
-	Pelicula pelicula;
-	ArchivoPeliculas archiPeliculas("peliculas.dat");
+	/*Pelicula pelicula;
+	ArchivoPeliculas archiPeliculas("peliculas.dat");*/
+
+	ArchivoEntrada archiventa("venta.dat");
 
 	//char nombrePelicula[30];
 	//InformesMaker informesMaker;
@@ -424,7 +426,7 @@ void Sistema::mostrarMenuListados() {
 		case 15: // flecha ABAJO													    
 			rlutil::locate(28, 11 + y);
 			std::cout << " " << std::endl;
-			y++;
+			y++;																	   
 			if (y > 5) y = 5;
 			break;
 		case 1: // ENTER
@@ -459,7 +461,10 @@ void Sistema::mostrarMenuListados() {
 			case 3: {
 				system("cls");
 				std::cout << "LISTADO VENTAS";
-				_admin1.verVentas();
+				//_admin1.verVentas();
+
+				archiventa.verVentasCargadas();
+				
 				system("pause");
 				system("cls");
 				break;
