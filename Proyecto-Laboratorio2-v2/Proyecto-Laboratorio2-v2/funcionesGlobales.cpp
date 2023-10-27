@@ -7,11 +7,10 @@ int funcionesGlobales::validarInt(std::string textoCout, std::string textoError)
 	int nroAvalidar;
 
 	std::cout << textoCout;
-	//<< std::endl; // le saque el salto de linea para que la fecha se ingrese en el mismo renglon
 	while (!(std::cin >> nroAvalidar)) {
 		std::cout << textoError;
 		std::cin.clear();
-		std::cin.ignore();
+		std::cin.ignore(INT_MAX, '\n');// El INT_MAX es el valor de entero mas grande, ignora los caracteres hasta el salto de linea.
 	}
 	return nroAvalidar;
 }
@@ -55,11 +54,11 @@ float funcionesGlobales::validarFloat(std::string textoCout, std::string textoEr
 {
 	float nroAvalidar;
 
-	std::cout << textoCout << std::endl;
+	std::cout << textoCout;
 	while (!(std::cin >> nroAvalidar)) {
 		std::cout << textoError;
 		std::cin.clear();
-		std::cin.ignore();
+		std::cin.ignore(INT_MAX, '\n');
 	}
 	return nroAvalidar;
 }
@@ -68,10 +67,10 @@ float funcionesGlobales::validarMinimoFloat(float minimo, std::string textoCout,
 {
 	float nroAvalidar;
 
-	nroAvalidar = validarInt(textoCout, textoError);
+	nroAvalidar = validarFloat(textoCout, textoError);
 	while (nroAvalidar < minimo) {
 		std::cout << textoMinimo << minimo << std::endl;
-		nroAvalidar = validarInt(textoCout, textoError);
+		nroAvalidar = validarFloat(textoCout, textoError);
 	}
 	return nroAvalidar;
 }
@@ -80,10 +79,10 @@ float funcionesGlobales::validarRangoFloat(float minimo, float maximo, std::stri
 {
 	float nroAvalidar;
 
-	nroAvalidar = validarInt(textoCout, textoError);
+	nroAvalidar = validarFloat(textoCout, textoError);
 	while (nroAvalidar<minimo || nroAvalidar>maximo) {
 		std::cout << textoMinimo << textoMaximo << std::endl;
-		nroAvalidar = validarInt(textoCout, textoError);
+		nroAvalidar = validarFloat(textoCout, textoError);
 	}
 	return nroAvalidar;
 }
