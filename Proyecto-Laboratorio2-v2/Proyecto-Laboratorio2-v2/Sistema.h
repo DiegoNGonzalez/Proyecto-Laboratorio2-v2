@@ -21,6 +21,7 @@ public:
 	void mostrarMenuAdmin();
 	void mostrarMenuVendedor();
 	void mostrarMenuInformes();
+	void mostrarMenuListados();
 	bool crearDirectorioBackUP();
 	void creditos();
 	void verificarFechaYHoraFunciones();
