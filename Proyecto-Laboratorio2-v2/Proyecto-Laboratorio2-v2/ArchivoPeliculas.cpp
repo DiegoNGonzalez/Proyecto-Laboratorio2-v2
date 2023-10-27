@@ -56,6 +56,7 @@ bool ArchivoPeliculas::generarBackUp() {
 
 	if (archivo == NULL) {
 		std::cout << "Error al abrir el archivo. Falla BackUp" << std::endl;
+		system("pause");
 		return false;
 	}
 

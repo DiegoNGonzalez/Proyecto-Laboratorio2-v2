@@ -118,6 +118,7 @@ bool ArchivoFunciones::restaurarBackUp() {
 	if (archivoBackUp == NULL)
 	{
 		std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
+		system("pause");
 		return false;
 	}
 	if (std::filesystem::exists(ruta)) {

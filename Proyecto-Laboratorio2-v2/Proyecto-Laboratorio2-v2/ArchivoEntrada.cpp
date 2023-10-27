@@ -56,6 +56,7 @@ bool ArchivoEntrada::generarBackUp() {
 
 	if (archivo == NULL) {
 		std::cout << "Error al abrir el archivo. Falla BackUp" << std::endl;
+		system("pause");
 		return false;
 	}
 
@@ -117,6 +118,7 @@ bool ArchivoEntrada::restaurarBackUp() {
 	if (archivoBackUp == NULL)
 	{
 		std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
+		system("pause");
 		return false;
 	}
 	if (std::filesystem::exists(ruta)) {
