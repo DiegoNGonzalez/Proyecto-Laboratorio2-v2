@@ -21,7 +21,7 @@ int funcionesGlobales::validarMinimo(int minimo, std::string textoCout, std::str
 	while (nroAvalidar < minimo) {
 		std::cout << textoMinimo << std::endl;
 		nroAvalidar = validarInt(textoCout, textoError);
-	}
+	} 
 	return nroAvalidar;
 }
 int funcionesGlobales::validarRango(int minimo, int maximo, std::string textoCout, std::string textoError, std::string textoMinimo, std::string textoMaximo) {
