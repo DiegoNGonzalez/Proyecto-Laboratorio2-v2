@@ -56,6 +56,7 @@ bool ArchivoEntrada::generarBackUp() {
 
 	if (archivo == NULL) {
 		std::cout << "Error al abrir el archivo. Falla BackUp" << std::endl;
+		system("pause");
 		return false;
 	}
 
@@ -76,7 +77,7 @@ bool ArchivoEntrada::generarBackUp() {
 
 			fclose(archivo);
 			fclose(archivoBackUp);
-			funcionesGlobales::mostrarPorcentaje(true);
+			funcionesGlobales::mostrarPorcentaje(true, "Generando Backup ... ");
 			std::cout << "Copia de seguridad generada con éxito." << std::endl;
 			return true;
 		}
@@ -100,7 +101,7 @@ bool ArchivoEntrada::generarBackUp() {
 
 		fclose(archivo);
 		fclose(archivoBackUp);
-		funcionesGlobales::mostrarPorcentaje(true);
+		funcionesGlobales::mostrarPorcentaje(true, "Generando Backup ... ");
 		std::cout << "Copia de seguridad generada con éxito." << std::endl;
 		return true;
 	}
@@ -117,6 +118,7 @@ bool ArchivoEntrada::restaurarBackUp() {
 	if (archivoBackUp == NULL)
 	{
 		std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
+		system("pause");
 		return false;
 	}
 	if (std::filesystem::exists(ruta)) {
@@ -136,7 +138,7 @@ bool ArchivoEntrada::restaurarBackUp() {
 			}
 			fclose(archivoBackUp);
 			fclose(archivo);
-			funcionesGlobales::mostrarPorcentaje(true);
+			funcionesGlobales::mostrarPorcentaje(true, "Restaurando Backup ... ");
 			std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
 			return true;
 		}
@@ -160,7 +162,7 @@ bool ArchivoEntrada::restaurarBackUp() {
 		}
 		fclose(archivoBackUp);
 		fclose(archivo);
-		funcionesGlobales::mostrarPorcentaje(true);
+		funcionesGlobales::mostrarPorcentaje(true, "Restaurando Backup ... ");
 		std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
 		return true;
 	}
@@ -213,34 +215,6 @@ Entrada ArchivoEntrada::buscarEntradaxID(int valorBuscado) {
 	}
 }
 
-int ArchivoEntrada::buscarPosVentaxAsientoVendido(int idFuncion, int fila, int columna)
-{
-	Entrada entrada;
-	int cantidadRegistros = contarRegistros();
-	for (int i = 0; i < cantidadRegistros; i++)
-	{
-		entrada = leerRegistro(i);
-		if (entrada.getFuncion().getIdFuncion() == idFuncion && entrada.getFilaAsiento() == fila && entrada.getColumnaAsiento() == columna) {
-			return i;
-		}
-	}
-	std::cout << "No se encontro el id." << std::endl;
-	return -1;
-}
-
-Entrada ArchivoEntrada::buscarVentaxAsientoVendido(int idFuncion, int fila, int columna)
-{
-	Entrada venta;
-	int pos = buscarPosVentaxAsientoVendido(idFuncion, fila, columna);
-	if (pos >= 0) {
-		venta = leerRegistro(pos);
-		return venta;
-	}
-	else {
-		std::cout << "No se encontro el id." << std::endl;
-		return venta;
-	}
-}
 
 void ArchivoEntrada::verVentasCargadas()
 {

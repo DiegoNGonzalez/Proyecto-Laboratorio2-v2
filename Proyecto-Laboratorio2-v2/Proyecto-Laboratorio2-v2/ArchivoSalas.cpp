@@ -2,6 +2,7 @@
 #include "funcionesGlobales.h"
 #include <iostream>
 #include <filesystem>
+
 Sala ArchivoSalas::leerRegistro(int posicion) {
 	Sala sala;
 	FILE* p;
@@ -55,6 +56,7 @@ bool ArchivoSalas::generarBackUp() {
 
 	if (archivo == NULL) {
 		std::cout << "Error al abrir el archivo. Falla BackUp" << std::endl;
+		system("pause");
 		return false;
 	}
 
@@ -75,7 +77,7 @@ bool ArchivoSalas::generarBackUp() {
 
 			fclose(archivo);
 			fclose(archivoBackUp);
-			funcionesGlobales::mostrarPorcentaje(true);
+			funcionesGlobales::mostrarPorcentaje(true, "Generando Backup ... ");
 			std::cout << "Copia de seguridad generada con éxito." << std::endl;
 			return true;
 		}
@@ -99,7 +101,7 @@ bool ArchivoSalas::generarBackUp() {
 
 		fclose(archivo);
 		fclose(archivoBackUp);
-		funcionesGlobales::mostrarPorcentaje(true);
+		funcionesGlobales::mostrarPorcentaje(true, "Generando Backup ... ");
 		std::cout << "Copia de seguridad generada con éxito." << std::endl;
 		return true;
 	}
@@ -116,6 +118,7 @@ bool ArchivoSalas::restaurarBackUp() {
 	if (archivoBackUp == NULL)
 	{
 		std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
+		system("pause");
 		return false;
 	}
 	if (std::filesystem::exists(ruta)) {
@@ -135,7 +138,7 @@ bool ArchivoSalas::restaurarBackUp() {
 			}
 			fclose(archivoBackUp);
 			fclose(archivo);
-			funcionesGlobales::mostrarPorcentaje(true);
+			funcionesGlobales::mostrarPorcentaje(true, "Restaurando Backup ... ");
 			std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
 			return true;
 		}
@@ -152,14 +155,14 @@ bool ArchivoSalas::restaurarBackUp() {
 			fclose(archivoBackUp);
 			return false;
 		}
-		Sala sala;
+		Sala sala;										
 		while (fread(&sala, sizeof(Sala), 1, archivoBackUp))
 		{
 			fwrite(&sala, sizeof(Sala), 1, archivo);
 		}
 		fclose(archivoBackUp);
 		fclose(archivo);
-		funcionesGlobales::mostrarPorcentaje(true);
+		funcionesGlobales::mostrarPorcentaje(true, "Restaurando Backup ... ");
 		std::cout << "Copia de seguridad restaurada con éxito." << std::endl;
 		return true;
 	}

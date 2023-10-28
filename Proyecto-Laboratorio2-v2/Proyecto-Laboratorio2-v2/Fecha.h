@@ -14,6 +14,7 @@ public:
 	void mostrarFecha();
 	bool operator==(Fecha fecha);
 	bool operator<(Fecha fecha);
+
 private:
 	int _dia, _mes, _anio;
 	int _diaSemana;

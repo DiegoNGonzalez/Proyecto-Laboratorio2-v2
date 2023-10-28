@@ -2,6 +2,8 @@
 #include <string>
 #include "Windows.h"
 #include "rlutil.h"
+
+using namespace std;
 #include "Pelicula.h"
 #include "Sala.h"
 #include "Funcion.h"
@@ -9,10 +11,6 @@
 #include "Empleado.h"
 #include "Administrador.h"
 #include <locale.h>
-
-
-using namespace std;
-
 
 int main() {
 
