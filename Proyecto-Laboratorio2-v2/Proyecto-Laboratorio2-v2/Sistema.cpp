@@ -939,18 +939,6 @@ void Sistema::mostrarListadoEmpleados() {
 
 	std::cout << std::left << "|" << std::setw(10) << _vendedor1.getLegajo() << "|" << std::setw(20) << _vendedor1.getNombre() << "|" << std::setw(20) << _vendedor1.getApellido() << "|" << std::setw(20) << _vendedor1.getUsuario() << "|" << std::endl;
 	std::cout << std::left << "|" << std::setw(10) << "_________" << "|" << std::setw(20) << "___________________" << "|" << std::setw(20) << "___________________" << "|" << std::setw(20) << "___________________" << "|" << std::endl;
-
-
-
+	std::cout << std::endl;
 }
 
-
-/*
- legajo = legajo;
-_cargo = cargo;
-_nombre = nombre;
-_apellido = apellido;
-_usuario = usuario;
-_contrasenia = contrasenia;
-
-}*/
