@@ -101,22 +101,15 @@ public:
 	* @param int idFuncion
 	* @return true o false segun si pudo o no realizar la accion
 	*/
-	void ingresarDatosFuncion(int &dia, int &mes, int &anio, int &hora, int &minuto, FechaHorario &fechaHoraFuncion);
-
 	bool modificarFuncionEnRegistro(int idFuncion);
-	
-	bool verificarEstadoPeliculas(int idPelicula);
-	bool verificarEstadoSalas(int idSaLa);
+
+
 	void darDeBajaFuncionxSalaOxPelicula();
 	bool darDeBajaFuncion();
-	void verVentas();
-	void generarReporte();
 	Administrador();
 	Administrador(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
-	void menuPeliculas();
-	void menuSalas();
-	void menuFunciones();
-	void menuBackUp();
+
+	void ingresarDatosFuncion(int &dia, int &mes, int &anio, int &hora, int &minuto, FechaHorario &fechaHoraFuncion);
 
 
 	

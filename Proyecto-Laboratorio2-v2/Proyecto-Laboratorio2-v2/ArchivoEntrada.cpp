@@ -215,34 +215,6 @@ Entrada ArchivoEntrada::buscarEntradaxID(int valorBuscado) {
 	}
 }
 
-int ArchivoEntrada::buscarPosVentaxAsientoVendido(int idFuncion, int fila, int columna)
-{
-	Entrada entrada;
-	int cantidadRegistros = contarRegistros();
-	for (int i = 0; i < cantidadRegistros; i++)
-	{
-		entrada = leerRegistro(i);
-		if (entrada.getFuncion().getIdFuncion() == idFuncion && entrada.getFilaAsiento() == fila && entrada.getColumnaAsiento() == columna) {
-			return i;
-		}
-	}
-	std::cout << "No se encontro el id." << std::endl;
-	return -1;
-}
-
-Entrada ArchivoEntrada::buscarVentaxAsientoVendido(int idFuncion, int fila, int columna)
-{
-	Entrada venta;
-	int pos = buscarPosVentaxAsientoVendido(idFuncion, fila, columna);
-	if (pos >= 0) {
-		venta = leerRegistro(pos);
-		return venta;
-	}
-	else {
-		std::cout << "No se encontro el id." << std::endl;
-		return venta;
-	}
-}
 
 void ArchivoEntrada::verVentasCargadas()
 {

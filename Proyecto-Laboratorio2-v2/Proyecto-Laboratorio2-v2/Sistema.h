@@ -22,9 +22,13 @@ public:
 	void mostrarMenuVendedor();
 	void mostrarMenuInformes();
 	void mostrarMenuListados();
+	void menuPeliculas();
+	void menuSalas();
+	void menuFunciones();
+	void menuBackUp();
 	bool crearDirectorioBackUP();
-	void creditos();
 	void verificarFechaYHoraFunciones();
+	void creditos();
 
 	Sistema();
 
