@@ -1,19 +1,18 @@
-
 #include "funcionesGlobales.h"
 #include "rlutil.h"
 #include <cstdio>
 #include <stdio.h>
+#include <limits.h>
 
 
 int funcionesGlobales::validarInt(std::string textoCout, std::string textoError) {
 	int nroAvalidar;
 
 	std::cout << textoCout;
-	//<< std::endl; // le saque el salto de linea para que la fecha se ingrese en el mismo renglon
 	while (!(std::cin >> nroAvalidar)) {
 		std::cout << textoError;
 		std::cin.clear();
-		std::cin.ignore(INT_MAX, '\n'); // ignora el INT_MAX caracteres hasta el salto de linea
+		std::cin.ignore(INT_MAX, '\n');// El INT_MAX es el valor de entero mas grande, ignora los caracteres hasta el salto de linea.
 	}
 	return nroAvalidar;
 }
@@ -24,7 +23,7 @@ int funcionesGlobales::validarMinimo(int minimo, std::string textoCout, std::str
 	while (nroAvalidar < minimo) {
 		std::cout << textoMinimo << std::endl;
 		nroAvalidar = validarInt(textoCout, textoError);
-	}
+	} 
 	return nroAvalidar;
 }
 int funcionesGlobales::validarRango(int minimo, int maximo, std::string textoCout, std::string textoError, std::string textoMinimo, std::string textoMaximo) {
@@ -57,11 +56,11 @@ float funcionesGlobales::validarFloat(std::string textoCout, std::string textoEr
 {
 	float nroAvalidar;
 
-	std::cout << textoCout << std::endl;
+	std::cout << textoCout;
 	while (!(std::cin >> nroAvalidar)) {
 		std::cout << textoError;
 		std::cin.clear();
-		std::cin.ignore(); 
+		std::cin.ignore(INT_MAX, '\n');
 	}
 	return nroAvalidar;
 }
@@ -111,10 +110,8 @@ void funcionesGlobales::mostrarPorcentaje(bool pudoEscribir, std::string mensaje
 	system("pause");
 }
 
-
-void funcionesGlobales::cargarCadena(char *pal, int tam)
+void funcionesGlobales::cargarCadena(char* pal, int tam)
 {
-
 	std::string input;
 	std::getline(std::cin, input);// cadena con espacions
 
@@ -123,7 +120,6 @@ void funcionesGlobales::cargarCadena(char *pal, int tam)
 	}
 
 	strcpy(pal, input.c_str());
-
 }
 
 bool funcionesGlobales::confirmarAccion(std::string textoCout)
@@ -132,14 +128,14 @@ bool funcionesGlobales::confirmarAccion(std::string textoCout)
 	std::cout << textoCout;
 	std::cin >> siONo;
 	while (siONo != 's' && siONo != 'S' && siONo != 'n' && siONo != 'N') {
-		std::cout << "Opcion no valida, reingrese (s/n): ";
+		std::cout << "OPCION NO VALIDA, REINGRESE (S/N): ";
 		std::cin >> siONo;
 	}
 	if (siONo == 's' || siONo == 'S') {
 		return true;
 	}
 	else {
-		std::cout << "Accion cancelada." << std::endl;
+		std::cout << "ACCION CANCELADA." << std::endl;
 		return false;
 	}
 }

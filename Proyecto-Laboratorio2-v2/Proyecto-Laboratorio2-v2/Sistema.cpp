@@ -38,10 +38,10 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		system("cls");
 		rlutil::setColor(rlutil::COLOR::LIGHTBLUE);
 		rlutil::locate(50, 10);
-		std::cout << "Ingrese su usuario: ";
+		std::cout << "Usuario: ";
 		std::cin >> usuario;
 		rlutil::locate(50, 11);
-		std::cout << "Ingrese su contrasenia: ";
+		std::cout << "Contraseña: ";
 		//cin >> contrasenia;
 		contrasenia = "";
 		char caracter;
@@ -95,7 +95,7 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 			std::cout << "Validando credenciales..." << std::endl;
 			Sleep(1500);
 			rlutil::locate(50, 13);
-			std::cout << "Usuario o contrasenia incorrectos" << std::endl;
+			std::cout << "Usuario o contraseña incorrectos" << std::endl;
 			intentos++;
 			Sleep(1000);
 			rlutil::locate(50, 14);
@@ -105,8 +105,6 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 	} while (intentos < 3 && login == false);
 	rlutil::setColor(rlutil::COLOR::WHITE);
 }
-
-
 
 
 void Sistema::mostrarMenuAdmin() {
@@ -124,8 +122,9 @@ void Sistema::mostrarMenuAdmin() {
 		funcionesGlobales::showItem(" FUNCIONES ", 50, 12, y == 2);
 		funcionesGlobales::showItem(" BACKUP ", 50, 13, y == 3);
 		funcionesGlobales::showItem(" INFORMES ", 50, 14, y == 4); // ---- NUEVO MENU INFORMES
-		funcionesGlobales::showItem(" Cerrar sesion ", 50, 15, y == 5); // Pase cerrar sesion para abajo, cambia y == 4 a y ==5
-		funcionesGlobales::showItem("  SALIR   ", 50, 16, y == 6); // mismo comentario linea anterior
+		funcionesGlobales::showItem(" LISTADOS", 50, 15, y == 5); // ---- NUEVO MENU LISTADOS
+		funcionesGlobales::showItem(" Cerrar sesion ", 50, 16, y == 6); // Pase cerrar sesion para abajo, cambia y == 4 a y ==5
+		funcionesGlobales::showItem("  SALIR   ", 50, 17, y == 7); // mismo comentario linea anterior
 
 		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
 
@@ -143,30 +142,30 @@ void Sistema::mostrarMenuAdmin() {
 			rlutil::locate(28, 10 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 6) y = 6; // -- agregue otra opcion, por eso cambie el 5 a 6
+			if (y > 7) y = 7; // -- OPCIONES DISPONIBLES
 			break;
 		case 1: // ENTER
 			switch (y)
 			{
 			case 0: {
 				system("cls");
-				_admin1.menuPeliculas();
+				menuPeliculas();
 				system("cls");
 				break;
 			}
 			case 1:
 				system("cls");
-				_admin1.menuSalas();
+				menuSalas();
 				system("cls");
 				break;
 			case 2:
 				system("cls");
-				_admin1.menuFunciones();
+				menuFunciones();
 				system("cls");
 				break;
 			case 3:
 				system("cls");
-				_admin1.menuBackUp();
+				menuBackUp();
 				system("cls");
 				break;
 			case 4: // ---- NUEVO MENU INFORMES
@@ -174,11 +173,16 @@ void Sistema::mostrarMenuAdmin() {
 				mostrarMenuInformes();
 				system("cls");
 				break;
-			case 5: // Pase cerrar sesion para abajo, cambia case de 4 a 5
+			case 5:	// --- NUEVO MENU LISTADOS
+				system("cls");
+				mostrarMenuListados();
+				system("cls");
+				break;
+			case 6: 
 				login(_admin1, _vendedor1);
 				op = 0;
 				break;
-			case 6: // Si el cursor esta en la opcion SALIR		// -- tambien cambie el case de 5 a 6
+			case 7: // Si el cursor esta en la opcion SALIR		// -- tambien cambie el case de 5 a 6
 				system("cls");
 				rlutil::locate(50, 16);
 				std::cout << "SALIENDO DEL PROGRAMA . . ." << std::endl;
@@ -244,9 +248,7 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 1: {
 				system("cls");
-				/*std::cout << "INGRESE EL NRO DE LA FUNCION:";
-				std::cin >> idFuncion;*/
-				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
+				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE FUNCION: ", "EL NRO DE FUNCION DEBE SER MAYOR O IGUAL A 1: ");
 				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					archiDiagrama.mostrarRegistro(pos);
@@ -260,9 +262,7 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 2: {
 				system("cls");
-				/*std::cout << "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ";
-				std::cin >> idFuncion;*/
-				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
+				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE FUNCION: ", "EL NRO DE FUNCION DEBE SER MAYOR O IGUAL A 1: ");
 				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					_vendedor1.venderEntradas(idFuncion);
@@ -277,7 +277,7 @@ void Sistema::mostrarMenuVendedor() {
 				archiVenta.verVentasCargadas();
 				/*std::cout << "NRO DE LA VENTA A CANCELAR: ";
 				std::cin >> idEntrada;*/
-				idEntrada = funcionesGlobales::validarMinimo(1, "NRO DE LA VENTA A CANCELAR: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
+				idEntrada = funcionesGlobales::validarMinimo(1, "NRO DE LA VENTA A CANCELAR: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE FUNCION: ", "EL NRO DE FUNCION DEBE SER MAYOR O IGUAL A 1: ");
 				int pos = archiVenta.buscarPosEntradaxID(idEntrada);
 				if (pos != -1) {
 					_vendedor1.cancelarVenta(idEntrada);
@@ -339,7 +339,7 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 			rlutil::locate(28, 11 + y);
 			std::cout << " " << std::endl;
 			y++;
-			if (y > 6) y = 6;
+			if (y > 5) y = 5;
 			break;
 		case 1: // ENTER
 			switch (y)
@@ -387,7 +387,434 @@ void Sistema::mostrarMenuInformes() { // NUEVO MENU INFORMES
 		}
 	} while (op != 0);
 }
+void Sistema::mostrarMenuListados() {
+	/*Pelicula pelicula;
+	ArchivoPeliculas archiPeliculas("peliculas.dat");*/
 
+	ArchivoEntrada archiventa("venta.dat");
+
+	//char nombrePelicula[30];
+	//InformesMaker informesMaker;
+
+	int op = 1, y = 0;
+	do {
+		rlutil::setConsoleTitle("MENU LISTADOS"); // establece el titulo de la consola
+		rlutil::hidecursor();
+
+		funcionesGlobales::showItem("LISTADO PELICULAS", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem("LISTADO FUNCIONES", 50, 11, y == 1);
+		funcionesGlobales::showItem("LISTADO SALAS", 50, 12, y == 2);
+		funcionesGlobales::showItem("LISTADO VENTAS", 50, 13, y == 3);
+		funcionesGlobales::showItem("OTRO LISTADO - falta ver ", 50, 14, y == 4);
+		funcionesGlobales::showItem(" Volver", 50, 15, y == 5);
+
+		int key = rlutil::getkey();
+
+		switch (key)
+		{
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
+			break;
+		case 15: // flecha ABAJO													    
+			rlutil::locate(28, 11 + y);
+			std::cout << " " << std::endl;
+			y++;																	   
+			if (y > 5) y = 5;
+			break;
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: { 
+				system("cls");
+				std::cout << "LISTADO PELICULAS " << std::endl;
+				_admin1.verPeliculasCargadas();
+				
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 1: {
+				system("cls");
+				std::cout << "LISTADO FUNCIONES" << std::endl;
+				_admin1.verFuncionesCargadas();
+
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 2: {
+				system("cls");
+				std::cout << "LISTADO SALAS" << std::endl;
+				_admin1.verSalasCargadas();
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3: {
+				system("cls");
+				std::cout << "LISTADO VENTAS";
+				//_admin1.verVentas();
+
+				archiventa.verVentasCargadas();
+				
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 4: {
+				system("cls");
+				std::cout << "EXTRA"; // ver si falta otro listado, sino vuela
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 5:
+				op = 0;
+				break;
+			}
+
+		}
+	} while (op != 0);
+}
+void Sistema::menuPeliculas() {
+	int op = 1, y = 0;
+	ArchivoPeliculas archiPeliculas("pelicula.dat");
+
+	do {
+		rlutil::setConsoleTitle("MENU PELICULAS"); // establece el titulo de la consola
+		rlutil::hidecursor(); // oculta el cursor
+		//rlutil::cls(); // limpia la pantalla
+
+		funcionesGlobales::showItem(" INGRESAR NUEVA PELICULA A CARTELERA ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem(" VER PELICULAS EN CARTELERA ", 50, 11, y == 1);
+		funcionesGlobales::showItem(" BUSCAR PELICULA", 50, 12, y == 2);
+		funcionesGlobales::showItem(" ELIMINAR PELICULA DE LA CARTELERA ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" Volver ", 50, 14, y == 4);
+
+		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+
+
+
+		switch (key) // evalua el codigo de tecla
+		{
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
+			break;
+		case 15: // flecha ABAJO
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl;
+			y++;
+			if (y > 4) y = 4;
+			break;
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: {
+				system("cls");
+				_admin1.cargarPeliculas();
+				system("cls");
+				break;
+			}
+			case 1:
+				system("cls");
+				_admin1.verPeliculasCargadas();
+				system("pause");
+				system("cls");
+				break;
+
+			case 2: {
+				system("cls");
+				int id, pos;
+				/*std::cout << "NRO DE PELICULA A BUSCAR: ";
+				std::cin >> id;*/
+				id = funcionesGlobales::validarMinimo(1, "NRO DE PELICULA A BUSCAR: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
+				pos = archiPeliculas.buscarPosPeliculaxID(id);
+				if (pos >= 0) {
+					system("cls");
+					_admin1.buscarPeliculaxID(id).mostrarDetalles();
+				}
+
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3:
+				system("cls");
+				_admin1.darDeBajaPelicula();
+				system("pause");
+				system("cls");
+				break;
+			case 4: // Si el cursor esta en la opcion SALIR
+				op = 0; // sale del programa
+				break;
+			}
+		}
+	} while (op != 0);
+}
+void Sistema::menuSalas() {
+	int op = 1, y = 0;
+	ArchivoSalas archiSalas("sala.dat");
+	do {
+		rlutil::setConsoleTitle("MENU SALAS"); // establece el titulo de la consola
+		rlutil::hidecursor(); // oculta el cursor
+		//rlutil::cls(); // limpia la pantalla
+
+		funcionesGlobales::showItem(" INGRESAR SALA ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem(" VER SALAS DISPONIBLES", 50, 11, y == 1);
+		funcionesGlobales::showItem(" MODIFICAR PRECIO DE SALA ", 50, 12, y == 2);
+		funcionesGlobales::showItem(" ELIMINAR SALA ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" Volver ", 50, 14, y == 4);
+
+		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+
+		switch (key) // evalua el codigo de tecla
+		{
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
+			break;
+		case 15: // flecha ABAJO
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl;
+			y++;
+			if (y > 4)y = 4;
+			break;
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: {
+				system("cls");
+				_admin1.cargarSalas();
+				system("cls");
+				break;
+			}
+			case 1:
+				system("cls");
+				_admin1.verSalasCargadas();
+				system("pause");
+				system("cls");
+				break;
+			case 2: {
+				system("cls");
+				int nroSala, posSala;
+				_admin1.verSalasCargadas();
+				nroSala = funcionesGlobales::validarMinimo(1, "NRO DE SALA A CAMBIAR PRECIO: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE SALA: ", "EL NRO DE SALA DEBE SER MAYOR O IGUAL A 1: ");
+				system("cls");
+				posSala	= archiSalas.buscarPosSalaxID(nroSala);
+				if (posSala != -1) {
+					_admin1.modificarSalaEnRegistro(nroSala);
+				}
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3:
+				system("cls");
+				_admin1.verSalasCargadas();
+				_admin1.darDeBajaSala();
+				system("pause");
+				system("cls");
+				break;
+			case 4: // Si el cursor esta en la opcion SALIR
+				op = 0; // sale del programa
+				break;
+			}
+		}
+	} while (op != 0);
+}
+void Sistema::menuFunciones() {
+	ArchivoFunciones archiFunciones("funcion.dat");
+	int op = 1, y = 0;
+
+	do {
+		rlutil::setConsoleTitle("MENU FUNCIONES"); // establece el titulo de la consola
+		rlutil::hidecursor(); // oculta el cursor
+		//rlutil::cls(); // limpia la pantalla
+
+		funcionesGlobales::showItem(" INGRESAR FUNCION ", 50, 10, y == 0); //si  y  es igual a 0, la opcion 1 esta seleccionada, coloca alli el cursor y cambia el color de fondo con la funcion showItem
+		funcionesGlobales::showItem(" VER FUNCIONES DISPONIBLES ", 50, 11, y == 1);
+		funcionesGlobales::showItem(" BUSCAR FUNCION ", 50, 12, y == 2);
+		funcionesGlobales::showItem(" MODIFICAR FUNCION ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" ELIMINAR FUNCION ", 50, 14, y == 4);
+		funcionesGlobales::showItem(" Volver ", 50, 15, y == 5);
+
+		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+		switch (key) // evalua el codigo de tecla
+		{
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
+			break;
+		case 15: // flecha ABAJO
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl;
+			y++;
+			if (y > 5) y = 5;
+			break;
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: {
+				system("cls");
+				_admin1.cargarFunciones();
+				system("cls");
+				break;
+			}
+			case 1:
+				system("cls");
+				_admin1.verFuncionesCargadas();
+				system("pause");
+				system("cls");
+				break;
+			case 2: {
+				system("cls");
+				int id;
+				id = funcionesGlobales::validarMinimo(1, "NRO DE FUNCION A BUSCAR: ", "INGRESO NO VALIDO, REINGRESE NRO DE FUNCION A BUSCAR: ", "EL NRO DE FUNCION TIENE QUE SER MAYOR A 0, REINGRESE NRO DE FUNCION A BUSCAR: ");
+				if (archiFunciones.buscarFuncionxID(id).getEstado()) {
+					system("cls");
+					archiFunciones.buscarFuncionxID(id).mostrarDetalles();
+				}
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 3: {
+				system("cls");
+				int id;
+				id = funcionesGlobales::validarMinimo(1, "NRO DE FUNCION A MODIFICAR: ", "INGRESO NO VALIDO, REINGRESE NRO DE FUNCION A MODIFICAR: ", "EL NRO DE FUNCION TIENE QUE SER MAYOR A 0, REINGRESE NRO DE FUNCION A MODIFICAR: ");
+				_admin1.modificarFuncionEnRegistro(id);
+				system("cls");
+				break;
+			}
+			case 4: {
+				system("cls");
+				_admin1.verFuncionesCargadas();
+				_admin1.darDeBajaFuncion();
+				system("pause");
+				system("cls");
+				break;
+			}
+			case 5: // Si el cursor esta en la opcion SALIR
+				op = 0; // sale del programa
+				break;
+			}
+		}
+	} while (op != 0);
+
+
+	
+}
+void Sistema::menuBackUp() {
+	int op = 1, y = 0;
+	ArchivoDiagrama archiDiagrama("diagrama.dat");
+	ArchivoPeliculas archiPeliculas("pelicula.dat");
+	ArchivoSalas archiSalas("sala.dat");
+	ArchivoFunciones archiFunciones("funcion.dat");
+	ArchivoEntrada archiEntrada("venta.dat");
+	do {
+		rlutil::setConsoleTitle("MENU BACKUP"); // establece el titulo de la consola
+		rlutil::hidecursor(); // oculta el cursor
+		//rlutil::cls(); // limpia la pantalla
+
+		funcionesGlobales::showItem(" GENERAR BACKUP PELICULAS ", 50, 10, y == 0);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP PELICULAS ", 50, 11, y == 1);
+		funcionesGlobales::showItem(" GENERAR BACKUP SALAS ", 50, 12, y == 2);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP SALAS ", 50, 13, y == 3);
+		funcionesGlobales::showItem(" GENERAR BACKUP FUNCIONES ", 50, 14, y == 4);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP FUNCIONES ", 50, 15, y == 5);
+		funcionesGlobales::showItem(" GENERAR BACKUP GRAFICOS SALA ", 50, 16, y == 6);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP GRAFICOS SALA ", 50, 17, y == 7);
+		funcionesGlobales::showItem(" GENERAR BACKUP VENTAS ", 50, 18, y == 8);
+		funcionesGlobales::showItem(" RECUPERAR BACKUP VENTAS ", 50, 19, y == 9);
+		funcionesGlobales::showItem(" Volver ", 50, 20, y == 10);
+
+		int key = rlutil::getkey(); // Lee una pulsación de tecla y devuelve un código ASCII de tecla.
+		switch (key) // evalua el codigo de tecla
+		{
+		case 14: // flecha ARRIBA
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl; // imprime un espacio para borrar la flecha cuando cambie de posicion
+			y--;
+			if (y < 0) y = 0; // validacion para que no se salga de las opciones
+			break;
+		case 15: // flecha ABAJO
+			rlutil::locate(28, 10 + y);
+			std::cout << " " << std::endl;
+			y++;
+			if (y > 10) y = 10;
+			break;
+		case 1: // ENTER
+			switch (y)
+			{
+			case 0: {
+				system("cls");
+				archiPeliculas.generarBackUp();
+				system("cls");
+				break;
+			}
+			case 1:
+				system("cls");
+				archiPeliculas.restaurarBackUp();
+				system("cls");
+				break;
+			case 2:
+				system("cls");
+				archiSalas.generarBackUp();
+				system("cls");
+				break;
+			case 3:
+				system("cls");
+				archiSalas.restaurarBackUp();
+				system("cls");
+				break;
+			case 4:
+				system("cls");
+				archiFunciones.generarBackUp();
+				system("cls");
+				break;
+			case 5:
+				system("cls");
+				archiFunciones.restaurarBackUp();
+				system("cls");
+				break;
+			case 6:
+				system("cls");
+				archiDiagrama.generarBackUp();
+				system("cls");
+				break;
+			case 7:
+				system("cls");
+				archiDiagrama.restaurarBackUp();
+				system("cls");
+				break;
+			case 8:
+				system("cls");
+				archiEntrada.generarBackUp();
+				system("cls");
+				break;
+			case 9:
+				system("cls");
+				archiEntrada.restaurarBackUp();
+				system("cls");
+				break;
+			case 10: // Si el cursor esta en la opcion SALIR
+				op = 0; // sale del programa
+				break;
+			}
+
+		}
+	} while (op != 0);
+}
 void Sistema::bienvenida() {
 	rlutil::setConsoleTitle("SISTEMA DE CINE");
 	rlutil::setColor(rlutil::COLOR::LIGHTBLUE);
@@ -491,13 +918,13 @@ void Sistema::creditos()
 
 void Sistema::verificarFechaYHoraFunciones()
 {
-	
+
 	ArchivoFunciones archiFunciones("funcion.dat");
 	Funcion funcionAuxiliar;
-	int cantidaReg= archiFunciones.contarRegistros();
+	int cantidaReg = archiFunciones.contarRegistros();
 	for (int i = 0; i < cantidaReg; i++) {
 		funcionAuxiliar = archiFunciones.leerRegistro(i);
-		if (funcionAuxiliar.getEstado() && funcionAuxiliar.getFechaHoraFuncion()<_fechaHorario) {
+		if (funcionAuxiliar.getEstado() && funcionAuxiliar.getFechaHoraFuncion() < _fechaHorario) {
 			funcionAuxiliar.setEstado(false);
 			archiFunciones.grabarRegistro(funcionAuxiliar, i);
 		}
