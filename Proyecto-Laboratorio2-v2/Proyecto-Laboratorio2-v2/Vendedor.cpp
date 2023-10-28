@@ -14,27 +14,37 @@ void Vendedor::venderEntradas(int idFuncion) {
 	ArchivoDiagrama archivoDiagrama("diagrama.dat");
 	ArchivoFunciones archivoFunciones("funcion.dat");
 	ArchivoEntrada archivoEntrada("venta.dat");
+	ArchivoSalas archivoSalas("sala.dat");
+
 	DiagramaSala diagramaAux;
 	Funcion funcionAux;
 	Entrada ventaAux;
+	Sala salaAux;
+
 	int idEntrada = archivoEntrada.validarId();
 	float importeVenta;
 	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(idFuncion);
-	int fila, columna;
-	/*std::cout << "FILA DEL ASIENTO A VENDER: ";
-	std::cin >> fila;*/
-	fila = funcionesGlobales::validarRango(1, 10, "FILA DEL ASIENTO A VENDER: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 10");
+	int fila, columna, idsala, posSala;
+
+	fila = funcionesGlobales::validarRango(1, 10, "FILA DEL ASIENTO A VENDER: ", "INGRESO NO VALIDO, REINGRESE FILA: ", "EL NRO DE FILA DEBE SER MAYOR O IGUAL A 1 ", "Y MENOR O IGUAL A 10.");
+
 	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
 	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
+
 	diagramaAux.mostrarAsientosPorFilaDisponible(fila);
+
 	importeVenta = funcionAux.getSala().getPrecioAsiento();
-	/*std::cout << "NRO DE ASIENTO A VENDER: ";
-	std::cin >> columna;*/
-	columna = funcionesGlobales::validarRango(1, 10, "NRO DE ASIENTO A VENDER: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 10");
+
+	salaAux = funcionAux.getSala();
+	salaAux.setAsientosDisponibles(salaAux.getAsientosDisponibles() - 1);
+	funcionAux.setSala(salaAux);
+
+	columna = funcionesGlobales::validarRango(1, 10, "NRO DE ASIENTO A VENDER: ", "INGRESO NO VALIDO, REINGRESE ASIENTO: ", "EL NRO DE ASIENTO DEBE SER MAYOR O IGUAL A 1 ", "Y MENOR O IGUAL A 10.");
+
 	if (archivoDiagrama.reservarAsientoEnRegistro(posAuxiliar, fila, columna)) {
 		ventaAux = Entrada(idEntrada, funcionAux, importeVenta, fila, columna);
 		archivoEntrada.grabarRegistro(ventaAux);
-		//std::cout << "Venta realizada con exito" << std::endl;
+		archivoFunciones.grabarRegistro(funcionAux, posAuxiliar);
 	}
 }
 
@@ -42,22 +52,32 @@ void Vendedor::cancelarVenta(int idEntrada) {
 	ArchivoDiagrama archivoDiagrama("diagrama.dat");
 	ArchivoFunciones archivoFunciones("funcion.dat");
 	ArchivoEntrada archivoVenta("venta.dat");
+	ArchivoSalas archivoSalas("sala.dat");
+
 	DiagramaSala diagramaAux;
 	Funcion funcionAux;
 	Entrada ventaAux;
+	Sala salaAux;
+
 	int posVenta = archivoVenta.buscarPosEntradaxID(idEntrada);
-	ventaAux = archivoVenta.buscarEntradaxID(idEntrada);
 	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(ventaAux.getFuncion().getIdFuncion());
-	int fila = ventaAux.getFilaAsiento(), columna = ventaAux.getColumnaAsiento();
+	int fila = ventaAux.getFilaAsiento();
+	int columna = ventaAux.getColumnaAsiento();
+
+	ventaAux = archivoVenta.buscarEntradaxID(idEntrada);
 	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
 	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
+	salaAux = funcionAux.getSala();	
+
+	salaAux.setAsientosDisponibles(salaAux.getAsientosDisponibles() + 1);
+	funcionAux.setSala(salaAux);
+
 	if (funcionesGlobales::confirmarAccion("DESEA CANCELAR LA VENTA? (s/n): ") ){
 
 		if (archivoDiagrama.cancelarReservaEnRegistro(posAuxiliar, fila, columna)) {
-			//ventaAux = Venta(idEntrada, funcionAux, importeVenta);
 			ventaAux.setEstado(false);
-				archivoVenta.grabarRegistro(ventaAux, posVenta);
-				//std::cout << "Venta realizada con exito" << std::endl;
+			archivoVenta.grabarRegistro(ventaAux, posVenta);
+			archivoFunciones.grabarRegistro(funcionAux, posAuxiliar);
 		}
 	}
 }

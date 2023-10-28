@@ -2,6 +2,7 @@
 #include "rlutil.h"
 #include <cstdio>
 #include <stdio.h>
+#include <limits.h>
 
 int funcionesGlobales::validarInt(std::string textoCout, std::string textoError) {
 	int nroAvalidar;
@@ -118,20 +119,6 @@ void funcionesGlobales::cargarCadena(char* pal, int tam)
 	}
 
 	strcpy(pal, input.c_str());
-
-	//int i;
-	////fflush(stdin);
-	//// std::cin.ignore();
-	//for (i = 0; i < tam; i++)
-	//{
-	//	pal[i] = std::cin.get();
-	//	if (pal[i] == '\n') break;
-	//}
-	//pal[i] = '\0';
-	////std::cin.ignore(INT_MAX);
-	//std::cin.ignore(30,'\n');
-	////fflush(stdin);
-	////fflush(stdin);
 }
 
 bool funcionesGlobales::confirmarAccion(std::string textoCout)
@@ -140,14 +127,14 @@ bool funcionesGlobales::confirmarAccion(std::string textoCout)
 	std::cout << textoCout;
 	std::cin >> siONo;
 	while (siONo != 's' && siONo != 'S' && siONo != 'n' && siONo != 'N') {
-		std::cout << "Opcion no valida, reingrese (s/n): ";
+		std::cout << "OPCION NO VALIDA, REINGRESE (S/N): ";
 		std::cin >> siONo;
 	}
 	if (siONo == 's' || siONo == 'S') {
 		return true;
 	}
 	else {
-		std::cout << "Accion cancelada." << std::endl;
+		std::cout << "ACCION CANCELADA." << std::endl;
 		return false;
 	}
 }
