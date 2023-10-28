@@ -78,6 +78,7 @@ public:
 	* @return true o false segun si pudo o no realizar la accion
  	*/
 	bool modificarSalaEnRegistro(int nroSala);
+	void modificarSalaEnFuncion(int idSala, int precioNuevo);
 	/**
 	* @brief Recorre el archivo de salas, muestra los registros que no tengan baja logica, pide el ingreso de un ID, busca la posicion en el archivo de salas, da baja logica al registro, lo graba en el archivo con validacion y muestra por pantalla si pudo o no realizar la accion.
 	* @param void
@@ -109,7 +110,7 @@ public:
 	Administrador();
 	Administrador(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia);
 
-	void ingresarDatosFuncion(int &dia, int &mes, int &anio, int &hora, int &minuto, FechaHorario &fechaHoraFuncion);
+	void validarFechaHoraFuncion(int &dia, int &mes, int &anio, int &hora, int &minuto, FechaHorario &fechaHoraFuncion, FechaHorario &_fechaHorario);
 
 
 	

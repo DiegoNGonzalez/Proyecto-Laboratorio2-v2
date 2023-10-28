@@ -36,10 +36,10 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 		system("cls");
 		rlutil::setColor(rlutil::COLOR::LIGHTBLUE);
 		rlutil::locate(50, 10);
-		std::cout << "Ingrese su usuario: ";
+		std::cout << "Usuario: ";
 		std::cin >> usuario;
 		rlutil::locate(50, 11);
-		std::cout << "Ingrese su contrasenia: ";
+		std::cout << "Contraseña: ";
 		//cin >> contrasenia;
 		contrasenia = "";
 		char caracter;
@@ -93,7 +93,7 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 			std::cout << "Validando credenciales..." << std::endl;
 			Sleep(1500);
 			rlutil::locate(50, 13);
-			std::cout << "Usuario o contrasenia incorrectos" << std::endl;
+			std::cout << "Usuario o contraseña incorrectos" << std::endl;
 			intentos++;
 			Sleep(1000);
 			rlutil::locate(50, 14);
@@ -246,9 +246,7 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 1: {
 				system("cls");
-				/*std::cout << "INGRESE EL NRO DE LA FUNCION:";
-				std::cin >> idFuncion;*/
-				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
+				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE FUNCION: ", "EL NRO DE FUNCION DEBE SER MAYOR O IGUAL A 1: ");
 				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					archiDiagrama.mostrarRegistro(pos);
@@ -262,9 +260,7 @@ void Sistema::mostrarMenuVendedor() {
 			}
 			case 2: {
 				system("cls");
-				/*std::cout << "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ";
-				std::cin >> idFuncion;*/
-				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
+				idFuncion = funcionesGlobales::validarMinimo(1, "INGRESE EL NRO DE LA FUNCION A VENDER UN ASIENTO: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE FUNCION: ", "EL NRO DE FUNCION DEBE SER MAYOR O IGUAL A 1: ");
 				int pos = archiDiagrama.buscarPosDiagramaxID(idFuncion);
 				if (pos != -1) {
 					_vendedor1.venderEntradas(idFuncion);
@@ -279,7 +275,7 @@ void Sistema::mostrarMenuVendedor() {
 				archiVenta.verVentasCargadas();
 				/*std::cout << "NRO DE LA VENTA A CANCELAR: ";
 				std::cin >> idEntrada;*/
-				idEntrada = funcionesGlobales::validarMinimo(1, "NRO DE LA VENTA A CANCELAR: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
+				idEntrada = funcionesGlobales::validarMinimo(1, "NRO DE LA VENTA A CANCELAR: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE FUNCION: ", "EL NRO DE FUNCION DEBE SER MAYOR O IGUAL A 1: ");
 				int pos = archiVenta.buscarPosEntradaxID(idEntrada);
 				if (pos != -1) {
 					_vendedor1.cancelarVenta(idEntrada);
@@ -561,7 +557,7 @@ void Sistema::menuPeliculas() {
 }
 void Sistema::menuSalas() {
 	int op = 1, y = 0;
-
+	ArchivoSalas archiSalas("sala.dat");
 	do {
 		rlutil::setConsoleTitle("MENU SALAS"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
@@ -606,13 +602,14 @@ void Sistema::menuSalas() {
 				break;
 			case 2: {
 				system("cls");
-				int nroSala;
+				int nroSala, posSala;
 				_admin1.verSalasCargadas();
-				/*std::cout << "NRO DE SALA A CAMBIAR PRECIO: ";
-				std::cin >> nroSala;*/
-				nroSala = funcionesGlobales::validarMinimo(1, "NRO DE SALA A CAMBIAR PRECIO: ", "Lo ingresado no es un numero, reingrese un numero: ", "El numero tiene que ser mayor o igual a 1, reingrese: ");
+				nroSala = funcionesGlobales::validarMinimo(1, "NRO DE SALA A CAMBIAR PRECIO: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE SALA: ", "EL NRO DE SALA DEBE SER MAYOR O IGUAL A 1: ");
 				system("cls");
-				_admin1.modificarSalaEnRegistro(nroSala);
+				posSala	= archiSalas.buscarPosSalaxID(nroSala);
+				if (posSala != -1) {
+					_admin1.modificarSalaEnRegistro(nroSala);
+				}
 				system("pause");
 				system("cls");
 				break;
