@@ -1,37 +1,83 @@
 #include "Vendedor.h"
 #include <iostream>
-Vendedor::Vendedor() : Persona() {
+#include "funcionesGlobales.h"
+Vendedor::Vendedor() : Empleado() {
 
 }
 
-Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia) : Persona(legajo, cargo, nombre, apellido, usuario, contrasenia) {
+Vendedor::Vendedor(int legajo, std::string cargo, std::string nombre, std::string apellido, std::string usuario, std::string contrasenia) : Empleado(legajo, cargo, nombre, apellido, usuario, contrasenia) {
 
 }
 
 
-void Vendedor::venderEntradas(int contadorEntradas, int idFuncion, int contadorGeneralEntradas) {
-	//FILE* f;
-	//f = fopen("funcion.dat", "rb");
-	//if (f == NULL) {
-	//	std::cout << "ERROR AL QUERER ABRIR EL ARCHIVO DE LAS FUNCIONES" << std::endl;
-	//}
-	//else {
-	//	// Mueve la posición del puntero en el archivo al registro correcto
-	//	fseek(f, (idFuncion - 1) * sizeof(Funcion), SEEK_SET);
+void Vendedor::venderEntradas(int idFuncion) {
+	ArchivoDiagrama archivoDiagrama("diagrama.dat");
+	ArchivoFunciones archivoFunciones("funcion.dat");
+	ArchivoEntrada archivoEntrada("venta.dat");
+	ArchivoSalas archivoSalas("sala.dat");
 
-	//	// Lee la información de la función desde el archivo
-	//	if (fread(&vecFunciones[idFuncion - 1], sizeof(Funcion), 1, f) == 1) {
-	//		std::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
-	//		std::cout << "El total a abonar es: $" << vecFunciones[idFuncion - 1].getPrecioEntrada() * contadorEntradas << std::endl;
-	//		std::cout << "¡Entrada vendida con éxito!\n";
-	//	}
-	//	else {
-	//		std::cout << "No se pudo leer la información de la función desde el archivo." << std::endl;
-	//	}
+	DiagramaSala diagramaAux;
+	Funcion funcionAux;
+	Entrada ventaAux;
+	Sala salaAux;
 
-	//	contadorGeneralEntradas += contadorEntradas;
-	//	std::cout << "Cantidad de entradas vendidas en total: " << contadorGeneralEntradas << std::endl;
-	//	fclose(f);
-	//}
-	std::cout << "Cantidad de entradas vendidas: " << contadorEntradas << std::endl;
+	int idEntrada = archivoEntrada.validarId();
+	float importeVenta;
+	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(idFuncion);
+	int fila, columna, idsala, posSala;
+
+	fila = funcionesGlobales::validarRango(1, 10, "FILA DEL ASIENTO A VENDER: ", "INGRESO NO VALIDO, REINGRESE FILA: ", "EL NRO DE FILA DEBE SER MAYOR O IGUAL A 1 ", "Y MENOR O IGUAL A 10.");
+
+	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
+	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
+
+	diagramaAux.mostrarAsientosPorFilaDisponible(fila);
+
+	importeVenta = funcionAux.getSala().getPrecioAsiento();
+
+	salaAux = funcionAux.getSala();
+	salaAux.setAsientosDisponibles(salaAux.getAsientosDisponibles() - 1);
+	funcionAux.setSala(salaAux);
+
+	columna = funcionesGlobales::validarRango(1, 10, "NRO DE ASIENTO A VENDER: ", "INGRESO NO VALIDO, REINGRESE ASIENTO: ", "EL NRO DE ASIENTO DEBE SER MAYOR O IGUAL A 1 ", "Y MENOR O IGUAL A 10.");
+
+	if (archivoDiagrama.reservarAsientoEnRegistro(posAuxiliar, fila, columna)) {
+		ventaAux = Entrada(idEntrada, funcionAux, importeVenta, fila, columna);
+		archivoEntrada.grabarRegistro(ventaAux);
+		archivoFunciones.grabarRegistro(funcionAux, posAuxiliar);
+	}
+}
+
+void Vendedor::cancelarVenta(int idEntrada) {
+	ArchivoDiagrama archivoDiagrama("diagrama.dat");
+	ArchivoFunciones archivoFunciones("funcion.dat");
+	ArchivoEntrada archivoVenta("venta.dat");
+	ArchivoSalas archivoSalas("sala.dat");
+
+	DiagramaSala diagramaAux;
+	Funcion funcionAux;
+	Entrada ventaAux;
+	Sala salaAux;
+
+	int posVenta = archivoVenta.buscarPosEntradaxID(idEntrada);
+	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(ventaAux.getFuncion().getIdFuncion());
+	int fila = ventaAux.getFilaAsiento();
+	int columna = ventaAux.getColumnaAsiento();
+
+	ventaAux = archivoVenta.buscarEntradaxID(idEntrada);
+	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
+	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
+	salaAux = funcionAux.getSala();	
+
+	salaAux.setAsientosDisponibles(salaAux.getAsientosDisponibles() + 1);
+	funcionAux.setSala(salaAux);
+
+	if (funcionesGlobales::confirmarAccion("DESEA CANCELAR LA VENTA? (s/n): ") ){
+
+		if (archivoDiagrama.cancelarReservaEnRegistro(posAuxiliar, fila, columna)) {
+			ventaAux.setEstado(false);
+			archivoVenta.grabarRegistro(ventaAux, posVenta);
+			archivoFunciones.grabarRegistro(funcionAux, posAuxiliar);
+		}
+	}
 }

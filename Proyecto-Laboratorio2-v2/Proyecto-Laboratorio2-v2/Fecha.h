@@ -12,6 +12,8 @@ public:
 	Fecha();
 	Fecha(int dia, int mes, int anio);
 	void mostrarFecha();
+	bool operator==(Fecha fecha);
+	bool operator<(Fecha fecha);
 
 private:
 	int _dia, _mes, _anio;

@@ -1,8 +1,11 @@
 #pragma once
-#include <Windows.h>
+//#include <Windows.h>
 #include <cstring>
 #include "Funcion.h"
-#include "rlutil.h"
+//#include "rlutil.h"
+#include "ArchivoPeliculas.h"
+#include "ArchivoSalas.h"
+#include "ArchivoDiagrama.h"
 class ArchivoFunciones
 {
 private:
@@ -11,11 +14,20 @@ public:
 	ArchivoFunciones(const char* nombre) {
 		strcpy(_nombre, nombre);
 	}
+	/**
+	* @brief Metodo que permite leer un registro de un archivo
+	* @param posicion posicion del registro a leer
+	* @return retorna un objeto de tipo Funcion
+	*/
 	Funcion leerRegistro(int posicion);
 	int contarRegistros();
 	bool grabarRegistro(Funcion funcion);
+	bool grabarRegistro(Funcion funcion, int posicion);
 	bool generarBackUp();
 	bool restaurarBackUp();
 	int validarId();
+	int buscarPosFuncionxID(int valorBuscado);
+	Funcion buscarFuncionxID(int valorBuscado);
+	
 };
 

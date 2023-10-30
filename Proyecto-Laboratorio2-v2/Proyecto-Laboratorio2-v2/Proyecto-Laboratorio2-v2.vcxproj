@@ -145,17 +145,21 @@
     <ClCompile Include="ArchivoFunciones.cpp" />
     <ClCompile Include="ArchivoPeliculas.cpp" />
     <ClCompile Include="ArchivoSalas.cpp" />
+    <ClCompile Include="ArchivoEntrada.cpp" />
     <ClCompile Include="DiagramaSala.cpp" />
+    <ClCompile Include="funcionesGlobales.cpp" />
+    <ClCompile Include="InformesMaker.cpp" />
     <ClCompile Include="Sistema.cpp" />
     <ClCompile Include="Fecha.cpp" />
     <ClCompile Include="FechaHorario.cpp" />
     <ClCompile Include="Funcion.cpp" />
     <ClCompile Include="Horario.cpp" />
     <ClCompile Include="Pelicula.cpp" />
-    <ClCompile Include="Persona.cpp" />
+    <ClCompile Include="Empleado.cpp" />
     <ClCompile Include="Sala.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Vendedor.cpp" />
+    <ClCompile Include="Entrada.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Administrador.h" />
@@ -163,7 +167,10 @@
     <ClInclude Include="ArchivoFunciones.h" />
     <ClInclude Include="ArchivoPeliculas.h" />
     <ClInclude Include="ArchivoSalas.h" />
+    <ClInclude Include="ArchivoEntrada.h" />
     <ClInclude Include="DiagramaSala.h" />
+    <ClInclude Include="funcionesGlobales.h" />
+    <ClInclude Include="InformesMaker.h" />
     <ClInclude Include="Sistema.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="FechaHorario.h" />
@@ -171,9 +178,10 @@
     <ClInclude Include="rlutil.h" />
     <ClInclude Include="Horario.h" />
     <ClInclude Include="Pelicula.h" />
-    <ClInclude Include="Persona.h" />
+    <ClInclude Include="Empleado.h" />
     <ClInclude Include="Sala.h" />
     <ClInclude Include="Vendedor.h" />
+    <ClInclude Include="Entrada.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

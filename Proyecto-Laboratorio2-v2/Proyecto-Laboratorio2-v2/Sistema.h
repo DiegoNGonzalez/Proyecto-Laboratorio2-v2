@@ -1,5 +1,5 @@
 #pragma once
-#include <vector>
+#include <vector>  // chequear si corresponde incluirlo aca
 #include "Pelicula.h"
 #include "Sala.h"
 #include "Funcion.h"
@@ -9,12 +9,9 @@
 class Sistema
 {
 private:
-	Pelicula vecPeliculas[5];
-	Sala vecSalas[5];
-	Funcion vecFunciones[25];
 	Administrador _admin1;
 	Vendedor _vendedor1;
-	int matrizSalasxFuncion[25][10][10] = { 0 };
+	FechaHorario _fechaHorario;
 
 public:
 	Administrador getAdmin() const;
@@ -23,7 +20,16 @@ public:
 	void bienvenida();
 	void mostrarMenuAdmin();
 	void mostrarMenuVendedor();
+	void mostrarMenuInformes();
+	void mostrarMenuListados();
+	void menuPeliculas();
+	void menuSalas();
+	void menuFunciones();
+	void menuBackUp();
 	bool crearDirectorioBackUP();
+	void verificarFechaYHoraFunciones();
+	void creditos();
+	void mostrarListadoEmpleados();
 
 	Sistema();
 

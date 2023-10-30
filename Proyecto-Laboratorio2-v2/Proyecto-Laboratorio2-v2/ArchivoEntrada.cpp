@@ -1,21 +1,21 @@
-#include "ArchivoPeliculas.h"
+#include "ArchivoEntrada.h"
 #include "funcionesGlobales.h"
-//#include <iostream>
 #include <filesystem>
-Pelicula ArchivoPeliculas::leerRegistro(int posicion) {
-	Pelicula pelicula;
+
+Entrada ArchivoEntrada::leerRegistro(int posicion) {
+	Entrada entrada;
 	FILE* p;
 	p = fopen(_nombre, "rb");
 	if (p == NULL) {
 		std::cout << "Error al tratar de leer" << std::endl;
-		return pelicula;
+		return entrada;
 	}
-	fseek(p, posicion * sizeof(Pelicula), SEEK_SET);
-	fread(&pelicula, sizeof(Pelicula), 1, p);
+	fseek(p, posicion * sizeof(Entrada), SEEK_SET);
+	fread(&entrada, sizeof(Entrada), 1, p);
 	fclose(p);
-	return pelicula;
+	return entrada;
 }
-int ArchivoPeliculas::contarRegistros() {
+int ArchivoEntrada::contarRegistros() {
 	FILE* p;
 	p = fopen(_nombre, "rb");
 	if (p == NULL) {
@@ -25,34 +25,34 @@ int ArchivoPeliculas::contarRegistros() {
 	fseek(p, 0, 2);
 	int tam = ftell(p);
 	fclose(p);
-	return tam / sizeof(Pelicula);
+	return tam / sizeof(Entrada);
 };
-bool ArchivoPeliculas::grabarRegistro(Pelicula pelicula) {
+bool ArchivoEntrada::grabarRegistro(Entrada entrada) {
 	FILE* p;
 	p = fopen(_nombre, "ab");
 	if (p == NULL) {
 		std::cout << "Error al grabar registro" << std::endl;
 		return false;
 	};
-	int escribio = fwrite(&pelicula, sizeof pelicula, 1, p);
+	int escribio = fwrite(&entrada, sizeof Entrada, 1, p);
 	fclose(p);
 	return escribio;
 };
 
-bool ArchivoPeliculas::grabarRegistro(Pelicula diagrama, int posicion) {
+bool ArchivoEntrada::grabarRegistro(Entrada entrada, int posicion) {
 	bool pudoEscribir;
 	FILE* p = fopen(_nombre, "rb+");
 	if (p == nullptr) {
 		return false;
 	}
-	fseek(p, posicion * sizeof(Pelicula), SEEK_SET);
-	pudoEscribir = fwrite(&diagrama, sizeof(Pelicula), 1, p);
+	fseek(p, posicion * sizeof(Entrada), SEEK_SET);
+	pudoEscribir = fwrite(&entrada, sizeof(Entrada), 1, p);
 	fclose(p);
 	return pudoEscribir;
 }
-bool ArchivoPeliculas::generarBackUp() {
+bool ArchivoEntrada::generarBackUp() {
 	FILE* archivo = fopen(_nombre, "rb");
-	std::string ruta = "backUp/peliculaBKP.dat";
+	std::string ruta = "backUp/ventaBKP.dat";
 
 	if (archivo == NULL) {
 		std::cout << "Error al abrir el archivo. Falla BackUp" << std::endl;
@@ -61,18 +61,18 @@ bool ArchivoPeliculas::generarBackUp() {
 	}
 
 	if (std::filesystem::exists(ruta)) {
-		std::cout << "Ya existe un BackUp de Peliculas." << std::endl;
+		std::cout << "Ya existe un BackUp de Entradas." << std::endl;
 		if (funcionesGlobales::confirmarAccion("Desea sobreescribirlo? (S/N): ")) {
-			FILE* archivoBackUp = fopen("backUp/peliculaBKP.dat", "wb");
+			FILE* archivoBackUp = fopen("backUp/ventaBKP.dat", "wb");
 			if (archivoBackUp == NULL) {
 				std::cout << "Error al abrir el archivo de respaldo. Falla BackUp" << std::endl;
 				fclose(archivo);
 				return false;
 			}
 
-			Pelicula pelicula;
-			while (fread(&pelicula, sizeof(Pelicula), 1, archivo) == 1) {
-				fwrite(&pelicula, sizeof(Pelicula), 1, archivoBackUp);
+			Entrada entrada;
+			while (fread(&entrada, sizeof(Entrada), 1, archivo) == 1) {
+				fwrite(&entrada, sizeof(Entrada), 1, archivoBackUp);
 			}
 
 			fclose(archivo);
@@ -87,16 +87,16 @@ bool ArchivoPeliculas::generarBackUp() {
 		}
 	}
 	else {
-		FILE* archivoBackUp = fopen("backUp/peliculaBKP.dat", "wb");
+		FILE* archivoBackUp = fopen("backUp/ventaBKP.dat", "wb");
 		if (archivoBackUp == NULL) {
 			std::cout << "Error al abrir el archivo de respaldo. Falla BackUp" << std::endl;
 			fclose(archivo);
 			return false;
 		}
 
-		Pelicula pelicula;
-		while (fread(&pelicula, sizeof(Pelicula), 1, archivo) == 1) {
-			fwrite(&pelicula, sizeof(Pelicula), 1, archivoBackUp);
+		Entrada entrada;
+		while (fread(&entrada, sizeof(Entrada), 1, archivo) == 1) {
+			fwrite(&entrada, sizeof(Entrada), 1, archivoBackUp);
 		}
 
 		fclose(archivo);
@@ -111,18 +111,18 @@ bool ArchivoPeliculas::generarBackUp() {
 
 
 
-bool ArchivoPeliculas::restaurarBackUp() {
-	FILE* archivoBackUp = fopen("backUp/peliculaBKP.dat", "rb");
-	std::string ruta = "pelicula.dat";
+bool ArchivoEntrada::restaurarBackUp() {
+	FILE* archivoBackUp = fopen("backUp/ventaBKP.dat", "rb");
+	std::string ruta = "venta.dat";
 
 	if (archivoBackUp == NULL)
 	{
 		std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
-		std::system("pause");
+		system("pause");
 		return false;
 	}
 	if (std::filesystem::exists(ruta)) {
-		std::cout << "Ya existe un archivo de Peliculas." << std::endl;
+		std::cout << "Ya existe un archivo de Entradas." << std::endl;
 		if (funcionesGlobales::confirmarAccion("Desea sobreescribirlo? (S/N): ")) {
 			FILE* archivo = fopen("venta.dat", "wb");
 			if (archivo == NULL)
@@ -131,10 +131,10 @@ bool ArchivoPeliculas::restaurarBackUp() {
 				fclose(archivoBackUp);
 				return false;
 			}
-			Pelicula pelicula;
-			while (fread(&pelicula, sizeof(Pelicula), 1, archivoBackUp))
+			Entrada entrada;
+			while (fread(&entrada, sizeof(Entrada), 1, archivoBackUp))
 			{
-				fwrite(&pelicula, sizeof(Pelicula), 1, archivo);
+				fwrite(&entrada, sizeof(Entrada), 1, archivo);
 			}
 			fclose(archivoBackUp);
 			fclose(archivo);
@@ -148,17 +148,17 @@ bool ArchivoPeliculas::restaurarBackUp() {
 		}
 	}
 	else {
-		FILE* archivo = fopen("pelicula.dat", "wb");
+		FILE* archivo = fopen("venta.dat", "wb");
 		if (archivo == NULL)
 		{
 			std::cout << "Error al abrir el archivo, Fallo BackUp" << std::endl;
 			fclose(archivoBackUp);
 			return false;
 		}
-		Pelicula pelicula;
-		while (fread(&pelicula, sizeof(Pelicula), 1, archivoBackUp))
+		Entrada entrada;
+		while (fread(&entrada, sizeof(Entrada), 1, archivoBackUp))
 		{
-			fwrite(&pelicula, sizeof(Pelicula), 1, archivo);
+			fwrite(&entrada, sizeof(Entrada), 1, archivo);
 		}
 		fclose(archivoBackUp);
 		fclose(archivo);
@@ -167,7 +167,8 @@ bool ArchivoPeliculas::restaurarBackUp() {
 		return true;
 	}
 }
-int ArchivoPeliculas::validarId() {
+
+int ArchivoEntrada::validarId() {
 	FILE* p;
 	int idMax = 0, contarReg;
 
@@ -177,30 +178,58 @@ int ArchivoPeliculas::validarId() {
 	}
 	contarReg = contarRegistros();
 	for (int i = 0; i < contarReg; i++) {
-		Pelicula pelicula = leerRegistro(i);
-		if (pelicula.getId() > idMax) {
-			idMax = pelicula.getId();
+		Entrada venta = leerRegistro(i);
+		if (venta.getidEntrada() > idMax) {
+			idMax = venta.getidEntrada();
 		}
 	}
 	fclose(p);
 	return idMax + 1;
 
-
 }
 
-int ArchivoPeliculas::buscarPosPeliculaxID(int valorBuscado) {
-	
-	Pelicula pelicula;
-	int cantidadRegistros=contarRegistros();
+int ArchivoEntrada::buscarPosEntradaxID(int valorBuscado) {
+	Entrada venta;
+	int cantidadRegistros = contarRegistros();
 	for (int i = 0; i < cantidadRegistros; i++)
 	{
-		pelicula = leerRegistro(i);
-		if (pelicula.getId() == valorBuscado && pelicula.getEstado() == true) {
+		venta = leerRegistro(i);
+		if (venta.getidEntrada() == valorBuscado) {
 			return i;
 		}
 	}
-	std::cout << "ID DE PELICULA INEXISTENTE." << std::endl;
+	std::cout << "No se encontro el id." << std::endl;
 	return -1;
-	
 }
 
+Entrada ArchivoEntrada::buscarEntradaxID(int valorBuscado) {
+	Entrada venta;
+	int pos = buscarPosEntradaxID(valorBuscado);
+	if (pos >= 0) {
+		venta = leerRegistro(pos);
+		return venta;
+	}
+	else {
+		std::cout << "No se encontro el id." << std::endl;
+		return venta;
+	}
+}
+
+
+void ArchivoEntrada::verVentasCargadas()
+{
+	Entrada venta;
+	int contador = 0;
+	int cantidadRegistros = contarRegistros();
+	for (int i = 0; i < cantidadRegistros; i++)
+	{
+		venta = leerRegistro(i);
+		if (venta.getEstado()) {
+			venta.mostrarVenta();
+			contador++;
+		}
+	}
+	if (contador == 0) {
+		std::cout << "No hay ventas cargadas" << std::endl;
+	}
+}

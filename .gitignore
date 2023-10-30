@@ -396,3 +396,4 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/Proyecto-Laboratorio2-v2/Proyecto-Laboratorio2-v2/Administrador.cpp

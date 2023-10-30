@@ -5,18 +5,19 @@ class DiagramaSala
 private:
 	int salaDeCine[10][10] = { 0 };
 	int _idFuncion;
-
+	bool _estado;
 public:
 	DiagramaSala();
 	DiagramaSala(int idFuncion);
 	bool reservarAsiento(int fila, int columna);
 	bool cancelarReserva(int fila, int columna);
+	void setEstado(bool est);
+	bool getEstado();
 	void setIdFuncion(int idFuncion);
 	int getIdFuncion();
 	void mostrarSala();
+	void mostrarAsientosPorFilaDisponible(int fila);
 	void setSalaDeCine(int fila, int columna, int estado);
-
-
 
 };
 

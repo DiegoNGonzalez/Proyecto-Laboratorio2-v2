@@ -36,11 +36,22 @@ bool Sala::getEstado() const
 	return _estado;
 }
 
+void Sala::setAsientosDisponibles(int asientosDisponibles)
+{
+	_asientosDisponibles = asientosDisponibles;
+}
+
+int Sala::getAsientosDisponibles()
+{
+	return _asientosDisponibles;
+}
+
 Sala::Sala()
 {
 	_idSala = 0;
 	_estado = true;
 	_precioAsiento = 0;
+	_asientosDisponibles = 0;
 }
 
 Sala::Sala(int idSala, float precioAsiento)
@@ -48,14 +59,16 @@ Sala::Sala(int idSala, float precioAsiento)
 	_idSala = idSala;
 	_precioAsiento = precioAsiento;
 	_estado = true;
+	_asientosDisponibles = 100;
 }
 
 
 void Sala::mostrarDetalles() const
 {
-	cout << "Numero de sala: " << _idSala << endl;
-	cout << "Capacidad maxima de asientos: " << 100 << endl;
-	cout << "Precio de entrada: $" << _precioAsiento << endl;
+	cout << "------- SALA #" << _idSala << " -------" << endl;
+	cout << "CAPACIDAD MAXIMA: " << 100 << endl;
+	cout << "ASIENTOS DISPONIBLES: " << _asientosDisponibles << endl;
+	cout << "PRECIO ENTRADA $" << _precioAsiento << endl;
 }
 
 
