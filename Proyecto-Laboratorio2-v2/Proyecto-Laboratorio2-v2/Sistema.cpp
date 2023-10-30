@@ -178,7 +178,7 @@ void Sistema::mostrarMenuAdmin() {
 				mostrarMenuListados();
 				system("cls");
 				break;
-			case 6: 
+			case 6:
 				login(_admin1, _vendedor1);
 				op = 0;
 				break;
@@ -405,7 +405,7 @@ void Sistema::mostrarMenuListados() {
 		funcionesGlobales::showItem("LISTADO FUNCIONES", 50, 11, y == 1);
 		funcionesGlobales::showItem("LISTADO SALAS", 50, 12, y == 2);
 		funcionesGlobales::showItem("LISTADO VENTAS", 50, 13, y == 3);
-		funcionesGlobales::showItem("OTRO LISTADO - falta ver ", 50, 14, y == 4);
+		funcionesGlobales::showItem("LISTADO EMPLEADOS", 50, 14, y == 4);
 		funcionesGlobales::showItem(" Volver", 50, 15, y == 5);
 
 		int key = rlutil::getkey();
@@ -421,17 +421,17 @@ void Sistema::mostrarMenuListados() {
 		case 15: // flecha ABAJO													    
 			rlutil::locate(28, 11 + y);
 			std::cout << " " << std::endl;
-			y++;																	   
+			y++;
 			if (y > 5) y = 5;
 			break;
 		case 1: // ENTER
 			switch (y)
 			{
-			case 0: { 
+			case 0: {
 				system("cls");
 				std::cout << "LISTADO PELICULAS " << std::endl;
 				_admin1.verPeliculasCargadas();
-				
+
 				system("pause");
 				system("cls");
 				break;
@@ -455,18 +455,19 @@ void Sistema::mostrarMenuListados() {
 			}
 			case 3: {
 				system("cls");
-				std::cout << "LISTADO VENTAS";
+				std::cout << "LISTADO VENTAS" << std::endl;;
 				//_admin1.verVentas();
 
 				archiventa.verVentasCargadas();
-				
+
 				system("pause");
 				system("cls");
 				break;
 			}
 			case 4: {
 				system("cls");
-				std::cout << "EXTRA"; // ver si falta otro listado, sino vuela
+				std::cout << "LISTADO EMPLEADOS" << std::endl;
+				mostrarListadoEmpleados();
 				system("pause");
 				system("cls");
 				break;
@@ -608,7 +609,7 @@ void Sistema::menuSalas() {
 				_admin1.verSalasCargadas();
 				nroSala = funcionesGlobales::validarMinimo(1, "NRO DE SALA A CAMBIAR PRECIO: ", "INGRESO NO VALIDO, REINGRESE UN NRO DE SALA: ", "EL NRO DE SALA DEBE SER MAYOR O IGUAL A 1: ");
 				system("cls");
-				posSala	= archiSalas.buscarPosSalaxID(nroSala);
+				posSala = archiSalas.buscarPosSalaxID(nroSala);
 				if (posSala != -1) {
 					_admin1.modificarSalaEnRegistro(nroSala);
 				}
@@ -712,7 +713,7 @@ void Sistema::menuFunciones() {
 	} while (op != 0);
 
 
-	
+
 }
 void Sistema::menuBackUp() {
 	int op = 1, y = 0;
@@ -931,3 +932,15 @@ void Sistema::verificarFechaYHoraFunciones()
 	}
 
 }
+
+void Sistema::mostrarListadoEmpleados() {
+
+	std::cout << std::left << "." << std::setw(10) << "_________" << "." << std::setw(20) << "___________________" << "." << std::setw(20) << "___________________" << "." << std::setw(20) << "___________________" << "." << std::endl;
+	std::cout << "|" << std::left << std::setw(10) << "LEGAJO" << "|" << std::setw(20) << "NOMBRE" << "|" << std::setw(20) << "APELLIDO" << "|" << std::setw(20) << "CARGO" << "|" << std::endl;
+	std::cout << std::left << "|" << std::setw(10) << _admin1.getLegajo() << "|" << std::setw(20) << _admin1.getNombre() << "|" << std::setw(20) << _admin1.getApellido() << "|" << std::setw(20) << _admin1.getUsuario() << "|" << std::endl;
+
+	std::cout << std::left << "|" << std::setw(10) << _vendedor1.getLegajo() << "|" << std::setw(20) << _vendedor1.getNombre() << "|" << std::setw(20) << _vendedor1.getApellido() << "|" << std::setw(20) << _vendedor1.getUsuario() << "|" << std::endl;
+	std::cout << std::left << "|" << std::setw(10) << "_________" << "|" << std::setw(20) << "___________________" << "|" << std::setw(20) << "___________________" << "|" << std::setw(20) << "___________________" << "|" << std::endl;
+	std::cout << std::endl;
+}
+

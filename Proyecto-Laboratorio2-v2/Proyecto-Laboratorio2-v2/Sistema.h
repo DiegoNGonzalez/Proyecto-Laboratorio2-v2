@@ -29,6 +29,7 @@ public:
 	bool crearDirectorioBackUP();
 	void verificarFechaYHoraFunciones();
 	void creditos();
+	void mostrarListadoEmpleados();
 
 	Sistema();
 
