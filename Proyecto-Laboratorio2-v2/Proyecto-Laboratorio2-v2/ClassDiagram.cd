@@ -1,44 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Administrador">
-    <Position X="7.5" Y="7" Width="1.5" />
+    <Position X="0.5" Y="13.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AwAAAEIAIADAQAAIAAAAQEAgAQiAAAAAIIwQAAwBgAU=</HashCode>
+      <HashCode>EgAAAEIAAABASAAAAAAAQAAgAQCAAAAAAIQQAAQBgAU=</HashCode>
       <FileName>Administrador.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Sistema">
-    <Position X="6" Y="6.25" Width="1.5" />
+    <Position X="5.75" Y="13.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>UAAAAAAAJAIAAAAAAAABACAAAAAAAAAAgAAAAAAAEAA=</HashCode>
+      <HashCode>UQAAAAAAJAIAAAAAAAABAGJAAAAAIAAAoAACAAAAEAA=</HashCode>
       <FileName>Sistema.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Fecha">
-    <Position X="8.75" Y="6.5" Width="2" />
+    <Position X="11" Y="11" Width="2" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAAAAABAEAIAEAAAdAAAAAAAAAAIAAAAAAUAA=</HashCode>
+      <HashCode>ACAAAAAAAAAABAEAIAEAAQdAAAAAAAAAAIAgAAAAUAA=</HashCode>
       <FileName>Fecha.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FechaHorario">
-    <Position X="14" Y="6" Width="1.5" />
+    <Position X="15.75" Y="11" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAgRAAEAAAAAAAAAAAAAgAAAAAAAAAEAAAEAAAAAAIA=</HashCode>
+      <HashCode>AAgRAAEAAAAAAAAAAAAAgQAAAAAAAAEAAAEgAAAAAIA=</HashCode>
       <FileName>FechaHorario.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Funcion">
     <Position X="5.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>EAAIBAAAAAAACAEEAAiABAAABAAAAAQYgQIAAEAAAIA=</HashCode>
+      <HashCode>EAAIBAAAAAAACAEEAAiABAAABAAAAAQYgAIAAEAAAIA=</HashCode>
       <FileName>Funcion.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Horario">
-    <Position X="2" Y="6.5" Width="1.5" />
+    <Position X="13.5" Y="11" Width="2" />
     <TypeIdentifier>
-      <HashCode>EAwgQAIAAAAAEAAAAAgAAAAEAAAgAAAAAAAAAAAAQAA=</HashCode>
+      <HashCode>EAwgQAIAAAAAEAAAAAgAAQAEAAAgAAAAAAAgAAAAQAA=</HashCode>
       <FileName>Horario.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -52,40 +52,40 @@
   <Class Name="Sala">
     <Position X="7.5" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAABAAIAEAAAAAAAAAAAQAAAAAAAgQMgEAAAAAQAAA=</HashCode>
+      <HashCode>AAAABAAIAEAAAAAAAAAAASAAAAAAAgQMgEAAAIAQABA=</HashCode>
       <FileName>Sala.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Vendedor">
-    <Position X="0.75" Y="10.25" Width="2.25" />
+    <Position X="3.25" Y="19" Width="2" />
     <TypeIdentifier>
       <HashCode>AAACAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
       <FileName>Vendedor.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ArchivoDiagrama">
-    <Position X="0.5" Y="6.75" Width="1.5" />
+    <Position X="0.5" Y="6.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIEAAAQAAAAAAAAAAACAAAAAQAQCgAAAIACBA=</HashCode>
       <FileName>ArchivoDiagrama.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ArchivoFunciones">
-    <Position X="9.5" Y="7.25" Width="1.5" />
+    <Position X="2.75" Y="6.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAQAAAIEAAAACAAAAAAAAgACAAAAAAEAAgAAAIAABA=</HashCode>
       <FileName>ArchivoFunciones.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ArchivoPeliculas">
-    <Position X="3.25" Y="7" Width="1.5" />
+    <Position X="7" Y="6.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAIEACBACAAAAAAAAAACAAAAAAAAAgAAAIAABA=</HashCode>
       <FileName>ArchivoPeliculas.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ArchivoSalas">
-    <Position X="3.5" Y="10.25" Width="1.5" />
+    <Position X="5" Y="6.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>IAAgAAAIEAAAACAAAAAAAAAACAAAAAAAAAgAAAIAABA=</HashCode>
       <FileName>ArchivoSalas.h</FileName>
@@ -94,7 +94,7 @@
   <Class Name="DiagramaSala">
     <Position X="9.75" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAABAQAAAAAAAEAAAAAAAIAAAAAAJBYgAAAAAIAAIA=</HashCode>
+      <HashCode>AAAABAQAAAAAAEEAAAAAAAIAAAAAAJBYgAAAAAIAAIA=</HashCode>
       <FileName>DiagramaSala.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -103,6 +103,27 @@
     <TypeIdentifier>
       <HashCode>AAQADAQCAABAgAABAAgAEAAAIQAAAAAYgBCACAIAAVA=</HashCode>
       <FileName>Entrada.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Empleado">
+    <Position X="3.25" Y="13.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAABABBSAERQBCAAAwAAIAAAAAABAAAAAAAIECAQ=</HashCode>
+      <FileName>Empleado.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ArchivoEntrada">
+    <Position X="9.5" Y="6.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIEAAAACAAAAAQAAAgCAgAAAAAAAgAAIIAABA=</HashCode>
+      <FileName>ArchivoEntrada.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InformesMaker">
+    <Position X="0.5" Y="10.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>QBAIgAAAAEAAIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>InformesMaker.h</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
