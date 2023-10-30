@@ -1,6 +1,4 @@
 #include "fechahorario.h"
-#include "fecha.h"
-#include "horario.h"
 #include <iostream>
 
 
