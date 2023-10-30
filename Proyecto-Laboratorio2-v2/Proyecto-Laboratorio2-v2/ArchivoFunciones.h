@@ -14,6 +14,11 @@ public:
 	ArchivoFunciones(const char* nombre) {
 		strcpy(_nombre, nombre);
 	}
+	/**
+	* @brief Metodo que permite leer un registro de un archivo
+	* @param posicion posicion del registro a leer
+	* @return retorna un objeto de tipo Funcion
+	*/
 	Funcion leerRegistro(int posicion);
 	int contarRegistros();
 	bool grabarRegistro(Funcion funcion);
