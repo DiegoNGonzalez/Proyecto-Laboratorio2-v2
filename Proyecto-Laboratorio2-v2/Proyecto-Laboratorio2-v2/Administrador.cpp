@@ -20,9 +20,7 @@ void Administrador::cargarPeliculas() {
 	std::cout << "DIRECTOR: ";
 	funcionesGlobales::cargarCadena(director, 29);
 	std::cout << "CLASIFICACION DE EDAD: ";
-	std::cout << "CLASIFICACION DE EDAD: ";
 	funcionesGlobales::cargarCadena(clasificacionEdad, 29);
->>>>>>> 8004fd5614bd8a7e67049fc20d5bd9d3f9006604
 	std::cout << "GENERO: ";
 	funcionesGlobales::cargarCadena(genero, 29);
 	duracion = funcionesGlobales::validarMinimo(0, "DURACION: ", "INGRESO NO VALIDO, REINGRESE LA DURACION: ", "LA DURACION TIENE QUE SER MAYOR A 0, REINGRESE LA DURACION: ");
