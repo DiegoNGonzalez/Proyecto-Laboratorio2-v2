@@ -3,6 +3,7 @@
 #include "Sala.h"
 #include <Windows.h>
 #include "rlutil.h"
+
 class ArchivoSalas
 {
 private:
