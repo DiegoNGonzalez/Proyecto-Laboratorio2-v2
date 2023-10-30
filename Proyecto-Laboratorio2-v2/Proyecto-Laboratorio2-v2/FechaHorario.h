@@ -13,6 +13,8 @@ public:
 	FechaHorario();
 	FechaHorario(Fecha fecha, Horario horario);
 	FechaHorario(int dia, int mes, int anio, int minuto, int hora);
+	bool esBisiesto(int anio);
+	int maximoDiasEnMes(int mes, int anio);
 	void mostrarFechaHora();
 	bool operator==(FechaHorario fechaHorario);
 	bool operator<(FechaHorario fechaHorario);

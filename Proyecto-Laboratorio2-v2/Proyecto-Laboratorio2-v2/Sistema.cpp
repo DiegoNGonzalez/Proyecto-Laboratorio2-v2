@@ -33,7 +33,7 @@ void Sistema::login(Administrador admin1, Vendedor vendedor1) {
 	std::string contrasenia;
 	int intentos = 0;
 	bool login = false;
-	rlutil::setConsoleTitle("LOGIN- SISTEMA DE CINE");
+	rlutil::setConsoleTitle("LOGIN - SISTEMA DE CINE");
 	do {
 		system("cls");
 		rlutil::setColor(rlutil::COLOR::LIGHTBLUE);
@@ -113,7 +113,7 @@ void Sistema::mostrarMenuAdmin() {
 	Funcion f1;
 	ArchivoFunciones archiFunciones("funcion.dat");
 	do {
-		rlutil::setConsoleTitle("MENU ADMIN CINE"); // establece el titulo de la consola
+		rlutil::setConsoleTitle("MENU ADMINISTRACIÓN CINE"); // establece el titulo de la consola
 		rlutil::hidecursor(); // oculta el cursor
 		//rlutil::cls(); // limpia la pantalla
 
@@ -871,7 +871,7 @@ void Sistema::creditos()
 	rlutil::locate(40, 9);
 	std::cout << "-----------------------------------------" << std::endl;
 	rlutil::locate(40, 10);
-	std::cout << "Bombieri Rodrigo. " << std::endl;
+	std::cout << "Bombieri Rodrigo Sebastián. " << std::endl;
 	rlutil::locate(40, 11);
 	std::cout << "Github: " << "https://github.com/RodrigoBombieri" << std::endl;
 	rlutil::locate(40, 12);

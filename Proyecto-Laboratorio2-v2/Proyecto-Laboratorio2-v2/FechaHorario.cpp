@@ -35,9 +35,17 @@ FechaHorario::FechaHorario() {
 }
 
 FechaHorario::FechaHorario(int dia, int mes, int anio, int minuto, int hora) {
-	_fecha.setDia(dia);
-	_fecha.setMes(mes);
-	_fecha.setAnio(anio);
+	if (dia > 0 && dia <= maximoDiasEnMes(mes, anio) && mes > 0 && mes <= 12 && anio > 0 && anio < 2030) {
+		_fecha.setDia(dia);
+		_fecha.setMes(mes);
+		_fecha.setAnio(anio);
+
+	}
+	else {
+		dia = 1;
+		mes = 1;
+		anio = 2023;
+	}
 	_horario.setMinuto(minuto);
 	_horario.setHora(hora);
 
@@ -76,4 +84,28 @@ bool FechaHorario::operator<(FechaHorario fechaHorario)
 	else {
 		return false;
 	}
+}
+
+bool FechaHorario::esBisiesto(int anio) {
+	bool bisiesto = false;
+	if (anio % 4 == 0 && anio % 100 != 0 || anio % 400 == 0) {
+		bisiesto = true;
+	}
+	return bisiesto;
+}
+
+int FechaHorario::maximoDiasEnMes(int mes, int anio) {
+	int diaMax = 31;// ENERO MARZO MAYO JULIO AGOSTO OCTUBRE DICIEMBRE
+	if (mes == 4 || mes == 6 || mes == 9 || mes == 11) {
+		diaMax = 30;
+	}
+	else if (mes == 2) {
+		if (esBisiesto(anio)) {
+			diaMax = 29;
+		}
+		else {
+			diaMax = 28;
+		}
+	}
+	return diaMax;
 }

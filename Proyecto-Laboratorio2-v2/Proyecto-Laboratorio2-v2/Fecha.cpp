@@ -76,3 +76,4 @@ bool Fecha::operator<(Fecha fecha)
 		return false;
 	}
 }
+
