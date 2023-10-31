@@ -12,7 +12,7 @@ void InformesMaker::mostrarInfomeRecaXPelicula() {
 	std::cout << "LISTADO DE PELICULAS DISPONIBLES " << std::endl << std::endl;
 	admin.verPeliculasCargadas();
 
-	idPelicula = funcionesGlobales::validarMinimo(1, "Ingrese el numero de la pelicula: ", "ERROR. Ingrese un numero valido", "El numero debe ser mayor o igual a 1 ");
+	idPelicula = funcionesGlobales::validarMinimo(1, "NRO DE PELICULA: ", "INGRESO NO VALIDO, REINGRESE NRO DE PELICULA: ", "EL NRO DE PELICULA DEBE SER MAYOR O IGUAL A 1");
 
 	Pelicula pelicula;
 	ArchivoPeliculas archivoPeliculas("pelicula.dat");
@@ -40,7 +40,7 @@ void InformesMaker::mostrarInfomeRecaXPelicula() {
 				}
 			}
 			if (recaudacion == 0) {
-				std::cout << "No hay ventas para la pelicula " << pelicula.getTitulo() << std::endl;
+				std::cout << "NO HUBO VENTAS PARA LA PELICULA " << pelicula.getTitulo() << std::endl;
 
 			}
 			else {
@@ -71,11 +71,11 @@ void InformesMaker::mostrarInformeRecaXDia() {
 
 	float recaudacion = 0;
 
-	std::cout << "INGRESAR LA FECHA\n" << std::endl;
+	std::cout << "INGRESE UNA FECHA PORFAVOR: \n" << std::endl;
 
-	dia = funcionesGlobales::validarRango(1, 31, "Ingrese el dia: ", "ERROR. Ingrese un numero valido: ", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 31");
-	mes = funcionesGlobales::validarRango(1, 12, "Ingrese el mes: ", "ERROR. Ingrese un numero valido: ", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 12");
-	anio = funcionesGlobales::validarRango(2020, 2023, "Ingrese el anio: ", "ERROR. Ingrese un numero valido: ", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2021");
+	dia = funcionesGlobales::validarRango(1, 31, "DIA: ", "INGRESO NO VALIDO, REINGRESE DIA: ", "EL DIA INGRESADO TIENE QUE SER MAYOR A 0 ", "Y MENOR O IGUAL A 31 ");
+	mes = funcionesGlobales::validarRango(1, 12, "MES: ", "INGRESO NO VALIDO, REINGRESE MES: ", "EL MES INGRESADO TIENE QUE SER MAYOR A 0 ", "Y MENOR O IGUAL A 12 ");
+	anio = funcionesGlobales::validarRango(2020, 2023, "AÑO: ", "INGRESO NO VALIDO, REINGRESE AÑO: ", "EL AÑO DEBE SER MAYOR O IGUAL A 2020 ", "Y MENOR O IGUAL A 2023 ");
 
 	Fecha fechaInforme(dia, mes, anio);
 
@@ -98,15 +98,17 @@ void InformesMaker::mostrarInformeRecaXDia() {
 		std::cout << std::endl;
 	}
 	else {
+		system("cls");
+		std::cout << "EN LA FECHA ";
 		fechaInforme.mostrarFecha();
-		std::cout << "\nNo se vendieron entradas" << std::endl;
+		std::cout << " NO HUBO VENTAS DE ENTRADAS." << std::endl;
 	}
 }
 
 void InformesMaker::mostrarInformeRecaXMes() {
 	float recaudacion = 0;
 	int mesInforme;
-	mesInforme = funcionesGlobales::validarRango(1, 12, "Ingrese el mes: ", "ERROR. Ingrese un mes valido: ", "El numero debe ser mayor o igual a 1 ", "y menor o igual a 12");
+	mesInforme = funcionesGlobales::validarRango(1, 12, "MES: ", "INGRESO NO VALIDO, REINGRESE MES: ", "EL MES INGRESADO DEBE SER MAYOR O IGUAL A 1 ", "Y MENOR O IGUAL A 12, REINGRESE MES: ");
 
 	ArchivoEntrada archiEntrada("venta.dat");
 	Entrada entrada;
@@ -133,14 +135,15 @@ void InformesMaker::mostrarInformeRecaXMes() {
 		std::cout << std::endl;
 	}
 	else {
-		std::cout << "No se vendieron entradas en " << funcionesGlobales::escribirMes(mesInforme) << std::endl;
+		system("cls");
+		std::cout << "NO HUBO VENTAS DE ENTRADA EN EL MES DE " << funcionesGlobales::escribirMes(mesInforme) << std::endl;
 	}
 
 }
 
 void InformesMaker::mostrarInformeRecaXAnio() {
 	float recaudacion = 0;
-	int anioInforme = funcionesGlobales::validarRango(2020, 2023, "Ingrese el anio: ", "ERROR. Ingrese un anio valido: ", "El numero debe ser mayor o igual a 2020 ", "y menor o igual a 2023");
+	int anioInforme = funcionesGlobales::validarRango(2020, 2023, "AÑO: ", "INGRESO NO VALIDO, REINGRESE UN AÑO: ", "EL AÑO DEBE SER MAYOR O IGUAL A 2020 ", "Y MENOR O IGUAL A 2023, REINGRESE AÑO: ");
 
 	ArchivoEntrada archiEntrada("venta.dat");
 	Entrada entrada;
@@ -160,14 +163,15 @@ void InformesMaker::mostrarInformeRecaXAnio() {
 		std::cout << "RECAUDACION ANUAL" << std::endl;
 
 		std::cout << "." << std::left << std::setw(15) << "_______________" << "_" << std::setw(15) << "_______________" << "." << std::endl;
-		std::cout << "|" << std::left << std::setw(15) << "ANIO" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
+		std::cout << "|" << std::left << std::setw(15) << "AÑO" << "|" << std::setw(15) << "RECAUDACION" << "|" << std::endl;
 		std::cout << "|" << std::left << std::setw(15) << anioInforme << "|" << std::setw(1) << "$" << std::setw(14) << recaudacion << "|" << std::endl;
 		std::cout << "|" << std::left << std::setw(15) << "_______________" << "|" << std::setw(15) << "_______________" << "|" << std::endl;
 		std::cout << std::endl;
 
 	}
 	else {
-		std::cout << "No se vendieron entradas en " << anioInforme << std::endl;
+		system("cls");
+		std::cout << "NO HUBO VENTAS DE ENTRADA EN EL AÑO " << anioInforme << std::endl;
 	}
 }
 
