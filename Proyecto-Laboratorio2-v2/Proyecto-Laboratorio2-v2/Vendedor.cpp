@@ -72,7 +72,7 @@ void Vendedor::cancelarVenta(int idEntrada) {
 	salaAux.setAsientosDisponibles(salaAux.getAsientosDisponibles() + 1);
 	funcionAux.setSala(salaAux);
 
-	if (funcionesGlobales::confirmarAccion("DESEA CANCELAR LA VENTA? (s/n): ") ){
+	if (funcionesGlobales::confirmarAccion("DESEA CANCELAR LA VENTA? (S/N): ") ){
 
 		if (archivoDiagrama.cancelarReservaEnRegistro(posAuxiliar, fila, columna)) {
 			ventaAux.setEstado(false);

@@ -143,18 +143,18 @@ bool funcionesGlobales::confirmarAccion(std::string textoCout)
 // Agregue para mostrar el mes en letras, lo uso en informes
 std::string funcionesGlobales::escribirMes(int mes) {
 	std::string vMeses[12] = {
-		"Enero",
-		"Febrero",
-		"Marzo",
-		"Abril",
-		"Mayo",
-		"Junio",
-		"Julio ",
-		"Agosto",
-		"Septiembre",
-		"Octubre",
-		"Noviembre",
-		"Diciembre"
+		"ENERO",
+		"FEBRERO",
+		"MARZO",
+		"ABRIL",
+		"MAYO",
+		"JUNIO",
+		"JULIO",
+		"AGOSTO",
+		"SEPTIEMBRE",
+		"OCTUBRE",
+		"NOVIEMBRE",
+		"DICIEMBRE"
 	};
 	return vMeses[mes - 1];
 }
