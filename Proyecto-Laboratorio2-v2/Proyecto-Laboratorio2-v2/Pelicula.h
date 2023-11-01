@@ -29,6 +29,6 @@ public:
 	bool getEstado() const;
 	Pelicula();
 	Pelicula(int id, const char *titulo, const char *director, const char *clasificacionEdad, const char *genero, int duracion);
-	void mostrarDetalles() const;
+	void mostrarDetalles();
 };
 

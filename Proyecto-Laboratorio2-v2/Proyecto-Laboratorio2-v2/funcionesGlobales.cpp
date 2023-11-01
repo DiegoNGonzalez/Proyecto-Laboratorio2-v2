@@ -2,7 +2,6 @@
 #include "rlutil.h"
 #include <cstdio>
 #include <stdio.h>
-#include <limits.h>
 
 
 int funcionesGlobales::validarInt(std::string textoCout, std::string textoError) {
@@ -60,7 +59,7 @@ float funcionesGlobales::validarFloat(std::string textoCout, std::string textoEr
 	while (!(std::cin >> nroAvalidar)) {
 		std::cout << textoError;
 		std::cin.clear();
-		std::cin.ignore(INT_MAX, '\n');
+		std::cin.ignore(FLT_MAX, '\n');// El FLT_MAX es el valor de float mas grande, ignora los caracteres hasta el salto de linea.
 	}
 	return nroAvalidar;
 }
