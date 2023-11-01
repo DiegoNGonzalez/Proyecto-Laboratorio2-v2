@@ -93,7 +93,7 @@ Pelicula::Pelicula(int id, const char *titulo, const char* director, const char*
 	_estado = true;
 }
 
-void Pelicula::mostrarDetalles() const
+void Pelicula::mostrarDetalles()
 {
 	std::cout << "--------- PELICULA #" << _id << " ---------" << std::endl;
 	std::cout << "TITULO: " << _titulo << std::endl;
