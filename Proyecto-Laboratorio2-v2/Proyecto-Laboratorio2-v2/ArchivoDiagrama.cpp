@@ -72,7 +72,7 @@ void ArchivoDiagrama::mostrarRegistro(int pos)
 		diagrama.mostrarSala();
 	}
 	else {
-		std::cout << "La funcion fue dada de baja." << std::endl;
+		std::cout << "LA FUNCION FUE DADA DE BAJA." << std::endl;
 		system("pause");
 	}
 
