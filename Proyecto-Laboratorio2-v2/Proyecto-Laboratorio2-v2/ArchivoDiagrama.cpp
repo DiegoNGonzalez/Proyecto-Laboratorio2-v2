@@ -123,7 +123,7 @@ int ArchivoDiagrama::buscarPosDiagramaxID(int valorBuscado) {
 	for (int i = 0; i < cantidadRegistros; i++)
 	{
 		diagrama = leerRegistro(i);
-		if (diagrama.getIdFuncion() == valorBuscado) {
+		if (diagrama.getIdFuncion() == valorBuscado && diagrama.getEstado()) {
 			return i;
 		}
 	}

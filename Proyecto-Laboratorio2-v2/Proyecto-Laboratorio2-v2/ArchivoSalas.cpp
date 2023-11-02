@@ -194,7 +194,7 @@ int ArchivoSalas::buscarPosSalaxID(int valorBuscado) {
 	for (int i = 0; i < cantidadRegistros; i++)
 	{
 		sala = leerRegistro(i);
-		if (sala.getIdSala() == valorBuscado) {
+		if (sala.getIdSala() == valorBuscado && sala.getEstado()) {
 			return i;
 		}
 	}

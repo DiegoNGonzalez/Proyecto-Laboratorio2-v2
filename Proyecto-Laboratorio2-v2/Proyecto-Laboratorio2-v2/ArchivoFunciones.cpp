@@ -194,7 +194,7 @@ int ArchivoFunciones::buscarPosFuncionxID(int valorBuscado) {
 	for (int i = 0; i < cantidadRegistros; i++)
 	{
 		funcion = leerRegistro(i);
-		if (funcion.getIdFuncion() == valorBuscado) {
+		if (funcion.getIdFuncion() == valorBuscado && funcion.getEstado()) {
 			return i;
 		}
 	}

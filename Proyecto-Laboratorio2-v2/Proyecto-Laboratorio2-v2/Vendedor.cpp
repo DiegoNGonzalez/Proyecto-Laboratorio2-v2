@@ -60,11 +60,12 @@ void Vendedor::cancelarVenta(int idEntrada) {
 	Sala salaAux;
 
 	int posVenta = archivoVenta.buscarPosEntradaxID(idEntrada);
+	ventaAux = archivoVenta.buscarEntradaxID(idEntrada);
+
 	int posAuxiliar = archivoFunciones.buscarPosFuncionxID(ventaAux.getFuncion().getIdFuncion());
 	int fila = ventaAux.getFilaAsiento();
 	int columna = ventaAux.getColumnaAsiento();
 
-	ventaAux = archivoVenta.buscarEntradaxID(idEntrada);
 	funcionAux = archivoFunciones.leerRegistro(posAuxiliar);
 	diagramaAux = archivoDiagrama.leerRegistro(posAuxiliar);
 	salaAux = funcionAux.getSala();	
@@ -74,7 +75,7 @@ void Vendedor::cancelarVenta(int idEntrada) {
 
 	if (funcionesGlobales::confirmarAccion("DESEA CANCELAR LA VENTA? (S/N): ") ){
 
-		if (archivoDiagrama.cancelarReservaEnRegistro(posAuxiliar, fila, columna)) {
+		if (archivoDiagrama.cancelarReservaEnRegistro(posAuxiliar, fila, columna) && ventaAux.getEstado()) {
 			ventaAux.setEstado(false);
 			archivoVenta.grabarRegistro(ventaAux, posVenta);
 			archivoFunciones.grabarRegistro(funcionAux, posAuxiliar);

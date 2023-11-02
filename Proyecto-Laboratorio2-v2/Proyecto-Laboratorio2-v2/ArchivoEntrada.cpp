@@ -194,7 +194,7 @@ int ArchivoEntrada::buscarPosEntradaxID(int valorBuscado) {
 	for (int i = 0; i < cantidadRegistros; i++)
 	{
 		venta = leerRegistro(i);
-		if (venta.getidEntrada() == valorBuscado) {
+		if (venta.getidEntrada() == valorBuscado && venta.getEstado()) {
 			return i;
 		}
 	}
