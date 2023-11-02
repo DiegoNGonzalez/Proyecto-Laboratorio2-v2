@@ -112,13 +112,14 @@ void funcionesGlobales::mostrarPorcentaje(bool pudoEscribir, std::string mensaje
 void funcionesGlobales::cargarCadena(char* pal, int tam)
 {
 	std::string input;
-	std::getline(std::cin, input);// cadena con espacions
+	std::getline(std::cin, input);  // cadena con espacios
 
-	if (input.length() > tam){
-		input.substr(0, tam);// recorta y devuelve la cadena con la cantidad limite
+	if (input.length() > tam) {  // si la cadena es más larga que el tamaño máximo
+		input = input.substr(0, tam);  // recorta y asigna la cadena con la cantidad límite
 	}
 
-	strcpy(pal, input.c_str());
+	strncpy(pal, input.c_str(), tam);  // usa strncpy para evitar desbordamientos
+	pal[tam - 1] = '\0';  // asegúrate de que la cadena de destino esté terminada correctamente
 }
 
 bool funcionesGlobales::confirmarAccion(std::string textoCout)

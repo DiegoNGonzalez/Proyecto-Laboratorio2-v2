@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include "Empleado.h"
 #include "ArchivoFunciones.h"
-#include "funcionesGlobales.h"
+
 
 
 class Administrador : public Empleado
